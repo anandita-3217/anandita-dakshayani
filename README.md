@@ -112,19 +112,19 @@ vercel --prod
 ``` -->
 
 
-## 🎯 Performance
+<!-- ## 🎯 Performance
 
 - **Lighthouse Score**: 95+ across all metrics
 - **First Contentful Paint**: < 1.5s
 - **Time to Interactive**: < 3s
-- **Bundle Size**: Optimized with code splitting
+- **Bundle Size**: Optimized with code splitting -->
 
 ## 🤝 Connect With Me
 
 I'm always excited to collaborate on interesting projects or discuss tech!
 
 <!-- - 💼 [LinkedIn](https://linkedin.com/in/anandita-dakshayani) -->
-- 🐙 [GitHub](https://github.com/anandita-3217)
+<!-- - 🐙 [GitHub](https://github.com/anandita-3217) -->
 - 🎨 [UIverse](https://uiverse.io/profile/anandita-3217)
 - 🖊️ [CodePen](https://codepen.io/anandita-3217)
 - 📧 ananditad21@gmail.com
