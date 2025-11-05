@@ -29,12 +29,18 @@
 // export default App
 
 import { Button } from '@chakra-ui/react'
+import { Container,Box,Heading  } from '@chakra-ui/react'
+import Hero  from './components/Hero'
+import ProjectCarousel from './components/ProjectCarousel'
 
 function App() {
   return (
-    <div style={{ padding: '2rem' }}>
-      <Button colorScheme="teal">Hello Chakra UI</Button>
-    </div>
+    <Container maxW="full" p={0} >
+      <Hero></Hero>
+      <ProjectCarousel></ProjectCarousel>
+    </Container>
+
+
   )
 }
 
