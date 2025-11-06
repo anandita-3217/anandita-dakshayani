@@ -135,7 +135,8 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## 🙏 Acknowledgments
 
-- Chakra UI team for the incredible component library
+- [Chakra UI](https://storyset.com/technology) team for the incredible component library
+- [Technology illustrations by Storyset](https://storyset.com/technology)
 
 
 ---
