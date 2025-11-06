@@ -61,6 +61,14 @@ function Hero() {
             <Button
               as="a"
               href="#projects"
+              onClick={(e) => {
+    e.preventDefault();
+    document.getElementById('projects')?.scrollIntoView({ 
+      behavior: 'smooth',
+      block: 'start'
+    });
+  }}
+
               colorScheme="teal"
               size="lg"
               px={8}
