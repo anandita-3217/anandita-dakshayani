@@ -105,34 +105,8 @@ function Hero() {
               Get in Touch
             </Button>
           </HStack>
-
-          {/* Optional: Scroll indicator */}
-          <Box
-            pt={16}
-            opacity={0.6}
-            animation="bounce 2s infinite"
-          >
-            <Text fontSize="sm" color="#b0b0b0">
-              ↓
-            </Text>
-          </Box>
         </VStack>
       </Container>
-
-      {/* CSS for scroll animation */}
-      <style jsx>{`
-        @keyframes bounce {
-          0%, 20%, 50%, 80%, 100% {
-            transform: translateY(0);
-          }
-          40% {
-            transform: translateY(-10px);
-          }
-          60% {
-            transform: translateY(-5px);
-          }
-        }
-      `}</style>
     </Box>
   );
 }

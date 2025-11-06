@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Box,
   Container,
@@ -15,66 +15,29 @@ import {
 } from '@chakra-ui/react';
 import { ChevronLeft, ChevronRight, ExternalLink, Github } from 'lucide-react';
 
-const projects = [
-  {
-    id: 1,
-    title: "DeepFake Image Detection",
-    description: "Deep learning system for detecting Deepfake images with 99.76% accuracy using SVM classifiers and DenseNets. Processed 140k images and analyzed 6.9M features.",
-    tags: ["Python", "Django", "SVM", "DenseNets", "Deep Learning"],
-    githubUrl: "https://github.com/anandita-3217/DeepFakeDetectionProject",
-    liveUrl: null,
-    metrics: [
-      { label: "Accuracy", value: "99.76%" },
-      { label: "Images Processed", value: "140k" },
-      { label: "Features Analyzed", value: "6.9M" }
-    ],
-    highlights: [
-      "3 distinct SVM classifiers with 97.5-99.76% accuracy",
-      "Comprehensive review of 20 existing detection systems",
-      "Advanced frequency domain analysis"
-    ]
-  },
-  {
-    id: 2,
-    title: "FlashLearn (Flashcard App)",
-    description: "Interactive flashcard application built with Python and Kivy, managing up to 150 flashcards with dynamic quiz features across three difficulty levels.",
-    tags: ["Python", "Pytest", "Kivy", "GUI Design"],
-    githubUrl: "https://github.com/anandita-3217/FlashcardApp_with_Kivy",
-    liveUrl: null,
-    metrics: [
-      { label: "Flashcards", value: "150+" },
-      { label: "Difficulty Levels", value: "3" },
-      { label: "Quiz Questions", value: "5-15" }
-    ],
-    highlights: [
-      "JSON-based deck upload for seamless management",
-      "Optimized scrollable views for 25+ cards",
-      "Dynamic quiz system with adaptive difficulty"
-    ]
-  },
-  {
-    id: 3,
-    title: "FoodieExpress",
-    description: "Full-stack food delivery web application connecting customers, restaurants, and delivery partners with real-time order tracking and comprehensive management systems.",
-    tags: ["Python", "Django", "JavaScript", "WebApp"],
-    githubUrl: "https://github.com/anandita-3217/FoodieExpress",
-    liveUrl: null,
-    metrics: [
-      { "label": "User Roles", "value": "3" },
-      { "label": "Models", "value": "6" },
-    ],
-    highlights: [
-      "Multi-role system for customers, restaurant owners, and delivery partners",
-      "Real-time order tracking and delivery status monitoring",
-      "Comprehensive menu management and sales analytics",
-      "Route optimization suggestions for delivery partners"
-    ]
-  }
-];
-
 function ProjectCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [projects, setProjects] = useState([]);
+  const [achievements, setAchievements] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [direction, setDirection] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
   const isMobile = useBreakpointValue({ base: true, md: false });
+
+  useEffect(() => {
+    // Load projects from JSON file
+    fetch('/assets/projects.json')
+      .then(response => response.json())
+      .then(data => {
+        setProjects(data.projects);
+        setAchievements(data.achievements);
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error('Error loading projects:', error);
+        setLoading(false);
+      });
+  }, []);
 
   const nextProject = () => {
     setCurrentIndex((prev) => (prev + 1) % projects.length);
@@ -83,6 +46,26 @@ function ProjectCarousel() {
   const prevProject = () => {
     setCurrentIndex((prev) => (prev - 1 + projects.length) % projects.length);
   };
+
+  if (loading) {
+    return (
+      <Box
+        bg="#0a0a0a"
+        color="white"
+        py={{ base: 16, md: 24 }}
+        minH="100vh"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Spinner size="xl" color="#14b8a6" />
+      </Box>
+    );
+  }
+
+  if (projects.length === 0) {
+    return null;
+  }
 
   const currentProject = projects[currentIndex];
 
