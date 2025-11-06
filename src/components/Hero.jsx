@@ -7,9 +7,15 @@ import {
   Button,
   VStack,
   HStack,
-  useColorModeValue
+  useColorModeValue,
+  Image 
 } from '@chakra-ui/react';
+import { ReactTyped } from "react-typed";
+import { MotionBox } from "./MotionBox";
 
+
+import CodingImg from "./assets/Coding.png";
+import DevGif from "./assets/developer.gif";
 function Hero() {
   return (
     <Box
@@ -28,8 +34,17 @@ function Hero() {
             fontSize={{ base: '4xl', md: '5xl', lg: '6xl' }}
             fontWeight="bold"
             lineHeight="1.2"
+            color="#14b8a6"
           >
-            Anandita Garimella
+          <ReactTyped
+          strings={
+            ["Hi! I am Anandita!"]}
+          typeSpeed={80}
+          backSpeed={80}
+          loop
+
+        />
+
           </Heading>
 
           {/* Subtitle */}
@@ -105,6 +120,20 @@ function Hero() {
               Get in Touch
             </Button>
           </HStack>
+          <Box textAlign="center" p={10}>
+      <Image src={CodingImg} alt="Coding" boxSize="250px" mx="auto" />
+      {/* <Image src={DevGif} alt="Developer" boxSize="250px" mx="auto" mt={4} /> */}
+      <MotionBox delay={0.6}>
+        <Image
+          src={DevGif}
+          alt="Developer"
+          mx="auto"
+          mt={8}
+          boxSize={["200px", "300px"]}
+          borderRadius="xl"
+        />
+      </MotionBox>
+    </Box>
         </VStack>
       </Container>
     </Box>

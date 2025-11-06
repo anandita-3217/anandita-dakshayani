@@ -36,6 +36,11 @@ const techStack = {
 ### Prerequisites
 
 - Node.js (v16+)
+- Node Packages: 
+  - npm install react-typed
+  - npm install lucide-react
+  - npm install react-intersection-observer
+
 
 <!-- ### Installation & Setup
 
@@ -137,6 +142,7 @@ This project is open source and available under the [MIT License](LICENSE).
 
 - [Chakra UI](https://storyset.com/technology) team for the incredible component library
 - [Technology illustrations by Storyset](https://storyset.com/technology)
+- [GIFS from LottieFiles](https://lottiefiles.com/free-animations)
 
 
 ---

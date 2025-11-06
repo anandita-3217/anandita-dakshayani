@@ -38,7 +38,7 @@ function App() {
       <Hero></Hero>
       <ProjectCarousel></ProjectCarousel>
     </Container>
-// TODO: add a typing animation to y name and add the coding.png in the assets file 
+// TODO: Properly use motion box for better ui/ux
 
   )
 }
