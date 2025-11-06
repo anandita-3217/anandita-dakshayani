@@ -122,7 +122,6 @@ function Hero() {
           </HStack>
           <Box textAlign="center" p={10}>
       <Image src={CodingImg} alt="Coding" boxSize="250px" mx="auto" />
-      {/* <Image src={DevGif} alt="Developer" boxSize="250px" mx="auto" mt={4} /> */}
       <MotionBox delay={0.6}>
         <Image
           src={DevGif}

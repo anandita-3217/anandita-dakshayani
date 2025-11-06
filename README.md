@@ -75,6 +75,7 @@ npm run dev
 portfolio/
 ├── src/
 │   ├── components/        # Reusable UI components
+│   │   ├── assets/       # Assets for the portfolio 
 │   │   ├── Header/       # Navigation & branding
 │   │   ├── Hero/         # Landing section
 │   │   ├── About/        # About me section
