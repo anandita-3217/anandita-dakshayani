@@ -14,7 +14,6 @@ import {
 import { motion } from 'framer-motion';
 import { ReactTyped } from "react-typed";
 import CodingImg from "./assets/Coding.png";
-import DevGif from "./assets/developer.gif";
 // Create motion components
 const MotionBox = motion(Box);
 const MotionHeading = motion(Heading);

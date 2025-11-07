@@ -7,6 +7,8 @@
       "tags": ["Django", "Python", "JavaScript", "HTML/CSS", "SQLite"],
       "githubUrl": "https://github.com/anandita-3217/FoodieExpress",
       "liveUrl": "https://youtu.be/cBefQyBQnOw",
+      "videoUrl": "https://www.youtube.com/embed/cBefQyBQnOw",
+      "youtubeId": "cBefQyBQnOw",
       "metrics": [
         { "label": "User Roles", "value": "3" },
         { "label": "Models", "value": "6" },
@@ -21,10 +23,11 @@
     {
       "id": 2,
       "title": "DeepFake Image Detection",
-      "description": "Deep learning system for detecting Deepfake images with 99.76% accuracy using SVM classifiers and DenseNets. Processed 140k images and analyzed 6.9M features.",
+      "description": "Deep learning system for detecting Deepfake images with 97% accuracy using DenseNets. Processed 140k images and analyzed 6.9M features.",
       "tags": ["Python", "Django", "SVM", "DenseNets", "Deep Learning"],
       "githubUrl": "https://github.com/anandita-3217/DeepFakeDetectionProject/",
       "liveUrl": null,
+      "videoUrl": null,
       "metrics": [
         { "label": "Accuracy", "value": "99.76%" },
         { "label": "Images Processed", "value": "140k" },
@@ -42,6 +45,7 @@
       "description": "Interactive flashcard application built with Python and Kivy, managing up to 150 flashcards with dynamic quiz features across three difficulty levels.",
       "tags": ["Python", "Pytest", "Kivy", "GUI Design"],
       "githubUrl": "https://github.com/anandita-3217/FlashcardApp_with_Kivy",
+      "videoUrl": "https://www.youtube.com/embed/TODGAKPxzUs",
       "liveUrl": "https://youtu.be/TODGAKPxzUs",
       "metrics": [
         { "label": "Flashcards", "value": "150+" },
@@ -58,10 +62,11 @@
       "id": 4,
       "title": "Portfolio",
       "description": "Modern, responsive portfolio website featuring an interactive project carousel, smooth animations, and dynamic content loading. Built with React and Chakra UI to showcase development projects with an engaging user experience.",
-      "tags": ["React", "Chakra UI", "Framer Motion", "JavaScript", "Responsive Design"],
+      "tags": ["React", "Chakra UI", "Framer Motion", "JavaScript"],
       "githubUrl": "https://github.com/anandita-3217/anandita-dakshayani/",
       "liveUrl": null,
-      "imagePlaceholder": "Portfolio Preview",
+      "imageUrl": null,
+      "videoUrl": null,
       "metrics": [
         { "label": "Components", "value": "8+" },
         { "label": "Animations", "value": "12+" },
@@ -71,6 +76,27 @@
         "Interactive carousel with swipe gestures and smooth transitions using Framer Motion",
         "Fully responsive design with mobile-first approach and Chakra UI theming",
         "Dynamic JSON-based content management for easy project updates"
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Stitch It Down",
+      "description": "A Lilo & Stitch inspired desktop productivity application with 100% local storage.",
+      "tags": ["Electron", "JavaScript", "Desktop App", "Privacy-First"],
+      "githubUrl": "https://github.com/anandita-3217/Stitch-It-Down",
+      "liveUrl": null,
+      "demoText": "Download App",
+      "videoUrl": null,
+      "imageUrl": "src/components/assets/projectImages/StitchItDown.png",
+      "metrics": [
+        { "label": "Features", "value": "5+" },
+        { "label": "Storage", "value": "100% Local" },
+        { "label": "Privacy", "value": "Zero Tracking" }
+      ],
+      "highlights": [
+        "Pomodoro timer with Stitch character animations and customizable work/break sessions",
+        "Advanced task manager supporting recurring tasks (daily, weekly, monthly) with 4-level priority system",
+        "Built-in calendar with multiple views and natural language event parsing"
       ]
     }
   ]

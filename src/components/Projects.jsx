@@ -31,11 +31,11 @@ function Projects() {
   const carouselControls = useAnimation();
   const [headerRef, headerInView] = useInView({ 
     triggerOnce: false, // Change to false to animate every time
-    threshold: 0.1 
+    threshold: 0.2
   });
   const [carouselRef, carouselInView] = useInView({ 
     triggerOnce: false, // Change to false to animate every time
-    threshold: 0.1 
+    threshold: 0.2
   });
 
   useEffect(() => {
@@ -245,17 +245,40 @@ function Projects() {
                         boxShadow: '0 12px 24px rgba(0,0,0,0.3)'
                       }}
                     >
-                      {/* Project Image */}
+                      {/* Project Image/Video */}
                       <Box
-                        h="200px"
+                        h="250px"
                         bg="#1a1a1a"
                         display="flex"
                         alignItems="center"
                         justifyContent="center"
                         color="#b0b0b0"
                         fontSize="sm"
+                        overflow="hidden"
                       >
-                        {currentProject.imagePlaceholder || 'Project Image'}
+                        {currentProject.videoUrl ? (
+                          <Box
+                            as="iframe"
+                            src={currentProject.videoUrl}
+                            width="100%"
+                            height="100%"
+                            title={currentProject.title}
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          />
+                        ) : currentProject.imageUrl ? (
+                          <Box
+                            as="img"
+                            src={currentProject.imageUrl}
+                            alt={currentProject.title}
+                            width="100%"
+                            height="100%"
+                            objectFit="cover"
+                          />
+                        ) : (
+                          currentProject.imagePlaceholder || 'Project Image'
+                        )}
                       </Box>
 
                       {/* Project Content */}

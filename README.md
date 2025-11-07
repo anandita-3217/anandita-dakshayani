@@ -40,6 +40,7 @@ const techStack = {
   - npm install react-typed
   - npm install lucide-react
   - npm install react-intersection-observer
+  - npm install react-icons --save
 
 
 <!-- ### Installation & Setup
