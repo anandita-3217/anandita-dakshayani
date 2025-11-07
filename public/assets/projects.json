@@ -53,6 +53,25 @@
         "Optimized scrollable views for 25+ cards",
         "Dynamic quiz system with adaptive difficulty"
       ]
+    },
+    {
+      "id": 4,
+      "title": "Portfolio",
+      "description": "Modern, responsive portfolio website featuring an interactive project carousel, smooth animations, and dynamic content loading. Built with React and Chakra UI to showcase development projects with an engaging user experience.",
+      "tags": ["React", "Chakra UI", "Framer Motion", "JavaScript", "Responsive Design"],
+      "githubUrl": "https://github.com/anandita-3217/anandita-dakshayani/",
+      "liveUrl": null,
+      "imagePlaceholder": "Portfolio Preview",
+      "metrics": [
+        { "label": "Components", "value": "8+" },
+        { "label": "Animations", "value": "12+" },
+        { "label": "Load Time", "value": "<2s" }
+      ],
+      "highlights": [
+        "Interactive carousel with swipe gestures and smooth transitions using Framer Motion",
+        "Fully responsive design with mobile-first approach and Chakra UI theming",
+        "Dynamic JSON-based content management for easy project updates"
+      ]
     }
   ]
 }
