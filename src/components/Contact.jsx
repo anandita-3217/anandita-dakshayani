@@ -130,7 +130,7 @@ function Contact() {
             mb={4}
             variants={fadeInUp}
           >
-            Let's <Text as="span" color="#14b8a6">Connect</Text>
+            <Text as="span" color="#14b8a6">Let's Connect</Text>
           </MotionHeading>
 
           <MotionText

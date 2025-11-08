@@ -17,7 +17,7 @@ import {
   X,
   Home,
   User,
-  Code,
+  File ,
   FolderGit2,
   Mail,
 } from "lucide-react";
@@ -30,7 +30,7 @@ const Header = () => {
   const links = [
     { name: "Home", icon: Home, href: "#hero" },
     { name: "About", icon: User, href: "#about" },
-    // { name: "Skills", icon: Code, href: "#skills" },
+    { name: "Resume", icon: File , href: "#resume" },
     { name: "Projects", icon: FolderGit2, href: "#projects" },
     // { name: "Experience", icon: Briefcase, href: "#experience" },
     { name: "Contact", icon: Mail, href: "#contact" },

@@ -79,7 +79,7 @@ function About() {
   return (
     <Box
       id="about"
-      bg="#1a1a1a"
+      bg="#0a0a0a"
       color="white"
       py={{ base: 16, md: 24 }}
       position="relative"
@@ -123,7 +123,7 @@ function About() {
             mb={4}
             variants={fadeInUp}
           >
-            About <Text as="span" color="#14b8a6">Me</Text>
+            <Text as="span" color="#14b8a6">About Me</Text>
           </MotionHeading>
 
           <MotionText
