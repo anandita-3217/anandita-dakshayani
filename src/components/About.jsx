@@ -79,7 +79,7 @@ function About() {
   return (
     <Box
       id="about"
-      bg="#0a0a0a"
+      bg="transparent"
       color="white"
       py={{ base: 16, md: 24 }}
       position="relative"

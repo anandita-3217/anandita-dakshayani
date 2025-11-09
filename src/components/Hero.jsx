@@ -73,7 +73,7 @@ function Hero() {
   return (
     <Box
       id="hero"
-      bg="#0a0a0a"
+      bg="transparent"
       color="white"
       py={{ base: 12, md: 20 }}
       minH="100vh"
@@ -130,6 +130,37 @@ function Hero() {
           gap={{ base: 8, lg: 12 }}
           alignItems="center"
         >
+          <GridItem>
+            <MotionBox
+              initial="hidden"
+              animate="visible"
+              variants={staggerContainer}
+              position="relative"
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+              justifyContent="center"
+            >
+              {/* Coding Image with float animation */}
+              <MotionImage
+                src={CodingImg}
+                alt="Coding"
+                boxSize={{ base: "200px", md: "250px", lg: "300px" }}
+                variants={scaleIn}
+                animate={{
+                  y: [0, -20, 0]
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+                filter="drop-shadow(0 10px 30px rgba(20, 184, 166, 0.3))"
+              />
+              
+
+            </MotionBox>
+          </GridItem>
           {/* Left side - Text content */}
           <GridItem>
             <MotionBox
@@ -220,6 +251,7 @@ function Hero() {
                       py={6}
                       fontSize="md"
                       fontWeight="600"
+                      bg="#0a0a0a"
                       borderColor="#2a2a2a"
                       color="white"
                       _hover={{
@@ -239,37 +271,7 @@ function Hero() {
           </GridItem>
 
           {/* Right side - Images */}
-          <GridItem>
-            <MotionBox
-              initial="hidden"
-              animate="visible"
-              variants={staggerContainer}
-              position="relative"
-              display="flex"
-              flexDirection="column"
-              alignItems="center"
-              justifyContent="center"
-            >
-              {/* Coding Image with float animation */}
-              <MotionImage
-                src={CodingImg}
-                alt="Coding"
-                boxSize={{ base: "200px", md: "250px", lg: "300px" }}
-                variants={scaleIn}
-                animate={{
-                  y: [0, -20, 0]
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-                filter="drop-shadow(0 10px 30px rgba(20, 184, 166, 0.3))"
-              />
-              
-
-            </MotionBox>
-          </GridItem>
+          
         </Grid>
       </Container>
     </Box>

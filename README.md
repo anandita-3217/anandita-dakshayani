@@ -41,6 +41,7 @@ const techStack = {
   - npm install lucide-react
   - npm install react-intersection-observer
   - npm install react-icons --save
+  - npm install gsap
 
 
 <!-- ### Installation & Setup

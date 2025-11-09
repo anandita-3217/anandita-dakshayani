@@ -87,7 +87,7 @@ function Contact() {
   return (
     <Box
       id="contact"
-      bg="#0a0a0a"
+      bg="transparent"
       color="white"
       py={{ base: 16, md: 24 }}
       position="relative"

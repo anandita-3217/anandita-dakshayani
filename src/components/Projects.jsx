@@ -141,7 +141,7 @@ function Projects() {
 
   return (
     <Box
-      bg="#0a0a0a"
+      bg="transparent"
       color="white"
       py={{ base: 16, md: 20 }}
       minH="100vh"
