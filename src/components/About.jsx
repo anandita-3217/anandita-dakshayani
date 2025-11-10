@@ -1,16 +1,6 @@
 import React from 'react';
 import {
-  Box,
-  Container,
-  Heading,
-  Text,
-  Button,
-  VStack,
-  HStack,
-  SimpleGrid,
-  Icon,
-  Link,
-  useColorModeValue
+  Box,Container,Heading,Text,Button,VStack,HStack,SimpleGrid,Icon
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import { 
@@ -79,9 +69,18 @@ function About() {
   return (
     <Box
       id="about"
+      // bg="transparent"
+      // color="white"
+      // py={{ base: 16, md: 24 }}
+      // position="relative"
+      // overflow="hidden"
+      // padding={30}
       bg="transparent"
       color="white"
-      py={{ base: 16, md: 24 }}
+      py={{ base: 12, md: 20 }}
+      minH="100vh"
+      display="flex"
+      alignItems="center"
       position="relative"
       overflow="hidden"
       padding={30}
@@ -183,65 +182,6 @@ function About() {
               </HStack>
             </VStack>
           </MotionBox>
-
-          {/* Skills Section */}
-          <MotionHeading
-            as="h3"
-            fontSize={{ base: '2xl', md: '3xl' }}
-            fontWeight="bold"
-            textAlign="center"
-            mb={8}
-            variants={fadeInUp}
-          >
-            Technical <Text as="span" color="#14b8a6">Skills</Text>
-          </MotionHeading>
-
-          <SimpleGrid
-            columns={{ base: 2, sm: 3, md: 4 }}
-            spacing={6}
-            variants={staggerContainer}
-          >
-            {skills.map((skill, index) => (
-              <MotionBox
-                key={skill.name}
-                variants={scaleIn}
-                whileHover={{ 
-                  scale: 1.1,
-                  y: -5
-                }}
-                transition={{ duration: 0.2 }}
-              >
-                <VStack
-                  bg="#222"
-                  p={6}
-                  borderRadius="xl"
-                  border="2px solid"
-                  borderColor="#2a2a2a"
-                  spacing={3}
-                  cursor="pointer"
-                  _hover={{
-                    borderColor: '#14b8a6',
-                    bg: '#2a2a2a',
-                    boxShadow: '0 8px 25px rgba(20, 184, 166, 0.15)'
-                  }}
-                  transition="all 0.3s"
-                >
-                  <Icon 
-                    as={skill.icon} 
-                    boxSize={{ base: 8, md: 10 }} 
-                    color="#14b8a6"
-                  />
-                  <Text 
-                    fontWeight="600" 
-                    fontSize={{ base: 'sm', md: 'md' }}
-                    color="#e0e0e0"
-                  >
-                    {skill.name}
-                  </Text>
-                </VStack>
-              </MotionBox>
-            ))}
-          </SimpleGrid>
         </MotionBox>
       </Container>
     </Box>

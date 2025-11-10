@@ -1,8 +1,167 @@
+// // InteractiveGridBackground.jsx
+// import React, { useEffect, useRef } from "react";
+// import { Box } from "@chakra-ui/react";
+
+// export default function Background({ children }) {
+//   const canvasRef = useRef(null);
+//   const glowRef = useRef({ col: -1, row: -1, alpha: 0 });
+
+//   useEffect(() => {
+//     const canvas = canvasRef.current;
+//     const ctx = canvas.getContext("2d");
+//     const dpr = window.devicePixelRatio || 1;
+
+//     const cellSize = 55;
+//     const baseColor = "#1e1e1e";
+//     const glowColor = "#14b8a6";
+
+//     let width, height;
+
+//     const resizeCanvas = () => {
+//       width = window.innerWidth;
+//       height = Math.max(window.innerHeight, document.body.scrollHeight);
+//       canvas.width = width * dpr;
+//       canvas.height = height * dpr;
+//       canvas.style.width = `${width}px`;
+//       canvas.style.height = `${height}px`;
+//       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+//     };
+
+//     resizeCanvas();
+
+//     function drawGrid() {
+//       ctx.fillStyle = "#0c0c0c";
+//       ctx.fillRect(0, 0, width, height);
+
+//       ctx.strokeStyle = baseColor;
+//       ctx.lineWidth = 1;
+
+//       // vertical lines
+//       for (let x = 0; x <= width; x += cellSize) {
+//         ctx.beginPath();
+//         ctx.moveTo(x, 0);
+//         ctx.lineTo(x, height);
+//         ctx.stroke();
+//       }
+
+//       // horizontal lines
+//       for (let y = 0; y <= height; y += cellSize) {
+//         ctx.beginPath();
+//         ctx.moveTo(0, y);
+//         ctx.lineTo(width, y);
+//         ctx.stroke();
+//       }
+//     }
+
+//     function drawGlow() {
+//       drawGrid();
+
+//       const { col, row, alpha } = glowRef.current;
+//       if (col < 0 || row < 0 || alpha <= 0.01) return;
+
+//       ctx.strokeStyle = `rgba(20, 184, 166, ${alpha})`;
+//       ctx.lineWidth = 1; // thinner glow edges
+//       ctx.shadowColor = glowColor;
+//       ctx.shadowBlur = 8 * alpha;
+
+//       const x = col * cellSize;
+//       const y = row * cellSize;
+
+//       // main hovered square edges
+//       ctx.beginPath();
+//       ctx.rect(x, y, cellSize, cellSize);
+//       ctx.stroke();
+
+//       // shared adjacent edges
+//       const drawSharedEdge = (dx, dy, fade) => {
+//         const nx = (col + dx) * cellSize;
+//         const ny = (row + dy) * cellSize;
+//         ctx.strokeStyle = `rgba(20, 184, 166, ${alpha * fade})`;
+
+//         ctx.beginPath();
+//         if (dx !== 0 && dy === 0) {
+//           const sx = dx > 0 ? nx : x;
+//           ctx.moveTo(sx, y);
+//           ctx.lineTo(sx, y + cellSize);
+//         }
+//         if (dy !== 0 && dx === 0) {
+//           const sy = dy > 0 ? ny : y;
+//           ctx.moveTo(x, sy);
+//           ctx.lineTo(x + cellSize, sy);
+//         }
+//         ctx.stroke();
+//       };
+
+//       // left, right, top, bottom shared edges (slightly dimmer)
+//       drawSharedEdge(-1, 0, 0.6);
+//       drawSharedEdge(1, 0, 0.6);
+//       drawSharedEdge(0, -1, 0.6);
+//       drawSharedEdge(0, 1, 0.6);
+
+//       ctx.shadowBlur = 0;
+//     }
+
+//     function animate() {
+//       drawGlow();
+//       glowRef.current.alpha *= 0.9;
+//       requestAnimationFrame(animate);
+//     }
+
+//     animate();
+
+//     function handlePointerMove(e) {
+//       const scrollY = window.scrollY;
+//       const mx = e.clientX;
+//       const my = e.clientY + scrollY;
+//       const col = Math.floor(mx / cellSize);
+//       const row = Math.floor(my / cellSize);
+//       glowRef.current = { col, row, alpha: 1 };
+//     }
+
+//     function handleScroll() {
+//       // extend height if user scrolls further down dynamically
+//       const newHeight = Math.max(window.innerHeight, document.body.scrollHeight);
+//       if (newHeight > height) resizeCanvas();
+//     }
+
+//     window.addEventListener("pointermove", handlePointerMove);
+//     window.addEventListener("resize", resizeCanvas);
+//     window.addEventListener("scroll", handleScroll);
+
+//     return () => {
+//       window.removeEventListener("pointermove", handlePointerMove);
+//       window.removeEventListener("resize", resizeCanvas);
+//       window.removeEventListener("scroll", handleScroll);
+//     };
+//   }, []);
+
+//   return (
+//     <Box position="relative" zIndex={0}>
+//       <canvas
+//         ref={canvasRef}
+//         style={{
+//           position: "absolute",
+//           top: 0,
+//           left: 0,
+//           width: "100%",
+//           height: "100%",
+//           zIndex: -1,
+//           pointerEvents: "none",
+//           backgroundColor: "#0c0c0c",
+//         }}
+//       />
+//       <Box position="relative" zIndex={1}>
+//         {children}
+//       </Box>
+//     </Box>
+//   );
+// }
+
 // InteractiveGridBackground.jsx
 import React, { useEffect, useRef } from "react";
 import { Box } from "@chakra-ui/react";
 
-export default function Background({ children }) {
+export default function InteractiveGridBackground({ children }) {
   const canvasRef = useRef(null);
   const glowRef = useRef({ col: -1, row: -1, alpha: 0 });
 
@@ -29,14 +188,13 @@ export default function Background({ children }) {
 
     resizeCanvas();
 
-    function drawGrid() {
+    const drawGrid = () => {
       ctx.fillStyle = "#0c0c0c";
       ctx.fillRect(0, 0, width, height);
 
       ctx.strokeStyle = baseColor;
       ctx.lineWidth = 1;
 
-      // vertical lines
       for (let x = 0; x <= width; x += cellSize) {
         ctx.beginPath();
         ctx.moveTo(x, 0);
@@ -44,86 +202,103 @@ export default function Background({ children }) {
         ctx.stroke();
       }
 
-      // horizontal lines
       for (let y = 0; y <= height; y += cellSize) {
         ctx.beginPath();
         ctx.moveTo(0, y);
         ctx.lineTo(width, y);
         ctx.stroke();
       }
-    }
+    };
 
-    function drawGlow() {
+    const drawGlow = () => {
       drawGrid();
 
       const { col, row, alpha } = glowRef.current;
       if (col < 0 || row < 0 || alpha <= 0.01) return;
 
-      ctx.strokeStyle = `rgba(20, 184, 166, ${alpha})`;
-      ctx.lineWidth = 1; // thinner glow edge
+      const fadeFactor = alpha;
+      ctx.lineWidth = 1;
       ctx.shadowColor = glowColor;
-      ctx.shadowBlur = 8 * alpha;
+      ctx.shadowBlur = 8 * fadeFactor;
 
       const x = col * cellSize;
       const y = row * cellSize;
 
-      // draw main square edges
+      // Full glow on hovered square
+      ctx.strokeStyle = `rgba(20, 184, 166, ${fadeFactor})`;
       ctx.beginPath();
       ctx.rect(x, y, cellSize, cellSize);
       ctx.stroke();
 
-      // glow shared edges with adjacent squares
-      const drawSharedEdge = (dx, dy) => {
-        const nx = (col + dx) * cellSize;
-        const ny = (row + dy) * cellSize;
+      // Function to draw a half-edge glow into neighbor squares
+      const drawHalfGlowEdge = (dx, dy, intensity) => {
+        const sharedAlpha = fadeFactor * intensity;
+        ctx.strokeStyle = `rgba(20, 184, 166, ${sharedAlpha})`;
+
         ctx.beginPath();
-        // shared vertical edges
-        if (dx !== 0 && dy === 0) {
-          const sx = dx > 0 ? nx : x;
+
+        if (dx !== 0) {
+          // Left or right shared edge glow
+          const sx = dx > 0 ? x + cellSize : x; // edge position
+          const offset = (cellSize / 2) * dx; // glow halfway across
           ctx.moveTo(sx, y);
-          ctx.lineTo(sx, y + cellSize);
+          ctx.lineTo(sx + offset, y);
+          ctx.moveTo(sx, y + cellSize);
+          ctx.lineTo(sx + offset, y + cellSize);
         }
-        // shared horizontal edges
-        if (dy !== 0 && dx === 0) {
-          const sy = dy > 0 ? ny : y;
+
+        if (dy !== 0) {
+          // Top or bottom shared edge glow
+          const sy = dy > 0 ? y + cellSize : y;
+          const offset = (cellSize / 2) * dy;
           ctx.moveTo(x, sy);
-          ctx.lineTo(x + cellSize, sy);
+          ctx.lineTo(x, sy + offset);
+          ctx.moveTo(x + cellSize, sy);
+          ctx.lineTo(x + cellSize, sy + offset);
         }
+
         ctx.stroke();
       };
 
-      // draw shared edges with neighbors (up, down, left, right)
-      drawSharedEdge(-1, 0); // left
-      drawSharedEdge(1, 0); // right
-      drawSharedEdge(0, -1); // up
-      drawSharedEdge(0, 1); // down
+      // Shared edges glowing halfway into adjacent squares
+      drawHalfGlowEdge(-1, 0, 0.6); // left
+      drawHalfGlowEdge(1, 0, 0.6); // right
+      drawHalfGlowEdge(0, -1, 0.6); // top
+      drawHalfGlowEdge(0, 1, 0.6); // bottom
 
-      ctx.shadowBlur = 0; // reset shadow
-    }
+      ctx.shadowBlur = 0;
+    };
 
-    function animate() {
+    const animate = () => {
       drawGlow();
-      glowRef.current.alpha *= 0.9; // fade glow smoothly
+      glowRef.current.alpha *= 0.9;
       requestAnimationFrame(animate);
-    }
+    };
 
     animate();
 
-    function handlePointerMove(e) {
+    const handlePointerMove = (e) => {
       const scrollY = window.scrollY;
       const mx = e.clientX;
       const my = e.clientY + scrollY;
       const col = Math.floor(mx / cellSize);
       const row = Math.floor(my / cellSize);
       glowRef.current = { col, row, alpha: 1 };
-    }
+    };
+
+    const handleScroll = () => {
+      const newHeight = Math.max(window.innerHeight, document.body.scrollHeight);
+      if (newHeight > height) resizeCanvas();
+    };
 
     window.addEventListener("pointermove", handlePointerMove);
     window.addEventListener("resize", resizeCanvas);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
       window.removeEventListener("pointermove", handlePointerMove);
       window.removeEventListener("resize", resizeCanvas);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -132,7 +307,7 @@ export default function Background({ children }) {
       <canvas
         ref={canvasRef}
         style={{
-          position: "fixed",
+          position: "absolute",
           top: 0,
           left: 0,
           width: "100%",

@@ -2,21 +2,70 @@ import React from "react"
 import {  
   Box,
   Container,
-  Button,
-  HStack,
   Text,
-  Code,
+  VStack,
   Heading,
-  Image,
-  Grid,
-  GridItem
+  SimpleGrid,
+  Icon
 } from '@chakra-ui/react'
 import { motion } from 'framer-motion';
+import { 
+  FaReact, 
+  FaPython, 
+  FaCode,
+  FaBrain
+} from 'react-icons/fa';
+import { 
+  SiDjango, 
+  SiJavascript, 
+  SiElectron,
+  SiTensorflow,
+  SiMongodb,
+  SiSqlite 
+} from 'react-icons/si';
 
+const MotionBox = motion.create(Box);
+const MotionHeading = motion.create(Heading);
+const scaleIn = {
+  hidden: { opacity: 0, scale: 0.8 },
+  visible: { 
+    opacity: 1, 
+    scale: 1,
+    transition: { duration: 0.4, ease: "easeOut" }
+  }
+};
+const fadeInUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" }
+  }
+};
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.1
+    }
+  }
+};
 function Skills(){
+    const skills = [
+      { name: 'React', icon: FaReact, color: '#61DAFB' },
+      { name: 'Django', icon: SiDjango, color: '#092E20' },
+      { name: 'Python', icon: FaPython, color: '#3776AB' },
+      { name: 'JavaScript', icon: SiJavascript, color: '#F7DF1E' },
+      { name: 'Electron', icon: SiElectron, color: '#3178C6' },
+      { name: 'TensorFlow', icon: SiTensorflow, color: '#FF6F00' },
+      { name: 'MongoDB', icon: SiMongodb, color: '#47A248' },
+      { name: 'Sqlite', icon: SiSqlite , color: '#4169E1' },
+    ];
       return (
         <Box
-          id="about"
+          id="skills"
           bg="transparent"
           color="white"
           py={{ base: 16, md: 24 }}

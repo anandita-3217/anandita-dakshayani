@@ -1,12 +1,14 @@
 import { Container,Box,Heading  } from '@chakra-ui/react'
+import Background from './components/Background'
+import NotFound from './components/NotFound'
 import Header from './components/Header'
 import Hero  from './components/Hero'
 import About from './components/About'
+import Skills from './components/Skills'
 import Projects from './components/Projects'
 import Contact from './components/Contact'
 import Resume from './components/Resume'
-import Background from './components/Background'
-import NotFound from './components/NotFound'
+import Footer from './components/Footer'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -32,9 +34,11 @@ function App() {
               <Header/>
               <Hero />
               <About />
+              <Skills/>
               <Projects /> 
               <Contact />
               <Resume/>
+              <Footer/>
               </Background>
             </>
           } />
@@ -44,7 +48,7 @@ function App() {
         </Routes>
       </Router>
 
-// TODO: added new assets and Notfound page. 
+// TODO: https://www.achyutkatiyar.com/ use this as a base for nav bar and technical skills 
 // TODO: work on learning and cerificates sections.
 //  Need towork on how to inegrate the NotFound page and Look for better interactive backgrounds
 

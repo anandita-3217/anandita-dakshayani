@@ -162,7 +162,7 @@ function Projects() {
               fontWeight="bold"
               textAlign="center"
             >
-              Featured Projects
+              Projects
             </Heading>
           </MotionBox>
 

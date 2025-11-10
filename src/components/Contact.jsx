@@ -59,7 +59,7 @@ function Contact() {
     {
       name: 'LinkedIn',
       icon: FaLinkedin,
-      href: 'https://linkedin.com/in/anandita-dakshayani',
+      href: 'https://linkedin.com/in/anandita-dakshayani-9621a0199',
       label: 'linkedin.com/in/anandita-dakshayani',
       color: '#0077B5'
     },
@@ -114,6 +114,7 @@ function Contact() {
             as="h2"
             fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}
             fontWeight="bold"
+            
             textAlign="center"
             mb={4}
             variants={fadeInUp}
