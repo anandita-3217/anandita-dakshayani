@@ -5,23 +5,26 @@ import About from './components/About'
 import Projects from './components/Projects'
 import Contact from './components/Contact'
 import Resume from './components/Resume'
-import InteractiveGridBackground from './components/Background'
+import NeonLinesBackground from './components/Background'
+import NotFound from './components/NotFound'
 
 function App() {
   return (
     <Container maxW="full" p={0} >
 
-      <InteractiveGridBackground>
+      <NeonLinesBackground>
       <Header></Header>
       <Hero></Hero>
       <About></About>
       <Projects></Projects>
       <Contact></Contact>
       <Resume></Resume>
-
-      </InteractiveGridBackground>
+    <NotFound></NotFound>
+      </NeonLinesBackground>
     </Container>
-// TODO: 
+// TODO: added new assets and Notfound page. 
+// TODO: work on learning and cerificates sections.
+//  Need towork on how to inegrate the NotFound page and Look for better interactive backgrounds
 
   )
 }
