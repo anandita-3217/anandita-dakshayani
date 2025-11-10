@@ -1,125 +1,25 @@
-// import React from "react"
-// import {  Box,
-//   Container,
-//   Button,
-//   VStack,
-//   HStack,
-//   Image} from '@chakra-ui/react'
-// import { motion } from 'framer-motion';
-// import Error from "./assets/Error404.gif"
-// // Create motion components
-// const MotionBox = motion(Box);
-// const MotionButton = motion(Button);
-// const MotionImage = motion(Image);
-
-// const fadeInUp = {
-//   hidden: { opacity: 0, y: 30 },
-//   visible: { 
-//     opacity: 1, 
-//     y: 0,
-//     transition: { duration: 0.6, ease: "easeOut" }
-//   }
-// };
-
-
-// const scaleIn = {
-//   hidden: { opacity: 0, scale: 0.8 },
-//   visible: { 
-//     opacity: 1, 
-//     scale: 1,
-//     transition: { duration: 0.5, ease: "easeOut" }
-//   }
-// };
-// // Animation variants
-
-// const staggerContainer = {
-//   hidden: { opacity: 0 },
-//   visible: {
-//     opacity: 1,
-//     transition: {
-//       staggerChildren: 0.2,
-//       delayChildren: 0.1
-//     }
-//   }
-// };
-// function NotFound(){
-//     return (
-//         <Box id="notFound" bg="transparent" >
-//             <Container maxW="container.xl" position="relative" zIndex={1}>
-//                 <MotionBox
-//                     initial="hidden"
-//                     animate="visible"
-//                     variants={staggerContainer}
-//                     position="relative"
-//                     display="flex"
-//                     flexDirection="column"
-//                     alignItems="center"
-//                     justifyContent="center"
-//                     >
-//                       {/* Coding Image with float animation */}
-//                     <MotionImage
-//                     src={Error}
-//                     alt="Coding"
-//                     boxSize={{ base: "200px", md: "250px", lg: "300px" }}
-//                     variants={scaleIn}
-//                     animate={{
-//                     y: [0, -20, 0]
-//                     }}
-//                     transition={{
-//                         duration: 4,
-//                         repeat: Infinity,
-//                         ease: "easeInOut"
-//                     }}
-//                     filter="drop-shadow(0 10px 30px rgba(20, 184, 166, 0.3))"
-//                     />
-//                                         <MotionButton
-//                       as="a"
-//                       href="#contact"
-//                       variant="outline"
-//                       size="lg"
-//                       px={8}
-//                       py={6}
-//                       fontSize="md"
-//                       fontWeight="600"
-//                       bg="#0a0a0a"
-//                       borderColor="#2a2a2a"
-//                       color="white"
-//                       _hover={{
-//                         borderColor: '#14b8a6',
-//                         color: '#14b8a6'
-//                       }}
-//                       whileHover={{ scale: 1.05 }}
-//                       whileTap={{ scale: 0.95 }}
-//                       transition={{ duration: 0.2 }}
-//                     >
-//                       Lost? Back to Home page
-//                     </MotionButton>
-//                     </MotionBox>
-//             </Container>
-//         </Box>
-//     )
-// }
-// export default NotFound;
 import React from "react"
 import {  
   Box,
   Container,
   Button,
-  VStack,
+  HStack,
   Text,
   Code,
   Heading,
-  Image
+  Image,
+  Grid,
+  GridItem
 } from '@chakra-ui/react'
 import { motion } from 'framer-motion';
 import Error from "./assets/Error404.gif"
 
 // Create motion components
-const MotionBox = motion(Box);
-const MotionButton = motion(Button);
-const MotionImage = motion(Image);
-const MotionText = motion(Text);
-const MotionHeading = motion(Heading);
+const MotionBox = motion.create(Box);
+const MotionButton = motion.create(Button);
+const MotionImage = motion.create(Image);
+const MotionText = motion.create(Text);
+const MotionHeading = motion.create(Heading);
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -175,7 +75,7 @@ function NotFound(){
                     {/* 404 Header */}
                     <MotionHeading
                       as="h1"
-                      fontSize={{ base: '4xl', md: '5xl', lg: '6xl' }}
+                      fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}
                       fontWeight="bold"
                       color="#14b8a6"
                       mb={4}
@@ -185,6 +85,12 @@ function NotFound(){
                     </MotionHeading>
 
                     {/* Error Image with float animation */}
+                    <Grid
+                              templateColumns={{ base: '1fr', lg: '1fr 1fr' }}
+                              gap={{ base: 8, lg: 12 }}
+                              alignItems="center"
+                            >
+                      <GridItem>
                     <MotionImage
                       src={Error}
                       alt="Error 404"
@@ -201,8 +107,9 @@ function NotFound(){
                       filter="drop-shadow(0 10px 30px rgba(20, 184, 166, 0.3))"
                       mb={8}
                     />
-
+                  </GridItem>
                     {/* Code Block */}
+                    <GridItem>
                     <MotionBox
                       variants={fadeInUp}
                       bg="#1a1a1a"
@@ -280,22 +187,12 @@ function NotFound(){
                         &#125;
                       </Code>
                     </MotionBox>
-
-                    {/* Error Message */}
-                    <MotionText
-                      variants={fadeInUp}
-                      fontSize={{ base: 'md', md: 'lg' }}
-                      color="#b0b0b0"
-                      mb={8}
-                      maxW="600px"
-                    >
-                      The page you're looking for doesn't exist. Either I forgot to build it, 
-                      or you've discovered a bug. Let's get you back on track.
-                    </MotionText>
+                    </GridItem>
+                  </Grid>
 
                     {/* Action Buttons */}
                     <MotionBox variants={fadeInUp}>
-                      <VStack spacing={4} w="full">
+                      <HStack spacing={4} w="full">
                         <MotionButton
                           as="a"
                           href="/"
@@ -338,7 +235,7 @@ function NotFound(){
                         >
                           View Projects
                         </MotionButton>
-                      </VStack>
+                      </HStack>
                     </MotionBox>
 
                     {/* Footer Note */}

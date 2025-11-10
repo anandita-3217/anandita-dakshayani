@@ -15,10 +15,6 @@ import {
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import { 
-  FaReact, 
-  FaPython, 
-  FaNodeJs, 
-  FaDatabase,
   FaGithub,
   FaLinkedin,
   FaEnvelope,
@@ -27,9 +23,9 @@ import {
   FaBrain
 } from 'react-icons/fa';
 
-const MotionBox = motion(Box);
-const MotionHeading = motion(Heading);
-const MotionText = motion(Text);
+const MotionBox = motion.create(Box);
+const MotionHeading = motion.create(Heading);
+const MotionText = motion.create(Text);
 // Animation variants
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -39,7 +35,6 @@ const fadeInUp = {
     transition: { duration: 0.6, ease: "easeOut" }
   }
 };
-
 const staggerContainer = {
   hidden: { opacity: 0 },
   visible: {
@@ -51,14 +46,7 @@ const staggerContainer = {
   }
 };
 
-const scaleIn = {
-  hidden: { opacity: 0, scale: 0.8 },
-  visible: { 
-    opacity: 1, 
-    scale: 1,
-    transition: { duration: 0.4, ease: "easeOut" }
-  }
-};
+
 function Contact() {
   const contactLinks = [
     {
@@ -119,7 +107,7 @@ function Contact() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-        //   variants={staggerContainer}
+          variants={staggerContainer}
         >
           {/* Section Title */}
           <MotionHeading
@@ -211,27 +199,7 @@ function Contact() {
           </VStack>
 
           {/* Resume Download Button */}
-          <MotionBox variants={fadeInUp} textAlign="center">
-            <Button
-              as="a"
-              href="/path-to-your-resume.pdf"
-              download
-              size="lg"
-              colorScheme="teal"
-              px={10}
-              py={7}
-              fontSize="md"
-              fontWeight="600"
-              leftIcon={<FaFileDownload />}
-              _hover={{
-                transform: 'translateY(-2px)',
-                boxShadow: '0 8px 25px rgba(20, 184, 166, 0.4)'
-              }}
-              transition="all 0.3s"
-            >
-              Download Resume
-            </Button>
-          </MotionBox>
+
 
           {/* Optional: Additional CTA */}
           <MotionText

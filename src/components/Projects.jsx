@@ -17,7 +17,7 @@ import { ChevronLeft, ChevronRight, ExternalLink, Github } from 'lucide-react';
 import { motion, AnimatePresence, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
-const MotionBox = motion(Box);
+const MotionBox = motion.create(Box);
 
 function Projects() {
   const [currentIndex, setCurrentIndex] = useState(0);

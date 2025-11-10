@@ -5,7 +5,6 @@ import {
   HStack,
   IconButton,
   Image,
-  Text,
   VStack,
   Link,
   useDisclosure,
@@ -23,17 +22,17 @@ import {
 } from "lucide-react";
 
 // Chakra + Motion wrapper
-const MotionBox = motion(Box);
+const MotionBox = motion.create(Box);
 
 const Header = () => {
   const { isOpen, onToggle, onClose } = useDisclosure();
   const links = [
     { name: "Home", icon: Home, href: "#hero" },
     { name: "About", icon: User, href: "#about" },
-    { name: "Resume", icon: File , href: "#resume" },
     { name: "Projects", icon: FolderGit2, href: "#projects" },
     // { name: "Experience", icon: Briefcase, href: "#experience" },
     { name: "Contact", icon: Mail, href: "#contact" },
+    { name: "Resume", icon: File , href: "#resume" },
   ];
 
   return (

@@ -15,11 +15,11 @@ import { motion } from 'framer-motion';
 import { ReactTyped } from "react-typed";
 import CodingImg from "./assets/Coding.png";
 // Create motion components
-const MotionBox = motion(Box);
-const MotionHeading = motion(Heading);
-const MotionText = motion(Text);
-const MotionButton = motion(Button);
-const MotionImage = motion(Image);
+const MotionBox = motion.create(Box);
+const MotionHeading = motion.create(Heading);
+const MotionText = motion.create(Text);
+const MotionButton = motion.create(Button);
+const MotionImage = motion.create(Image);
 
 // Animation variants
 const fadeInUp = {

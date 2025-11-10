@@ -1,91 +1,218 @@
-import React, { useRef, useEffect } from "react";
+// import React, { useEffect, useRef } from "react";
+// import { Box } from "@chakra-ui/react";
+
+// export default function Background({ children }) {
+//   const canvasRef = useRef(null);
+//   const containerRef = useRef(null);
+
+//   useEffect(() => {
+//     const canvas = canvasRef.current;
+//     const container = containerRef.current;
+//     const ctx = canvas.getContext("2d");
+
+//     let width = window.innerWidth;
+//     let height = window.innerHeight;
+//     const cellSize = 55;
+//     const baseColor = "#1e1e1e";
+//     const glowColor = "#14b8a6";
+
+//     const dpr = window.devicePixelRatio || 1;
+//     canvas.width = width * dpr;
+//     canvas.height = height * dpr;
+//     canvas.style.width = `${width}px`;
+//     canvas.style.height = `${height}px`;
+//     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+//     function drawGrid() {
+//       ctx.clearRect(0, 0, width, height);
+//       ctx.fillStyle = "#0c0c0c";
+//       ctx.fillRect(0, 0, width, height);
+
+//       ctx.strokeStyle = baseColor;
+//       ctx.lineWidth = 1;
+//       for (let x = 0; x < width; x += cellSize) {
+//         ctx.beginPath();
+//         ctx.moveTo(x, 0);
+//         ctx.lineTo(x, height);
+//         ctx.stroke();
+//       }
+//       for (let y = 0; y < height; y += cellSize) {
+//         ctx.beginPath();
+//         ctx.moveTo(0, y);
+//         ctx.lineTo(width, y);
+//         ctx.stroke();
+//       }
+//     }
+
+//     drawGrid();
+
+//     function highlightCell(mx, my) {
+//       drawGrid(); // redraw base grid
+//       const col = Math.floor(mx / cellSize);
+//       const row = Math.floor(my / cellSize);
+//       const x = col * cellSize;
+//       const y = row * cellSize;
+
+//       ctx.strokeStyle = glowColor;
+//       ctx.lineWidth = 2;
+//       ctx.shadowColor = glowColor;
+//       ctx.shadowBlur = 10;
+
+//       ctx.strokeRect(x, y, cellSize, cellSize);
+
+//       // reset shadow so it doesn't affect future drawings
+//       ctx.shadowBlur = 0;
+//     }
+
+//     function handlePointerMove(e) {
+//       const rect = container.getBoundingClientRect();
+//       const mx = e.clientX - rect.left;
+//       const my = e.clientY - rect.top;
+//       highlightCell(mx, my);
+//     }
+
+//     function handleLeave() {
+//       drawGrid();
+//     }
+
+//     container.addEventListener("pointermove", handlePointerMove);
+//     container.addEventListener("pointerleave", handleLeave);
+
+//     const handleResize = () => {
+//       width = window.innerWidth;
+//       height = window.innerHeight;
+//       canvas.width = width * dpr;
+//       canvas.height = height * dpr;
+//       canvas.style.width = `${width}px`;
+//       canvas.style.height = `${height}px`;
+//       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+//       drawGrid();
+//     };
+
+//     window.addEventListener("resize", handleResize);
+
+//     return () => {
+//       window.removeEventListener("resize", handleResize);
+//       container.removeEventListener("pointermove", handlePointerMove);
+//       container.removeEventListener("pointerleave", handleLeave);
+//     };
+//   }, []);
+
+//   return (
+//     <Box ref={containerRef} position="relative" zIndex={0}>
+//       {/* fixed canvas for grid and glow effect */}
+//       <canvas
+//         ref={canvasRef}
+//         style={{
+//           position: "fixed",
+//           top: 0,
+//           left: 0,
+//           width: "100%",
+//           height: "100%",
+//           zIndex: -1,
+//           pointerEvents: "none",
+//           backgroundColor: "#0c0c0c",
+//         }}
+//       />
+//       {/* content above background */}
+//       <Box position="relative" zIndex={1}>
+//         {children}
+//       </Box>
+//     </Box>
+//   );
+// }
+
+// InteractiveGridBackground.jsx
+import React, { useEffect, useRef } from "react";
 import { Box } from "@chakra-ui/react";
 
-export default function NeonLinesBackground({ children }) {
+export default function Background({ children }) {
   const canvasRef = useRef(null);
+  const glowRef = useRef({ x: -1, y: -1, alpha: 0 }); // stores last glow position + fade value
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
-    let width = window.innerWidth;
-    let height = window.innerHeight;
-    let lines = [];
-    const numLines = 30;
-    const speed = 0.5;
-    const color = "#14b8a6";
-
     const dpr = window.devicePixelRatio || 1;
-    canvas.width = width * dpr;
-    canvas.height = height * dpr;
-    canvas.style.width = `${width}px`;
-    canvas.style.height = `${height}px`;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    const mouse = { x: width / 2, y: height / 2 };
+    let width = window.innerWidth;
+    let height = Math.max(window.innerHeight, document.body.scrollHeight);
+    const cellSize = 55;
+    const baseColor = "#1e1e1e";
+    const glowColor = "#14b8a6";
 
-    for (let i = 0; i < numLines; i++) {
-      lines.push({
-        y: (i / numLines) * height,
-        offset: Math.random() * width,
-        speed: speed + Math.random(),
-      });
-    }
-
-    function resize() {
+    const resizeCanvas = () => {
       width = window.innerWidth;
-      height = window.innerHeight;
+      height = Math.max(window.innerHeight, document.body.scrollHeight);
       canvas.width = width * dpr;
       canvas.height = height * dpr;
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    }
+    };
+    resizeCanvas();
 
-    window.addEventListener("resize", resize);
-
-    function animate() {
-      ctx.clearRect(0, 0, width, height);
-      const gradient = ctx.createLinearGradient(0, 0, width, height);
-      gradient.addColorStop(0, "rgba(20,184,166,0.1)");
-      gradient.addColorStop(1, "rgba(20,184,166,0.3)");
-      ctx.strokeStyle = gradient;
-      ctx.lineWidth = 1.5;
-
-      for (let line of lines) {
-        line.offset += line.speed;
-        const brightness =
-          0.3 + 0.7 * Math.exp(-Math.pow((line.y - mouse.y) / 150, 2));
-        ctx.globalAlpha = brightness;
-
-        const y = (line.y + Math.sin(line.offset / 50) * 10) % height;
+    function drawGrid() {
+      ctx.fillStyle = "#0c0c0c";
+      ctx.fillRect(0, 0, width, height);
+      ctx.strokeStyle = baseColor;
+      ctx.lineWidth = 1;
+      for (let x = 0; x < width; x += cellSize) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, height);
+        ctx.stroke();
+      }
+      for (let y = 0; y < height; y += cellSize) {
         ctx.beginPath();
         ctx.moveTo(0, y);
         ctx.lineTo(width, y);
         ctx.stroke();
       }
-
-      ctx.globalAlpha = 1;
-      requestAnimationFrame(animate);
     }
 
-    animate();
+    function draw() {
+      drawGrid();
 
-    function onMove(e) {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
+      const { x, y, alpha } = glowRef.current;
+      if (x >= 0 && y >= 0 && alpha > 0.01) {
+        ctx.strokeStyle = `rgba(20, 184, 166, ${alpha})`;
+        ctx.lineWidth = 2;
+        ctx.shadowColor = glowColor;
+        ctx.shadowBlur = 12 * alpha;
+        ctx.strokeRect(x, y, cellSize, cellSize);
+        ctx.shadowBlur = 0;
+      }
+
+      // fade the glow over time
+      glowRef.current.alpha *= 0.9;
+      requestAnimationFrame(draw);
     }
 
-    window.addEventListener("pointermove", onMove);
+    draw();
+
+    function handlePointerMove(e) {
+      const scrollY = window.scrollY;
+      const mx = e.clientX;
+      const my = e.clientY + scrollY;
+      const col = Math.floor(mx / cellSize);
+      const row = Math.floor(my / cellSize);
+      const x = col * cellSize;
+      const y = row * cellSize;
+      glowRef.current = { x, y, alpha: 1 }; // reset glow
+    }
+
+    window.addEventListener("pointermove", handlePointerMove);
+    window.addEventListener("resize", resizeCanvas);
 
     return () => {
-      window.removeEventListener("resize", resize);
-      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointermove", handlePointerMove);
+      window.removeEventListener("resize", resizeCanvas);
     };
   }, []);
 
   return (
     <Box position="relative" zIndex={0}>
-      {/* fixed canvas background */}
       <canvas
         ref={canvasRef}
         style={{
@@ -94,12 +221,11 @@ export default function NeonLinesBackground({ children }) {
           left: 0,
           width: "100%",
           height: "100%",
-          zIndex: -1, // stays behind content
-          pointerEvents: "none", // allows scrolling & interaction
+          zIndex: -1,
+          pointerEvents: "none",
           backgroundColor: "#0c0c0c",
         }}
       />
-      {/* your actual content renders above */}
       <Box position="relative" zIndex={1}>
         {children}
       </Box>

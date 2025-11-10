@@ -42,6 +42,7 @@ const techStack = {
   - npm install react-intersection-observer
   - npm install react-icons --save
   - npm install gsap
+  - npm install react-router-dom
 
 
 <!-- ### Installation & Setup
