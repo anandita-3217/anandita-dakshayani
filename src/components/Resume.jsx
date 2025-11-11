@@ -28,15 +28,6 @@ const staggerContainer = {
   }
 };
 
-const scaleIn = {
-  hidden: { opacity: 0, scale: 0.8 },
-  visible: { 
-    opacity: 1, 
-    scale: 1,
-    transition: { duration: 0.4, ease: "easeOut" }
-  }
-};
-3
 function Resume() {
   return (
     <Box bg="transparent" minH="100vh" py={20} id="resume">

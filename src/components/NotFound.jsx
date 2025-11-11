@@ -94,7 +94,7 @@ function NotFound(){
                     <MotionImage
                       src={Error}
                       alt="Error 404"
-                      boxSize={{ base: "200px", md: "280px", lg: "350px" }}
+                      boxSize={{ base: "100px", md: "180px", lg: "250px" }}
                       variants={scaleIn}
                       animate={{
                         y: [0, -15, 0]

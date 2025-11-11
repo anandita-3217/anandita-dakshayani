@@ -50,7 +50,8 @@ function App() {
 
 // TODO: https://www.achyutkatiyar.com/ use this as a base for nav bar and technical skills 
 // TODO: work on learning and cerificates sections.
-//  Need towork on how to inegrate the NotFound page and Look for better interactive backgrounds
+//  Need to work on better interactive backgrounds
+
 
   )
 }
