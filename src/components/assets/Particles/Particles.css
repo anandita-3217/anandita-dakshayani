@@ -1,0 +1,15 @@
+.particles-container {
+  /* position: relative;
+  width: 100%;
+  height: 100%;
+   */
+     position: fixed; /* make it fill the entire viewport */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  z-index: -1; /* send behind all content */
+  pointer-events: none; /* let you click things on top */
+  overflow: hidden;
+}

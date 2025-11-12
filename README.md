@@ -41,7 +41,8 @@ const techStack = {
   - npm install lucide-react
   - npm install react-intersection-observer
   - npm install react-icons --save
-  - npm install gsap
+  - npm install ogl
+  npm install gsap
   - npm install react-router-dom
 
 
@@ -147,6 +148,7 @@ This project is open source and available under the [MIT License](LICENSE).
 - [Chakra UI](https://storyset.com/technology) team for the incredible component library
 - [Technology illustrations by Storyset](https://storyset.com/technology)
 - [GIFS from LottieFiles](https://lottiefiles.com/free-animations)
+- [ReactBits](https://reactbits.dev/backgrounds/) for the background component
 
 
 ---

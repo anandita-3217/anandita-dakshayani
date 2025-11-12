@@ -26,7 +26,7 @@ function TechIcon({ logoKey, name, size = 20 }) {
   
   const getIconUrl = () => {
     if (logoKey === 'nextjs') return 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg';
-    if (logoKey === 'tailwindcss') return 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg';
+    if (logoKey === 'huggingface') return 'https://img.icons8.com/?size=100&id=sop9ROXku5bb&format=png&color=000000';
     return `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${logoKey}/${logoKey}-original.svg`;
   };
   
@@ -75,43 +75,43 @@ export default function SkillsShowcase() {
 
   const skills = {
     Languages: [
-      { name: "JavaScript", logoKey: "javascript" },
       { name: "Python", logoKey: "python" },
-      { name: "TypeScript", logoKey: "typescript" },
       { name: "Java", logoKey: "java" },
-      { name: "C++", logoKey: "cplusplus" },
+      { name: "JavaScript", logoKey: "javascript" },
+      { name: "HTML", logoKey: "html5" },
+      { name: "CSS", logoKey: "css3" },
+      { name: "R", logoKey: "r" }
+      // { name: "C++", logoKey: "cplusplus" },
     ],
     Frameworks: [
       { name: "React", logoKey: "react" },
-      { name: "Next.js", logoKey: "nextjs" },
+      { name: "Node.js", logoKey: "nodejs" },
       { name: "Django", logoKey: "django" },
       { name: "Express", logoKey: "express" },
-      { name: "TailwindCSS", logoKey: "tailwindcss" },
+      { name: "Flask", logoKey: "flask" },
+      { name: "BootStrap", logoKey: "bootstrap" },
+      { name: "Electron", logoKey: "electron" },
     ],
     Databases: [
       { name: "MongoDB", logoKey: "mongodb" },
-      { name: "PostgreSQL", logoKey: "postgresql" },
+      // { name: "PostgreSQL", logoKey: "postgresql" },
       { name: "MySQL", logoKey: "mysql" },
-      { name: "Redis", logoKey: "redis" },
+      // { name: "Redis", logoKey: "redis" },
       { name: "SQLite", logoKey: "sqlite" },
     ],
-    DevOps: [
-      { name: "Docker", logoKey: "docker" },
-      { name: "Kubernetes", logoKey: "kubernetes" },
-      { name: "AWS", logoKey: "amazonwebservices" },
-      { name: "Git", logoKey: "git" },
-      { name: "GitHub Actions", logoKey: "github" },
+    MachineLearning: [
+      { name: "Numpy", logoKey: "numpy" },
+      { name: "ScikitLearn", logoKey: "scikitlearn" },
+      { name: "pandas", logoKey: "pandas" },
+      
+      { name: "TensorFlow", logoKey: "tensorflow" },
+      { name: "HuggingFace", logoKey: "huggingface" },
     ],
   };
 
   const categories = Object.keys(skills);
-
-  const bgMuted = useColorModeValue("gray.50", "gray.800");
   const textPrimary = useColorModeValue("gray.900", "white");
   const textSecondary = useColorModeValue("gray.600", "gray.400");
-  const tabBg = useColorModeValue("gray.100", "gray.700");
-  const tabActiveBg = useColorModeValue("white", "gray.600");
-  const badgeBg = useColorModeValue("white", "gray.700");
   const badgeHoverBg = useColorModeValue("gray.100", "gray.600");
 
   return (
@@ -135,15 +135,6 @@ export default function SkillsShowcase() {
           >
             Technical Skills
           </Heading>
-          <Text
-            maxW="700px"
-            mx="auto"
-            color={textSecondary}
-            fontSize={{ base: "md", md: "xl" }}
-            lineHeight="relaxed"
-          >
-            My expertise across various technologies and tools
-          </Text>
         </MotionBox>
 
         <MotionBox
@@ -164,7 +155,8 @@ export default function SkillsShowcase() {
                 flexWrap="wrap"
                 gap={2}
                 h="auto"
-                bg={tabBg}
+                bg="transparent"
+                backdropFilter="blur(10px)"
                 p={1}
                 borderRadius="lg"
               >
@@ -177,8 +169,9 @@ export default function SkillsShowcase() {
                     fontWeight="medium"
                     borderRadius="md"
                     color={textSecondary}
+                    bg="teal.900"
                     _selected={{
-                      bg: tabActiveBg,
+                      bg: "teal.400",
                       color: textPrimary,
                       boxShadow: "sm",
                     }}
@@ -194,7 +187,8 @@ export default function SkillsShowcase() {
               {categories.map((category) => (
                 <TabPanel key={category} p={0}>
                   <Box
-                    bg={bgMuted}
+                    bg="transparent"
+                backdropFilter="blur(10px)"
                     borderRadius="lg"
                     p={6}
                   >
@@ -203,7 +197,7 @@ export default function SkillsShowcase() {
                       gap={3}
                       justify="center"
                     >
-                      {skills[category].map((skill, index) => (
+                      {/* {skills[category].map((skill, index) => (
                         <MotionBadge
                           key={skill.name}
                           initial={{ opacity: 0, scale: 0.9 }}
@@ -213,7 +207,34 @@ export default function SkillsShowcase() {
                           fontSize="sm"
                           py={2}
                           px={4}
-                          bg={badgeBg}
+                          bg= "teal.900"
+                          border="1px solid"
+                          borderColor={useColorModeValue("gray.200", "gray.600")}
+                          borderRadius="md"
+                          display="flex"
+                          alignItems="center"
+                          gap={2}
+                          cursor="pointer"
+                        >
+                          <TechIcon logoKey={skill.logoKey} name={skill.name} size={20} />
+                          {skill.name}
+                        </MotionBadge>
+                      ))} */}
+                      {skills[category].map((skill, index) => (
+                        <MotionBadge
+                          key={`${category}-${skill.name}`}
+                          initial={{ opacity: 0, y: 20, scale: 0.8 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          whileHover={{ scale: 1.05, backgroundColor: badgeHoverBg }}
+                          transition={{ 
+                            duration: 0.4, 
+                            delay: index * 0.1,
+                            ease: "easeOut"
+                          }}
+                          fontSize="sm"
+                          py={2}
+                          px={4}
+                          bg= "teal.900"
                           border="1px solid"
                           borderColor={useColorModeValue("gray.200", "gray.600")}
                           borderRadius="md"
