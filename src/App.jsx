@@ -51,6 +51,8 @@ function App() {
 // TODO: https://www.achyutkatiyar.com/ use this as a base for nav bar and technical skills 
 // TODO: work on learning and cerificates sections.
 //  Need to work on better interactive backgrounds
+// TODO: INSTEAD OF A CURSOR INTERACTIVE BACKGROUND HAVE A NORMAL BACKGROUND WITH MOTION
+// TODO: IMPROVE THE CURSOR SO IT LEAVES A TRAIL OF PARTICLES
 
 
   )

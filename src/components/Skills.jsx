@@ -1,171 +1,3 @@
-// import React from "react"
-// import {  
-//   Box,
-//   Container,
-//   Text,
-//   VStack,
-//   Heading,
-//   SimpleGrid,
-//   Icon
-// } from '@chakra-ui/react'
-// import { motion } from 'framer-motion';
-// import { 
-//   FaReact, 
-//   FaPython, 
-//   FaCode,
-//   FaBrain
-// } from 'react-icons/fa';
-// import { 
-//   SiDjango, 
-//   SiJavascript, 
-//   SiElectron,
-//   SiTensorflow,
-//   SiMongodb,
-//   SiSqlite 
-// } from 'react-icons/si';
-
-// const MotionBox = motion.create(Box);
-// const MotionHeading = motion.create(Heading);
-// const scaleIn = {
-//   hidden: { opacity: 0, scale: 0.8 },
-//   visible: { 
-//     opacity: 1, 
-//     scale: 1,
-//     transition: { duration: 0.4, ease: "easeOut" }
-//   }
-// };
-// const fadeInUp = {
-//   hidden: { opacity: 0, y: 30 },
-//   visible: { 
-//     opacity: 1, 
-//     y: 0,
-//     transition: { duration: 0.6, ease: "easeOut" }
-//   }
-// };
-// const staggerContainer = {
-//   hidden: { opacity: 0 },
-//   visible: {
-//     opacity: 1,
-//     transition: {
-//       staggerChildren: 0.2,
-//       delayChildren: 0.1
-//     }
-//   }
-// };
-// function Skills(){
-//     const skills = [
-//       { name: 'React', icon: FaReact, color: '#61DAFB' },
-//       { name: 'Django', icon: SiDjango, color: '#092E20' },
-//       { name: 'Python', icon: FaPython, color: '#3776AB' },
-//       { name: 'JavaScript', icon: SiJavascript, color: '#F7DF1E' },
-//       { name: 'Electron', icon: SiElectron, color: '#3178C6' },
-//       { name: 'TensorFlow', icon: SiTensorflow, color: '#FF6F00' },
-//       { name: 'MongoDB', icon: SiMongodb, color: '#47A248' },
-//       { name: 'Sqlite', icon: SiSqlite , color: '#4169E1' },
-//     ];
-//       return (
-//         <Box
-//           id="skills"
-//           bg="transparent"
-//           color="white"
-//           py={{ base: 16, md: 24 }}
-//           position="relative"
-//           overflow="hidden"
-//           padding={30}
-//         >
-//           {/* Background decoration */}
-//           <MotionBox
-//             position="absolute"
-//             top="20%"
-//             left="5%"
-//             w="200px"
-//             h="200px"
-//             bg="rgba(20, 184, 166, 0.03)"
-//             borderRadius="full"
-//             filter="blur(40px)"
-//             animate={{
-//               scale: [1, 1.2, 1],
-//               opacity: [0.3, 0.5, 0.3]
-//             }}
-//             transition={{
-//               duration: 6,
-//               repeat: Infinity,
-//               ease: "easeInOut"
-//             }}
-//           />
-    
-//           <Container maxW="container.xl" position="relative" zIndex={1}>
-//             <MotionBox
-//               initial="hidden"
-//               whileInView="visible"
-//               viewport={{ once: true, margin: "-100px" }}
-//               variants={staggerContainer}
-//             >
-//               {/* Skills Section */}
-//               <MotionHeading
-//                 as="h3"
-//                 fontSize={{ base: '2xl', md: '3xl' }}
-//                 fontWeight="bold"
-//                 textAlign="center"
-//                 mb={8}
-//                 variants={fadeInUp}
-//               >
-//                  <Text as="span" color="#14b8a6">Technical Skills</Text>
-//               </MotionHeading>
-    
-//               <SimpleGrid
-//                 columns={{ base: 2, sm: 3, md: 4 }}
-//                 spacing={6}
-//                 variants={staggerContainer}
-//               >
-//                 {skills.map((skill, index) => (
-//                   <MotionBox
-//                     key={skill.name}
-//                     variants={scaleIn}
-//                     whileHover={{ 
-//                       scale: 1.1,
-//                       y: -5
-//                     }}
-//                     transition={{ duration: 0.2 }}
-//                   >
-//                     <VStack
-//                       bg="#222"
-//                       p={6}
-//                       borderRadius="xl"
-//                       border="2px solid"
-//                       borderColor="#2a2a2a"
-//                       spacing={3}
-//                       cursor="pointer"
-//                       _hover={{
-//                         borderColor: '#14b8a6',
-//                         bg: '#2a2a2a',
-//                         boxShadow: '0 8px 25px rgba(20, 184, 166, 0.15)'
-//                       }}
-//                       transition="all 0.3s"
-//                     >
-//                       <Icon 
-//                         as={skill.icon} 
-//                         boxSize={{ base: 8, md: 10 }} 
-//                         color="#14b8a6"
-//                       />
-//                       <Text 
-//                         fontWeight="600" 
-//                         fontSize={{ base: 'sm', md: 'md' }}
-//                         color="#e0e0e0"
-//                       >
-//                         {skill.name}
-//                       </Text>
-//                     </VStack>
-//                   </MotionBox>
-//                 ))}
-//               </SimpleGrid>
-//             </MotionBox>
-//           </Container>
-//         </Box>
-//       );
-// }
-// export default Skills;
-// components/SkillsShowcase.jsx
 import React, { useState } from "react";
 import {
   Box,
@@ -177,160 +9,224 @@ import {
   TabPanels,
   Tab,
   TabPanel,
-  SimpleGrid,
-  Badge,
-  useColorModeValue,
   Flex,
+  Badge,
+  Image,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import SkillIcon from "./SkillIcons";
+import { Code } from "lucide-react";
 
 const MotionBox = motion(Box);
+const MotionBadge = motion(Badge);
 
-export default function Skills() {
+// TechIcon Component
+function TechIcon({ logoKey, name, size = 20 }) {
+  const [imageError, setImageError] = useState(false);
+  
+  const getIconUrl = () => {
+    if (logoKey === 'nextjs') return 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg';
+    if (logoKey === 'tailwindcss') return 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg';
+    return `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${logoKey}/${logoKey}-original.svg`;
+  };
+  
+  const getFallbackUrl = () => {
+    return `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${logoKey}/${logoKey}-plain.svg`;
+  };
+  
+  if (imageError) {
+    return (
+      <Box 
+        display="flex" 
+        alignItems="center" 
+        justifyContent="center" 
+        bg="teal.100" 
+        color="teal.600"
+        borderRadius="sm"
+        w={`${size}px`}
+        h={`${size}px`}
+      >
+        <Code size={size * 0.6} />
+      </Box>
+    );
+  }
+  
+  return (
+    <Image 
+      src={getIconUrl()}
+      alt={`${name} logo`}
+      w={`${size}px`}
+      h={`${size}px`}
+      objectFit="contain"
+      onError={(e) => {
+        const target = e.currentTarget;
+        if (target.src !== getFallbackUrl()) {
+          target.src = getFallbackUrl();
+        } else {
+          setImageError(true);
+        }
+      }}
+    />
+  );
+}
+
+export default function SkillsShowcase() {
   const [selectedCategory, setSelectedCategory] = useState("Languages");
 
   const skills = {
     Languages: [
-      { name: "JavaScript", icon: "code" },
-      { name: "Python", icon: "coffee" },
-      { name: "TypeScript", icon: "type" },
+      { name: "JavaScript", logoKey: "javascript" },
+      { name: "Python", logoKey: "python" },
+      { name: "TypeScript", logoKey: "typescript" },
+      { name: "Java", logoKey: "java" },
+      { name: "C++", logoKey: "cplusplus" },
     ],
     Frameworks: [
-      { name: "React", icon: "layout" },
-      { name: "Django", icon: "server" },
-      { name: "TensorFlow", icon: "brain" },
+      { name: "React", logoKey: "react" },
+      { name: "Next.js", logoKey: "nextjs" },
+      { name: "Django", logoKey: "django" },
+      { name: "Express", logoKey: "express" },
+      { name: "TailwindCSS", logoKey: "tailwindcss" },
     ],
     Databases: [
-      { name: "MongoDB", icon: "database" },
-      { name: "SQLite", icon: "database" },
-      { name: "PostgreSQL", icon: "cloud-cog" },
+      { name: "MongoDB", logoKey: "mongodb" },
+      { name: "PostgreSQL", logoKey: "postgresql" },
+      { name: "MySQL", logoKey: "mysql" },
+      { name: "Redis", logoKey: "redis" },
+      { name: "SQLite", logoKey: "sqlite" },
     ],
     DevOps: [
-      { name: "Docker", icon: "container" },
-      { name: "GitHub Actions", icon: "git-branch" },
-      { name: "AWS", icon: "cloud" },
+      { name: "Docker", logoKey: "docker" },
+      { name: "Kubernetes", logoKey: "kubernetes" },
+      { name: "AWS", logoKey: "amazonwebservices" },
+      { name: "Git", logoKey: "git" },
+      { name: "GitHub Actions", logoKey: "github" },
     ],
   };
 
   const categories = Object.keys(skills);
 
-  const bgMuted = useColorModeValue("gray.100", "gray.800");
-  const accent = useColorModeValue("#14b8a6", "#5eead4");
+  const bgMuted = useColorModeValue("gray.50", "gray.800");
+  const textPrimary = useColorModeValue("gray.900", "white");
+  const textSecondary = useColorModeValue("gray.600", "gray.400");
+  const tabBg = useColorModeValue("gray.100", "gray.700");
+  const tabActiveBg = useColorModeValue("white", "gray.600");
+  const badgeBg = useColorModeValue("white", "gray.700");
+  const badgeHoverBg = useColorModeValue("gray.100", "gray.600");
 
   return (
-    <Box py={{ base: 12, md: 24 }}>
-      <Container maxW="6xl" textAlign="center">
-        {/* Heading Section */}
+    <Box as="section" py={{ base: 12, md: 24 }}>
+      <Container maxW="6xl" px={{ base: 4, md: 6 }} mx="auto">
         <MotionBox
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
+          textAlign="center"
           mb={8}
         >
           <Heading
             as="h2"
-            size="2xl"
-            mb={2}
+            fontSize={{ base: "3xl", sm: "4xl", md: "5xl" }}
             fontWeight="bold"
-            color={useColorModeValue("gray.900", "white")}
+            letterSpacing="tight"
+            color={textPrimary}
+            mb={4}
           >
             Technical Skills
           </Heading>
           <Text
-            color={useColorModeValue("gray.600", "gray.400")}
-            fontSize="lg"
             maxW="700px"
             mx="auto"
+            color={textSecondary}
+            fontSize={{ base: "md", md: "xl" }}
+            lineHeight="relaxed"
           >
             My expertise across various technologies and tools
           </Text>
         </MotionBox>
 
-        {/* Tabs */}
         <MotionBox
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
+          mt={{ base: 8, md: 12 }}
         >
           <Tabs
-            variant="soft-rounded"
-            colorScheme="teal"
-            align="center"
+            variant="unstyled"
+            index={categories.indexOf(selectedCategory)}
             onChange={(index) => setSelectedCategory(categories[index])}
           >
-            <TabList
-              flexWrap="wrap"
-              justifyContent="center"
-              gap={2}
-              mb={6}
-            >
-              {categories.map((category) => (
-                <Tab
-                  key={category}
-                  _selected={{
-                    color: "white",
-                    bg: accent,
-                    boxShadow: `0 0 10px ${accent}`,
-                  }}
-                >
-                  {category}
-                </Tab>
-              ))}
-            </TabList>
+            <Flex justify="center" mb={8}>
+              <TabList
+                display="flex"
+                flexWrap="wrap"
+                gap={2}
+                h="auto"
+                bg={tabBg}
+                p={1}
+                borderRadius="lg"
+              >
+                {categories.map((category) => (
+                  <Tab
+                    key={category}
+                    px={4}
+                    py={2}
+                    fontSize="sm"
+                    fontWeight="medium"
+                    borderRadius="md"
+                    color={textSecondary}
+                    _selected={{
+                      bg: tabActiveBg,
+                      color: textPrimary,
+                      boxShadow: "sm",
+                    }}
+                    transition="all 0.2s"
+                  >
+                    {category}
+                  </Tab>
+                ))}
+              </TabList>
+            </Flex>
 
             <TabPanels>
               {categories.map((category) => (
-                <TabPanel key={category}>
+                <TabPanel key={category} p={0}>
                   <Box
                     bg={bgMuted}
-                    p={8}
-                    borderRadius="xl"
-                    border="1px solid"
-                    borderColor={useColorModeValue("gray.300", "gray.700")}
-                    backdropFilter="blur(8px)"
+                    borderRadius="lg"
+                    p={6}
                   >
-                    <SimpleGrid
-                      columns={{ base: 2, sm: 3, md: 4, lg: 5 }}
-                      spacing={6}
-                      justifyItems="center"
+                    <Flex
+                      flexWrap="wrap"
+                      gap={3}
+                      justify="center"
                     >
                       {skills[category].map((skill, index) => (
-                        <motion.div
+                        <MotionBadge
                           key={skill.name}
                           initial={{ opacity: 0, scale: 0.9 }}
                           animate={{ opacity: 1, scale: 1 }}
+                          whileHover={{ backgroundColor: badgeHoverBg }}
                           transition={{ duration: 0.3, delay: index * 0.05 }}
+                          fontSize="sm"
+                          py={2}
+                          px={4}
+                          bg={badgeBg}
+                          border="1px solid"
+                          borderColor={useColorModeValue("gray.200", "gray.600")}
+                          borderRadius="md"
+                          display="flex"
+                          alignItems="center"
+                          gap={2}
+                          cursor="pointer"
                         >
-                          <Badge
-                            px={4}
-                            py={3}
-                            borderRadius="lg"
-                            variant="outline"
-                            borderColor={accent}
-                            bg="transparent"
-                            display="flex"
-                            alignItems="center"
-                            gap={2}
-                            fontSize="md"
-                            color={accent}
-                            transition="all 0.2s"
-                            _hover={{
-                              bg: useColorModeValue(
-                                "teal.50",
-                                "rgba(20, 184, 166, 0.1)"
-                              ),
-                              transform: "translateY(-4px)",
-                            }}
-                          >
-                            <SkillIcon name={skill.icon} size={20} color={accent} />
-                            {skill.name}
-                          </Badge>
-                        </motion.div>
+                          <TechIcon logoKey={skill.logoKey} name={skill.name} size={20} />
+                          {skill.name}
+                        </MotionBadge>
                       ))}
-                    </SimpleGrid>
+                    </Flex>
                   </Box>
                 </TabPanel>
               ))}
