@@ -1,7 +1,7 @@
 # 🎨 Anandita's Portfolio
 
 > A sleek, modern portfolio website showcasing my journey as a software engineer | Built with React 18 + Vite + Chakra UI
-
+<!-- https://formspree.io/ for conatct form -->
 [![React](https://img.shields.io/badge/React-18-61DAFB?style=flat&logo=react&logoColor=white)](https://react.dev/)
 [![Vite](https://img.shields.io/badge/Vite-5-646CFF?style=flat&logo=vite&logoColor=white)](https://vitejs.dev/)
 [![Chakra UI](https://img.shields.io/badge/Chakra_UI-319795?style=flat&logo=chakra-ui&logoColor=white)](https://chakra-ui.com/)

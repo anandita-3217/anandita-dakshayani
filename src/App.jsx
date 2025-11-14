@@ -1,7 +1,7 @@
 import { Container,Box,Heading  } from '@chakra-ui/react'
-import Background from './components/Background'
 
-import Particles from './components/assets/Particles/Particles'
+// import Background from './components/Background'
+// import Particles from './components/assets/Particles/Particles'
 import DotGrid from './components/assets/DotGrid/DotGrid'
 import NotFound from './components/NotFound'
 import Header from './components/Header'
@@ -35,7 +35,7 @@ function App() {
     alphaParticles={false}
     disableRotation={false}
   />   */}
-    <DotGrid
+     <DotGrid
     dotSize={5}
     gap={15}
     baseColor="#272727"
@@ -45,7 +45,7 @@ function App() {
     shockStrength={5}
     resistance={750}
     returnDuration={1.5}
-  />
+  /> 
               <Header/>
               <Hero />
               <About />
@@ -67,11 +67,10 @@ function App() {
 
 // TODO: https://www.achyutkatiyar.com/ use this as a base for nav bar and technical skills 
 // TODO: work on learning and cerificates sections.
-// TODO: WOrk on theme and stuff
+// TODO: WOrk on light and dark theme and stuff
 // TODO: MotionBox is still shit 
-// TODO: Change the buttons in the Skills to work as the buttons in Header
-// TODO: Add github contributions 
-// TODO: Add Conatct form
+// TODO: Add formspree so that the mails thing will actually work 
+
 
 
 

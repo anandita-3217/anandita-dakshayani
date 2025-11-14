@@ -166,7 +166,19 @@ export default function SkillsShowcase() {
                 p={1}
                 borderRadius="lg"
               >
-                {categories.map((category) => (
+                {categories.map((category,i) => (
+                  <MotionBox
+                    key={category}
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      delay: i * 0.05,
+                      duration: 0.3,
+                    }}
+                    as={motion.div}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
                   <Tab
                     key={category}
                     px={4}
@@ -185,6 +197,7 @@ export default function SkillsShowcase() {
                   >
                     {category}
                   </Tab>
+                  </MotionBox>
                 ))}
               </TabList>
             </Flex>
@@ -203,30 +216,7 @@ export default function SkillsShowcase() {
                       gap={3}
                       justify="center"
                     >
-                      {/* {skills[category].map((skill, index) => (
-                        <MotionBadge
-                          key={skill.name}
-                          initial={{ opacity: 0, scale: 0.9 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          whileHover={{ backgroundColor: badgeHoverBg }}
-                          transition={{ duration: 0.3, delay: index * 0.05 }}
-                          fontSize="sm"
-                          py={2}
-                          px={4}
-                          bg= "teal.900"
-                          border="1px solid"
-                          borderColor={useColorModeValue("gray.200", "gray.600")}
-                          borderRadius="md"
-                          display="flex"
-                          alignItems="center"
-                          gap={2}
-                          cursor="pointer"
-                        >
-                          <TechIcon logoKey={skill.logoKey} name={skill.name} size={20} />
-                          {skill.name}
-                        </MotionBadge>
-                      ))} */}
-                      {skills[category].map((skill, index) => (
+                    {skills[category].map((skill, index) => (
                         <MotionBadge
                           key={`${category}-${skill.name}`}
                           initial={{ opacity: 0, y: 20, scale: 0.8 }}

@@ -1,6 +1,6 @@
 import React from "react";
 import GitHubCalendar from "react-github-calendar";
-import "./contribution_map.css";
+
 import {
   Box,Container,Heading,Text,Button,VStack,HStack,SimpleGrid,Icon
 } from '@chakra-ui/react';
@@ -29,20 +29,31 @@ const ContributionMap = () => {
   };
 
   return (
-    <MotionBox>
-      <Box className="contribution-map">
-        <MotionHeading color = "#14b8a6">My Github Contributions</MotionHeading>
-        <Box className="react-github-calendar">
-          <Box className="calendar-wrapper">
+    <MotionBox width={"80%"} margin={"0 auto"} padding={"20px"}>
+        <MotionHeading
+                    as="h2"
+                    fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}
+                    fontWeight="bold"
+                    textAlign="center"
+                    mb={4}
+                    variants={fadeInUp}
+                  >
+                    <Text as="span" color="#14b8a6">My Github Contributions </Text>
+                  </MotionHeading>
+        <Box w={"100%"} display="flex" justifyContent={"center"} overflowX={"auto"}>
+          <Box width="100%" display="flex" justifyContent={"center"}>
             <GitHubCalendar
               username="anandita-3217"
               blockSize={18}
               fontSize={16}
+              theme={{
+                light: ["#1e1e1e", "#c4ede8", "#89dbd2", "#4ec9bc", "#14b8a6"],
+                dark: ["#1e1e1e", "#c4ede8", "#89dbd2", "#4ec9bc", "#14b8a6"],
+              }}
               labels={labels}
             />
           </Box>
         </Box>
-      </Box>
     </MotionBox>
   );
 };
