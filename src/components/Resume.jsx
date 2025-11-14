@@ -33,7 +33,7 @@ function Resume() {
     <Box bg="transparent" minH="100vh" py={20} id="resume">
       <Container maxW="container.xl">
         <VStack spacing={8}>
-          <Heading color="white" size="2xl">Resume</Heading>
+          <Heading color="#14b8a6" size="2xl">Resume</Heading>
           
             <MotionBox variants={fadeInUp} textAlign="center">
               <Button

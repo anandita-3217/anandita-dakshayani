@@ -44,6 +44,7 @@ const techStack = {
   - npm install ogl
   npm install gsap
   - npm install react-router-dom
+  - npm install react-github-calendar
 
 
 <!-- ### Installation & Setup

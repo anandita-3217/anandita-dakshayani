@@ -136,7 +136,7 @@ export default function SkillsShowcase() {
             fontSize={{ base: "3xl", sm: "4xl", md: "5xl" }}
             fontWeight="bold"
             letterSpacing="tight"
-            color={textPrimary}
+            color="#14b8a6"
             mb={4}
           >
             Technical Skills

@@ -4,19 +4,9 @@ import {
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import { 
-  FaReact, 
-  FaPython, 
   FaCode,
   FaBrain
 } from 'react-icons/fa';
-import { 
-  SiDjango, 
-  SiJavascript, 
-  SiElectron,
-  SiTensorflow,
-  SiMongodb,
-  SiSqlite 
-} from 'react-icons/si';
 
 // Motion components
 const MotionBox = motion.create(Box);
@@ -55,17 +45,6 @@ const scaleIn = {
 
 // About Section Component
 function About() {
-  const skills = [
-    { name: 'React', icon: FaReact, color: '#61DAFB' },
-    { name: 'Django', icon: SiDjango, color: '#092E20' },
-    { name: 'Python', icon: FaPython, color: '#3776AB' },
-    { name: 'JavaScript', icon: SiJavascript, color: '#F7DF1E' },
-    { name: 'Electron', icon: SiElectron, color: '#3178C6' },
-    { name: 'TensorFlow', icon: SiTensorflow, color: '#FF6F00' },
-    { name: 'MongoDB', icon: SiMongodb, color: '#47A248' },
-    { name: 'Sqlite', icon: SiSqlite , color: '#4169E1' },
-  ];
-
   return (
     <Box
       id="about"

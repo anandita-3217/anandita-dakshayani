@@ -18,6 +18,15 @@ import { motion, AnimatePresence, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
 const MotionBox = motion.create(Box);
+const MotionHeading = motion.create(Heading);
+const fadeInUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" }
+  }
+};
 
 function Projects() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -150,21 +159,16 @@ function Projects() {
       <Container maxW="container.xl">
         <VStack spacing={12} align="stretch">
           {/* Section Header with scroll animation */}
-          <MotionBox
-            ref={headerRef}
-            initial="hidden"
-            animate={headerControls}
-            variants={headerVariants}
-          >
-            <Heading
-              as="h2"
-              fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}
-              fontWeight="bold"
-              textAlign="center"
-            >
-              Projects
-            </Heading>
-          </MotionBox>
+         <MotionHeading
+          as="h2"
+          fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}
+          fontWeight="bold"
+          textAlign="center"
+          mb={4}
+          variants={fadeInUp}
+        >
+          <Text as="span" color="#14b8a6">Projects</Text>
+        </MotionHeading>
 
           {/* Carousel Container with scroll animation */}
           <MotionBox
