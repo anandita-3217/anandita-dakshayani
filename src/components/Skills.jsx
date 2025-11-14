@@ -81,32 +81,38 @@ export default function SkillsShowcase() {
       { name: "HTML", logoKey: "html5" },
       { name: "CSS", logoKey: "css3" },
       { name: "R", logoKey: "r" }
-      // { name: "C++", logoKey: "cplusplus" },
     ],
     Frameworks: [
       { name: "React", logoKey: "react" },
       { name: "Node.js", logoKey: "nodejs" },
-      { name: "Django", logoKey: "django" },
-      { name: "Express", logoKey: "express" },
-      { name: "Flask", logoKey: "flask" },
-      { name: "BootStrap", logoKey: "bootstrap" },
       { name: "Electron", logoKey: "electron" },
+      { name: "Express", logoKey: "express" },
+      { name: "Nextjs", logoKey: "nextjs" },
+      { name: "Nextjs", logoKey: "nodejs" },
+      { name: "Django", logoKey: "django" },
+      { name: "Flask", logoKey: "flask" },
+      { name: "Tkinter", logoKey: "tkinter" },
+      { name: "Kivy", logoKey: "kivy" },
+    ],
+        UIFrameworks: [
+      { name: "BootStrap", logoKey: "bootstrap" },
+      { name: "TailwindCss", logoKey: "tailwindcss" },
+      { name: "Chakra UI", logoKey: "chakraui" },
+      { name: "Material UI", logoKey: "materialui" },
     ],
     Databases: [
       { name: "MongoDB", logoKey: "mongodb" },
-      // { name: "PostgreSQL", logoKey: "postgresql" },
       { name: "MySQL", logoKey: "mysql" },
-      // { name: "Redis", logoKey: "redis" },
       { name: "SQLite", logoKey: "sqlite" },
     ],
     MachineLearning: [
       { name: "Numpy", logoKey: "numpy" },
       { name: "ScikitLearn", logoKey: "scikitlearn" },
       { name: "pandas", logoKey: "pandas" },
-      
       { name: "TensorFlow", logoKey: "tensorflow" },
       { name: "HuggingFace", logoKey: "huggingface" },
     ],
+
   };
 
   const categories = Object.keys(skills);

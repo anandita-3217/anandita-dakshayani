@@ -68,6 +68,8 @@ function App() {
 // TODO: WOrk on theme and stuff
 // TODO: MotionBox is still shit 
 // TODO: Change the buttons in the Skills to work as the buttons in Header
+// TODO: Add github contributions 
+// TODO: Add Conatct form
 
 
 
