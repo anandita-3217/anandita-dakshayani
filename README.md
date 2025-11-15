@@ -130,7 +130,7 @@ vercel --prod
 - **Time to Interactive**: < 3s
 - **Bundle Size**: Optimized with code splitting -->
 
-## 🤝 Connect With Me
+<!-- ## 🤝 Connect With Me
 
 I'm always excited to collaborate on interesting projects or discuss tech!
 
@@ -138,7 +138,7 @@ I'm always excited to collaborate on interesting projects or discuss tech!
 <!-- - 🐙 [GitHub](https://github.com/anandita-3217) -->
 - 🎨 [UIverse](https://uiverse.io/profile/anandita-3217)
 - 🖊️ [CodePen](https://codepen.io/anandita-3217)
-- 📧 ananditad21@gmail.com
+- 📧 ananditad21@gmail.com -->
 
 ## 📝 License
 
