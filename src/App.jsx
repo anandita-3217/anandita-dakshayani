@@ -10,6 +10,7 @@ import Contact from './components/Contact'
 import ContributionMap from './components/ContributionMap'
 import Resume from './components/Resume'
 import Footer from './components/Footer'
+import theme from '../theme'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {

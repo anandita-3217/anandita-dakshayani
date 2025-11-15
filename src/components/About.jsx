@@ -62,7 +62,7 @@ function About() {
       alignItems="center"
       position="relative"
       overflow="hidden"
-      padding={30}
+      p={90}
     >
       {/* Background decoration */}
       <MotionBox

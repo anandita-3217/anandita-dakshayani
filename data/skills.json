@@ -1,0 +1,44 @@
+{
+    "skills" : {
+    "Languages": [
+        { "name": "Python", "logoKey": "python" },
+        { "name": "Java", "logoKey": "java" },
+        { "name": "JavaScript", "logoKey": "javascript" },
+        { "name": "TypeScript", "logoKey": "typescript" },
+        { "name": "HTML", "logoKey": "html5" },
+        { "name": "CSS", "logoKey": "css3" },
+        { "name": "R", "logoKey": "r" }
+    ],  
+    "Frameworks": [
+        { "name": "React", "logoKey": "react" },
+        { "name": "Node.js", "logoKey": "nodejs" },
+        { "name": "Electron", "logoKey": "electron" },
+        { "name": "Express", "logoKey": "express" },
+        { "name": "Nextjs", "logoKey": "nextjs" },
+        { "name": "Django", "logoKey": "django" },
+        { "name": "Flask", "logoKey": "flask" },
+        { "name": "Tkinter", "logoKey": "tkinter" },
+        { "name": "Kivy", "logoKey": "kivy" }
+    ],
+    "UI Frameworks": [
+        { "name": "BootStrap", "logoKey": "bootstrap" },
+        { "name": "TailwindCss", "logoKey": "tailwindcss" },
+        { "name": "Chakra UI", "logoKey": "chakraui" },
+        { "name": "Material UI", "logoKey": "materialui" }
+    ],
+    "Databases": [
+        { "name": "MongoDB", "logoKey": "mongodb" },
+        { "name": "MySQL", "logoKey": "mysql" },
+        { "name": "SQLite", "logoKey": "sqlite" }
+    ],  
+    "Machine Learning": [
+        { "name": "Numpy", "logoKey": "numpy" },
+        { "name": "ScikitLearn", "logoKey": "scikitlearn" },
+        { "name": "pandas", "logoKey": "pandas" },
+        { "name": "TensorFlow", "logoKey": "tensorflow" },
+        { "name": "HuggingFace", "logoKey": "huggingface" }
+    ]
+
+    }
+
+}

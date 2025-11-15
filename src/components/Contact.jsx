@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+// export default Contact;
+import React, { useEffect, useState } from 'react';
 import {
   Box,
   Container,
@@ -15,7 +16,9 @@ import {
   FormLabel,
   Input,
   Textarea,
-  useToast
+  useToast,
+  Spinner,
+  Center
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import { 
@@ -27,10 +30,10 @@ import {
   FaPaperPlane
 } from 'react-icons/fa';
 
-const MotionBox = motion(Box);
-const MotionHeading = motion(Heading);
-const MotionText = motion(Text);
-const MotionGridItem = motion(GridItem);
+const MotionBox = motion.create(Box);
+const MotionHeading = motion.create(Heading);
+const MotionText = motion.create(Text);
+const MotionGridItem = motion.create(GridItem);
 
 // Animation variants
 const fadeInUp = {
@@ -70,6 +73,12 @@ const staggerContainer = {
     }
   }
 };
+const iconMap = {
+  FaEnvelope,
+  FaLinkedin,
+  FaGithub,
+  FaPhone
+};
 
 function Contact() {
   const toast = useToast();
@@ -79,33 +88,22 @@ function Contact() {
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [contactLinks, setContactLinks] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const contactLinks = [
-    {
-      name: 'Email',
-      icon: FaEnvelope,
-      href: 'mailto:ananditad21@gmail.com',
-      label: 'ananditad21@gmail.com',
-    },
-    {
-      name: 'LinkedIn',
-      icon: FaLinkedin,
-      href: 'https://linkedin.com/in/anandita-dakshayani-9621a0199',
-      label: 'linkedin.com/in/anandita-dakshayani'
-    },
-    {
-      name: 'GitHub',
-      icon: FaGithub,
-      href: 'https://github.com/anandita-3217',
-      label: 'github.com/anandita-3217',
-    },
-    {
-      name: 'Phone',
-      icon: FaPhone,
-      href: '+91-9652050538',
-      label: '+1234567890',
-    }
-  ];
+  useEffect(() => {
+    // Fixed: .json extension was missing
+    fetch('../data/contact.json')
+      .then(response => response.json())
+      .then(data => {
+        setContactLinks(data.contact || []);
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error('Error loading contact: ', error);
+        setLoading(false);
+      });
+  }, []);
 
   const handleChange = (e) => {
     setFormData({
@@ -132,6 +130,23 @@ function Contact() {
     }, 1000);
   };
 
+  if (loading) {
+    return (
+      <Box
+        id="contact"
+        bg="transparent"
+        color="white"
+        py={{ base: 16, md: 24 }}
+      >
+        <Container maxW="container.xl">
+          <Center h="400px">
+            <Spinner size="xl" color="teal.400" thickness="4px" />
+          </Center>
+        </Container>
+      </Box>
+    );
+  }
+
   return (
     <Box
       id="contact"
@@ -140,6 +155,7 @@ function Contact() {
       py={{ base: 16, md: 24 }}
       position="relative"
       overflow="hidden"
+      p={90}
     >
       {/* Background decoration */}
       <MotionBox
@@ -226,7 +242,7 @@ function Contact() {
                   Send me a message
                 </Heading>
                 
-                <VStack spacing={5}>
+                <VStack spacing={5} as="form" onSubmit={handleSubmit}>
                   <FormControl isRequired>
                     <FormLabel color="#b0b0b0" fontSize="sm">Name</FormLabel>
                     <Input
@@ -291,7 +307,7 @@ function Contact() {
                   </FormControl>
 
                   <Button
-                    onClick={handleSubmit}
+                    type="submit"
                     isLoading={isSubmitting}
                     loadingText="Sending..."
                     width="full"
@@ -348,7 +364,7 @@ function Contact() {
                         transition="all 0.3s"
                       >
                         <Icon 
-                          as={contact.icon} 
+                          as={iconMap[contact.icon]} 
                           boxSize={{ base: 6, md: 8 }}
                           color="#14b8a6"
                         />

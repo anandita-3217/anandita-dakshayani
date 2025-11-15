@@ -61,7 +61,7 @@ function Projects() {
 
   useEffect(() => {
     // Load projects from JSON file
-    fetch('/assets/projects.json')
+    fetch('../data/projects.json')
       .then(response => response.json())
       .then(data => {
         setProjects(data.projects || []);
@@ -159,12 +159,12 @@ function Projects() {
       <Container maxW="container.xl">
         <VStack spacing={12} align="stretch">
           {/* Section Header with scroll animation */}
-         <MotionHeading
+        <MotionHeading
           as="h2"
           fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}
           fontWeight="bold"
           textAlign="center"
-          mb={4}
+          // mb={4}
           variants={fadeInUp}
         >
           <Text as="span" color="#14b8a6">Projects</Text>

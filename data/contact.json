@@ -1,0 +1,28 @@
+{
+"contact":[
+        {
+            "name": "Email",
+            "icon": "FaEnvelope",
+            "href": "mailto:ananditad21@gmail.com",
+            "label": "ananditad21@gmail.com"
+        },  
+        {   
+            "name": "LinkedIn",
+            "icon": "FaLinkedin",
+            "href": "https://linkedin.com/in/anandita-dakshayani-9621a0199",
+            "label": "linkedin.com/in/anandita-dakshayani"
+        },
+        {
+            "name": "GitHub",
+            "icon": "FaGithub",
+            "href": "https://github.com/anandita-3217",
+            "label": "github.com/anandita-3217"
+        },
+        {
+            "name": "Phone",
+            "icon": "FaPhone",
+            "href": "tel:+919652050538",
+            "label": "+1234567890"
+        }
+    ]
+}

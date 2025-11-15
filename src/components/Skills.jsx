@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Container,
   Heading,
-  Text,
   Tabs,
   TabList,
   TabPanels,
@@ -12,13 +11,14 @@ import {
   Flex,
   Badge,
   Image,
-  useColorModeValue,
+  Spinner,
+  Center,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { Code } from "lucide-react";
 
-const MotionBox = motion(Box);
-const MotionBadge = motion(Badge);
+const MotionBox = motion.create(Box);
+const MotionBadge = motion.create(Badge);
 
 // TechIcon Component
 function TechIcon({ logoKey, name, size = 20 }) {
@@ -72,53 +72,36 @@ function TechIcon({ logoKey, name, size = 20 }) {
 
 export default function SkillsShowcase() {
   const [selectedCategory, setSelectedCategory] = useState("Languages");
+  const [skills, setSkills] = useState({});
+  const [loading, setLoading] = useState(true);
 
-  const skills = {
-    Languages: [
-      { name: "Python", logoKey: "python" },
-      { name: "Java", logoKey: "java" },
-      { name: "JavaScript", logoKey: "javascript" },
-      { name: "HTML", logoKey: "html5" },
-      { name: "CSS", logoKey: "css3" },
-      { name: "R", logoKey: "r" }
-    ],
-    Frameworks: [
-      { name: "React", logoKey: "react" },
-      { name: "Node.js", logoKey: "nodejs" },
-      { name: "Electron", logoKey: "electron" },
-      { name: "Express", logoKey: "express" },
-      { name: "Nextjs", logoKey: "nextjs" },
-      { name: "Nextjs", logoKey: "nodejs" },
-      { name: "Django", logoKey: "django" },
-      { name: "Flask", logoKey: "flask" },
-      { name: "Tkinter", logoKey: "tkinter" },
-      { name: "Kivy", logoKey: "kivy" },
-    ],
-        UIFrameworks: [
-      { name: "BootStrap", logoKey: "bootstrap" },
-      { name: "TailwindCss", logoKey: "tailwindcss" },
-      { name: "Chakra UI", logoKey: "chakraui" },
-      { name: "Material UI", logoKey: "materialui" },
-    ],
-    Databases: [
-      { name: "MongoDB", logoKey: "mongodb" },
-      { name: "MySQL", logoKey: "mysql" },
-      { name: "SQLite", logoKey: "sqlite" },
-    ],
-    MachineLearning: [
-      { name: "Numpy", logoKey: "numpy" },
-      { name: "ScikitLearn", logoKey: "scikitlearn" },
-      { name: "pandas", logoKey: "pandas" },
-      { name: "TensorFlow", logoKey: "tensorflow" },
-      { name: "HuggingFace", logoKey: "huggingface" },
-    ],
-
-  };
+  useEffect(() => {
+    // Load skills from JSON file
+    fetch('../data/skills.json')
+      .then(response => response.json())
+      .then(data => {
+        setSkills(data.skills || {});
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error('Error loading skills:', error);
+        setLoading(false);
+      });
+  }, []);
 
   const categories = Object.keys(skills);
-  const textPrimary = useColorModeValue("gray.900", "white");
-  const textSecondary = useColorModeValue("gray.600", "gray.400");
-  const badgeHoverBg = useColorModeValue("gray.100", "gray.600");
+
+  if (loading) {
+    return (
+      <Box as="section" py={{ base: 12, md: 24 }}>
+        <Container maxW="6xl" px={{ base: 4, md: 6 }} mx="auto">
+          <Center h="400px">
+            <Spinner size="xl" color="teal.400" thickness="4px" />
+          </Center>
+        </Container>
+      </Box>
+    );
+  }
 
   return (
     <Box as="section" py={{ base: 12, md: 24 }}>
@@ -166,7 +149,7 @@ export default function SkillsShowcase() {
                 p={1}
                 borderRadius="lg"
               >
-                {categories.map((category,i) => (
+                {categories.map((category, i) => (
                   <MotionBox
                     key={category}
                     initial={{ opacity: 0, y: -10 }}
@@ -179,24 +162,23 @@ export default function SkillsShowcase() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                  <Tab
-                    key={category}
-                    px={4}
-                    py={2}
-                    fontSize="sm"
-                    fontWeight="medium"
-                    borderRadius="md"
-                    color={textSecondary}
-                    bg="teal.900"
-                    _selected={{
-                      bg: "teal.400",
-                      color: textPrimary,
-                      boxShadow: "sm",
-                    }}
-                    transition="all 0.2s"
-                  >
-                    {category}
-                  </Tab>
+                    <Tab
+                      px={4}
+                      py={2}
+                      fontSize="sm"
+                      fontWeight="medium"
+                      borderRadius="md"
+                      color="text.secondary"
+                      bg="teal.900"
+                      _selected={{
+                        bg: "teal.400",
+                        color: "text.primary",
+                        boxShadow: "sm",
+                      }}
+                      transition="all 0.2s"
+                    >
+                      {category}
+                    </Tab>
                   </MotionBox>
                 ))}
               </TabList>
@@ -207,7 +189,7 @@ export default function SkillsShowcase() {
                 <TabPanel key={category} p={0}>
                   <Box
                     bg="transparent"
-                backdropFilter="blur(10px)"
+                    backdropFilter="blur(10px)"
                     borderRadius="lg"
                     p={6}
                   >
@@ -216,12 +198,13 @@ export default function SkillsShowcase() {
                       gap={3}
                       justify="center"
                     >
-                    {skills[category].map((skill, index) => (
+                      {skills[category]?.map((skill, index) => (
                         <MotionBadge
                           key={`${category}-${skill.name}`}
                           initial={{ opacity: 0, y: 20, scale: 0.8 }}
                           animate={{ opacity: 1, y: 0, scale: 1 }}
-                          whileHover={{ scale: 1.05, backgroundColor: badgeHoverBg }}
+                          whileHover={{ scale: 1.05 }}
+                          _hover={{ bg: "bg.hover" }}
                           transition={{ 
                             duration: 0.4, 
                             delay: index * 0.1,
@@ -230,9 +213,9 @@ export default function SkillsShowcase() {
                           fontSize="sm"
                           py={2}
                           px={4}
-                          bg= "teal.900"
+                          bg="teal.900"
                           border="1px solid"
-                          borderColor={useColorModeValue("gray.200", "gray.600")}
+                          borderColor="border.primary"
                           borderRadius="md"
                           display="flex"
                           alignItems="center"
