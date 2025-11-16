@@ -57,6 +57,7 @@ function App() {
 // TODO: MotionBox is still shit 
 // TODO: Add formspree so that the mails thing will actually work 
 // TODO: Keyboard Shortcuts
+// TODO: ISTG the colors for the light theme have to change esp for the dotgrid
 
 
 

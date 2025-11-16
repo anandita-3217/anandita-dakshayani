@@ -21,16 +21,16 @@
   pointer-events: none;
 } */
 
-.dot-grid {
+/* .dot-grid {
     background-color: #1e1e1e;
-  position: fixed;          /* make it stick to the viewport */
+  position: fixed;          
   top: 0;
   left: 0;
-  width: 100vw;             /* full viewport width */
-  height: 100vh;            /* full viewport height */
-  z-index: -1;              /* behind everything else */
-  overflow: hidden;
-  pointer-events: none;     /* allow clicks on top elements */
+  width: 100vw;             
+  height: 100vh;            
+  z-index: -1;              
+  overflow: hidden
+  pointer-events: none;     
 }
 
 .dot-grid__wrap {
@@ -46,4 +46,127 @@
   height: 100%;
   pointer-events: none;
 }
+ */
+ /* .dot-grid {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  transition: background-color 0.3s ease;
+}
+.dot-grid[data-theme="dark"] {
+  background-color: #1e1e1e;
+}
+.dot-grid[data-theme="light"] {
+  background-color: #ffffff;
+}
 
+.dot-grid__wrap {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.dot-grid__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+} */
+
+.dot-grid {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  transition: background-color 0.3s ease;
+}
+
+/* Dark mode background - Deep dark with subtle gradient */
+.dot-grid[data-theme="dark"] {
+  background: linear-gradient(
+    135deg,
+    #0a0a0a 0%,
+    #1a1a1a 50%,
+    #0a0a0a 100%
+  );
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+/* Light mode background - Soft gradient with subtle texture */
+.dot-grid[data-theme="light"] {
+  background: linear-gradient(
+    135deg,
+    #f8fafc 0%,
+    #ffffff 25%,
+    #f1f5f9 50%,
+    #ffffff 75%,
+    #f8fafc 100%
+  );
+  background-size: 400% 400%;
+  animation: gradientShift 20s ease infinite;
+}
+
+/* Optional: Add a subtle texture overlay for light mode */
+.dot-grid[data-theme="light"]::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(20, 184, 166, 0.02) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(20, 184, 166, 0.02) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Optional: Add depth to dark mode */
+.dot-grid[data-theme="dark"]::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 20% 30%, rgba(20, 184, 166, 0.03) 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(20, 184, 166, 0.03) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.dot-grid__wrap {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.dot-grid__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
