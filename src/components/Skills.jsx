@@ -70,7 +70,7 @@ function TechIcon({ logoKey, name, size = 20 }) {
   );
 }
 
-export default function SkillsShowcase() {
+export default function Skills() {
   const [selectedCategory, setSelectedCategory] = useState("Languages");
   const [skills, setSkills] = useState({});
   const [loading, setLoading] = useState(true);

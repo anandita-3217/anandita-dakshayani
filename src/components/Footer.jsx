@@ -284,7 +284,7 @@ export default function Footer() {
               <VStack align="flex-start" spacing={2}>
                 <HStack>
                   <HStack spacing={1}>
-                    <Kbd>⌘</Kbd>
+                    <Kbd>ctrl</Kbd>
                     <Kbd>K</Kbd>
                   </HStack>
                   <Text fontSize="sm" color="text.secondary">

@@ -10,22 +10,24 @@ import Contact from './components/Contact'
 import ContributionMap from './components/ContributionMap'
 import Resume from './components/Resume'
 import Footer from './components/Footer'
-import theme from '../theme'
+import { useColorMode } from '@chakra-ui/react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
+  const { colorMode } = useColorMode();
+  const isLight = colorMode === "light";
+
   return (
     <Router>
         <Routes>
-          {/* Main portfolio page */}
           <Route path="/" element={
             <>
-            {/* <Background> */}
+
      <DotGrid
     dotSize={5}
     gap={15}
-    baseColor="#272727"
-    activeColor="#14b8a6"
+    baseColor={isLight ? "#d4dadc" : "#272727"}     
+    activeColor={isLight ? "#14b8a6" : "#5fffea"}   
     proximity={85}
     shockRadius={250}
     shockStrength={5}
@@ -41,8 +43,6 @@ function App() {
               <Contact />
               <Resume/>
               <Footer/>
-             
-              {/* </Background> */}
             </>
           } />
 
@@ -53,16 +53,10 @@ function App() {
 
 // TODO: https://www.achyutkatiyar.com/ use this as a base s 
 // TODO: work on learning and cerificates sections.
-// TODO: WOrk on light and dark theme and stuff
 // TODO: MotionBox is still shit 
 // TODO: Add formspree so that the mails thing will actually work 
 // TODO: Keyboard Shortcuts
-// TODO: ISTG the colors for the light theme have to change esp for the dotgrid
-
-
-
-
-
+// TODO: Add a back to top button 
   )
 }
 
