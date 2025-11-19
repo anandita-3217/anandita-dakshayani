@@ -13,6 +13,7 @@ import {
 } from '@chakra-ui/react'
 import { motion } from 'framer-motion';
 import Error from "./assets/Error404.gif"
+import { useNavigate } from "react-router-dom";
 
 // Create motion components
 const MotionBox = motion.create(Box);
@@ -50,11 +51,22 @@ const staggerContainer = {
   }
 };
 
+
 function NotFound(){
+  const navigate = useNavigate();
+  const handleProjectsClick = ()  => {
+    navigate('/');
+    setTimeout(() =>{
+      const projectsSection = document.getElementById('projects');
+      if (projectsSection){
+        projectsSection.scrollIntoView({behavior: 'smooth',block: 'start'});
+      }
+    },100);
+  };
     return (
         <Box 
           id="notFound" 
-          bg="#0a0a0a" 
+          bg="bg.secondary" 
           minH="100vh"
           display="flex"
           alignItems="center"
@@ -77,7 +89,7 @@ function NotFound(){
                       as="h1"
                       fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}
                       fontWeight="bold"
-                      color="#14b8a6"
+                      color="brand.400"
                       mb={4}
                       variants={fadeInUp}
                     >
@@ -112,27 +124,27 @@ function NotFound(){
                     <GridItem>
                     <MotionBox
                       variants={fadeInUp}
-                      bg="#1a1a1a"
+                      bg="bg.primary"
                       p={{ base: 4, md: 6 }}
                       borderRadius="xl"
                       border="2px solid"
-                      borderColor="#2a2a2a"
+                      borderColor="border.primary"
                       mb={8}
                       maxW="500px"
                       w="full"
                       fontFamily="'Courier New', monospace"
                       fontSize={{ base: 'sm', md: 'md' }}
-                      color="#e0e0e0"
+                      color="text.primary"
                       textAlign="left"
                       _hover={{
-                        borderColor: '#14b8a6',
+                        borderColor: 'brand.400',
                         boxShadow: '0 0 20px rgba(20, 184, 166, 0.2)'
                       }}
                       transition="all 0.3s"
                     >
                       <Code 
                         bg="transparent" 
-                        color="#14b8a6" 
+                        color="brand.400" 
                         fontSize="inherit"
                         fontFamily="inherit"
                       >
@@ -141,7 +153,7 @@ function NotFound(){
                       <br />
                       <Code 
                         bg="transparent" 
-                        color="#e0e0e0" 
+                        color="text.secondary" 
                         fontSize="inherit"
                         fontFamily="inherit"
                         pl={4}
@@ -151,16 +163,24 @@ function NotFound(){
                       <br />
                       <Code 
                         bg="transparent" 
+                        color="brand.400" 
+                        fontSize="inherit"
+                        fontFamily="inherit"
+                      >
+                        &#125; catch
+                      </Code>
+                      <Code 
+                        bg="transparent" 
                         color="#ff6b6b" 
                         fontSize="inherit"
                         fontFamily="inherit"
                       >
-                        &#125; catch (PageNotFoundException e) &#123;
+                      (PageNotFoundException e) &#123;
                       </Code>
                       <br />
                       <Code 
                         bg="transparent" 
-                        color="#666" 
+                        color="gray.400" 
                         fontSize="inherit"
                         fontFamily="inherit"
                         pl={4}
@@ -170,7 +190,7 @@ function NotFound(){
                       <br />
                       <Code 
                         bg="transparent" 
-                        color="#e0e0e0" 
+                        color="text.secondary" 
                         fontSize="inherit"
                         fontFamily="inherit"
                         pl={4}
@@ -192,11 +212,12 @@ function NotFound(){
 
                     {/* Action Buttons */}
                     <MotionBox variants={fadeInUp}>
-                      <HStack spacing={4} w="full">
+                      <HStack spacing={4} w="full" flexWrap="wrap" justify="center">
                         <MotionButton
                           as="a"
                           href="/"
-                          colorScheme="teal"
+                          bg = "brand.400"
+                          color="white"
                           size="lg"
                           px={10}
                           py={6}
@@ -214,20 +235,20 @@ function NotFound(){
                         </MotionButton>
 
                         <MotionButton
-                          as="a"
-                          href="#projects"
+                          onClick={handleProjectsClick}
                           variant="outline"
                           size="lg"
                           px={10}
                           py={6}
                           fontSize="md"
                           fontWeight="600"
-                          borderColor="#2a2a2a"
-                          color="white"
+                          borderColor="border.secondary"
+                          color="text.primary"
                           w={{ base: "full", sm: "auto" }}
                           _hover={{
-                            borderColor: '#14b8a6',
-                            color: '#14b8a6'
+                            borderColor: 'brand.400',
+                            color: 'brand.400',
+                            bg: 'bg.accent'
                           }}
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
@@ -242,7 +263,7 @@ function NotFound(){
                     <MotionText
                       variants={fadeInUp}
                       fontSize="xs"
-                      color="#666"
+                      color="text.muted"
                       mt={12}
                       fontStyle="italic"
                     >
