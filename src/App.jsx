@@ -70,6 +70,7 @@ function App() {
 // TODO: Add formspree so that the mails thing will actually work 
 // TODO: Keyboard Shortcuts
 // TODO: Add a back to top button 
+// TODO: Add a glimplse of github profile 
   )
 }
 
