@@ -10,14 +10,24 @@ import Contact from './components/Contact'
 import ContributionMap from './components/ContributionMap'
 import Resume from './components/Resume'
 import Footer from './components/Footer'
-import { useColorMode } from '@chakra-ui/react';
+import CommandPalette from './components/CommandPalette'
+import { useColorMode, useDisclosure } from '@chakra-ui/react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { motion, useScroll } from 'framer-motion'
 
+import useKeyboardShortcuts from './components/hooks/useKeyboardShortcuts'
 function App() {
   const { scrollYProgress } = useScroll();
   const { colorMode } = useColorMode();
   const isLight = colorMode === "light";
+
+  const {
+    isOpen : isCommandPaletteOpen,
+    onOpen : onCommandPaletteOpen,
+    onClose : onCommandPaletteClose
+  } = useDisclosure();
+  
+  useKeyboardShortcuts({onCommandPaletteOpen});
 
   return (
     <Router>
@@ -33,6 +43,10 @@ function App() {
           transformOrigin: '0%',
           zIndex: 9999,
         }}
+      />
+      <CommandPalette 
+        isOpen={isCommandPaletteOpen}
+        onClose={onCommandPaletteClose}
       />
         <Routes>
           <Route path="/" element={
