@@ -11,6 +11,7 @@ import ContributionMap from './components/ContributionMap'
 import Resume from './components/Resume'
 import Footer from './components/Footer'
 import CommandPalette from './components/CommandPalette'
+import ScrollToTop from './components/ScrollToTop'
 import { useColorMode, useDisclosure } from '@chakra-ui/react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { motion, useScroll } from 'framer-motion'
@@ -48,6 +49,7 @@ function App() {
         isOpen={isCommandPaletteOpen}
         onClose={onCommandPaletteClose}
       />
+       <ScrollToTop />
         <Routes>
           <Route path="/" element={
             <>
@@ -82,8 +84,6 @@ function App() {
 // TODO: work on learning and cerificates sections.
 // TODO: MotionBox is still shit 
 // TODO: Add formspree so that the mails thing will actually work 
-// TODO: Keyboard Shortcuts
-// TODO: Add a back to top button 
 // TODO: Add a glimplse of github profile 
   )
 }
