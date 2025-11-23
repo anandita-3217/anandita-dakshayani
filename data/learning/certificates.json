@@ -1,0 +1,14 @@
+{
+    "certificates": [
+        {
+            "id" : 1,
+            "certificate-name":  "Noracle",
+            "image" : "Ask the chatbot any question and it finds reasons to not do it",
+            "Url": null,
+            "liveUrl": null,
+            "tags" : ["api-wrapper", "chatbot", "text-to-speech","NextJS","Vercel"],
+            "comment": "Fill with all the other certificates"
+        }
+
+    ]
+}
