@@ -60,7 +60,7 @@ function Learning() {
 
   useEffect(() => {
     // Load projects from JSON file
-    fetch('../data/projects.json')
+    fetch('../data/learning/miniprojects.json')
       .then(response => response.json())
       .then(data => {
         setProjects(data.projects || []);
@@ -168,7 +168,7 @@ function Learning() {
             animate={headerControls}
             variants={headerVariants}
           >
-            <Text as="span" color="brand.400">Projects</Text>
+            <Text as="span" color="brand.400">Learning</Text>
           </MotionHeading>
 
           {/* Carousel Container with scroll animation */}

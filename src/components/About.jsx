@@ -288,7 +288,8 @@ function About() {
 
           {/* About Content */}
           <MotionBox
-            bg="bg.hover"
+            bg="transparent"
+            filter={blur}
             borderRadius="2xl"
             p={{ base: 6, md: 10 }}
             mb={12}

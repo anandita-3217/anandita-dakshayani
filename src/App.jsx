@@ -12,8 +12,11 @@ import Resume from './components/Resume'
 import Footer from './components/Footer'
 import CommandPalette from './components/CommandPalette'
 import ScrollToTop from './components/ScrollToTop'
+import Learning from './components/Learning';
 import { useColorMode, useDisclosure } from '@chakra-ui/react';
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+
 import { motion, useScroll } from 'framer-motion'
 
 import useKeyboardShortcuts from './components/hooks/useKeyboardShortcuts'
@@ -65,6 +68,7 @@ function App() {
               returnDuration={1.5}/> 
               <Header/>
               <Hero />
+              <Learning/>
               <About />
               <Skills/>
               <ContributionMap/>
