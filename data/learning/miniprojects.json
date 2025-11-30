@@ -1,21 +1,28 @@
 {
-    "miniprojects": [
+    "projects": [
         {
-            "id" : 1,
-            "project-name":  "Noracle",
-            "description" : "Ask the chatbot any question and it finds reasons to not do it",
-            "githubUrl": null,
-            "liveUrl": null,
-            "tags" : ["api-wrapper", "chatbot", "text-to-speech","NextJS","Vercel"],
-            "comment": "Fill with all the other funny litte projects"
+            "id": 1,
+            "title": "Noracle",
+            "description": "Ask the chatbot any question and it finds reasons to not do it",
+            "githubUrl": "https://github.com/yourusername/noracle",
+            "liveUrl": "https://noracle.vercel.app",
+            "tags": ["api-wrapper", "chatbot", "text-to-speech", "NextJS", "Vercel"],
+            "imageUrl": "/images/noracle.png",
+            "videoUrl": null,
+            "imagePlaceholder": "Noracle Preview",
+            "demoText": "Try Noracle"
         },
         {
-            "id" : 2,
-            "project-name":  "github-user-finder",
-            "description" : "Find any github users stats using only their username",
-            "githubUrl": null,
-            "comment": "Fill with all the other funny litte projects"
+            "id": 2,
+            "title": "GitHub User Finder",
+            "description": "Find any github users stats using only their username",
+            "githubUrl": "https://github.com/yourusername/github-user-finder",
+            "liveUrl": "https://github-finder.vercel.app",
+            "tags": ["GitHub API", "React", "REST API"],
+            "imageUrl": "/images/github-finder.png",
+            "videoUrl": null,
+            "imagePlaceholder": "GitHub Finder Preview",
+            "demoText": "Live Demo"
         }
-
     ]
 }
