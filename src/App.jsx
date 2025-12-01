@@ -89,6 +89,7 @@ function App() {
 // TODO: MotionBox is still shit 
 // TODO: Add formspree so that the mails thing will actually work 
 // TODO: Add a glimplse of github profile 
+// TODO: Better layout design and make it multi page
   )
 }
 
