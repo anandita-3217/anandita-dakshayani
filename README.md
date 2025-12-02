@@ -42,9 +42,10 @@ const techStack = {
   - npm install react-intersection-observer
   - npm install react-icons --save
   - npm install ogl
-  npm install gsap
+  - npm install gsap
   - npm install react-router-dom
   - npm install react-github-calendar
+  - npm install @formspree/react
 
 
 <!-- ### Installation & Setup

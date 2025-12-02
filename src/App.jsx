@@ -90,6 +90,7 @@ function App() {
 // TODO: Add formspree so that the mails thing will actually work 
 // TODO: Add a glimplse of github profile 
 // TODO: Better layout design and make it multi page
+// TODO: Make security better for contact form
   )
 }
 
