@@ -4,10 +4,10 @@
             "id": 1,
             "title": "Noracle",
             "description": "Ask the chatbot any question and it finds reasons to not do it",
-            "githubUrl": "https://github.com/yourusername/noracle",
+            "githubUrl": "https://github.com/anandita-3217/Noracle",
             "liveUrl": "https://noracle.vercel.app",
             "tags": ["api-wrapper", "chatbot", "text-to-speech", "NextJS", "Vercel"],
-            "imageUrl": "/images/noracle.png",
+            "imageUrl": null,
             "videoUrl": null,
             "imagePlaceholder": "Noracle Preview",
             "demoText": "Try Noracle"
@@ -19,9 +19,21 @@
             "githubUrl": "https://github.com/yourusername/github-user-finder",
             "liveUrl": "https://github-finder.vercel.app",
             "tags": ["GitHub API", "React", "REST API"],
-            "imageUrl": "/images/github-finder.png",
+            "imageUrl": null,
             "videoUrl": null,
             "imagePlaceholder": "GitHub Finder Preview",
+            "demoText": "Live Demo"
+        },
+        {
+            "id": 3,
+            "title": "Social Media Detoxer",
+            "description": "An API wrapper for Smol-LM that berates you on your use of social media",
+            "githubUrl": "https://github.com/anandita-3217/social-media-detoxerr",
+            "liveUrl": "https://github-finder.vercel.app",
+            "tags": ["LLM-Wrapper", "React", "Smol-LM"],
+            "imageUrl": null,
+            "videoUrl": null,
+            "imagePlaceholder": "Social Media DeToxer Preview",
             "demoText": "Live Demo"
         }
     ]

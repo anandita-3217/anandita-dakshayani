@@ -13,6 +13,7 @@ import Footer from './components/Footer'
 import CommandPalette from './components/CommandPalette'
 import ScrollToTop from './components/ScrollToTop'
 import Learning from './components/Learning';
+import Certificates from './components/Certificates';
 import { useColorMode, useDisclosure } from '@chakra-ui/react';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
@@ -68,8 +69,9 @@ function App() {
               returnDuration={1.5}/> 
               <Header/>
               <Hero />
-              <Learning/>
               <About />
+              <Learning/>
+              <Certificates/>
               <Skills/>
               <ContributionMap/>
               <Projects /> 
@@ -87,10 +89,11 @@ function App() {
 // TODO: https://www.achyutkatiyar.com/ use this as a base s 
 // TODO: work on learning and cerificates sections.
 // TODO: MotionBox is still shit 
-// TODO: Add formspree so that the mails thing will actually work 
 // TODO: Add a glimplse of github profile 
 // TODO: Better layout design and make it multi page
 // TODO: Make security better for contact form
+// TODO: Change contact code to clear all the filled after send
+// TODO: Change project images to show an icon when a project image is not available in Projects.jsx and Learning.jsx 
   )
 }
 

@@ -311,6 +311,7 @@ function About() {
                 Hi! I'm a <Text as="span" color="brand.400" fontWeight="600">Computer Science graduate</Text> specializing 
                 in full-stack web development and machine learning. I'm passionate about building 
                 practical solutions to real-world problems, from AI-powered applications to complete web platforms.
+                I am most excited about react right now!
               </Text>
 
               <Text
