@@ -13,7 +13,7 @@ import {
   Spinner,
   Link
 } from '@chakra-ui/react';
-import { ChevronLeft, ChevronRight, ExternalLink, Github } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ExternalLink, Github, Image as ImageIcon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
@@ -311,7 +311,7 @@ function Certificates() {
                             objectFit="cover"
                           />
                         ) : (
-                          currentProject.imagePlaceholder || 'Project Image'
+                          <ImageIcon size={48} color="#6B7280"/>
                         )}
                       </Box>
 

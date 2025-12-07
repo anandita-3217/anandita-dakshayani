@@ -93,7 +93,7 @@ function App() {
 // TODO: Better layout design and make it multi page
 // TODO: Make security better for contact form
 // TODO: Change contact code to clear all the filled after send
-// TODO: Change project images to show an icon when a project image is not available in Projects.jsx and Learning.jsx 
+// TODO: 
   )
 }
 

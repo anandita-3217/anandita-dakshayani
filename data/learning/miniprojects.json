@@ -39,7 +39,7 @@
         {
             "id": 4,
             "title": "Wordle Clone",
-            "description": "An API wrapper for Smol-LM that berates you on your use of social media",
+            "description": "A worlde clone with infinit challeneges that runs locally in your desktop",
             "githubUrl": "https://github.com/anandita-3217/WordGame",
             "liveUrl": "https://github-finder.vercel.app",
             "tags": ["Electron"],
