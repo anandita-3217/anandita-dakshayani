@@ -245,7 +245,6 @@ function About() {
         h="200px"
         bg="rgba(20, 184, 166, 0.03)"
         borderRadius="full"
-        filter="blur(40px)"
         animate={{
           scale: [1, 1.2, 1],
           opacity: [0.3, 0.5, 0.3]
@@ -289,7 +288,7 @@ function About() {
           {/* About Content */}
           <MotionBox
             bg="transparent"
-            filter={blur}
+            backdropFilter="blur(1.5px)"
             borderRadius="2xl"
             p={{ base: 6, md: 10 }}
             mb={12}

@@ -125,6 +125,7 @@ function Contact() {
   }
 
   return (
+    <motion.div initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} transition={{ duration: 1.3}}>
     <Box
       id="contact"
       bg="transparent"
@@ -373,6 +374,7 @@ function Contact() {
         </MotionBox>
       </Container>
     </Box>
+    </motion.div>
   );
 }
 

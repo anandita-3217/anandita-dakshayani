@@ -1,115 +1,23 @@
-// import { motion, useAnimation } from "framer-motion";
-// import { Box } from "@chakra-ui/react";
-// import { useInView } from "react-intersection-observer";
-// import { useEffect } from "react";
+import { motion, useAnimation } from "framer-motion";
+import { Box } from "@chakra-ui/react";
+import { useInView } from "react-intersection-observer";
+import { useEffect } from "react";
 
-// export const MotionBox = ({ children, delay = 0, ...props }) => {
-//   const controls = useAnimation();
-//   const [ref, inView] = useInView({ 
-//     triggerOnce: false,  // Changed to false
-//     threshold: 0.2
-//   });
-
-//   useEffect(() => {
-//     if (inView) {
-//       controls.start("visible");
-//     } else {
-//       controls.start("hidden");  // Added: animate out when not in view
-//     }
-//   }, [controls, inView]);
-
-//   const variants = {
-//     hidden: { opacity: 0, y: 40 },
-//     visible: {
-//       opacity: 1,
-//       y: 0,
-//       transition: { duration: 0.7, delay },
-//     },
-//     exit: {  // Custom exit animation
-//     opacity: 0,
-//     y: -20,  // Slide up instead of down
-//     transition: { duration: 0.5 }
-//     }
-//   };
-//   useEffect(() => {
-//   if (inView) {
-//     controls.start("visible");
-//   } else {
-//     controls.start("exit");  // Use custom exit animation
-//   }
-// }, [controls, inView]);
-
-//   return (
-//     <Box
-//       as={motion.div}
-//       ref={ref}
-//       initial="hidden"
-//       animate={controls}
-//       variants={variants}
-//       {...props}
-//     >
-//       {children}
-//     </Box>
-//   );
-// };
-// import { motion, useAnimation } from "framer-motion";
-// import { Box } from "@chakra-ui/react";
-// import { useInView } from "react-intersection-observer";
-// import { useEffect } from "react";
-
-// export const MotionBox = ({ children, delay = 0, ...props }) => {
-//   const controls = useAnimation();
-//   const [ref, inView] = useInView({ 
-//     triggerOnce: false,
-//     threshold: 0.2
-//   });
-
-//   useEffect(() => {
-//     if (inView) {
-//       controls.start("visible");
-//     } else {
-//       controls.start("exit");
-//     }
-//   }, [controls, inView]);
-
-//   const variants = {
-//     hidden: { opacity: 0, y: 40 },
-//     visible: {
-//       opacity: 1,
-//       y: 0,
-//       transition: { duration: 0.7, delay },
-//     },
-//     exit: {
-//       opacity: 0,
-//       y: -20,
-//       transition: { duration: 0.5 }
-//     }
-//   };
-
-//   return (
-//     <Box
-//       as={motion.div}
-//       ref={ref}
-//       initial="hidden"
-//       animate={controls}
-//       variants={variants}
-//       {...props}
-//     >
-//       {children}
-//     </Box>
-//   );
-// };
 export const MotionBox = ({ children, delay = 0, ...props }) => {
   const controls = useAnimation();
+
   const [ref, inView] = useInView({
-    triggerOnce: false,
-    threshold: 0.2
+    triggerOnce: false,  // 👈 allows repeated triggering
+    threshold: 0.2,      // 20% in view before animation starts
   });
 
   useEffect(() => {
-    if (inView) controls.start("visible");
-    else controls.start("exit");
-  }, [controls, inView]);
+    if (inView) {
+      controls.start("visible");   // 👈 play animation when in view
+    } else {
+      controls.start("hidden");    // 👈 reset when leaving view
+    }
+  }, [inView, controls]);
 
   const variants = {
     hidden: { opacity: 0, y: 40 },
@@ -118,20 +26,13 @@ export const MotionBox = ({ children, delay = 0, ...props }) => {
       y: 0,
       transition: { duration: 0.7, delay },
     },
-    exit: {
-      opacity: 0,
-      y: -20,
-      transition: { duration: 0.5 },
-    },
   };
 
-  // 👇 give motion.div a changing key to force re-render on visibility change
   return (
     <Box
       as={motion.div}
-      key={inView ? "visible" : "hidden"}
       ref={ref}
-      initial="hidden"
+      initial="hidden"     // 👈 start hidden every time
       animate={controls}
       variants={variants}
       {...props}
@@ -140,3 +41,4 @@ export const MotionBox = ({ children, delay = 0, ...props }) => {
     </Box>
   );
 };
+// TODO: Works for learning, certificates but not for many of the others test again and modify the code 
