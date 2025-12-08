@@ -91,7 +91,7 @@ function Contact() {
         setLoading(false);
       });
   }, []);
-
+  const formRef = React.useRef();
   useEffect(() => {
     if(state.succeeded){
       toast({
@@ -101,6 +101,9 @@ function Contact() {
         duration: 5000,
         isClosable: true
       });
+      if (formRef.current){
+        formRef.current.reset();
+      }
     }
   },[state.succeeded,toast]);
 
@@ -216,7 +219,7 @@ function Contact() {
                   Send me a message
                 </Heading>
                 
-                <VStack spacing={5} as="form" onSubmit={handleSubmit}>
+                <VStack spacing={5} as="form" onSubmit={handleSubmit} ref={formRef}>
                   <FormControl isRequired>
                     <FormLabel color="text.secondary" fontSize="sm">Name</FormLabel>
                     <Input
