@@ -92,7 +92,7 @@ function App() {
 // TODO: Add a glimplse of github profile 
 // TODO: Better layout design and make it multi page
 // TODO: Make security better for contact form
-// TODO: Change contact code to clear all the filled after send
+
 
   )
 }
