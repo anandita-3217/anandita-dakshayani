@@ -41,4 +41,3 @@ export const MotionBox = ({ children, delay = 0, ...props }) => {
     </Box>
   );
 };
-// TODO: Works for learning, certificates but not for many of the others test again and modify the code 
