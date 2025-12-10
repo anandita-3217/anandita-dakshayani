@@ -16,7 +16,7 @@ import {
   FaCode,
   FaBrain
 } from 'react-icons/fa';
-
+import { useInView } from 'react-intersection-observer';
 // Motion components
 const MotionBox = motion.create(Box);
 const MotionHeading = motion.create(Heading);
@@ -43,17 +43,36 @@ const staggerContainer = {
   }
 };
 
-const scaleIn = {
-  hidden: { opacity: 0, scale: 0.8 },
-  visible: { 
-    opacity: 1, 
-    scale: 1,
-    transition: { duration: 0.4, ease: "easeOut" }
-  }
-};
+const headerVariants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.7 }
+    }
+  };
+const aboutVariants = {
+    hidden: { opacity: 0, y: -40 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.7 }
+    }
+  };
+
 
 // About Section Component
 function About() {
+  const [headerRef, headerInView] = useInView({ 
+      triggerOnce: false,
+      threshold: 0.2
+    });
+    
+  const [aboutRef, aboutInView] = useInView({ 
+      triggerOnce: false,
+      threshold: 0.2
+    });
+    
   return (
     <Box
       id="about"
@@ -96,17 +115,20 @@ function About() {
         >
           {/* Section Title */}
           <MotionHeading
+            ref={headerRef}
             as="h2"
             fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}
             fontWeight="bold"
             textAlign="center"
-            mb={4}
-            variants={fadeInUp}
+            initial="hidden"
+            animate={headerInView ? "visible" : "hidden"}
+            variants={headerVariants}
+            mb={12}
           >
             <Text as="span" color="brand.400">About Me</Text>
           </MotionHeading>
 
-          <MotionText
+          {/* <MotionText
             textAlign="center"
             color="text.secondary"
             fontSize={{ base: 'sm', md: 'md' }}
@@ -114,10 +136,11 @@ function About() {
             variants={fadeInUp}
           >
             Get to know me and my technical expertise
-          </MotionText>
+          </MotionText> */}
 
           {/* About Content */}
           <MotionBox
+            ref={aboutRef}
             bg="transparent"
             backdropFilter="blur(1.5px)"
             borderRadius="2xl"
@@ -125,7 +148,9 @@ function About() {
             mb={12}
             border="1px solid"
             borderColor="border.primary"
-            variants={fadeInUp}
+            initial="hidden"
+            animate={aboutInView ? "visible" : "hidden"}
+            variants={aboutVariants}
             _hover={{
               borderColor: 'brand.400',
               boxShadow: '0 0 30px rgba(20, 184, 166, 0.2)'

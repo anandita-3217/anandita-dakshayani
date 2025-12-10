@@ -21,20 +21,17 @@ import { useInView } from 'react-intersection-observer';
 const MotionBox = motion.create(Box);
 const MotionHeading = motion.create(Heading);
 
-const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { 
-    opacity: 1, 
-    y: 0,
-    transition: { duration: 0.6, ease: "easeOut" }
-  }
-};
-
 function Projects() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [direction, setDirection] = useState(0);
+
+  // const [projectsRef, projectsInView] = useInView({
+  //   triggerOnce: false,
+  //   threshold: 0.2
+  // });
+
   
   // Scroll animation controls
   const headerControls = useAnimation();

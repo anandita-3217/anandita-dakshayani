@@ -93,7 +93,7 @@ function App() {
 // TODO: Better layout design and make it multi page
 // TODO: Make security better for contact form
 // TODO: Have separate pages and have like buttons with tech skills or stuff for like when clicked tge projects with those tech skills in tags will be displayed
-// TODO: MotionBox Works for learning, certificates but not for many of the others test again and modify the code 
+// TODO: MotionBox Works for about, learning, certificates but not for many of the others test again and modify the code 
 // TODO: Direct mailto: in contact.jsx is unsafe check that out
 
 
