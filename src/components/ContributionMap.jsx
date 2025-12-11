@@ -1,65 +1,3 @@
-// import React from "react";
-// import GitHubCalendar from "react-github-calendar";
-
-// import {
-//   Box,Container,Heading,Text,Button,VStack,HStack,SimpleGrid,Icon
-// } from '@chakra-ui/react';
-// import { motion } from 'framer-motion';
-
-// const MotionBox = motion.create(Box);
-// const MotionHeading = motion.create(Heading);
-// const fadeInUp = {
-//   hidden: { opacity: 0, y: 30 },
-//   visible: { 
-//     opacity: 1, 
-//     y: 0,
-//     transition: { duration: 0.6, ease: "easeOut" }
-//   }
-// };
-
-// const ContributionMap = () => {
-//   const labels = {
-//     months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-//     weekdays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-//     totalCount: '{{count}} contributions in 2024', 
-//     legend: {
-//       less: 'Less',
-//       more: 'More',
-//     },
-//   };
-
-//   return (
-//     <MotionBox width={"80%"} margin={"0 auto"} padding={"20px"}>
-//         <MotionHeading
-//                     as="h2"
-//                     fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}
-//                     fontWeight="bold"
-//                     textAlign="center"
-//                     mb={4}
-//                     variants={fadeInUp}
-//                   >
-//                     <Text as="span" color="#14b8a6">My Github Contributions </Text>
-//                   </MotionHeading>
-//         <Box w={"100%"} display="flex" justifyContent={"center"} overflowX={"auto"}>
-//           <Box width="100%" display="flex" justifyContent={"center"}>
-//             <GitHubCalendar
-//               username="anandita-3217"
-//               blockSize={18}
-//               fontSize={16}
-//               theme={{
-//                 light: ["#1e1e1e", "#c4ede8", "#89dbd2", "#4ec9bc", "#14b8a6"],
-//                 dark: ["#1e1e1e", "#c4ede8", "#89dbd2", "#4ec9bc", "#14b8a6"],
-//               }}
-//               labels={labels}
-//             />
-//           </Box>
-//         </Box>
-//     </MotionBox>
-//   );
-// };
-
-// export default ContributionMap;
-
 import React from "react";
 import GitHubCalendar from "react-github-calendar";
 import {
@@ -70,7 +8,7 @@ import {
   useColorMode
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
-
+import { useInView } from "react-intersection-observer";
 const MotionBox = motion.create(Box);
 const MotionHeading = motion.create(Heading);
 
@@ -80,6 +18,22 @@ const fadeInUp = {
     opacity: 1, 
     y: 0,
     transition: { duration: 0.6, ease: "easeOut" }
+  }
+};
+const headerVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.6}
+  }
+};
+const mapVariants = {
+  hidden: { opacity: 0, y: -40 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.6}
   }
 };
 
@@ -94,9 +48,16 @@ const staggerContainer = {
   }
 };
 
-const ContributionMap = () => {
+function ContributionMap()  {
   const { colorMode } = useColorMode();
-  
+  const {headerRef, headerInView} = useInView({
+    triggerOnce: false,
+    threshold: 0.2
+  });
+  const {mapRef, mapInView} = useInView({
+    triggerOnce: false,
+    threshold: 0.2
+  });
   const labels = {
     months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
     weekdays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
@@ -150,18 +111,24 @@ const ContributionMap = () => {
         >
           {/* Section Title */}
           <MotionHeading
+            ref={headerRef}
             as="h2"
             fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}
             fontWeight="bold"
             textAlign="center"
             mb={4}
-            variants={fadeInUp}
+            initial="hidden"
+            animate={headerInView ? "hidden":"visible"}
+            variants={headerVariants}
           >
             <Text as="span" color="brand.400">My GitHub Contributions</Text>
           </MotionHeading>
 
           <MotionBox
-            variants={fadeInUp}
+            ref={mapRef}
+            initial="hidden"
+            animate={mapInView ? "hidden":"visible"}
+            variants={mapVariants}
             textAlign="center"
             mb={12}
           >

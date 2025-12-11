@@ -13,12 +13,33 @@ import {
   Image,
   Spinner,
   Center,
+  transition,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { Code } from "lucide-react";
+import { useInView } from "react-intersection-observer";
 
 const MotionBox = motion.create(Box);
+const MotionHeading = motion.create(Heading);
 const MotionBadge = motion.create(Badge);
+
+const headerVariants = {
+  hidden: {opacity:0,y:40},
+  visible:{
+    opacity:1,
+    y:0,
+    transition: {duration:0.7}
+  }
+}
+
+const skillsVariants = {
+  hidden: {opacity:0,y:-40},
+  visible:{
+    opacity:1,
+    y:0,
+    transition: {duration:0.7}
+  }
+}
 
 // TechIcon Component
 function TechIcon({ logoKey, name, size = 20 }) {
@@ -74,7 +95,14 @@ export default function Skills() {
   const [selectedCategory, setSelectedCategory] = useState("Languages");
   const [skills, setSkills] = useState({});
   const [loading, setLoading] = useState(true);
-
+  const [headerRef,headerInView] = useInView({
+    triggerOnce: false,
+    threshold: 0.2
+  });
+  const [skillsRef,skillsInView] = useInView({
+    triggerOnce: false,
+    threshold: 0.2
+  });
   useEffect(() => {
     // Load skills from JSON file
     fetch('../data/skills.json')
@@ -114,24 +142,29 @@ export default function Skills() {
           textAlign="center"
           mb={8}
         >
-          <Heading
+          <MotionHeading
+            ref={headerRef}
             as="h2"
             fontSize={{ base: "3xl", sm: "4xl", md: "5xl" }}
             fontWeight="bold"
             letterSpacing="tight"
+            initial="hidden"
+            animate={headerInView ? "visible" : "hidden"}
+            variants={headerVariants}
             color="#14b8a6"
             mb={4}
           >
             Technical Skills
-          </Heading>
+          </MotionHeading>
         </MotionBox>
 
         <MotionBox
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
           mt={{ base: 8, md: 12 }}
+          ref={skillsRef}
+          initial="hidden"
+          animate={skillsInView?"visible":"hidden"}
+          variants={skillsVariants}
         >
           <Tabs
             variant="unstyled"
