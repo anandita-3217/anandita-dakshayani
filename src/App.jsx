@@ -94,7 +94,8 @@ function App() {
 // TODO: MotionBox Works for about, learning, certificates,skills,resume but not for hero, contribution map, contact and projects test again and modify the code 
 // TODO: Direct mailto: in contact.jsx is unsafe check that out
 // TODO: add keyboard shortcuts to toggle theme with ctrl+tmigrate resume to a drive link
-// TODO: 
+// TODO: Change up the look with good fonts
+
 
 
   )
