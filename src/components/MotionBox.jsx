@@ -7,15 +7,15 @@ export const MotionBox = ({ children, delay = 0, ...props }) => {
   const controls = useAnimation();
 
   const [ref, inView] = useInView({
-    triggerOnce: false,  // 👈 allows repeated triggering
-    threshold: 0.2,      // 20% in view before animation starts
+    triggerOnce: false, 
+    threshold: 0.2,     
   });
 
   useEffect(() => {
     if (inView) {
-      controls.start("visible");   // 👈 play animation when in view
+      controls.start("visible");   
     } else {
-      controls.start("hidden");    // 👈 reset when leaving view
+      controls.start("hidden");    
     }
   }, [inView, controls]);
 
@@ -32,7 +32,7 @@ export const MotionBox = ({ children, delay = 0, ...props }) => {
     <Box
       as={motion.div}
       ref={ref}
-      initial="hidden"     // 👈 start hidden every time
+      initial="hidden"     
       animate={controls}
       variants={variants}
       {...props}
