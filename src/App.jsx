@@ -22,7 +22,7 @@ import { motion, useScroll } from 'framer-motion'
 import useKeyboardShortcuts from './components/hooks/useKeyboardShortcuts'
 function App() {
   const { scrollYProgress } = useScroll();
-  const { colorMode } = useColorMode();
+  const { colorMode, toggleColorMode } = useColorMode();
   const isLight = colorMode === "light";
 
   const {
@@ -31,7 +31,7 @@ function App() {
     onClose : onCommandPaletteClose
   } = useDisclosure();
   
-  useKeyboardShortcuts({onCommandPaletteOpen});
+  useKeyboardShortcuts({onCommandPaletteOpen,onThemeToggle: toggleColorMode});
 
   return (
     <Router>
