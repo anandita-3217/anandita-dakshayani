@@ -95,6 +95,7 @@ function App() {
 // TODO: add keyboard shortcuts to toggle theme with ctrl+t
 // TODO: migrate resume to a drive link all assets
 // TODO: Change up the look with good fonts
+// TODO: Learn to make routes and setup separate pages 
 
 
 
