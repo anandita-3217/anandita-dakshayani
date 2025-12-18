@@ -12,14 +12,14 @@ import { useInView } from "react-intersection-observer";
 const MotionBox = motion.create(Box);
 const MotionHeading = motion.create(Heading);
 
-const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { 
-    opacity: 1, 
-    y: 0,
-    transition: { duration: 0.6, ease: "easeOut" }
-  }
-};
+// const fadeInUp = {
+//   hidden: { opacity: 0, y: 30 },
+//   visible: { 
+//     opacity: 1, 
+//     y: 0,
+//     transition: { duration: 0.6, ease: "easeOut" }
+//   }
+// };
 const headerVariants = {
   hidden: { opacity: 0, y: 40 },
   visible: { 
@@ -50,11 +50,11 @@ const staggerContainer = {
 
 function ContributionMap()  {
   const { colorMode } = useColorMode();
-  const {headerRef, headerInView} = useInView({
+  const [headerRef,headerInView] = useInView({
     triggerOnce: false,
     threshold: 0.2
   });
-  const {mapRef, mapInView} = useInView({
+  const [mapRef, mapInView] = useInView({
     triggerOnce: false,
     threshold: 0.2
   });
@@ -74,6 +74,7 @@ function ContributionMap()  {
 
   return (
     <Box
+      as="section"
       id="contributions"
       bg="transparent"
       color="text.primary"
@@ -83,43 +84,23 @@ function ContributionMap()  {
     >
       {/* Background decoration */}
       <MotionBox
-        position="absolute"
-        top="30%"
-        right="10%"
-        w="200px"
-        h="200px"
-        bg="rgba(20, 184, 166, 0.03)"
-        borderRadius="full"
-        filter="blur(50px)"
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.2, 0.4, 0.2]
-        }}
-        transition={{
-          duration: 7,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        textAlign="center"
+        mb={8}
       />
-
-      <Container maxW="container.xl" position="relative" zIndex={1}>
-        <MotionBox
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={staggerContainer}
-        >
-          {/* Section Title */}
           <MotionHeading
-            ref={headerRef}
+            // ref={headerRef}
             as="h2"
             fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}
             fontWeight="bold"
             textAlign="center"
             mb={4}
-            initial="hidden"
-            animate={headerInView ? "hidden":"visible"}
-            variants={headerVariants}
+            // initial="hidden"
+            // animate={headerInView ? "hidden":"visible"}
+            // variants={headerVariants}
           >
             <Text as="span" color="brand.400">My GitHub Contributions</Text>
           </MotionHeading>
@@ -144,7 +125,7 @@ function ContributionMap()  {
 
           {/* GitHub Calendar Container */}
           <MotionBox
-            variants={fadeInUp}
+            // variants={fadeInUp}
             w="full"
             display="flex"
             justifyContent="center"
@@ -192,8 +173,6 @@ function ContributionMap()  {
               />
             </Box>
           </MotionBox>
-        </MotionBox>
-      </Container>
     </Box>
   );
 };
