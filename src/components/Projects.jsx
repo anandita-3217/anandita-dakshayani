@@ -26,14 +26,6 @@ function Projects() {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [direction, setDirection] = useState(0);
-
-  // const [projectsRef, projectsInView] = useInView({
-  //   triggerOnce: false,
-  //   threshold: 0.2
-  // });
-
-  
-  // Scroll animation controls
   const headerControls = useAnimation();
   const carouselControls = useAnimation();
   const [headerRef, headerInView] = useInView({ 
@@ -44,12 +36,16 @@ function Projects() {
     triggerOnce: false,
     threshold: 0.2
   });
-
-  useEffect(() => {
-    if (headerInView) {
-      headerControls.start("visible");
-    }
-  }, [headerControls, headerInView]);
+  const [projectsRef, projectsInView] = useInView({
+    triggerOnce: false,
+    threshold: 0.2
+  });
+  
+  // useEffect(() => {
+  //   if (headerInView) {
+  //     headerControls.start("visible");
+  //   }
+  // }, [headerControls, headerInView]);
 
   useEffect(() => {
     if (carouselInView) {
@@ -93,6 +89,14 @@ function Projects() {
 
   const headerVariants = {
     hidden: { opacity: 0, y: 40 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.7 }
+    }
+  };
+  const projectsVariants = {
+    hidden: { opacity: 0, y: -40 },
     visible: {
       opacity: 1,
       y: 0,
@@ -164,12 +168,18 @@ function Projects() {
             fontWeight="bold"
             textAlign="center"
             initial="hidden"
-            animate={headerControls}
+            animate = {headerInView?"visible":"hidden"}
             variants={headerVariants}
           >
             <Text as="span" color="brand.400">Projects</Text>
           </MotionHeading>
-
+        <MotionBox
+        ref={projectsRef}
+            textAlign="center"
+            initial="hidden"
+            viewport={{ once: true }}
+            animate={projectsInView ? "visible" : "hidden"}
+            variants={projectsVariants}>
           {/* Carousel Container with scroll animation */}
           <MotionBox
             ref={carouselRef}
@@ -410,6 +420,7 @@ function Projects() {
                 />
               ))}
             </HStack>
+          </MotionBox>
           </MotionBox>
         </VStack>
       </Container>

@@ -14,6 +14,7 @@ import {
 import { motion } from 'framer-motion';
 import { ReactTyped } from "react-typed";
 import CodingImg from "./assets/Coding.png";
+import { useInView } from 'react-intersection-observer';
 
 // Create motion components
 const MotionBox = motion.create(Box);
@@ -40,7 +41,6 @@ const fadeInLeft = {
     transition: { duration: 0.7, ease: "easeOut" }
   }
 };
-
 const fadeInRight = {
   hidden: { opacity: 0, x: 50 },
   visible: { 
@@ -49,6 +49,7 @@ const fadeInRight = {
     transition: { duration: 0.7, ease: "easeOut" }
   }
 };
+
 
 const scaleIn = {
   hidden: { opacity: 0, scale: 0.8 },
@@ -59,18 +60,21 @@ const scaleIn = {
   }
 };
 
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.1
-    }
-  }
-};
+
 
 function Hero() {
+  const [headerRef,headerInView] = useInView({
+    triggerOnce: false,
+    threshold: 0.2
+  });
+  const [imageRef,imageInView] = useInView({
+    triggerOnce: false,
+    threshold: 0.2
+  });
+  const [contentRef,contentInView] = useInView({
+    triggerOnce: false,
+    threshold: 0.2
+  });
   return (
     <Box
       id="hero"
@@ -133,9 +137,10 @@ function Hero() {
         >
           <GridItem>
             <MotionBox
+              ref={imageRef}
               initial="hidden"
-              animate="visible"
-              variants={staggerContainer}
+              animate={imageInView?"visible":"hidden"}
+              variants={fadeInLeft}
               position="relative"
               display="flex"
               flexDirection="column"
@@ -164,18 +169,23 @@ function Hero() {
           {/* Right side - Text content */}
           <GridItem>
             <MotionBox
+            ref={contentRef}
               initial="hidden"
-              animate="visible"
-              variants={staggerContainer}
+              animate={contentInView?"visible":"hidden"}
+
+              variants={fadeInRight}
             >
               <VStack spacing={6} align={{ base: 'center', lg: 'flex-start' }} textAlign={{ base: 'center', lg: 'left' }}>
                 {/* Main Heading with Typing Effect */}
                 <MotionHeading
+                  ref={headerRef}
                   as="h1"
                   fontSize={{ base: '3xl', md: '4xl', lg: '5xl', xl: '6xl' }}
                   fontWeight="bold"
                   lineHeight="1.2"
                   color="brand.400"
+                  initial= "hidden"
+                  animate={headerInView?"visible":"hidden"}
                   variants={fadeInUp}
                 >
                   <ReactTyped
