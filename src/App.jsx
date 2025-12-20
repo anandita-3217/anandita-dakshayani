@@ -86,6 +86,9 @@ function App() {
       </Router>
 
 // TODO: https://www.achyutkatiyar.com/ use this as a base s 
+// TODO: https://sarayoussry.com/
+// TODO: https://aayushbharti.in/
+// TODO: https://www.muhammadaamirmalik.com/
 // TODO: Add a glimplse of github profile 
 // TODO: Better layout design and make it multi page
 // TODO: Make security better for contact form

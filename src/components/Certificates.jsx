@@ -199,7 +199,7 @@ function Certificates() {
           >
             <Text as="span" color="brand.400">Certificates</Text>
           </MotionHeading>
-
+          <Text as="p" color="brand.400"> Im always eager to learn more  </Text>
           {/* Carousel Container with scroll animation */}
           <MotionBox
             ref={carouselRef}
