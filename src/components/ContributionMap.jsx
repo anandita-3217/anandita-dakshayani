@@ -21,7 +21,7 @@ const MotionHeading = motion.create(Heading);
 //   }
 // };
 const headerVariants = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 0, y: 30 },
   visible: { 
     opacity: 1, 
     y: 0,
@@ -83,14 +83,14 @@ function ContributionMap()  {
       overflow="hidden"
     >
       {/* Background decoration */}
-      <MotionBox
+      {/* <MotionBox
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
         textAlign="center"
         mb={8}
-      />
+      /> */}
           <MotionHeading
             // ref={headerRef}
             as="h2"
@@ -98,7 +98,7 @@ function ContributionMap()  {
             fontWeight="bold"
             textAlign="center"
             mb={4}
-            // initial="hidden"
+            initial="hidden"
             // animate={headerInView ? "hidden":"visible"}
             // variants={headerVariants}
           >
