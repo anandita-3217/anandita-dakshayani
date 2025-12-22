@@ -12,14 +12,6 @@ import { useInView } from "react-intersection-observer";
 const MotionBox = motion.create(Box);
 const MotionHeading = motion.create(Heading);
 
-// const fadeInUp = {
-//   hidden: { opacity: 0, y: 30 },
-//   visible: { 
-//     opacity: 1, 
-//     y: 0,
-//     transition: { duration: 0.6, ease: "easeOut" }
-//   }
-// };
 const headerVariants = {
   hidden: { opacity: 0, y: 30 },
   visible: { 

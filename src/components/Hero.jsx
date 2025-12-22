@@ -15,7 +15,7 @@ import { motion } from 'framer-motion';
 import { ReactTyped } from "react-typed";
 import CodingImg from "./assets/Coding.png";
 import { useInView } from 'react-intersection-observer';
-
+import TextType from "./ui/TextType";
 // Create motion components
 const MotionBox = motion.create(Box);
 const MotionHeading = motion.create(Heading);
@@ -188,11 +188,12 @@ function Hero() {
                   animate={headerInView?"visible":"hidden"}
                   variants={fadeInUp}
                 >
-                  <ReactTyped
-                    strings={["Hi! I'm Anandita!"]}
-                    typeSpeed={80}
-                    backSpeed={60}
-                    loop
+                  <TextType 
+                    text={["Hi! I'm Anandita!"]}
+                    typingSpeed={75}
+                    pauseDuration={1500}
+                    showCursor={true}
+                    cursorCharacter="_"
                   />
                 </MotionHeading>
 
