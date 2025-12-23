@@ -102,10 +102,11 @@ function App() {
 // TODO: Add guest book inspired by https://aayushbharti.in/ 
 // TODO: Add bucketlist inspired by https://aayushbharti.in/ 
 // TODO: In techSkills remove the name of the tech and add it as a tooltip inspired by https://aayushbharti.in/  https://v2.chakra-ui.com/docs/components/tooltip
-
+// TODO: For the main projects think of a better layout and add filters and sorts option
 // TODO: https://aayushbharti.in/about layout for new about page https://reactbits.dev/components/dome-gallery or https://reactbits.dev/components/masonry or https://reactbits.dev/components/stack or https://reactbits.dev/components/circular-gallery for rightside asset
 // TODO: https://reactbits.dev/text-animations/scroll-velocity works for other assets for the home page's about https://reactbits.dev/animations/logo-loop combine these
 // TODO: https://reactbits.dev/text-animations/split-text for separate contact page
+// TODO: https://github.com/aarabii/An/blob/master/src/components/sections/Skills.tsx for having a ribbon of tech skills in the home page> about section> bento box layout one of the bento boxes
   )
 }
 
