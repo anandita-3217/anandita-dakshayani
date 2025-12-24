@@ -10,14 +10,7 @@
 <!-- 
 Welcome to my digital space! This portfolio is where code meets creativity. Built with modern web technologies, it showcases my projects, skills, and journey in software engineering—from detecting deepfakes with 99.76% accuracy to crafting beautiful UI components. -->
 
-<!-- ### ✨ What Makes It Special
 
-- **⚡ Blazing Fast** - Vite's HMR means changes appear instantly during development
-- **🎨 Beautiful UI** - Chakra UI components for a polished, accessible design
-- **🌗 Dark Mode Ready** - Toggle between light and dark themes seamlessly
-- **📱 Fully Responsive** - Looks stunning on every device, from mobile to 4K displays
-- **🎭 Smooth Animations** - Delightful micro-interactions that bring the site to life
-- **♿ Accessible** - WCAG compliant with keyboard navigation and screen reader support -->
 
 ## 🛠️ Tech Stack
 
