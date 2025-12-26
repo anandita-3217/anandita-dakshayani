@@ -8,7 +8,6 @@ import { useInView } from "react-intersection-observer";
 // Motion components
 const MotionBox = motion.create(Box);
 const MotionHeading = motion.create(Heading);
-const MotionText = motion.create(Text);
 // TODO: make the source come from google drive no direct assets
 
 const headerVariants = {
