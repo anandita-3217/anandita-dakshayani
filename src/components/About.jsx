@@ -127,18 +127,6 @@ function About() {
           >
             <Text as="span" color="brand.400">About Me</Text>
           </MotionHeading>
-
-          {/* <MotionText
-            textAlign="center"
-            color="text.secondary"
-            fontSize={{ base: 'sm', md: 'md' }}
-            mb={12}
-            variants={fadeInUp}
-          >
-            Get to know me and my technical expertise
-          </MotionText> */}
-
-          {/* About Content */}
           <MotionBox
             ref={aboutRef}
             bg="transparent"
