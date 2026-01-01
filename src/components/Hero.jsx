@@ -15,8 +15,10 @@ import { motion } from 'framer-motion';
 import { ReactTyped } from "react-typed";
 import CodingImg from "./assets/Coding.png";
 import { useInView } from 'react-intersection-observer';
+import { useColorMode } from '@chakra-ui/react';
 import TextType from "./ui/TextType";
 import Marquee from "react-fast-marquee";
+
 // Create motion components
 const MotionBox = motion.create(Box);
 const MotionHeading = motion.create(Heading);
@@ -64,6 +66,7 @@ const scaleIn = {
 
 
 function Hero() {
+  const { colorMode } = useColorMode();
   const [headerRef,headerInView] = useInView({
     triggerOnce: false,
     threshold: 0.2
@@ -184,13 +187,13 @@ function Hero() {
                   fontSize={{ base: '3xl', md: '4xl', lg: '5xl', xl: '6xl' }}
                   fontWeight="bold"
                   lineHeight="1.2"
-                  color="brand.400"
                   initial= "hidden"
                   animate={headerInView?"visible":"hidden"}
                   variants={fadeInUp}
                 >
                   <TextType 
                     text={["Hi! I'm Anandita!"]}
+                    
                     typingSpeed={75}
                     pauseDuration={1500}
                     showCursor={true}
