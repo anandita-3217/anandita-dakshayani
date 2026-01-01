@@ -12,8 +12,9 @@ import Footer from './components/Footer'
 import CommandPalette from './components/CommandPalette'
 import ScrollToTop from './components/ScrollToTop'
 import Learning from './components/Learning';
-import Certificates from './components/Certificates';
+// import Certificates from './components/Certificates';
 import Hobbies from './components/AboutPageBits/Hobbies'
+import Certificates from './components/AboutPageBits/Cert'
 import { useColorMode, useDisclosure } from '@chakra-ui/react';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
@@ -70,9 +71,10 @@ function App() {
               <Header/>
               <Hero />
               <About />
-              <Hobbies/>
-              <Learning/>
+              {/* <Hobbies/> */}
               <Certificates/>
+              <Learning/>
+              {/* <Certificates/> */}
               <Skills/>
               <ContributionMap/>
               <Projects /> 
