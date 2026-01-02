@@ -3,6 +3,8 @@ import React from 'react';
 import {
   Box,
   Container,
+  Grid,
+  GridItem,
   Heading,
   Text,
   Button,
@@ -20,17 +22,9 @@ import { useInView } from 'react-intersection-observer';
 // Motion components
 const MotionBox = motion.create(Box);
 const MotionHeading = motion.create(Heading);
-const MotionText = motion.create(Text);
+const MotionGridItem = motion.create(GridItem);
 
 // Animation variants
-const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { 
-    opacity: 1, 
-    y: 0,
-    transition: { duration: 0.6, ease: "easeOut" }
-  }
-};
 
 const staggerContainer = {
   hidden: { opacity: 0 },
@@ -51,14 +45,14 @@ const headerVariants = {
       transition: { duration: 0.7 }
     }
   };
-const aboutVariants = {
-    hidden: { opacity: 0, y: -40 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.7 }
-    }
-  };
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" }
+  }
+};
 
 
 // About Section Component
@@ -68,10 +62,30 @@ function About() {
       threshold: 0.2
     });
     
-  const [aboutRef, aboutInView] = useInView({ 
-      triggerOnce: false,
-      threshold: 0.2
-    });
+  const [topLeftRef, topLeftInView] = useInView({ 
+    triggerOnce: false,
+    threshold: 0.2
+  });
+
+  const [middleRef, middleInView] = useInView({ 
+    triggerOnce: false,
+    threshold: 0.2
+  });
+
+  const [topRightRef, topRightInView] = useInView({ 
+    triggerOnce: false,
+    threshold: 0.2
+  });
+
+  const [bottomLeftRef, bottomLeftInView] = useInView({ 
+    triggerOnce: false,
+    threshold: 0.2
+  });
+
+  const [bottomRightRef, bottomRightInView] = useInView({ 
+    triggerOnce: false,
+    threshold: 0.2
+  });
     
   return (
     <Box
@@ -106,14 +120,14 @@ function About() {
         }}
       />
 
-      <Container maxW="container.xl" position="relative" zIndex={1}>
+       <Container maxW="container.xl" position="relative" zIndex={1}>
         <MotionBox
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
         >
-          {/* Section Title */}
+          
           <MotionHeading
             ref={headerRef}
             as="h2"
@@ -127,59 +141,158 @@ function About() {
           >
             <Text as="span" color="brand.400">About Me</Text>
           </MotionHeading>
-          <MotionBox
-            ref={aboutRef}
-            bg="transparent"
-            backdropFilter="blur(1.5px)"
-            borderRadius="2xl"
-            p={{ base: 6, md: 10 }}
-            mb={12}
-            border="1px solid"
-            borderColor="border.primary"
-            initial="hidden"
-            animate={aboutInView ? "visible" : "hidden"}
-            variants={aboutVariants}
-            _hover={{
-              borderColor: 'brand.400',
-              boxShadow: '0 0 30px rgba(20, 184, 166, 0.2)'
-            }}
-            transition="all 0.3s"
-          >
-            <VStack spacing={6} align="stretch">
-              <Text
-                fontSize={{ base: 'md', md: 'lg' }}
-                color="text.primary"
-                lineHeight="1.8"
-              >
-                Hi! I'm a <Text as="span" color="brand.400" fontWeight="600">Computer Science graduate</Text> specializing 
-                in full-stack web development and machine learning. I'm passionate about building 
-                practical solutions to real-world problems, from AI-powered applications to complete web platforms.
-                I am most excited about react right now!
-              </Text>
-
-              <Text
-                fontSize={{ base: 'md', md: 'lg' }}
-                color="text.primary"
-                lineHeight="1.8"
-              >
-                My approach combines technical 
-                proficiency with creative problem-solving to deliver elegant, functional solutions.
-              </Text>
-
-              <HStack spacing={4} pt={4} flexWrap="wrap">
-                <HStack spacing={2} color="brand.400">
-                  <Icon as={FaCode} boxSize={5} />
-                  <Text fontWeight="600">Full-Stack Development</Text>
-                </HStack>
-                <HStack spacing={2} color="brand.400">
-                  <Icon as={FaBrain} boxSize={5} />
-                  <Text fontWeight="600">Machine Learning</Text>
-                </HStack>
-              </HStack>
-            </VStack>
-          </MotionBox>
+          <Grid
+               templateColumns="repeat(3, 1fr)"
+               templateRows="repeat(5, 1fr)"
+               gap={4}
+               w="100%"
+               h="100vh"
+               p={4}
+             >
+               {/* Top Left - 3 rows */}
+               <MotionGridItem
+                 ref={topLeftRef}
+                 rowSpan={2}
+                 colSpan={1}
+                 bg="surface.card"
+                 borderRadius="xl"
+                 border="1px solid"
+                 borderColor="border.primary"
+                 p={6}
+                 initial="hidden"
+                 animate={topLeftInView ? "visible" : "hidden"}
+                 variants={cardVariants}
+                 _hover={{
+                   borderColor: 'brand.400',
+                   boxShadow: '0 0 30px rgba(20, 184, 166, 0.2)'
+                 }}
+                 transition="all 0.3s"
+               >
+                 <VStack spacing={4} align="stretch" h="100%">
+           <Heading
+             as="h3"
+             fontSize={{ base: 'xl', md: '2xl' }}
+             fontWeight="bold"
+             color="brand.400"
+           >
+             About Me
+           </Heading>
+         
+           <Text
+             fontSize={{ base: 'sm', md: 'md' }}
+             color="text.primary"
+             lineHeight="1.6"
+             noOfLines={4}
+           >
+             Hi! I'm a <Text as="span" color="brand.400" fontWeight="600">Computer Science graduate</Text> specializing 
+             in full-stack web development and machine learning. I'm passionate about building 
+             practical solutions to real-world problems.
+           </Text>
+         
+           <HStack spacing={3} pt={2} flexWrap="wrap">
+             <HStack spacing={1} color="brand.400" fontSize="sm">
+               <Icon as={FaCode} boxSize={4} />
+               <Text fontWeight="600">Full-Stack</Text>
+             </HStack>
+             <HStack spacing={1} color="brand.400" fontSize="sm">
+               <Icon as={FaBrain} boxSize={4} />
+               <Text fontWeight="600">ML</Text>
+             </HStack>
+           </HStack>
+         </VStack>
+               </MotionGridItem>
+         
+               {/* Middle - 5 rows */}
+               <MotionGridItem
+                 ref={middleRef}
+                 rowSpan={5}
+                 colSpan={1}
+                 bg="surface.card"
+                 borderRadius="xl"
+                 border="1px solid"
+                 borderColor="border.primary"
+                 p={6}
+                 initial="hidden"
+                 animate={middleInView ? "visible" : "hidden"}
+                 variants={cardVariants}
+                 _hover={{
+                   borderColor: 'brand.400',
+                   boxShadow: '0 0 30px rgba(20, 184, 166, 0.2)'
+                 }}
+                 transition="all 0.3s"
+               >
+                 <Box>Middle (5 rows)</Box>
+               </MotionGridItem>
+         
+               {/* Top Right - 3 rows */}
+               <MotionGridItem
+                 ref={topRightRef}
+                 rowSpan={3}
+                 colSpan={1}
+                 bg="surface.card"
+                 borderRadius="xl"
+                 border="1px solid"
+                 borderColor="border.primary"
+                 p={6}
+                 initial="hidden"
+                 animate={topRightInView ? "visible" : "hidden"}
+                 variants={cardVariants}
+                 _hover={{
+                   borderColor: 'brand.400',
+                   boxShadow: '0 0 30px rgba(20, 184, 166, 0.2)'
+                 }}
+                 transition="all 0.3s"
+                 overflow="hidden"
+               >
+                 <Box>Top Right (3 rows) </Box>
+               </MotionGridItem>
+         
+               {/* Bottom Left - 2 rows */}
+               <MotionGridItem
+                 ref={bottomLeftRef}
+                 rowSpan={3}
+                 colSpan={1}
+                 bg="surface.card"
+                 borderRadius="xl"
+                 border="1px solid"
+                 borderColor="border.primary"
+                 p={6}
+                 initial="hidden"
+                 animate={bottomLeftInView ? "visible" : "hidden"}
+                 variants={cardVariants}
+                 _hover={{
+                   borderColor: 'brand.400',
+                   boxShadow: '0 0 30px rgba(20, 184, 166, 0.2)'
+                 }}
+                 transition="all 0.3s"
+               >
+                 <Box>Bottom Right (3 rows)</Box>
+               </MotionGridItem>
+         
+               {/* Bottom Right - 3 rows */}
+               <MotionGridItem
+                 ref={bottomRightRef}
+                 rowSpan={3}
+                 colSpan={1}
+                 bg="surface.card"
+                 borderRadius="xl"
+                 border="1px solid"
+                 borderColor="border.primary"
+                 p={6}
+                 initial="hidden"
+                 animate={bottomRightInView ? "visible" : "hidden"}
+                 variants={cardVariants}
+                 _hover={{
+                   borderColor: 'brand.400',
+                   boxShadow: '0 0 30px rgba(20, 184, 166, 0.2)'
+                 }}
+                 transition="all 0.3s"
+               >
+                 <Box>Bottom Left (2 rows)</Box>
+               </MotionGridItem>
+             </Grid>
         </MotionBox>
-      </Container>
+      </Container> 
     </Box>
   );
 }

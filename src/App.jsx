@@ -1,6 +1,6 @@
+import Header from './components/Header'
 import DotGrid from './components/assets/DotGrid/DotGrid'
 import NotFound from './components/NotFound'
-import Header from './components/Header'
 import Hero  from './components/Hero'
 import About from './components/About'
 import Skills from './components/Skills'
