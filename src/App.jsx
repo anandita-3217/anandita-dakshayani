@@ -12,9 +12,8 @@ import Footer from './components/Footer'
 import CommandPalette from './components/CommandPalette'
 import ScrollToTop from './components/ScrollToTop'
 import Learning from './components/Learning';
-// import Certificates from './components/Certificates';
 import Hobbies from './components/AboutPageBits/Hobbies'
-import Certificates from './components/AboutPageBits/Cert'
+import Certificates from './components/AboutPageBits/Certificates'
 import { useColorMode, useDisclosure, useColorModeValue } from '@chakra-ui/react';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
@@ -80,7 +79,6 @@ const baseColor = useColorModeValue("#d4dadc", '#1a1a1a');
               {/* <Hobbies/> */}
               <Certificates/>
               <Learning/>
-              {/* <Certificates/> */}
               <Skills/>
               <ContributionMap/>
               <Projects /> 
