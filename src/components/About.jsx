@@ -375,28 +375,28 @@ const BentoCard = ({ children, rowSpan, colSpan, index, color = '#14b8a6', accen
   };
 
   // Floating animation with GSAP-like effect using CSS
-  useEffect(() => {
-    const card = cardRef.current;
-    if (!card) return;
+  // useEffect(() => {
+  //   const card = cardRef.current;
+  //   if (!card) return;
 
-    const floatAnimation = `
-      @keyframes float-${index} {
-        0%, 100% { transform: translateY(0px) rotate(0deg); }
-        33% { transform: translateY(${Math.sin((index+1) * 1.5) * 10}px) rotate(${Math.sin(index) * 1}deg); }
-        66% { transform: translateY(${-Math.sin((index+1) * 1.5) * 10}px) rotate(${-Math.sin(index) * 1}deg); }
-      }
-    `;
+  //   const floatAnimation = `
+  //     @keyframes float-${index} {
+  //       0%, 100% { transform: translateY(0px) rotate(0deg); }
+  //       33% { transform: translateY(${Math.sin((index+1) * 1.5) * 10}px) rotate(${Math.sin(index) * 1}deg); }
+  //       66% { transform: translateY(${-Math.sin((index+1) * 1.5) * 10}px) rotate(${-Math.sin(index) * 1}deg); }
+  //     }
+  //   `;
 
-    const styleSheet = document.createElement('style');
-    styleSheet.textContent = floatAnimation;
-    document.head.appendChild(styleSheet);
+  //   const styleSheet = document.createElement('style');
+  //   styleSheet.textContent = floatAnimation;
+  //   document.head.appendChild(styleSheet);
 
-    card.style.animation = `float-${index} ${3 + index * 0.2}s ease-in-out infinite`;
+  //   card.style.animation = `float-${index} ${3 + index * 0.2}s ease-in-out infinite`;
 
-    return () => {
-      document.head.removeChild(styleSheet);
-    };
-  }, [index]);
+  //   return () => {
+  //     document.head.removeChild(styleSheet);
+  //   };
+  // }, [index]);
 
   return (
     <MotionGridItem
