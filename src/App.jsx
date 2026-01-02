@@ -15,7 +15,7 @@ import Learning from './components/Learning';
 // import Certificates from './components/Certificates';
 import Hobbies from './components/AboutPageBits/Hobbies'
 import Certificates from './components/AboutPageBits/Cert'
-import { useColorMode, useDisclosure } from '@chakra-ui/react';
+import { useColorMode, useDisclosure, useColorModeValue } from '@chakra-ui/react';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
@@ -34,6 +34,11 @@ function App() {
   } = useDisclosure();
   
   useKeyboardShortcuts({onCommandPaletteOpen,onThemeToggle: toggleColorMode});
+const baseColor = useColorModeValue("#d4dadc", '#1a1a1a');
+  const gradientColors = useColorModeValue(
+    ['#ff0080', '#6366f1', '#3b82f6'], // light mode: pink → indigo → blue
+    ['#ff00ff', '#8000ff', '#0080ff']  // dark mode: lighter versions
+  );
 
   return (
     <Router>
@@ -61,11 +66,12 @@ function App() {
               <DotGrid
               dotSize={5}
               gap={15}
-              baseColor={isLight ? "#d4dadc" : "#272727"}     
-              activeColor={isLight ? "#14b8a6" : "#5fffea"}   
+              // baseColor={isLight ? "#d4dadc" : "#272727"}     
+  baseColor={baseColor}
+  activeColor={gradientColors} 
               proximity={85}
               shockRadius={250}
-              shockStrength={5}
+              shockStrength={4}
               resistance={750}
               returnDuration={1.5}/> 
               <Header/>
