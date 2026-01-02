@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import Marquee from "react-fast-marquee";
 import {
   Box,
   Container,
@@ -11,7 +12,32 @@ import {
   Icon,
 } from '@chakra-ui/react';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
-import { Code, Brain, Zap, Award, Target, Rocket } from 'lucide-react';
+import { Code, Brain, Zap, Award, Target, Rocket,UserRound } from 'lucide-react';
+import {
+  DiReact,
+  DiNodejsSmall,
+  DiPython,
+  DiJavascript1,
+  DiMongodb,
+  DiPostgresql,
+  DiGit,
+  DiDocker,
+  DiHtml5,
+  DiCss3,
+  DiSass,
+  DiNpm,
+  DiGithubBadge,
+  DiRedis,
+  DiFirebase,
+  DiVisualstudio,
+  DiBootstrap,
+  DiJqueryLogo,
+  DiLinux,
+  DiTerminal,
+  DiPhotoshop,
+  DiIllustrator,
+} from 'react-icons/di';
+
 
 const MotionBox = motion(Box);
 const MotionHeading = motion(Heading);
@@ -102,6 +128,9 @@ const BentoCard = ({ children, rowSpan, colSpan, index, color = '#14b8a6', accen
       ref={cardRef}
       rowSpan={rowSpan}
       colSpan={colSpan}
+        minW={0}              
+  maxW="100%"           
+  overflow="hidden"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onMouseEnter={() => setIsHovered(true)}
@@ -234,6 +263,7 @@ function About() {
             variants={headerVariants}
             mb={12}
           >
+            {/* Add animations here */}
             <Text as="span" color="brand.500">About Me</Text>
           </MotionHeading>
 
@@ -246,20 +276,20 @@ function About() {
           >
             {/* Top Left - Introduction */}
             <BentoCard rowSpan={2} colSpan={1} index={0} color="#14b8a6" accentColor="#0d9488">
-              <VStack spacing={4} align="stretch" h="100%">
-                <Heading
-                  as="h3"
-                  fontSize={{ base: 'xl', md: '2xl' }}
-                  fontWeight="bold"
-                  color="brand.400"
+              <VStack spacing={3} align="stretch" h="100%">
+                <Box
+                  p={4}
+                  bg="rgba(102, 234, 219, 0.15)"
+                  borderRadius="2xl"
+                  w="fit-content"
                 >
-                  About Me
-                </Heading>
+                  <Icon as={UserRound} boxSize={10} color="#14b8a6" />
+                </Box>
 
                 <Text
                   fontSize={{ base: 'sm', md: 'md' }}
                   color="text.primary"
-                  lineHeight="1.6"
+                  lineHeight="1.5"
                 >
                   Hi! I'm a <Text as="span" color="#14b8a6" fontWeight="600">Computer Science graduate</Text> specializing 
                   in full-stack web development and machine learning. I'm passionate about building 
@@ -323,57 +353,126 @@ function About() {
               </VStack>
             </BentoCard>
 
-            {/* Top Right - Skills */}
-            <BentoCard rowSpan={3} colSpan={1} index={2} color="#f093fb" accentColor="#f5576c">
-              <VStack spacing={4} align="stretch" h="100%">
+           {/* Top Right - Tech Stack */}
+          <BentoCard rowSpan={3} colSpan={1} index={2} color="#f093fb" accentColor="#f5576c">
+            <VStack spacing={3} align="stretch" h="100%" overflow="hidden">
+              <HStack spacing={3} align="center">
                 <Box
-                  p={3}
+                  p={2}
                   bg="rgba(240, 147, 251, 0.15)"
-                  borderRadius="xl"
-                  w="fit-content"
+                  borderRadius="lg"
+                  flexShrink={0}
                 >
-                  <Icon as={Zap} boxSize={8} color="#f093fb" />
+                  <Icon as={Zap} boxSize={6} color="#f093fb" />
                 </Box>
-
+                          
                 <Heading
                   as="h3"
-                  fontSize={{ base: 'xl', md: '2xl' }}
+                  fontSize={{ base: 'lg', md: 'xl' }}
                   fontWeight="bold"
                   color="#f093fb"
                 >
-                  Technical Skills
+                  Tech Stack
                 </Heading>
-
-                <VStack spacing={2} align="stretch">
-                  {[
-                    { name: 'React & Next.js', level: 90 },
-                    { name: 'Node.js', level: 85 },
-                    { name: 'Python & ML', level: 80 }
-                  ].map((skill, i) => (
-                    <Box key={i}>
-                      <HStack justify="space-between" mb={1}>
-                        <Text fontSize="sm" color="text.secondary">
-                          {skill.name}
-                        </Text>
-                        <Text fontSize="xs" color="text.secondary">
-                          {skill.level}%
-                        </Text>
-                      </HStack>
-                      <Box h="4px" bg="rgba(255, 255, 255, 0.1)" borderRadius="full">
-                        <Box
-                          h="100%"
-                          w={`${skill.level}%`}
-                          bg="#f093fb"
-                          borderRadius="full"
-                          transition="width 1s ease-out"
-                        />
+              </HStack>
+                          
+              {/* Marquee Section - Takes remaining space */}
+              <VStack spacing={3} flex={1} justify="center" overflow="hidden">
+                <Box w="100%" overflow="hidden">
+                  <Marquee
+                    gradient={false}
+                    speed={30}
+                    pauseOnHover={true}
+                  >
+                    {[
+                      { icon: DiReact, color: '#61dafb' },
+                      { icon: DiNodejsSmall, color: '#68a063' },
+                      { icon: DiPython, color: '#3776ab' },
+                      { icon: DiJavascript1, color: '#f7df1e' },
+                      { icon: DiMongodb, color: '#47a248' },
+                      { icon: DiPostgresql, color: '#336791' },
+                      { icon: DiGit, color: '#f05032' },
+                      { icon: DiDocker, color: '#2496ed' },
+                    ].map((tech, i) => (
+                      <Box
+                        key={i}
+                        p={2}
+                        bg="rgba(255, 255, 255, 0.05)"
+                        borderRadius="lg"
+                        border="1px solid"
+                        borderColor="rgba(255, 255, 255, 0.1)"
+                        mx={1.5}
+                      >
+                        <Icon as={tech.icon} boxSize={6} color={tech.color} />
                       </Box>
-                    </Box>
-                  ))}
-                </VStack>
+                    ))}
+                  </Marquee>
+                </Box>
+                  
+                <Box w="100%" overflow="hidden">
+                  <Marquee
+                    gradient={false}
+                    speed={30}
+                    direction="right"
+                    pauseOnHover={true}
+                  >
+                    {[
+                      { icon: DiHtml5, color: '#e34f26' },
+                      { icon: DiCss3, color: '#1572b6' },
+                      { icon: DiSass, color: '#cc6699' },
+                      { icon: DiNpm, color: '#cb3837' },
+                      { icon: DiGithubBadge, color: '#fff' },
+                      { icon: DiRedis, color: '#dc382d' },
+                      { icon: DiFirebase, color: '#ffca28' },
+                      { icon: DiVisualstudio, color: '#007acc' },
+                    ].map((tech, i) => (
+                      <Box
+                        key={i}
+                        p={2}
+                        bg="rgba(255, 255, 255, 0.05)"
+                        borderRadius="lg"
+                        border="1px solid"
+                        borderColor="rgba(255, 255, 255, 0.1)"
+                        mx={1.5}
+                      >
+                        <Icon as={tech.icon} boxSize={6} color={tech.color} />
+                      </Box>
+                    ))}
+                  </Marquee>
+                </Box>
+                  
+                <Box w="100%" overflow="hidden">
+                  <Marquee
+                    gradient={false}
+                    speed={30}
+                    pauseOnHover={true}
+                  >
+                    {[
+                      { icon: DiBootstrap, color: '#7952b3' },
+                      { icon: DiJqueryLogo, color: '#0769ad' },
+                      { icon: DiLinux, color: '#fcc624' },
+                      { icon: DiTerminal, color: '#4eaa25' },
+                      { icon: DiPhotoshop, color: '#31a8ff' },
+                      { icon: DiIllustrator, color: '#ff9a00' },
+                    ].map((tech, i) => (
+                      <Box
+                        key={i}
+                        p={2}
+                        bg="rgba(255, 255, 255, 0.05)"
+                        borderRadius="lg"
+                        border="1px solid"
+                        borderColor="rgba(255, 255, 255, 0.1)"
+                        mx={1.5}
+                      >
+                        <Icon as={tech.icon} boxSize={6} color={tech.color} />
+                      </Box>
+                    ))}
+                  </Marquee>
+                </Box>
               </VStack>
-            </BentoCard>
-
+            </VStack>
+          </BentoCard>
+                  
             {/* Bottom Left - Experience */}
             <BentoCard rowSpan={3} colSpan={1} index={3} color="#4facfe" accentColor="#00f2fe">
               <VStack spacing={4} align="stretch" h="100%" justify="center">

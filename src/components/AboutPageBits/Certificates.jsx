@@ -429,7 +429,7 @@ const CertificateDetailModal = ({ isOpen, onClose, cert }) => {
 };
 
 // Main Component
-const Certificates = () => {
+export default function Certificates () {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedCert, setSelectedCert] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
@@ -540,6 +540,7 @@ const Certificates = () => {
         <VStack spacing={12} align="stretch">
           {/* Header Section */}
           <VStack spacing={6} textAlign="center">
+            {/* Add animations here */}
             <Heading
               as="h2"
               fontSize={{ base: '3xl', md: '5xl' }}
@@ -734,4 +735,3 @@ const Certificates = () => {
   );
 };
 
-export default Certificates;
