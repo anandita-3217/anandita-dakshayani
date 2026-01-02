@@ -71,8 +71,10 @@ function ContributionMap()  {
       bg="transparent"
       color="text.primary"
       py={{ base: 16, md: 20 }}
+      px={{ base: 4, md: 8, lg: 16 }}
       position="relative"
       overflow="hidden"
+
     >
       {/* Background decoration */}
       {/* <MotionBox
