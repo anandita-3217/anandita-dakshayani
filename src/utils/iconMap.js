@@ -1,6 +1,6 @@
 // src/utils/iconMap.js
 import { GraduationCap, DatabaseZap } from 'lucide-react';
-import { DiReact, DiJavascript1, DiNodejsSmall } from "react-icons/di";
+import { DiReact, DiJavascript1, DiNodejsSmall,DiPython } from "react-icons/di";
 import { BsGlobe } from "react-icons/bs";
 
 export const iconMap = {
@@ -10,6 +10,7 @@ export const iconMap = {
   DiJavascript1: DiJavascript1,
   DiNodejsSmall: DiNodejsSmall,
   DatabaseZap: DatabaseZap,
+  DiPython: DiPython,
 };
 
 // Helper function to get icon component
