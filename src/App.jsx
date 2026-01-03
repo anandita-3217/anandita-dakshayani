@@ -1,19 +1,20 @@
-import Header from './components/Header'
 import DotGrid from './components/assets/DotGrid/DotGrid'
+import Header from './components/Header'
+import Footer from './components/Footer'
 import NotFound from './components/NotFound'
 import Hero  from './components/Hero'
 import About from './components/About'
 import Skills from './components/Skills'
 import Projects from './components/Projects'
 import Contact from './components/Contact'
-import ContributionMap from './components/ContributionMap'
+// import ContributionMap from './components/ContributionMap'
 import Resume from './components/Resume'
-import Footer from './components/Footer'
 import CommandPalette from './components/CommandPalette'
 import ScrollToTop from './components/ScrollToTop'
 import Learning from './components/Learning';
 import Hobbies from './components/AboutPageBits/Hobbies'
 import Certificates from './components/AboutPageBits/Certificates'
+import ContributionMap from './components/AboutPageBits/ContributionMap'
 import { useColorMode, useDisclosure, useColorModeValue } from '@chakra-ui/react';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
