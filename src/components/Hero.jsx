@@ -17,7 +17,7 @@ import CodingImg from "./assets/Coding.png";
 import { useInView } from 'react-intersection-observer';
 import { useColorMode } from '@chakra-ui/react';
 import TextType from "./ui/TextType";
-import Marquee from "react-fast-marquee";
+
 
 // Create motion components
 const MotionBox = motion.create(Box);
@@ -286,9 +286,6 @@ function Hero() {
                   </HStack>
                 </MotionBox>
               </VStack>
-              <Marquee>
-  I can be a React component, multiple React components, or just some text.
-</Marquee>
             </MotionBox>
           </GridItem>
         </Grid>
