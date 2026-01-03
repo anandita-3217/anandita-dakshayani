@@ -388,11 +388,11 @@ function About() {
                       { icon: DiReact, color: '#61dafb' },
                       { icon: DiNodejsSmall, color: '#68a063' },
                       { icon: DiPython, color: '#3776ab' },
-                      { icon: DiJavascript1, color: '#f7df1e' },
+                      // { icon: DiExpress, color: '#f7df1e' },
                       { icon: DiMongodb, color: '#47a248' },
-                      { icon: DiPostgresql, color: '#336791' },
+                      // { icon: DiPostgresql, color: '#336791' },
                       { icon: DiGit, color: '#f05032' },
-                      { icon: DiDocker, color: '#2496ed' },
+                      // { icon: DiDocker, color: '#2496ed' },
                     ].map((tech, i) => (
                       <Box
                         key={i}
@@ -419,11 +419,12 @@ function About() {
                     {[
                       { icon: DiHtml5, color: '#e34f26' },
                       { icon: DiCss3, color: '#1572b6' },
-                      { icon: DiSass, color: '#cc6699' },
+                      { icon: DiJavascript1, color: '#f7df1e' },
+                      // { icon: DiSass, color: '#cc6699' },
                       { icon: DiNpm, color: '#cb3837' },
                       { icon: DiGithubBadge, color: '#fff' },
-                      { icon: DiRedis, color: '#dc382d' },
-                      { icon: DiFirebase, color: '#ffca28' },
+                      // { icon: DiRedis, color: '#dc382d' },
+                      // { icon: DiFirebase, color: '#ffca28' },
                       { icon: DiVisualstudio, color: '#007acc' },
                     ].map((tech, i) => (
                       <Box
@@ -449,11 +450,11 @@ function About() {
                   >
                     {[
                       { icon: DiBootstrap, color: '#7952b3' },
-                      { icon: DiJqueryLogo, color: '#0769ad' },
+                      // { icon: DiJqueryLogo, color: '#0769ad' },
                       { icon: DiLinux, color: '#fcc624' },
                       { icon: DiTerminal, color: '#4eaa25' },
-                      { icon: DiPhotoshop, color: '#31a8ff' },
-                      { icon: DiIllustrator, color: '#ff9a00' },
+                      // { icon: DiPhotoshop, color: '#31a8ff' },
+                      // { icon: DiIllustrator, color: '#ff9a00' },
                     ].map((tech, i) => (
                       <Box
                         key={i}

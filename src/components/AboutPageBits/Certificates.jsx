@@ -37,7 +37,7 @@ import {
 } from 'lucide-react';
 import { DiReact, DiJavascript1, DiNodejsSmall } from "react-icons/di";
 import { BsGlobe } from "react-icons/bs";
-
+import { useInView } from 'react-intersection-observer';
 const MotionBox = motion(Box);
 
 // Icon mapping helper
@@ -57,6 +57,7 @@ const getIcon = (iconType, color) => {
 
 // Certificate Card Component with Bento styling
 const CertificateCard = ({ cert, onViewDetails }) => {
+
   const cardRef = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -427,9 +428,40 @@ const CertificateDetailModal = ({ isOpen, onClose, cert }) => {
     </Modal>
   );
 };
+const headerVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7 }
+  }
+};
+const statsVariants = {
+  hidden: { opacity: 0, scale: 0.8 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.5, ease: "backOut" }
+  }
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.3
+    }
+  }
+};
 
 // Main Component
 export default function Certificates () {
+    const [headerRef, headerInView] = useInView({ 
+    triggerOnce: false,
+    threshold: 0.2
+  });
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedCert, setSelectedCert] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
@@ -540,60 +572,101 @@ export default function Certificates () {
         <VStack spacing={12} align="stretch">
           {/* Header Section */}
           <VStack spacing={6} textAlign="center">
-            {/* Add animations here */}
-            <Heading
-              as="h2"
-              fontSize={{ base: '3xl', md: '5xl' }}
-              fontWeight="bold"
-              color="text.primary"
+            <MotionBox
+              ref={headerRef}
+              initial="hidden"
+              animate={headerInView ? "visible" : "hidden"}
+              variants={headerVariants}
             >
-              <Text as="span" color="brand.400">Credentials & Achievements</Text>
-            </Heading>
-            
-            <Text
+              <Heading
+                as="h2"
+                fontSize={{ base: '3xl', md: '5xl' }}
+                fontWeight="bold"
+                color="text.primary"
+              >
+                {/* Character-by-character animation */}
+                {"Credentials & Achievements".split('').map((char, i) => (
+                  <motion.span
+                    key={i}
+                    style={{
+                      display: 'inline-block',
+                      transformOrigin: 'center bottom',
+                      perspective: '1000px',
+                      color: char === '&'  ? '#14b8a6' : 'inherit'
+                    }}
+                    initial={{ opacity: 0, y: 50, rotateX: -90 }}
+                    animate={headerInView ? { 
+                      opacity: 1, 
+                      y: 0, 
+                      rotateX: 0 
+                    } : { 
+                      opacity: 0, 
+                      y: 50, 
+                      rotateX: -90 
+                    }}
+                    transition={{
+                      duration: 0.5,
+                      delay: i * 0.03,
+                      ease: [0.23, 1, 0.32, 1]
+                    }}
+                  >
+                    {char === ' ' ? '\u00A0' : char}
+                  </motion.span>
+                ))}
+              </Heading>
+            </MotionBox>
+              
+            <MotionBox
+              as={Text}
               fontSize="lg"
               color="text.secondary"
               maxW="600px"
+              initial={{ opacity: 0, y: 20 }}
+              animate={headerInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
             >
               My academic journey and professional certifications showcasing continuous learning
-            </Text>
-
-            {/* Stats Summary */}
-            <HStack 
-              spacing={{ base: 4, md: 8 }} 
-              pt={4} 
-              flexWrap="wrap" 
+            </MotionBox>
+              
+            {/* Stats Summary with stagger animation */}
+            <MotionBox
+              as={HStack}
+              spacing={{ base: 4, md: 8 }}
+              pt={4}
+              flexWrap="wrap"
               justify="center"
+              initial="hidden"
+              animate={headerInView ? "visible" : "hidden"}
+              variants={staggerContainer}
             >
-              <VStack spacing={1}>
+              <MotionBox as={VStack} spacing={1} variants={statsVariants}>
                 <Heading size="xl" color="brand.400">
                   {stats.total}
                 </Heading>
                 <Text fontSize="sm" color="text.secondary">
                   Total Credentials
                 </Text>
-              </VStack>
+              </MotionBox>
               
-              <VStack spacing={1}>
+              <MotionBox as={VStack} spacing={1} variants={statsVariants}>
                 <Heading size="xl" color="purple.400">
                   {stats.degrees}
                 </Heading>
                 <Text fontSize="sm" color="text.secondary">
                   Degrees
                 </Text>
-              </VStack>
+              </MotionBox>
               
-              <VStack spacing={1}>
+              <MotionBox as={VStack} spacing={1} variants={statsVariants}>
                 <Heading size="xl" color="blue.400">
                   {stats.certifications}
                 </Heading>
                 <Text fontSize="sm" color="text.secondary">
                   Certifications
                 </Text>
-              </VStack>
-            </HStack>
+              </MotionBox>
+            </MotionBox>
           </VStack>
-
           {/* Search and Filter Section */}
           <HStack spacing={4} flexWrap="wrap">
             <Box flex={1} minW="250px">
