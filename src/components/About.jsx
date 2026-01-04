@@ -13,6 +13,7 @@ import {
 } from '@chakra-ui/react';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
 import { Code, Brain, Zap, Award, Target, Rocket,UserRound } from 'lucide-react';
+import { useInView } from 'react-intersection-observer';
 import {
   DiReact,
   DiNodejsSmall,
@@ -215,6 +216,11 @@ const BentoCard = ({ children, rowSpan, colSpan, index, color = '#14b8a6', accen
 
 // About Section Component
 function About() {
+  const [headerRef, headerInView] = useInView({ 
+    triggerOnce: false,
+    threshold: 0.2
+  });
+
   return (
     <Box
       id="about"
@@ -255,7 +261,7 @@ function About() {
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
         >
-          <MotionHeading
+          {/* <MotionHeading
             as="h2"
             fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}
             fontWeight="bold"
@@ -263,9 +269,65 @@ function About() {
             variants={headerVariants}
             mb={12}
           >
-            {/* Add animations here */}
+           
             <Text as="span" color="brand.500">About Me</Text>
-          </MotionHeading>
+          </MotionHeading> */}
+          <VStack spacing={6} textAlign="center" mb={12}>
+  <MotionBox
+    ref={headerRef}
+    initial="hidden"
+    animate={headerInView ? "visible" : "hidden"}
+    variants={headerVariants}
+  >
+    <Heading
+      as="h2"
+      fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}
+      fontWeight="bold"
+      color="text.primary"
+    >
+      {"About Me".split('').map((char, i) => (
+        <motion.span
+          key={i}
+          style={{
+            display: 'inline-block',
+            transformOrigin: 'center bottom',
+            perspective: '1000px',
+            color: char === 'M' || char === 'e' ? '#14b8a6' : 'inherit'
+          }}
+          initial={{ opacity: 0, y: 50, rotateX: -90 }}
+          animate={headerInView ? { 
+            opacity: 1, 
+            y: 0, 
+            rotateX: 0 
+          } : { 
+            opacity: 0, 
+            y: 50, 
+            rotateX: -90 
+          }}
+          transition={{
+            duration: 0.5,
+            delay: i * 0.08,
+            ease: [0.23, 1, 0.32, 1]
+          }}
+        >
+          {char === ' ' ? '\u00A0' : char}
+        </motion.span>
+      ))}
+    </Heading>
+  </MotionBox>
+  
+  <MotionBox
+    as={Text}
+    fontSize="lg"
+    color="text.secondary"
+    maxW="600px"
+    initial={{ opacity: 0, y: 20 }}
+    animate={headerInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+    transition={{ duration: 0.6, delay: 0.8 }}
+  >
+    Full-stack developer and ML enthusiast crafting innovative solutions
+  </MotionBox>
+</VStack>
 
           <Grid
             templateColumns="repeat(3, 1fr)"
@@ -517,6 +579,7 @@ function About() {
             </BentoCard>
 
             {/* Bottom Right - Mission */}
+            {/* Add a copyable email link */}
             <BentoCard rowSpan={2} colSpan={1} index={4} color="#68d391" accentColor="#38a169">
               <VStack spacing={3} align="stretch" h="100%" justify="center">
                 <Box

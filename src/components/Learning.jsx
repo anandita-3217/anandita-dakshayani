@@ -38,19 +38,20 @@ const categories = [
 ];
 
 // Sample learning projects data
+// Shift this to json
 const learningProjects = [
   {
     id: 1,
-    title: 'CSS Animation Playground',
-    description: 'Experimenting with wild CSS animations and transitions. Made things bounce, spin, and dance!',
+    title: 'Noracle',
+    description: 'Ask the chatbot any question and it finds reasons to not do it',
     category: 'web',
-    techStack: ['CSS3', 'HTML5', 'JavaScript'],
+    techStack: ["NextJS", "Vercel"],
     color: '#667eea',
-    emoji: '🎨',
-    learned: ['Advanced CSS animations', 'Keyframes', 'Transform functions'],
-    githubUrl: '#',
+    emoji: '🚫',
+    learned: ['api-wrapper', 'chatbot', 'text-to-speech'],
+    githubUrl: "https://github.com/anandita-3217/Noracle",
     liveUrl: '#',
-    funFact: 'Spent 3 hours making a button bounce perfectly',
+    funFact: 'Spent  3 making a chatbot that will make your blood boil',
   },
   {
     id: 2,
@@ -66,17 +67,17 @@ const learningProjects = [
     funFact: 'My high score is embarrassingly low',
   },
   {
-    id: 3,
-    title: 'Random Color Generator',
-    description: 'Click for random colors! Used it way too much during late-night coding sessions.',
+    id: 3, // Skip this - over done
+    title: 'GitHub User Finder',
+    description: 'Find any github users stats using only their username. ',
     category: 'tool',
-    techStack: ['React', 'Color Theory', 'Hooks'],
-    color: '#68d391',
-    emoji: '🎨',
-    learned: ['Color spaces', 'Clipboard API', 'React hooks'],
+    techStack: ['React', 'GitHub API", "REST API'],
+    color: '#4a6d6da6',
+    emoji: <Github size={40}/>,
+    learned: ['api-integration', 'Clipboard API', 'React hooks'],
     githubUrl: '#',
     liveUrl: '#',
-    funFact: 'Generated 1000+ colors to find "the perfect blue"',
+    funFact: 'Stalk anyone on github TODO: Add a copied to clip board feature',
   },
   {
     id: 4,
@@ -93,16 +94,16 @@ const learningProjects = [
   },
   {
     id: 5,
-    title: 'Typing Speed Tester',
-    description: 'Test your WPM! Learned I type faster when angry at bugs.',
+    title: 'Wordle Clone',
+    description: 'A worlde clone with infinit challeneges that runs locally in your desktop',
     category: 'game',
-    techStack: ['JavaScript', 'Timers', 'DOM'],
+    techStack: ['JavaScript', 'Electron', 'DOM'],
     color: '#f093fb',
     emoji: '⌨️',
-    learned: ['Event handling', 'Time calculations', 'Performance'],
-    githubUrl: '#',
+    learned: ['Event handling', 'Time calculations', 'Performance'], // Imporve this 
+    githubUrl: 'https://github.com/anandita-3217/WordGame',
     liveUrl: '#',
-    funFact: 'Beat my own record while writing this description',
+    funFact: 'I wasted so much time playing this',
   },
   {
     id: 6,
