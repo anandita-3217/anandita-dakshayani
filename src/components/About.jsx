@@ -12,7 +12,7 @@ import {
   Icon,
 } from '@chakra-ui/react';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
-import { Code, Brain, Zap, Award, Target, Rocket,UserRound } from 'lucide-react';
+import { Code, Brain, Zap, Link, UserRound, Rocket,MailOpen, Copy,CheckCheck, ExternalLink  } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
 import {
   DiReact,
@@ -41,9 +41,80 @@ import {
 
 
 const MotionBox = motion(Box);
-const MotionHeading = motion(Heading);
 const MotionGridItem = motion(GridItem);
 
+
+// Copyable Email Component
+const CopyableEmail = () => {
+  const [copied, setCopied] = useState(false);
+  const email = 'ananditad21@gmail.com';
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(email);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <Box
+      as="button"
+      onClick={handleCopy}
+      bg="rgba(255, 255, 255, 0.05)"
+      border="2px solid"
+      borderColor={copied ? '#4facfe' : 'rgba(255, 255, 255, 0.1)'}
+      borderRadius="lg"
+      p={4}
+      cursor="pointer"
+      transition="all 0.3s"
+      position="relative"
+      overflow="hidden"
+      w="100%"
+      _hover={{
+        borderColor: '#4facfe',
+        bg: 'rgba(104, 211, 145, 0.1)',
+        transform: 'translateY(-2px)',
+      }}
+      _active={{
+        transform: 'translateY(0)',
+      }}
+    >
+      {/* Email or Copied Text */}
+      <Box position="relative" zIndex={1}>
+        {!copied ? (
+          <HStack spacing={3} justify="center" flexWrap="wrap">
+            <Icon as={Copy} boxSize={5} color="#4facfe" flexShrink={0} />
+            <Text
+              fontSize={{ base: 'xs', sm: 'sm', md: 'md' }}
+              fontWeight="600"
+              color="text.primary"
+              wordBreak="break-all"
+              textAlign="center"
+            >
+              {email}
+            </Text>
+          </HStack>
+        ) : (
+          <MotionBox
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3 }}
+          >
+            <HStack spacing={2} justify="center">
+              <Icon as={CheckCheck} boxSize={5} color="#4facfe" />
+              <Text
+                fontSize={{ base: 'sm', md: 'md' }}
+                fontWeight="600"
+                color="#4facfe"
+              >
+                Copied to clipboard
+              </Text>
+            </HStack>
+          </MotionBox>
+        )}
+      </Box>
+    </Box>
+  );
+};
 // Animation variants
 const staggerContainer = {
   hidden: { opacity: 0 },
@@ -261,17 +332,7 @@ function About() {
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
         >
-          {/* <MotionHeading
-            as="h2"
-            fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}
-            fontWeight="bold"
-            textAlign="center"
-            variants={headerVariants}
-            mb={12}
-          >
-           
-            <Text as="span" color="brand.500">About Me</Text>
-          </MotionHeading> */}
+        
           <VStack spacing={6} textAlign="center" mb={12}>
   <MotionBox
     ref={headerRef}
@@ -417,15 +478,16 @@ function About() {
 
            {/* Top Right - Tech Stack */}
           <BentoCard rowSpan={3} colSpan={1} index={2} color="#f093fb" accentColor="#f5576c">
-            <VStack spacing={3} align="stretch" h="100%" overflow="hidden">
-              <HStack spacing={3} align="center">
+            <VStack spacing={2} align="stretch" h="100%" overflow="hidden" justify="space-between">
+              <Box flex={1}/>
+              <VStack spacing={3} align="stretch" mb={3}>
                 <Box
                   p={2}
                   bg="rgba(240, 147, 251, 0.15)"
                   borderRadius="lg"
-                  flexShrink={0}
+                  flexShrink={0} w="fit-content"
                 >
-                  <Icon as={Zap} boxSize={6} color="#f093fb" />
+                  <Icon as={Zap} boxSize={9} color="#f093fb" />
                 </Box>
                           
                 <Heading
@@ -436,10 +498,10 @@ function About() {
                 >
                   Tech Stack
                 </Heading>
-              </HStack>
+              </VStack>
                           
               {/* Marquee Section - Takes remaining space */}
-              <VStack spacing={3} flex={1} justify="center" overflow="hidden">
+              <VStack spacing={2} justify="flex-end" overflow="hidden">
                 <Box w="100%" overflow="hidden">
                   <Marquee
                     gradient={false}
@@ -535,51 +597,30 @@ function About() {
               </VStack>
             </VStack>
           </BentoCard>
-                  
-            {/* Bottom Left - Experience */}
+            {/* Bottom Left - Quick Links/Social */}
             <BentoCard rowSpan={3} colSpan={1} index={3} color="#4facfe" accentColor="#00f2fe">
-              <VStack spacing={4} align="stretch" h="100%" justify="center">
+               <VStack spacing={3} align="stretch" h="100%" justify="center">
                 <Box
                   p={3}
-                  bg="rgba(79, 172, 254, 0.15)"
+                  bg="rgba(104, 211, 145, 0.15)"
                   borderRadius="xl"
                   w="fit-content"
                 >
-                  <Icon as={Award} boxSize={8} color="#4facfe" />
+                  <Icon as={MailOpen} boxSize={7} color="#4facfe" />
                 </Box>
 
                 <Heading
                   as="h3"
-                  fontSize={{ base: 'xl', md: '2xl' }}
+                  fontSize={{ base: 'lg', md: 'xl' }}
                   fontWeight="bold"
                   color="#4facfe"
                 >
-                  Experience
+                  Write To Me!
                 </Heading>
-
-                <VStack spacing={3} align="stretch">
-                  <Box>
-                    <Text fontSize="md" fontWeight="600" color="text.primary">
-                      2+ Years
-                    </Text>
-                    <Text fontSize="sm" color="text.secondary">
-                      Building Web Apps
-                    </Text>
-                  </Box>
-                  <Box>
-                    <Text fontSize="md" fontWeight="600" color="text.primary">
-                      10+ Projects
-                    </Text>
-                    <Text fontSize="sm" color="text.secondary">
-                      Completed Successfully
-                    </Text>
-                  </Box>
-                </VStack>
+                    <CopyableEmail/>
               </VStack>
             </BentoCard>
-
-            {/* Bottom Right - Mission */}
-            {/* Add a copyable email link */}
+            {/* Bottom Right - Socials */}
             <BentoCard rowSpan={2} colSpan={1} index={4} color="#68d391" accentColor="#38a169">
               <VStack spacing={3} align="stretch" h="100%" justify="center">
                 <Box
@@ -588,7 +629,7 @@ function About() {
                   borderRadius="xl"
                   w="fit-content"
                 >
-                  <Icon as={Target} boxSize={7} color="#68d391" />
+                  <Icon as={Link} boxSize={7} color="#68d391" />
                 </Box>
 
                 <Heading
@@ -597,16 +638,57 @@ function About() {
                   fontWeight="bold"
                   color="#68d391"
                 >
-                  My Mission
+                  Let's Connect!
                 </Heading>
-
-                <Text
-                  fontSize={{ base: 'sm', md: 'md' }}
-                  color="text.secondary"
-                  lineHeight="1.6"
-                >
-                  Creating elegant, efficient solutions that solve real problems and delight users.
-                </Text>
+                    <HStack spacing={3} justify="flex-start" flexWrap="wrap">
+      {[
+        {
+          name: 'GitHub',
+          icon: () => (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+          ),
+          url: 'https://github.com/anandita-3217',
+          color: '#68d391',
+        },
+        {
+          name: 'LinkedIn',
+          icon: () => (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          ),
+          url: 'https://linkedin.com/in/yourusername',
+          color: '#68d391',
+        },
+      ].map((social, i) => (
+        <Box
+          key={i}
+          as="a"
+          href={social.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          p={3}
+          bg="rgba(255, 255, 255, 0.05)"
+          borderRadius="lg"
+          border="1px solid"
+          borderColor="rgba(255, 255, 255, 0.1)"
+          transition="all 0.3s"
+          cursor="pointer"
+          title={social.name}
+          _hover={{
+            borderColor: social.color,
+            bg: `${social.color}15`,
+            transform: 'scale(1.1))',
+          }}
+        >
+          <Box color={social.color}>
+            <social.icon />
+          </Box>
+        </Box>
+      ))}
+    </HStack>
               </VStack>
             </BentoCard>
           </Grid>
