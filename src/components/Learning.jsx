@@ -71,7 +71,7 @@ const learningProjects = [
     title: 'GitHub User Finder',
     description: 'Find any github users stats using only their username. ',
     category: 'tool',
-    techStack: ['React', 'GitHub API", "REST API'],
+    techStack: ['React', 'GitHub API', 'REST API'],
     color: '#4a6d6da6',
     emoji: <Github size={40}/>,
     learned: ['api-integration', 'Clipboard API', 'React hooks'],
