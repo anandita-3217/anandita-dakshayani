@@ -187,10 +187,13 @@ function Hero() {
                   fontSize={{ base: '3xl', md: '4xl', lg: '5xl', xl: '6xl' }}
                   fontWeight="bold"
                   lineHeight="1.2"
-                  initial= "hidden"
-                  animate={headerInView?"visible":"hidden"}
+                  initial="hidden"
+                  animate={headerInView ? "visible" : "hidden"}
                   variants={fadeInUp}
+                  bgGradient="linear(to-r, #1e40af, #7c3aed,#ec4899)"
+                  bgClip="text"
                 >
+                  
                   <TextType 
                     text={["Hi! I'm Anandita!"]}
                     

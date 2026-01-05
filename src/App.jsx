@@ -38,6 +38,9 @@ const baseColor = useColorModeValue("#d4dadc", '#1a1a1a');
   const gradientColors = useColorModeValue(
     ['#ff0080', '#6366f1', '#3b82f6'], // light mode: pink → indigo → blue
     ['#ff00ff', '#8000ff', '#0080ff']  // dark mode: lighter versions
+    //  ['#1e40af', '#7c3aed','#ec4899'],
+    //  ['#1e40af', '#7c3aed','#ec4899']
+     
   );
 
   return (

@@ -72,7 +72,7 @@ const CopyableEmail = () => {
       w="100%"
       _hover={{
         borderColor: '#4facfe',
-        bg: 'rgba(104, 211, 145, 0.1)',
+        bg: "rgba(79, 172, 254, 0.15)",
         transform: 'translateY(-2px)',
       }}
       _active={{
@@ -603,7 +603,7 @@ function About() {
                <VStack spacing={3} align="stretch" h="100%" justify="center">
                 <Box
                   p={3}
-                  bg="rgba(104, 211, 145, 0.15)"
+                  bg="rgba(79, 172, 254, 0.15)"
                   borderRadius="xl"
                   w="fit-content"
                 >
