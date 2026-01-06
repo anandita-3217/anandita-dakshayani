@@ -575,11 +575,8 @@ function About() {
                   >
                     {[
                       { icon: DiBootstrap, color: '#7952b3' },
-                      // { icon: DiJqueryLogo, color: '#0769ad' },
                       { icon: DiLinux, color: '#fcc624' },
                       { icon: DiTerminal, color: '#4eaa25' },
-                      // { icon: DiPhotoshop, color: '#31a8ff' },
-                      // { icon: DiIllustrator, color: '#ff9a00' },
                     ].map((tech, i) => (
                       <Box
                         key={i}
