@@ -392,14 +392,17 @@ function About() {
 </VStack>
 
           <Grid
-            templateColumns="repeat(3, 1fr)"
-            templateRows="repeat(5, 1fr)"
+            templateColumns={{
+              base: "1fr",
+              md: "repeat(2,1fr)",
+              lg: "repeat(3,1fr)"
+            }}
             gap={4}
             w="100%"
-            h="100vh"
+            autoRows="minmax(200px, auto)"  
           >
             {/* Top Left - Introduction */}
-            <BentoCard rowSpan={2} colSpan={1} index={0} color="#14b8a6" accentColor="#0d9488">
+            <BentoCard rowSpan={{ base: 1, lg: 2 }} colSpan={{ base: 1, md: 1, lg: 1 }}  index={0} color="#14b8a6" accentColor="#0d9488">
               <VStack spacing={3} align="stretch" h="100%">
                 <Box
                   p={4}
@@ -432,9 +435,9 @@ function About() {
                 </HStack>
               </VStack>
             </BentoCard>
-
+{/* For introduction bring down the entire thing  same for write to me and socials move up the tech stack a little bit */}
             {/* Middle - Main Focus */}
-            <BentoCard rowSpan={5} colSpan={1} index={1} color="#667eea" accentColor="#764ba2">
+            <BentoCard rowSpan={{ base: 1, md: 2, lg: 5 }}  colSpan={{ base: 1, md: 2, lg: 1 }}  index={1} color="#667eea" accentColor="#764ba2">
               <VStack spacing={6} align="stretch" h="100%" justify="center">
                 <Box
                   p={4}
@@ -478,7 +481,7 @@ function About() {
             </BentoCard>
 
            {/* Top Right - Tech Stack */}
-          <BentoCard rowSpan={3} colSpan={1} index={2} color="#f093fb" accentColor="#f5576c">
+          <BentoCard rowSpan={{ base: 1, md: 1, lg: 3 }} colSpan={{ base: 1, md: 1, lg: 1 }}  index={2} color="#f093fb" accentColor="#f5576c">
             <VStack spacing={2} align="stretch" h="100%" overflow="hidden" justify="space-between">
               <Box flex={1}/>
               <VStack spacing={3} align="stretch" mb={3}>
@@ -513,11 +516,8 @@ function About() {
                       { icon: DiReact, color: '#61dafb' },
                       { icon: DiNodejsSmall, color: '#68a063' },
                       { icon: DiPython, color: '#3776ab' },
-                      // { icon: DiExpress, color: '#f7df1e' },
                       { icon: DiMongodb, color: '#47a248' },
-                      // { icon: DiPostgresql, color: '#336791' },
                       { icon: DiGit, color: '#f05032' },
-                      // { icon: DiDocker, color: '#2496ed' },
                     ].map((tech, i) => (
                       <Box
                         key={i}
@@ -545,11 +545,8 @@ function About() {
                       { icon: DiHtml5, color: '#e34f26' },
                       { icon: DiCss3, color: '#1572b6' },
                       { icon: DiJavascript1, color: '#f7df1e' },
-                      // { icon: DiSass, color: '#cc6699' },
                       { icon: DiNpm, color: '#cb3837' },
                       { icon: DiGithubBadge, color: '#fff' },
-                      // { icon: DiRedis, color: '#dc382d' },
-                      // { icon: DiFirebase, color: '#ffca28' },
                       { icon: DiVisualstudio, color: '#007acc' },
                     ].map((tech, i) => (
                       <Box
@@ -596,7 +593,7 @@ function About() {
             </VStack>
           </BentoCard>
             {/* Bottom Left - Copyable Email */}
-            <BentoCard rowSpan={3} colSpan={1} index={3} color="#4facfe" accentColor="#00f2fe">
+            <BentoCard rowSpan={{ base: 1, md: 1, lg: 3 }}  colSpan={{ base: 1, md: 1, lg: 1 }}  index={3} color="#4facfe" accentColor="#00f2fe">
                <VStack spacing={3} align="stretch" h="100%" justify="center">
                 <Box
                   p={3}
@@ -619,7 +616,7 @@ function About() {
               </VStack>
             </BentoCard>
             {/* Bottom Right - Socials */}
-            <BentoCard rowSpan={2} colSpan={1} index={4} color="#68d391" accentColor="#38a169">
+            <BentoCard rowSpan={{ base: 1, md: 1, lg: 2 }}  colSpan={{ base: 1, md: 2, lg: 1 }} index={4} color="#68d391" accentColor="#38a169">
               <VStack spacing={3} align="stretch" h="100%" justify="center">
                 <Box
                   p={3}
