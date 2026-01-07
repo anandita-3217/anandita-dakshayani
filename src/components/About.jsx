@@ -391,7 +391,7 @@ function About() {
   </MotionBox>
 </VStack>
 
-          <Grid
+          {/* <Grid
             templateColumns={{
               base: "1fr",
               md: "repeat(2,1fr)",
@@ -400,7 +400,21 @@ function About() {
             gap={4}
             w="100%"
             autoRows="minmax(200px, auto)"  
-          >
+          > */}
+          <Grid
+  templateColumns={{
+    base: "1fr",
+    md: "repeat(2, 1fr)",
+    lg: "repeat(3, 1fr)"
+  }}
+  templateRows={{
+    base: "auto",  // Auto rows on mobile
+    lg: "repeat(5, 1fr)"  // 5 equal rows on desktop like original
+  }}
+  gap={4}
+  w="100%"
+  h={{ base: "auto", lg: "100vh" }}  // Full viewport height only on desktop
+>
             {/* Top Left - Introduction */}
             <BentoCard rowSpan={{ base: 1, lg: 2 }} colSpan={{ base: 1, md: 1, lg: 1 }}  index={0} color="#14b8a6" accentColor="#0d9488">
               <VStack spacing={3} align="stretch" h="100%">
@@ -435,9 +449,8 @@ function About() {
                 </HStack>
               </VStack>
             </BentoCard>
-{/* For introduction bring down the entire thing  same for write to me and socials move up the tech stack a little bit */}
             {/* Middle - Main Focus */}
-            <BentoCard rowSpan={{ base: 1, md: 2, lg: 5 }}  colSpan={{ base: 1, md: 2, lg: 1 }}  index={1} color="#667eea" accentColor="#764ba2">
+            {/* <BentoCard rowSpan={{ base: 1, md: 2, lg: 5 }}  colSpan={{ base: 1, md: 2, lg: 1 }}  index={1} color="#667eea" accentColor="#764ba2">
               <VStack spacing={6} align="stretch" h="100%" justify="center">
                 <Box
                   p={4}
@@ -478,8 +491,134 @@ function About() {
                   ))}
                 </VStack>
               </VStack>
+            </BentoCard> */}
+            {/* Middle Top - Currently Learning */}
+            <BentoCard rowSpan={{ base: 1, md: 1, lg: 3 }}  colSpan={{ base: 1, md: 2, lg: 1 }}  index={1} color="#667eea" accentColor="#764ba2">
+              <VStack spacing={4} align="stretch" h="100%" justify="space-between">
+                <Box
+                  p={3}
+                  bg="rgba(102, 126, 234, 0.15)"
+                  borderRadius="xl"
+                  w="fit-content"
+                >
+                  <Icon as={Brain} boxSize={8} color="#764ba2" />
+                </Box>
+                
+                <VStack spacing={3} align="stretch" flex={1}>
+                  <Heading
+                    as="h3"
+                    fontSize={{ base: 'xl', md: '2xl' }}
+                    fontWeight="bold"
+                    color="#764ba2"
+                  >
+                    🎯 Currently Mastering
+                  </Heading>
+
+                  <Box
+                    p={4}
+                    bg="rgba(102, 126, 234, 0.1)"
+                    borderRadius="xl"
+                    border="1px solid"
+                    borderColor="rgba(102, 126, 234, 0.2)"
+                  >
+                    <VStack spacing={2} align="stretch">
+                      <Text
+                        fontSize={{ base: 'md', md: 'lg' }}
+                        fontWeight="600"
+                        color="#667eea"
+                      >
+                        Deep Learning Specialization
+                      </Text>
+                      <Text
+                        fontSize={{ base: 'xs', md: 'sm' }}
+                        color="text.secondary"
+                      >
+                        by Andrew Ng - Coursera
+                      </Text>
+                    </VStack>
+                  </Box>
+
+                  <Text
+                    fontSize={{ base: 'sm', md: 'md' }}
+                    color="text.primary"
+                    lineHeight="1.6"
+                  >
+                    Building neural networks and computer vision models to solve real-world problems
+                  </Text>
+
+                  <HStack spacing={2} pt={2}>
+                    <Box
+                      px={3}
+                      py={1}
+                      bg="rgba(102, 126, 234, 0.2)"
+                      borderRadius="full"
+                      border="1px solid"
+                      borderColor="rgba(102, 126, 234, 0.3)"
+                    >
+                      <Text fontSize="xs" fontWeight="600" color="#667eea">
+                        📅 Week 3 of 5
+                      </Text>
+                    </Box>
+                  </HStack>
+                </VStack>
+              </VStack>
             </BentoCard>
 
+            {/* Middle Bottom - Monthly Goals */}
+            <BentoCard rowSpan={{ base: 1, md: 1, lg: 2 }}  colSpan={{ base: 1, md: 2, lg: 1 }}  index={5} color="#667eea" accentColor="#764ba2">
+              <VStack spacing={4} align="stretch" h="100%" justify="space-between">
+                <Heading
+                  as="h3"
+                  fontSize={{ base: 'lg', md: 'xl' }}
+                  fontWeight="bold"
+                  color="#764ba2"
+                >
+                  January 2026 Focus
+                </Heading>
+
+                <VStack spacing={3} align="stretch" flex={1}>
+                  {[
+                    { text: 'Complete ML certification', checked: true },
+                    { text: 'Build AI-powered chat application', checked: false },
+                    { text: 'Contribute to React documentation', checked: false },
+                  ].map((goal, i) => (
+                    <HStack key={i} spacing={3} align="flex-start">
+                      <Box
+                        mt={1}
+                        w="18px"
+                        h="18px"
+                        borderRadius="md"
+                        border="2px solid"
+                        borderColor={goal.checked ? "#667eea" : "rgba(255, 255, 255, 0.2)"}
+                        bg={goal.checked ? "rgba(102, 126, 234, 0.2)" : "transparent"}
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                        flexShrink={0}
+                        transition="all 0.3s"
+                      >
+                        {goal.checked && (
+                          <Box
+                            w="8px"
+                            h="8px"
+                            bg="#667eea"
+                            borderRadius="sm"
+                          />
+                        )}
+                      </Box>
+                      <Text
+                        fontSize={{ base: 'sm', md: 'md' }}
+                        color={goal.checked ? "text.secondary" : "text.primary"}
+                        textDecoration={goal.checked ? "line-through" : "none"}
+                        opacity={goal.checked ? 0.7 : 1}
+                      >
+                        {goal.text}
+                      </Text>
+                    </HStack>
+                  ))}
+                </VStack>
+              </VStack>
+            </BentoCard>
            {/* Top Right - Tech Stack */}
           <BentoCard rowSpan={{ base: 1, md: 1, lg: 3 }} colSpan={{ base: 1, md: 1, lg: 1 }}  index={2} color="#f093fb" accentColor="#f5576c">
             <VStack spacing={2} align="stretch" h="100%" overflow="hidden" justify="space-between">
