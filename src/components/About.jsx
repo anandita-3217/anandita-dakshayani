@@ -390,33 +390,22 @@ function About() {
     Full-stack developer and ML enthusiast crafting innovative solutions
   </MotionBox>
 </VStack>
-
-          {/* <Grid
+          <Grid
             templateColumns={{
               base: "1fr",
-              md: "repeat(2,1fr)",
-              lg: "repeat(3,1fr)"
+              md: "repeat(2, 1fr)",
+              lg: "repeat(3, 1fr)"
+            }}
+            templateRows={{
+              base: "auto",
+              lg: "repeat(5, 1fr)"
             }}
             gap={4}
             w="100%"
-            autoRows="minmax(200px, auto)"  
-          > */}
-          <Grid
-  templateColumns={{
-    base: "1fr",
-    md: "repeat(2, 1fr)",
-    lg: "repeat(3, 1fr)"
-  }}
-  templateRows={{
-    base: "auto",  // Auto rows on mobile
-    lg: "repeat(5, 1fr)"  // 5 equal rows on desktop like original
-  }}
-  gap={4}
-  w="100%"
-  h={{ base: "auto", lg: "100vh" }}  // Full viewport height only on desktop
->
+            h={{ base: "auto", lg: "100vh" }}  
+          >
             {/* Top Left - Introduction */}
-            <BentoCard rowSpan={{ base: 1, lg: 2 }} colSpan={{ base: 1, md: 1, lg: 1 }}  index={0} color="#14b8a6" accentColor="#0d9488">
+            <BentoCard rowSpan={{ base: 1, lg: 2 }} colSpan={{ base: 1, md: 2, lg: 1 }}  index={1} color="#14b8a6" accentColor="#0d9488">
               <VStack spacing={3} align="stretch" h="100%">
                 <Box
                   p={4}
@@ -449,49 +438,6 @@ function About() {
                 </HStack>
               </VStack>
             </BentoCard>
-            {/* Middle - Main Focus */}
-            {/* <BentoCard rowSpan={{ base: 1, md: 2, lg: 5 }}  colSpan={{ base: 1, md: 2, lg: 1 }}  index={1} color="#667eea" accentColor="#764ba2">
-              <VStack spacing={6} align="stretch" h="100%" justify="center">
-                <Box
-                  p={4}
-                  bg="rgba(102, 126, 234, 0.15)"
-                  borderRadius="2xl"
-                  w="fit-content"
-                >
-                  <Icon as={Rocket} boxSize={10} color="#764ba2" />
-                </Box>
-                
-                <Heading
-                  as="h3"
-                  fontSize={{ base: '2xl', md: '3xl' }}
-                  fontWeight="bold"
-                  color="#764ba2"
-                >
-                  Building the Future
-                </Heading>
-
-                <Text
-                  fontSize={{ base: 'md', md: 'lg' }}
-                  color="#667eea"
-                  lineHeight="1.7"
-                >
-                  I combine cutting-edge technologies with innovative thinking to create 
-                  solutions that make a real impact. From web applications to AI models, 
-                  every project is an opportunity to push boundaries.
-                </Text>
-
-                <VStack spacing={3} align="stretch">
-                  {['Innovation', 'Quality', 'Impact'].map((value, i) => (
-                    <HStack key={i} spacing={3}>
-                      <Box w="6px" h="6px" bg="#667eea" borderRadius="full" />
-                      <Text fontSize="sm" color="text.secondary">
-                        {value}
-                      </Text>
-                    </HStack>
-                  ))}
-                </VStack>
-              </VStack>
-            </BentoCard> */}
             {/* Middle Top - Currently Learning */}
             <BentoCard rowSpan={{ base: 1, md: 1, lg: 3 }}  colSpan={{ base: 1, md: 2, lg: 1 }}  index={1} color="#667eea" accentColor="#764ba2">
               <VStack spacing={4} align="stretch" h="100%" justify="space-between">
@@ -563,64 +509,97 @@ function About() {
                 </VStack>
               </VStack>
             </BentoCard>
-
-            {/* Middle Bottom - Monthly Goals */}
-            <BentoCard rowSpan={{ base: 1, md: 1, lg: 2 }}  colSpan={{ base: 1, md: 2, lg: 1 }}  index={5} color="#667eea" accentColor="#764ba2">
-              <VStack spacing={4} align="stretch" h="100%" justify="space-between">
+            {/* Top Right - Socials */}
+            <BentoCard rowSpan={{ base: 1, md: 1, lg: 2 }}  colSpan={{ base: 1, md: 2, lg: 1 }} index={5} color="#68d391" accentColor="#38a169">
+              <VStack spacing={3} align="stretch" h="100%" justify="center">
+                <Box
+                  p={3}
+                  bg="rgba(104, 211, 145, 0.15)"
+                  borderRadius="xl"
+                  w="fit-content"
+                >
+                  <Icon as={Link} boxSize={7} color="#68d391" />
+                </Box>
                 <Heading
                   as="h3"
                   fontSize={{ base: 'lg', md: 'xl' }}
                   fontWeight="bold"
-                  color="#764ba2"
+                  color="#68d391"
                 >
-                  January 2026 Focus
+                  Let's Connect!
                 </Heading>
-
-                <VStack spacing={3} align="stretch" flex={1}>
-                  {[
-                    { text: 'Complete ML certification', checked: true },
-                    { text: 'Build AI-powered chat application', checked: false },
-                    { text: 'Contribute to React documentation', checked: false },
-                  ].map((goal, i) => (
-                    <HStack key={i} spacing={3} align="flex-start">
-                      <Box
-                        mt={1}
-                        w="18px"
-                        h="18px"
-                        borderRadius="md"
-                        border="2px solid"
-                        borderColor={goal.checked ? "#667eea" : "rgba(255, 255, 255, 0.2)"}
-                        bg={goal.checked ? "rgba(102, 126, 234, 0.2)" : "transparent"}
-                        display="flex"
-                        alignItems="center"
-                        justifyContent="center"
-                        flexShrink={0}
-                        transition="all 0.3s"
-                      >
-                        {goal.checked && (
-                          <Box
-                            w="8px"
-                            h="8px"
-                            bg="#667eea"
-                            borderRadius="sm"
-                          />
-                        )}
-                      </Box>
-                      <Text
-                        fontSize={{ base: 'sm', md: 'md' }}
-                        color={goal.checked ? "text.secondary" : "text.primary"}
-                        textDecoration={goal.checked ? "line-through" : "none"}
-                        opacity={goal.checked ? 0.7 : 1}
-                      >
-                        {goal.text}
-                      </Text>
-                    </HStack>
-                  ))}
-                </VStack>
+                    <HStack spacing={3} justify="flex-start" flexWrap="wrap">
+                {[
+                  {
+                    name: 'GitHub',
+                    icon: FaGithub,
+                    url: 'https://github.com/anandita-3217',
+                    color: '#68d391',
+                  },
+                  {
+                    name: 'LinkedIn',
+                    icon: FaLinkedin,
+                    url: 'https://linkedin.com/in/yourusername',
+                    color: '#68d391',
+                  },
+                ].map((social, i) => (
+                  <Box
+                    key={i}
+                    as="a"
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    w="40px"
+                    h="40px"
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    bg="rgba(255, 255, 255, 0.05)"
+                    borderRadius="full"
+                    border="1px solid"
+                    borderColor="rgba(255, 255, 255, 0.1)"
+                    transition="all 0.3s"
+                    cursor="pointer"
+                    title={social.name}
+                    _hover={{
+                      borderColor: social.color,
+                      bg: `${social.color}15`,
+                      transform: 'scale(1.15))',
+                    }}
+            >
+          <Box color={social.color}>
+            <social.icon />
+          </Box>
+        </Box>
+      ))}
+    </HStack>
               </VStack>
             </BentoCard>
-           {/* Top Right - Tech Stack */}
-          <BentoCard rowSpan={{ base: 1, md: 1, lg: 3 }} colSpan={{ base: 1, md: 1, lg: 1 }}  index={2} color="#f093fb" accentColor="#f5576c">
+          
+          {/* Bottom Left - Copyable Email */}
+          <BentoCard rowSpan={{ base: 1, md: 1, lg: 3 }}  colSpan={{ base: 1, md: 1, lg: 1 }}  index={4} color="#4facfe" accentColor="#00f2fe">
+            <VStack spacing={3} align="stretch" h="100%" justify="center">
+                <Box
+                  p={3}
+                  bg="rgba(79, 172, 254, 0.15)"
+                  borderRadius="xl"
+                  w="fit-content"
+                >
+                  <Icon as={MailOpen} boxSize={7} color="#4facfe" />
+                </Box>
+                <Heading
+                  as="h3"
+                  fontSize={{ base: 'lg', md: 'xl' }}
+                  fontWeight="bold"
+                  color="#4facfe"
+                >
+                  Write To Me!
+                </Heading>
+                    <CopyableEmail/>
+              </VStack>
+            </BentoCard>
+            {/* Bottom Right - Tech Stack */}
+          <BentoCard rowSpan={{ base: 1, md: 1, lg: 3 }} colSpan={{ base: 1, md: 1, lg: 1 }}  index={0} color="#f093fb" accentColor="#f5576c">
             <VStack spacing={2} align="stretch" h="100%" overflow="hidden" justify="space-between">
               <Box flex={1}/>
               <VStack spacing={3} align="stretch" mb={3}>
@@ -731,96 +710,63 @@ function About() {
               </VStack>
             </VStack>
           </BentoCard>
-            {/* Bottom Left - Copyable Email */}
-            <BentoCard rowSpan={{ base: 1, md: 1, lg: 3 }}  colSpan={{ base: 1, md: 1, lg: 1 }}  index={3} color="#4facfe" accentColor="#00f2fe">
-               <VStack spacing={3} align="stretch" h="100%" justify="center">
-                <Box
-                  p={3}
-                  bg="rgba(79, 172, 254, 0.15)"
-                  borderRadius="xl"
-                  w="fit-content"
-                >
-                  <Icon as={MailOpen} boxSize={7} color="#4facfe" />
-                </Box>
-
+            {/* Bottom Middle - Monthly Goals */}
+            
+            <BentoCard rowSpan={{ base: 1, md: 1, lg: 2 }}  colSpan={{ base: 1, md: 2, lg: 1 }}  index={2} color="#667eea" accentColor="#764ba2">
+              <VStack spacing={4} align="stretch" h="100%" justify="space-between">
                 <Heading
                   as="h3"
                   fontSize={{ base: 'lg', md: 'xl' }}
                   fontWeight="bold"
-                  color="#4facfe"
+                  color="#764ba2"
                 >
-                  Write To Me!
+                  January 2026 Focus
                 </Heading>
-                    <CopyableEmail/>
-              </VStack>
-            </BentoCard>
-            {/* Bottom Right - Socials */}
-            <BentoCard rowSpan={{ base: 1, md: 1, lg: 2 }}  colSpan={{ base: 1, md: 2, lg: 1 }} index={4} color="#68d391" accentColor="#38a169">
-              <VStack spacing={3} align="stretch" h="100%" justify="center">
-                <Box
-                  p={3}
-                  bg="rgba(104, 211, 145, 0.15)"
-                  borderRadius="xl"
-                  w="fit-content"
-                >
-                  <Icon as={Link} boxSize={7} color="#68d391" />
-                </Box>
 
-                <Heading
-                  as="h3"
-                  fontSize={{ base: 'lg', md: 'xl' }}
-                  fontWeight="bold"
-                  color="#68d391"
-                >
-                  Let's Connect!
-                </Heading>
-                    <HStack spacing={3} justify="flex-start" flexWrap="wrap">
-      {[
-        {
-          name: 'GitHub',
-          icon: FaGithub,
-          url: 'https://github.com/anandita-3217',
-          color: '#68d391',
-        },
-        {
-          name: 'LinkedIn',
-          icon: FaLinkedin,
-          url: 'https://linkedin.com/in/yourusername',
-          color: '#68d391',
-        },
-      ].map((social, i) => (
-        <Box
-          key={i}
-          as="a"
-          href={social.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          w="40px"
-          h="40px"
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-          bg="rgba(255, 255, 255, 0.05)"
-          borderRadius="full"
-          border="1px solid"
-          borderColor="rgba(255, 255, 255, 0.1)"
-          transition="all 0.3s"
-          cursor="pointer"
-          title={social.name}
-          _hover={{
-            borderColor: social.color,
-            bg: `${social.color}15`,
-            transform: 'scale(1.15))',
-          }}
-        >
-          <Box color={social.color}>
-            <social.icon />
-          </Box>
-        </Box>
-      ))}
-    </HStack>
+                <VStack spacing={3} align="stretch" flex={1}>
+                  {[
+                    { text: 'Complete ML certification', checked: true },
+                    { text: 'Build AI-powered chat application', checked: false },
+                    { text: 'Contribute to React documentation', checked: false },
+                  ].map((goal, i) => (
+                    <HStack key={i} spacing={3} align="flex-start">
+                      <Box
+                        mt={1}
+                        w="18px"
+                        h="18px"
+                        borderRadius="md"
+                        border="2px solid"
+                        borderColor={goal.checked ? "#667eea" : "rgba(255, 255, 255, 0.2)"}
+                        bg={goal.checked ? "rgba(102, 126, 234, 0.2)" : "transparent"}
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                        flexShrink={0}
+                        transition="all 0.3s"
+                      >
+                        {goal.checked && (
+                          <Box
+                            w="8px"
+                            h="8px"
+                            bg="#667eea"
+                            borderRadius="sm"
+                          />
+                        )}
+                      </Box>
+                      <Text
+                        fontSize={{ base: 'sm', md: 'md' }}
+                        color={goal.checked ? "text.secondary" : "text.primary"}
+                        textDecoration={goal.checked ? "line-through" : "none"}
+                        opacity={goal.checked ? 0.7 : 1}
+                      >
+                        {goal.text}
+                      </Text>
+                    </HStack>
+                  ))}
+                </VStack>
               </VStack>
             </BentoCard>
+            
           </Grid>
         </MotionBox>
       </Container>

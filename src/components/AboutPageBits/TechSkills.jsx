@@ -539,7 +539,7 @@ function CategorySection({ category, skills, color, index }) {
   );
 }
 
-export default function Skills() {
+export default function TechSkills() {
   const [skills, setSkills] = useState({});
   const [loading, setLoading] = useState(true);
   const [headerRef, headerInView] = useInView({

@@ -4,8 +4,8 @@ import Footer from './components/Footer'
 import NotFound from './components/NotFound'
 import Hero  from './components/Hero'
 import About from './components/About'
-// import Skills from './components/Skills'
-import Skills from './components/AboutPageBits/TechSkills'
+import Skills from './components/Skills'
+import TechSkills from './components/AboutPageBits/TechSkills'
 import Projects from './components/Projects'
 import Contact from './components/Contact'
 // import ContributionMap from './components/ContributionMap'
@@ -13,9 +13,10 @@ import Resume from './components/Resume'
 import CommandPalette from './components/CommandPalette'
 import ScrollToTop from './components/ScrollToTop'
 import Learning from './components/Learning';
-import Hobbies from './components/AboutPageBits/Hobbies'
+// import Hobbies from './components/AboutPageBits/Hobbies'
 import Certificates from './components/AboutPageBits/Certificates'
 import ContributionMap from './components/AboutPageBits/ContributionMap'
+import GlassGitHubContributions from './components/options'
 import { useColorMode, useDisclosure, useColorModeValue } from '@chakra-ui/react';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
@@ -85,6 +86,8 @@ const baseColor = useColorModeValue("#d4dadc", '#1a1a1a');
               <Certificates/>
               <Learning/>
               <Skills/>
+              <GlassGitHubContributions/>
+              <TechSkills/>
               <ContributionMap/>
               <Projects /> 
               <Contact />
