@@ -15,8 +15,8 @@ import ScrollToTop from './components/ScrollToTop'
 import Learning from './components/Learning';
 // import Hobbies from './components/AboutPageBits/Hobbies'
 import Certificates from './components/AboutPageBits/Certificates'
-import ContributionMap from './components/AboutPageBits/ContributionMap'
-import GlassGitHubContributions from './components/options'
+// import ContributionMap from './components/AboutPageBits/ContributionMap'
+import ContributionMap from './components/options'
 import { useColorMode, useDisclosure, useColorModeValue } from '@chakra-ui/react';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
@@ -86,9 +86,9 @@ const baseColor = useColorModeValue("#d4dadc", '#1a1a1a');
               <Certificates/>
               <Learning/>
               <Skills/>
-              <GlassGitHubContributions/>
-              <TechSkills/>
               <ContributionMap/>
+              <TechSkills/>
+              {/* <ContributionMap/> */}
               <Projects /> 
               <Contact />
               <Resume/>
