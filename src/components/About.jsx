@@ -12,8 +12,8 @@ import {
   Icon,
 } from '@chakra-ui/react';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
-import { Code, Brain, Zap, Link, UserRound, Rocket,MailOpen, Copy,CheckCheck, ExternalLink  } from 'lucide-react';
-import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import { Code, Brain, Zap, Link, UserRound, ListChecks ,MailOpen, Copy,CheckCheck  } from 'lucide-react';
+import { FaGithub, FaLinkedin, FaTwitter, } from 'react-icons/fa';
 import { useInView } from 'react-intersection-observer';
 import {
   DiReact,
@@ -714,13 +714,21 @@ function About() {
             
             <BentoCard rowSpan={{ base: 1, md: 1, lg: 2 }}  colSpan={{ base: 1, md: 2, lg: 1 }}  index={2} color="#667eea" accentColor="#764ba2">
               <VStack spacing={4} align="stretch" h="100%" justify="space-between">
+                <Box
+                  p={3}
+                  bg="#8b42d544"
+                  borderRadius="xl"
+                  w="fit-content"
+                >
+                  <Icon as={ListChecks} boxSize={7} color="#8b42d5ff" />
+                </Box>
                 <Heading
                   as="h3"
                   fontSize={{ base: 'lg', md: 'xl' }}
                   fontWeight="bold"
-                  color="#764ba2"
+                  color="#8b42d5ff"
                 >
-                  January 2026 Focus
+                  Current Goals
                 </Heading>
 
                 <VStack spacing={3} align="stretch" flex={1}>
