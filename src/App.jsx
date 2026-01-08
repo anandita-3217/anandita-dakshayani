@@ -75,8 +75,8 @@ const baseColor = useColorModeValue("#d4dadc", '#1a1a1a');
   baseColor={baseColor}
   activeColor={gradientColors} 
               proximity={85}
-              shockRadius={250}
-              shockStrength={4}
+              shockRadius={170}
+              shockStrength={3}
               resistance={750}
               returnDuration={1.5}/> 
               <Header/>
