@@ -351,7 +351,7 @@ function ContributionMap()  {
             'ry': 6
           },
           filter: 'brightness(1.5) saturate(1.4) drop-shadow(0 0 3px rgba(20, 184, 166, 0.6))',
-          rotation: 5,
+          // rotation: 5,
           duration: 0.3,
           ease: "back.out(2)"
         });
@@ -366,63 +366,19 @@ function ContributionMap()  {
             'ry': 4
           },
           filter: 'brightness(1) saturate(1)',
-          rotation: 0,
+          // rotation: 0,
           duration: 0.4,
           ease: "power2.out"
         });
       };
 
-      /* OPTION 1: Color Wave Click (Default)
-      const handleClick = () => {
-        gsap.timeline()
-          .to(cell, {
-            attr: { 'stroke-width': 4 },
-            filter: 'brightness(2) hue-rotate(45deg)',
-            duration: 0.15,
-            ease: "power2.out"
-          })
-          .to(cell, {
-            attr: { 'stroke-width': 1 },
-            filter: 'brightness(1) hue-rotate(0deg)',
-            duration: 0.3,
-            ease: "elastic.out(1, 0.5)"
-          });
-      };*/
-
-      /* OPTION 2: Spin Flash - Uncomment to use
-      const handleClick = () => {
-        gsap.timeline()
-          .to(cell, {
-            rotation: 180,
-            opacity: 0.4,
-            duration: 0.2,
-            ease: "power2.in"
-          })
-          .to(cell, {
-            rotation: 360,
-            opacity: 1,
-            duration: 0.2,
-            ease: "power2.out"
-          });
-      };
-      */
-
-      /* OPTION 3: Shake Effect - Uncomment to use
-      const handleClick = () => {
-        gsap.timeline()
-          .to(cell, { x: -2, duration: 0.05 })
-          .to(cell, { x: 2, duration: 0.05 })
-          .to(cell, { x: -2, duration: 0.05 })
-          .to(cell, { x: 2, duration: 0.05 })
-          .to(cell, { x: 0, duration: 0.05 });
-      };
-      */
 
       // OPTION 4: Bounce + Glow - Uncomment to use
-      /*const handleClick = () => {
+      const handleClick = () => {
         gsap.timeline()
           .to(cell, {
             y: -5,
+            
             filter: 'brightness(2) drop-shadow(0 5px 10px rgba(20, 184, 166, 0.8))',
             duration: 0.2,
             ease: "power2.out"
@@ -433,27 +389,7 @@ function ContributionMap()  {
             duration: 0.3,
             ease: "bounce.out"
           });
-      };*/
-      
-
-      //  OPTION 5: Expanding Border Pulse - Uncomment to use
-      const handleClick = () => {
-        gsap.timeline()
-          .to(cell, {
-            attr: { 'stroke-width': 8 },
-            strokeOpacity: 0.8,
-            duration: 0.1,
-            ease: "power2.out"
-          })
-          .to(cell, {
-            attr: { 'stroke-width': 1 },
-            strokeOpacity: 1,
-            duration: 0.4,
-            ease: "power2.out"
-          });
       };
-
-
       cell.addEventListener('mouseenter', handleMouseEnter);
       cell.addEventListener('mouseleave', handleMouseLeave);
       cell.addEventListener('click', handleClick);
@@ -520,7 +456,7 @@ function ContributionMap()  {
         animate="visible"
         variants={headerVariants}
       >
-        <Text as="span" color="brand.400">My GitHub Contributions</Text>
+        <Text fontFamily="Silkscreen"as="span" color="brand.400">My GitHub Contributions</Text>
       </MotionHeading>
 
       <MotionBox
@@ -641,29 +577,6 @@ function ContributionMap()  {
           />
         </Box>
       </MotionBox>
-
-      {/* Optional: Info card below */}
-      <Box
-        mt={6}
-        p={4}
-        borderRadius="lg"
-        bg={colorMode === 'dark' ? 'rgba(20, 184, 166, 0.05)' : 'rgba(20, 184, 166, 0.08)'}
-        border="1px solid"
-        borderColor={colorMode === 'dark' ? 'rgba(20, 184, 166, 0.2)' : 'rgba(20, 184, 166, 0.15)'}
-      >
-        <Text fontSize="sm" fontWeight="semibold" mb={2} color="brand.400">
-          Click Animation Options
-        </Text>
-        <Text fontSize="xs" color="text.secondary" lineHeight="1.7">
-          <strong>Active:</strong> Color Wave (hue shift + elastic bounce)
-          <br />
-          <strong>Try:</strong> Uncomment other options in code:
-          <br />• Spin Flash - 360° rotation with fade
-          <br />• Shake Effect - rapid horizontal vibration
-          <br />• Bounce + Glow - jumps up with drop shadow
-          <br />• Expanding Border - border expands outward
-        </Text>
-      </Box>
     </Box>
   );
 };

@@ -5,6 +5,10 @@ const theme = extendTheme({
     initialColorMode: 'dark',
     useSystemColorMode: false,
   },
+fonts: {
+    heading: `'Orbitron', sans-serif`,
+    body: `'Sora', sans-serif`,
+  },
 
   colors: {
     brand: {

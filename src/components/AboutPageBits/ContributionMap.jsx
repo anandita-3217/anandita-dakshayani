@@ -1,580 +1,584 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Box, Container, Heading, Text, VStack, HStack, Button, Badge } from '@chakra-ui/react';
-import { Flame, Star, Building2, Music, Layers } from 'lucide-react';
+// import React, { useRef, useEffect } from "react";
+// import GitHubCalendar from "react-github-calendar";
+// import {
+//   Box,
+//   Heading,
+//   Text,
+//   useColorMode
+// } from '@chakra-ui/react';
+// import { motion } from 'framer-motion';
+// import { useInView } from "react-intersection-observer";
+// import gsap from 'gsap';
 
-// ============================================
-// CONFIGURATION - PUT YOUR GITHUB USERNAME HERE
-// ============================================
-const GITHUB_USERNAME = ""; // ← CHANGE THIS!
+// const MotionBox = motion.create(Box);
+// const MotionHeading = motion.create(Heading);
 
-// Sample contribution data (in real app, fetch from GitHub API or use react-github-calendar)
-// Each week has 7 days, intensity 0-4 (0=none, 4=most commits)
-const generateSampleData = () => {
-  const weeks = 52;
-  const data = [];
-  for (let w = 0; w < weeks; w++) {
-    const week = [];
-    for (let d = 0; d < 7; d++) {
-      week.push({
-        date: new Date(2024, 0, 1 + w * 7 + d),
-        count: Math.floor(Math.random() * 15), // 0-15 commits
-        level: Math.floor(Math.random() * 5), // 0-4 intensity
-      });
-    }
-    data.push(week);
-  }
-  return data;
-};
+// const headerVariants = {
+//   hidden: { opacity: 0, y: 30 },
+//   visible: { 
+//     opacity: 1, 
+//     y: 0,
+//     transition: { duration: 0.6}
+//   }
+// };
 
-// ============================================
-// STYLE 1: HEATMAP WITH GLOW EFFECTS
-// ============================================
-const GlowHeatmap = ({ data }) => {
-  const getColor = (level) => {
-    const colors = ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'];
-    return colors[level] || colors[0];
-  };
+// const mapVariants = {
+//   hidden: { opacity: 0, y: -40 },
+//   visible: { 
+//     opacity: 1, 
+//     y: 0,
+//     transition: { duration: 0.6}
+//   }
+// };
 
-  return (
-    <Box>
-      <Heading size="md" mb={4} color="brand.400">
-        🌟 Glow Heatmap Style
-      </Heading>
-      <Box 
-        display="flex" 
-        gap="3px" 
-        overflowX="auto" 
-        p={4}
-        bg="rgba(0,0,0,0.3)"
-        borderRadius="xl"
-      >
-        {data.map((week, wi) => (
-          <VStack key={wi} spacing="3px">
-            {week.map((day, di) => (
-              <Box
-                key={`${wi}-${di}`}
-                w="12px"
-                h="12px"
-                bg={getColor(day.level)}
-                borderRadius="sm"
-                transition="all 0.3s"
-                boxShadow={day.level > 2 ? `0 0 ${day.level * 8}px ${getColor(day.level)}` : 'none'}
-                _hover={{
-                  transform: 'scale(1.5)',
-                  boxShadow: `0 0 20px ${getColor(day.level)}`,
-                  zIndex: 10,
-                }}
-                cursor="pointer"
-              />
-            ))}
-          </VStack>
-        ))}
-      </Box>
-    </Box>
-  );
-};
+// function ContributionMap()  {
+//   const { colorMode } = useColorMode();
+//   const [mapRef, mapInView] = useInView({
+//     triggerOnce: false,
+//     threshold: 0.2
+//   });
+//   const calendarRef = useRef(null);
 
-// ============================================
-// STYLE 2: 3D ELEVATED GRAPH
-// ============================================
-const ElevatedGraph = ({ data }) => {
-  return (
-    <Box>
-      <Heading size="md" mb={4} color="purple.400">
-        📊 3D Elevated Graph
-      </Heading>
-      <Box 
-        display="flex" 
-        gap="2px" 
-        overflowX="auto"
-        p={4}
-        bg="rgba(0,0,0,0.3)"
-        borderRadius="xl"
-        style={{ perspective: '1000px' }}
-      >
-        {data.slice(0, 30).map((week, wi) => (
-          <VStack key={wi} spacing="2px" align="stretch">
-            {week.map((day, di) => {
-              const height = day.count * 3 + 10;
-              return (
-                <Box
-                  key={`${wi}-${di}`}
-                  w="14px"
-                  h={`${height}px`}
-                  bg={`hsl(${120 + day.level * 20}, 70%, ${40 + day.level * 10}%)`}
-                  borderRadius="sm"
-                  transition="all 0.3s"
-                  transform="rotateX(45deg)"
-                  transformOrigin="bottom"
-                  boxShadow="0 4px 8px rgba(0,0,0,0.3)"
-                  _hover={{
-                    transform: 'rotateX(45deg) scale(1.2)',
-                    zIndex: 10,
-                  }}
-                  cursor="pointer"
-                />
-              );
-            })}
-          </VStack>
-        ))}
-      </Box>
-    </Box>
-  );
-};
+//   // Setup GSAP hover and click effects
+//   useEffect(() => {
+//     if (!calendarRef.current) return;
 
-// ============================================
-// STYLE 3: NEON CITY SKYLINE
-// ============================================
-const NeonCity = ({ data }) => {
-  return (
-    <Box>
-      <Heading size="md" mb={4} color="cyan.400">
-        🏙️ Neon City Skyline
-      </Heading>
-      <Box 
-        h="200px"
-        display="flex"
-        alignItems="flex-end"
-        gap="1px"
-        overflowX="auto"
-        p={4}
-        bg="linear-gradient(to bottom, #0a0a1a 0%, #1a0a2e 100%)"
-        borderRadius="xl"
-        position="relative"
-      >
-        {/* Stars background */}
-        {[...Array(50)].map((_, i) => (
-          <Box
-            key={i}
-            position="absolute"
-            w="2px"
-            h="2px"
-            bg="white"
-            borderRadius="full"
-            top={`${Math.random() * 60}%`}
-            left={`${Math.random() * 100}%`}
-            opacity={Math.random()}
-          />
-        ))}
-        
-        {data.slice(0, 30).map((week, wi) => (
-          <VStack key={wi} spacing="1px" h="100%" justify="flex-end">
-            {week.map((day, di) => {
-              const height = `${(day.count * 8 + 20)}px`;
-              const glowColor = day.level > 2 ? '#00ffff' : day.level > 1 ? '#ff00ff' : '#4a5568';
-              return (
-                <Box
-                  key={`${wi}-${di}`}
-                  w="8px"
-                  h={height}
-                  bg={glowColor}
-                  borderTopRadius="sm"
-                  transition="all 0.3s"
-                  boxShadow={`0 0 ${day.level * 10}px ${glowColor}, 0 -5px 10px ${glowColor}80`}
-                  _hover={{
-                    transform: 'scaleY(1.2)',
-                    boxShadow: `0 0 30px ${glowColor}`,
-                  }}
-                  cursor="pointer"
-                  position="relative"
-                >
-                  {day.level > 2 && (
-                    <Box
-                      position="absolute"
-                      top="-4px"
-                      left="50%"
-                      transform="translateX(-50%)"
-                      w="2px"
-                      h="4px"
-                      bg={glowColor}
-                      boxShadow={`0 0 10px ${glowColor}`}
-                    />
-                  )}
-                </Box>
-              );
-            })}
-          </VStack>
-        ))}
-      </Box>
-    </Box>
-  );
-};
+//     const cells = calendarRef.current.querySelectorAll('rect[data-level]');
 
-// ============================================
-// STYLE 4: CONSTELLATION MAP
-// ============================================
-const ConstellationMap = ({ data }) => {
-  const canvasRef = useRef(null);
+//     cells.forEach(cell => {
+//       // Store original fill color
+//       const originalFill = cell.getAttribute('fill');
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    
-    const ctx = canvas.getContext('2d');
-    const w = canvas.width;
-    const h = canvas.height;
-    
-    ctx.fillStyle = '#0a0a1a';
-    ctx.fillRect(0, 0, w, h);
-    
-    // Draw connections between days with commits
-    const points = [];
-    data.slice(0, 30).forEach((week, wi) => {
-      week.forEach((day, di) => {
-        if (day.level > 1) {
-          points.push({
-            x: wi * 20 + 20,
-            y: di * 20 + 20,
-            level: day.level,
-          });
-        }
-      });
-    });
-    
-    // Draw lines
-    ctx.strokeStyle = 'rgba(100, 200, 255, 0.2)';
-    ctx.lineWidth = 1;
-    points.forEach((p1, i) => {
-      points.slice(i + 1).forEach(p2 => {
-        const dist = Math.hypot(p2.x - p1.x, p2.y - p1.y);
-        if (dist < 60) {
-          ctx.beginPath();
-          ctx.moveTo(p1.x, p1.y);
-          ctx.lineTo(p2.x, p2.y);
-          ctx.stroke();
-        }
-      });
-    });
-    
-    // Draw stars
-    points.forEach(p => {
-      const size = p.level * 2 + 2;
-      ctx.fillStyle = `hsl(${200 + p.level * 20}, 80%, 70%)`;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
-      ctx.fill();
-      
-      // Glow
-      ctx.shadowBlur = 20;
-      ctx.shadowColor = ctx.fillStyle;
-      ctx.fill();
-      ctx.shadowBlur = 0;
-    });
-  }, [data]);
+//       // Hover in - subtle glow and border
+//       const handleMouseEnter = () => {
+//         gsap.to(cell, {
+//           attr: { 'stroke-width': 2.5 },
+//           filter: 'brightness(1.4) saturate(1.3)',
+//           duration: 0.2,
+//           ease: "power1.out"
+//         });
+//       };
 
-  return (
-    <Box>
-      <Heading size="md" mb={4} color="blue.300">
-        ✨ Constellation Map
-      </Heading>
-      <Box 
-        bg="#0a0a1a" 
-        borderRadius="xl" 
-        p={4}
-        overflowX="auto"
-      >
-        <canvas 
-          ref={canvasRef} 
-          width={700} 
-          height={180}
-          style={{ borderRadius: '8px' }}
-        />
-      </Box>
-    </Box>
-  );
-};
+//       // Hover out - return to normal
+//       const handleMouseLeave = () => {
+//         gsap.to(cell, {
+//           attr: { 'stroke-width': 1 },
+//           filter: 'brightness(1) saturate(1)',
+//           duration: 0.3,
+//           ease: "power1.out"
+//         });
+//       };
 
-// ============================================
-// STYLE 5: FIRE/HEAT VISUALIZATION
-// ============================================
-const FireVisualization = ({ data }) => {
-  const getFireColor = (level) => {
-    const colors = [
-      'linear-gradient(to top, #1a1a2e, #16213e)',
-      'linear-gradient(to top, #0f3460, #16213e)',
-      'linear-gradient(to top, #e94560, #0f3460)',
-      'linear-gradient(to top, #ff6b6b, #e94560)',
-      'linear-gradient(to top, #ffd93d, #ff6b6b)',
-    ];
-    return colors[level] || colors[0];
-  };
+//       // Click - opacity flash effect (no jumping!)
+//       const handleClick = () => {
+//         gsap.timeline()
+//           .to(cell, {
+//             opacity: 0.3,
+//             duration: 0.1,
+//             ease: "power2.out"
+//           })
+//           .to(cell, {
+//             opacity: 1,
+//             duration: 0.2,
+//             ease: "power2.out"
+//           });
+//       };
 
-  return (
-    <Box>
-      <Heading size="md" mb={4} color="orange.400">
-        🔥 Fire Heat Visualization
-      </Heading>
-      <Box 
-        display="flex" 
-        gap="2px" 
-        overflowX="auto"
-        p={4}
-        bg="linear-gradient(to bottom, #0a0a0a, #1a1a1a)"
-        borderRadius="xl"
-      >
-        {data.slice(0, 30).map((week, wi) => (
-          <VStack key={wi} spacing="2px">
-            {week.map((day, di) => (
-              <Box
-                key={`${wi}-${di}`}
-                w="12px"
-                h="12px"
-                bg={getFireColor(day.level)}
-                borderRadius="sm"
-                transition="all 0.3s"
-                position="relative"
-                _hover={{
-                  transform: 'scale(1.3)',
-                  zIndex: 10,
-                }}
-                cursor="pointer"
-                _before={day.level > 2 ? {
-                  content: '""',
-                  position: 'absolute',
-                  top: '-8px',
-                  left: '50%',
-                  transform: 'translateX(-50%)',
-                  w: '4px',
-                  h: '8px',
-                  bg: 'orange.300',
-                  borderRadius: 'full',
-                  filter: 'blur(2px)',
-                  animation: 'flicker 0.5s infinite',
-                } : {}}
-              >
-                {day.level > 3 && (
-                  <Box
-                    position="absolute"
-                    top="-4px"
-                    left="50%"
-                    transform="translateX(-50%)"
-                    w="6px"
-                    h="6px"
-                    bg="yellow.300"
-                    borderRadius="full"
-                    filter="blur(3px)"
-                    opacity={0.8}
-                  />
-                )}
-              </Box>
-            ))}
-          </VStack>
-        ))}
-      </Box>
-    </Box>
-  );
-};
+//       cell.addEventListener('mouseenter', handleMouseEnter);
+//       cell.addEventListener('mouseleave', handleMouseLeave);
+//       cell.addEventListener('click', handleClick);
 
-// ============================================
-// STYLE 6: GLASSMORPHISM TILES
-// ============================================
-const GlassTiles = ({ data }) => {
-  return (
-    <Box>
-      <Heading size="md" mb={4} color="purple.300">
-        💎 Glass Morphism Tiles
-      </Heading>
-      <Box 
-        display="flex" 
-        gap="4px" 
-        overflowX="auto"
-        p={4}
-        bg="linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
-        borderRadius="xl"
-      >
-        {data.slice(0, 30).map((week, wi) => (
-          <VStack key={wi} spacing="4px">
-            {week.map((day, di) => {
-              const opacity = 0.1 + (day.level * 0.15);
-              return (
-                <Box
-                  key={`${wi}-${di}`}
-                  w="14px"
-                  h="14px"
-                  bg={`rgba(255, 255, 255, ${opacity})`}
-                  backdropFilter="blur(10px)"
-                  borderRadius="md"
-                  border="1px solid"
-                  borderColor={`rgba(255, 255, 255, ${opacity + 0.1})`}
-                  transition="all 0.3s"
-                  _hover={{
-                    transform: 'scale(1.4) translateZ(20px)',
-                    bg: 'rgba(255, 255, 255, 0.4)',
-                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
-                    zIndex: 10,
-                  }}
-                  cursor="pointer"
-                  style={{ perspective: '1000px' }}
-                />
-              );
-            })}
-          </VStack>
-        ))}
-      </Box>
-    </Box>
-  );
-};
+//       // Cleanup
+//       cell._gsapCleanup = () => {
+//         cell.removeEventListener('mouseenter', handleMouseEnter);
+//         cell.removeEventListener('mouseleave', handleMouseLeave);
+//         cell.removeEventListener('click', handleClick);
+//       };
+//     });
 
-// ============================================
-// STYLE 7: PIXELATED GAME BOARD
-// ============================================
-const PixelGameBoard = ({ data }) => {
-  return (
-    <Box>
-      <Heading size="md" mb={4} color="green.400">
-        🎮 Pixel Game Board
-      </Heading>
-      <Box 
-        display="flex" 
-        gap="1px" 
-        overflowX="auto"
-        p={4}
-        bg="#0a0a0a"
-        borderRadius="xl"
-        border="4px solid"
-        borderColor="green.500"
-        imageRendering="pixelated"
-      >
-        {data.slice(0, 30).map((week, wi) => (
-          <VStack key={wi} spacing="1px">
-            {week.map((day, di) => {
-              const colors = ['#1a1a1a', '#2d4a2b', '#3d6e3b', '#52a352', '#7bc67b'];
-              return (
-                <Box
-                  key={`${wi}-${di}`}
-                  w="12px"
-                  h="12px"
-                  bg={colors[day.level]}
-                  transition="all 0.1s"
-                  _hover={{
-                    transform: 'scale(1.2)',
-                    boxShadow: `0 0 0 2px ${colors[4]}`,
-                    zIndex: 10,
-                  }}
-                  cursor="pointer"
-                  position="relative"
-                >
-                  {day.level > 3 && (
-                    <Box
-                      position="absolute"
-                      top="2px"
-                      left="2px"
-                      w="4px"
-                      h="4px"
-                      bg="yellow.300"
-                    />
-                  )}
-                </Box>
-              );
-            })}
-          </VStack>
-        ))}
-      </Box>
-    </Box>
-  );
-};
+//     return () => {
+//       cells.forEach(cell => {
+//         if (cell._gsapCleanup) cell._gsapCleanup();
+//       });
+//     };
+//   }, [mapInView]);
 
-// ============================================
-// MAIN COMPONENT WITH SWITCHER
-// ============================================
-export default function GitHubContributions() {
-  const [activeStyle, setActiveStyle] = useState('glow');
-  const sampleData = generateSampleData();
+//   const labels = {
+//     months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+//     weekdays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+//     totalCount: '{{count}} contributions in {{year}}', 
+//     legend: {
+//       less: 'Less',
+//       more: 'More',
+//     },
+//   };
+
+//   // Glassmorphism color schemes with transparency
+//   const lightTheme = [
+//     "rgba(20, 184, 166, 0.08)",   // Level 0
+//     "rgba(20, 184, 166, 0.25)",   // Level 1
+//     "rgba(20, 184, 166, 0.45)",   // Level 2
+//     "rgba(13, 148, 136, 0.65)",   // Level 3
+//     "rgba(13, 148, 136, 0.85)",   // Level 4
+//   ];
   
-  // Calculate streak (mock data)
-  const currentStreak = 127; // ← You can calculate this from real data
-  const longestStreak = 365;
-  const totalContributions = 2847;
+//   const darkTheme = [
+//     "rgba(255, 255, 255, 0.05)",  // Level 0
+//     "rgba(20, 184, 166, 0.25)",   // Level 1
+//     "rgba(20, 184, 166, 0.45)",   // Level 2
+//     "rgba(20, 184, 166, 0.65)",   // Level 3
+//     "rgba(20, 184, 166, 0.85)",   // Level 4
+//   ];
 
-  const styles = [
-    { id: 'glow', name: 'Glow Heatmap', icon: Flame, component: GlowHeatmap },
-    { id: '3d', name: '3D Elevated', icon: Layers, component: ElevatedGraph },
-    { id: 'city', name: 'Neon City', icon: Building2, component: NeonCity },
-    { id: 'constellation', name: 'Constellation', icon: Star, component: ConstellationMap },
-    { id: 'fire', name: 'Fire Heat', icon: Flame, component: FireVisualization },
-    { id: 'glass', name: 'Glass Tiles', icon: Layers, component: GlassTiles },
-    { id: 'pixel', name: 'Pixel Game', icon: Music, component: PixelGameBoard },
+//   return (
+//     <Box
+//       as="section"
+//       id="contributions"
+//       bg="transparent"
+//       color="text.primary"
+//       py={{ base: 16, md: 20 }}
+//       px={{ base: 4, md: 8, lg: 16 }}
+//       position="relative"
+//       overflow="hidden"
+//     >
+//       <MotionHeading
+//         as="h2"
+//         fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}
+//         fontWeight="bold"
+//         textAlign="center"
+//         mb={4}
+//         initial="hidden"
+//         animate="visible"
+//         variants={headerVariants}
+//       >
+//         <Text as="span" color="brand.400">My GitHub Contributions</Text>
+//       </MotionHeading>
+
+//       <MotionBox
+//         ref={mapRef}
+//         initial="hidden"
+//         animate={mapInView ? "visible" : "hidden"}
+//         variants={mapVariants}
+//         textAlign="center"
+//         mb={12}
+//       >
+//         <Text 
+//           color="text.secondary" 
+//           fontSize={{ base: 'sm', md: 'md' }}
+//           maxW="600px"
+//           mx="auto"
+//         >
+//           A visualization of my coding activity on GitHub
+//         </Text>
+//       </MotionBox>
+
+//       {/* GLASSMORPHISM CONTAINER */}
+//       <MotionBox
+//         w="full"
+//         display="flex"
+//         justifyContent="center"
+//         overflowX="auto"
+//         position="relative"
+//         // Glassmorphism styling
+//         bg={colorMode === 'dark' 
+//           ? 'rgba(255, 255, 255, 0.03)' 
+//           : 'rgba(255, 255, 255, 0.7)'}
+//         backdropFilter="blur(20px)"
+//         WebkitBackdropFilter="blur(20px)" // Safari support
+//         borderRadius="xl"
+//         border="1px solid"
+//         borderColor={colorMode === 'dark'
+//           ? 'rgba(255, 255, 255, 0.1)'
+//           : 'rgba(20, 184, 166, 0.2)'}
+//         boxShadow={colorMode === 'dark'
+//           ? '0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+//           : '0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.8)'}
+//         p={{ base: 4, md: 8 }}
+//         _hover={{
+//           borderColor: colorMode === 'dark' ? 'brand.400' : 'brand.500',
+//           boxShadow: colorMode === 'dark'
+//             ? '0 12px 40px rgba(20, 184, 166, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.15)'
+//             : '0 12px 40px rgba(20, 184, 166, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.9)'
+//         }}
+//         transition="all 0.4s ease"
+//       >
+//         {/* Frost texture overlay */}
+//         <Box
+//           position="absolute"
+//           top={0}
+//           left={0}
+//           right={0}
+//           bottom={0}
+//           pointerEvents="none"
+//           opacity={0.3}
+//           borderRadius="xl"
+//           backgroundImage={`radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+//                            radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%)`}
+//         />
+
+//         <Box 
+//           ref={calendarRef}
+//           width="100%" 
+//           display="flex" 
+//           justifyContent="center"
+//           position="relative"
+//           zIndex={1}
+//           sx={{
+//             // ROUNDED SQUARES + GLASS EFFECT
+//             '& rect[data-level]': {
+//               rx: '4px',
+//               ry: '4px',
+//               strokeWidth: '1px',
+//               stroke: colorMode === 'dark' 
+//                 ? 'rgba(255, 255, 255, 0.15)' 
+//                 : 'rgba(20, 184, 166, 0.25)',
+//               cursor: 'pointer',
+//               transformOrigin: 'center center',
+//               transformBox: 'fill-box',
+//               // Remove all CSS transitions - GSAP handles everything
+//             },
+            
+//             // Style labels
+//             '.react-activity-calendar__legend-label': {
+//               color: 'text.secondary',
+//               fontSize: '12px',
+//             },
+//             '.react-activity-calendar__count': {
+//               color: 'text.secondary',
+//               fontWeight: '500',
+//             },
+//             'svg text': {
+//               fill: colorMode === 'dark' 
+//                 ? 'rgba(255, 255, 255, 0.6)' 
+//                 : 'rgba(0, 0, 0, 0.6)',
+//             },
+//             'svg': {
+//               maxWidth: '100%',
+//               height: 'auto',
+//             }
+//           }}
+//         >
+//           <GitHubCalendar
+//             username="anandita-3217"
+//             blockSize={18}        // Larger blocks
+//             blockMargin={5}       // Space between blocks
+//             fontSize={16}
+//             theme={{
+//               light: lightTheme,
+//               dark: darkTheme,
+//             }}
+//             colorScheme={colorMode}
+//             labels={labels}
+//           />
+//         </Box>
+//       </MotionBox>
+
+//       {/* Optional: Info card below */}
+//       <Box
+//         mt={6}
+//         p={4}
+//         borderRadius="lg"
+//         bg={colorMode === 'dark' ? 'rgba(20, 184, 166, 0.05)' : 'rgba(20, 184, 166, 0.08)'}
+//         border="1px solid"
+//         borderColor={colorMode === 'dark' ? 'rgba(20, 184, 166, 0.2)' : 'rgba(20, 184, 166, 0.15)'}
+//         textAlign="center"
+//       >
+//         <Text fontSize="xs" color="text.secondary">
+//           💡 Hover for glow • Click for flash effect
+//         </Text>
+//       </Box>
+//     </Box>
+//   );
+// };
+
+// export default ContributionMap;
+import React, { useRef, useEffect } from "react";
+import GitHubCalendar from "react-github-calendar";
+import {
+  Box,
+  Heading,
+  Text,
+  useColorMode
+} from '@chakra-ui/react';
+import { motion } from 'framer-motion';
+import { useInView } from "react-intersection-observer";
+import gsap from 'gsap';
+
+const MotionBox = motion.create(Box);
+const MotionHeading = motion.create(Heading);
+
+const headerVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.6}
+  }
+};
+
+const mapVariants = {
+  hidden: { opacity: 0, y: -40 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.6}
+  }
+};
+
+function ContributionMap()  {
+  const { colorMode } = useColorMode();
+  const [mapRef, mapInView] = useInView({
+    triggerOnce: false,
+    threshold: 0.2
+  });
+  const calendarRef = useRef(null);
+
+  // Setup GSAP hover and click effects
+  useEffect(() => {
+    if (!calendarRef.current) return;
+
+    const cells = calendarRef.current.querySelectorAll('rect[data-level]');
+
+    cells.forEach(cell => {
+      const originalFill = cell.getAttribute('fill');
+      
+      // Hover in - glow with subtle rotation
+      const handleMouseEnter = () => {
+        gsap.to(cell, {
+          attr: { 
+            'stroke-width': 2.5,
+            'rx': 6, // More rounded on hover
+            'ry': 6
+          },
+          filter: 'brightness(1.5) saturate(1.4) drop-shadow(0 0 3px rgba(20, 184, 166, 0.6))',
+          // rotation: 5,
+          duration: 0.3,
+          ease: "back.out(2)"
+        });
+      };
+
+      // Hover out - return to normal
+      const handleMouseLeave = () => {
+        gsap.to(cell, {
+          attr: { 
+            'stroke-width': 1,
+            'rx': 4,
+            'ry': 4
+          },
+          filter: 'brightness(1) saturate(1)',
+          // rotation: 0,
+          duration: 0.4,
+          ease: "power2.out"
+        });
+      };
+
+
+      // OPTION 4: Bounce + Glow - Uncomment to use
+      const handleClick = () => {
+        gsap.timeline()
+          .to(cell, {
+            y: -5,
+            
+            filter: 'brightness(2) drop-shadow(0 5px 10px rgba(20, 184, 166, 0.8))',
+            duration: 0.2,
+            ease: "power2.out"
+          })
+          .to(cell, {
+            y: 0,
+            filter: 'brightness(1)',
+            duration: 0.3,
+            ease: "bounce.out"
+          });
+      };
+      cell.addEventListener('mouseenter', handleMouseEnter);
+      cell.addEventListener('mouseleave', handleMouseLeave);
+      cell.addEventListener('click', handleClick);
+
+      cell._gsapCleanup = () => {
+        cell.removeEventListener('mouseenter', handleMouseEnter);
+        cell.removeEventListener('mouseleave', handleMouseLeave);
+        cell.removeEventListener('click', handleClick);
+      };
+    });
+
+    return () => {
+      cells.forEach(cell => {
+        if (cell._gsapCleanup) cell._gsapCleanup();
+      });
+    };
+  }, [mapInView]);
+
+  const labels = {
+    months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    weekdays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+    totalCount: '{{count}} contributions in {{year}}', 
+    legend: {
+      less: 'Less',
+      more: 'More',
+    },
+  };
+
+  // Glassmorphism color schemes with transparency
+  const lightTheme = [
+    "rgba(20, 184, 166, 0.08)",   // Level 0
+    "rgba(20, 184, 166, 0.25)",   // Level 1
+    "rgba(20, 184, 166, 0.45)",   // Level 2
+    "rgba(13, 148, 136, 0.65)",   // Level 3
+    "rgba(13, 148, 136, 0.85)",   // Level 4
+  ];
+  
+  const darkTheme = [
+    "rgba(255, 255, 255, 0.05)",  // Level 0
+    "rgba(20, 184, 166, 0.25)",   // Level 1
+    "rgba(20, 184, 166, 0.45)",   // Level 2
+    "rgba(20, 184, 166, 0.65)",   // Level 3
+    "rgba(20, 184, 166, 0.85)",   // Level 4
   ];
 
-  const ActiveComponent = styles.find(s => s.id === activeStyle)?.component || GlowHeatmap;
-
   return (
-    <Container maxW="container.xl" py={12}>
-      <VStack spacing={8} align="stretch">
-        {/* Header */}
-        <VStack spacing={4} textAlign="center">
-          <Heading size="xl" color="text.primary">
-            GitHub Contribution Styles 🎨
-          </Heading>
-          <Text color="text.secondary">
-            Choose your favorite visualization style
-          </Text>
-          
-          {/* Stats */}
-          <HStack spacing={6} pt={4}>
-            <VStack spacing={0}>
-              <Heading size="lg" color="green.400">{currentStreak}</Heading>
-              <Text fontSize="xs" color="text.muted">Day Streak 🔥</Text>
-            </VStack>
-            <VStack spacing={0}>
-              <Heading size="lg" color="purple.400">{longestStreak}</Heading>
-              <Text fontSize="xs" color="text.muted">Longest Streak</Text>
-            </VStack>
-            <VStack spacing={0}>
-              <Heading size="lg" color="blue.400">{totalContributions}</Heading>
-              <Text fontSize="xs" color="text.muted">Total Contributions</Text>
-            </VStack>
-          </HStack>
-        </VStack>
+    <Box
+      as="section"
+      id="contributions"
+      bg="transparent"
+      color="text.primary"
+      py={{ base: 16, md: 20 }}
+      px={{ base: 4, md: 8, lg: 16 }}
+      position="relative"
+      overflow="hidden"
+    >
+      <MotionHeading
+        as="h2"
+        fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}
+        fontWeight="bold"
+        textAlign="center"
+        mb={4}
+        initial="hidden"
+        animate="visible"
+        variants={headerVariants}
+      >
+        <Text fontFamily="Silkscreen"as="span" color="brand.400">My GitHub Contributions</Text>
+      </MotionHeading>
 
-        {/* Style Switcher */}
-        <HStack spacing={3} flexWrap="wrap" justify="center">
-          {styles.map(style => (
-            <Button
-              key={style.id}
-              size="sm"
-              leftIcon={<style.icon size={16} />}
-              onClick={() => setActiveStyle(style.id)}
-              colorScheme={activeStyle === style.id ? 'purple' : 'gray'}
-              variant={activeStyle === style.id ? 'solid' : 'outline'}
-            >
-              {style.name}
-            </Button>
-          ))}
-        </HStack>
-
-        {/* Active Visualization */}
-        <Box>
-          <ActiveComponent data={sampleData} />
-        </Box>
-
-        {/* Integration Instructions */}
-        <Box
-          bg="rgba(255, 255, 255, 0.02)"
-          p={6}
-          borderRadius="xl"
-          border="1px solid"
-          borderColor="rgba(255, 255, 255, 0.1)"
+      <MotionBox
+        ref={mapRef}
+        initial="hidden"
+        animate={mapInView ? "visible" : "hidden"}
+        variants={mapVariants}
+        textAlign="center"
+        mb={12}
+      >
+        <Text 
+          color="text.secondary" 
+          fontSize={{ base: 'sm', md: 'md' }}
+          maxW="600px"
+          mx="auto"
         >
-          <Heading size="sm" mb={3} color="brand.400">
-            📝 How to Use:
-          </Heading>
-          <VStack align="stretch" spacing={2} fontSize="sm" color="text.secondary">
-            <Text>1. Change <Badge>GITHUB_USERNAME</Badge> at the top of the file</Text>
-            <Text>2. Install: <Badge>npm install react-github-calendar</Badge> for real data</Text>
-            <Text>3. Or fetch from GitHub API: <Badge>https://github-contributions-api.jogruber.de/v4/{GITHUB_USERNAME}</Badge></Text>
-            <Text>4. Pick your favorite style and use that component</Text>
-            <Text>5. Uncomment the style you want in your Learning.jsx</Text>
-          </VStack>
-        </Box>
-      </VStack>
+          A visualization of my coding activity on GitHub
+        </Text>
+      </MotionBox>
 
-      <style>{`
-        @keyframes flicker {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.6; }
-        }
-      `}</style>
-    </Container>
+      {/* GLASSMORPHISM CONTAINER */}
+      <MotionBox
+        w="full"
+        display="flex"
+        justifyContent="center"
+        overflowX="auto"
+        position="relative"
+        // Glassmorphism styling
+        bg={colorMode === 'dark' 
+          ? 'rgba(255, 255, 255, 0.03)' 
+          : 'rgba(255, 255, 255, 0.7)'}
+        backdropFilter="blur(20px)"
+        WebkitBackdropFilter="blur(20px)" // Safari support
+        borderRadius="xl"
+        border="1px solid"
+        borderColor={colorMode === 'dark'
+          ? 'rgba(255, 255, 255, 0.1)'
+          : 'rgba(20, 184, 166, 0.2)'}
+        boxShadow={colorMode === 'dark'
+          ? '0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+          : '0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.8)'}
+        p={{ base: 4, md: 8 }}
+        _hover={{
+          borderColor: colorMode === 'dark' ? 'brand.400' : 'brand.500',
+          boxShadow: colorMode === 'dark'
+            ? '0 12px 40px rgba(20, 184, 166, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.15)'
+            : '0 12px 40px rgba(20, 184, 166, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.9)'
+        }}
+        transition="all 0.4s ease"
+      >
+        {/* Frost texture overlay */}
+        <Box
+          position="absolute"
+          top={0}
+          left={0}
+          right={0}
+          bottom={0}
+          pointerEvents="none"
+          opacity={0.3}
+          borderRadius="xl"
+          backgroundImage={`radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                           radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%)`}
+        />
+
+        <Box 
+          ref={calendarRef}
+          width="100%" 
+          display="flex" 
+          justifyContent="center"
+          position="relative"
+          zIndex={1}
+          sx={{
+            // ROUNDED SQUARES + GLASS EFFECT
+            '& rect[data-level]': {
+              rx: '4px',
+              ry: '4px',
+              strokeWidth: '1px',
+              stroke: colorMode === 'dark' 
+                ? 'rgba(255, 255, 255, 0.15)' 
+                : 'rgba(20, 184, 166, 0.25)',
+              cursor: 'pointer',
+              transformOrigin: 'center center',
+              transformBox: 'fill-box',
+              // Remove all CSS transitions - GSAP handles everything
+            },
+            
+            // Style labels
+            '.react-activity-calendar__legend-label': {
+              color: 'text.secondary',
+              fontSize: '12px',
+            },
+            '.react-activity-calendar__count': {
+              color: 'text.secondary',
+              fontWeight: '500',
+            },
+            'svg text': {
+              fill: colorMode === 'dark' 
+                ? 'rgba(255, 255, 255, 0.6)' 
+                : 'rgba(0, 0, 0, 0.6)',
+            },
+            'svg': {
+              maxWidth: '100%',
+              height: 'auto',
+            }
+          }}
+        >
+          <GitHubCalendar
+            username="anandita-3217"
+            blockSize={18}        // Larger blocks
+            blockMargin={5}       // Space between blocks
+            fontSize={16}
+            theme={{
+              light: lightTheme,
+              dark: darkTheme,
+            }}
+            colorScheme={colorMode}
+            labels={labels}
+          />
+        </Box>
+      </MotionBox>
+    </Box>
   );
-}
+};
+
+export default ContributionMap;

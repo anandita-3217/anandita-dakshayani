@@ -425,17 +425,6 @@ function About() {
                   in full-stack web development and machine learning. I'm passionate about building 
                   practical solutions to real-world problems.
                 </Text>
-
-                <HStack spacing={3} pt={2} flexWrap="wrap">
-                  <HStack spacing={1} color="#14b8a6" fontSize="sm">
-                    <Icon as={Code} boxSize={4} />
-                    <Text fontWeight="600">Full-Stack</Text>
-                  </HStack>
-                  <HStack spacing={1} color="#14b8a6" fontSize="sm">
-                    <Icon as={Brain} boxSize={4} />
-                    <Text fontWeight="600">ML</Text>
-                  </HStack>
-                </HStack>
               </VStack>
             </BentoCard>
             {/* Middle Top - Currently Learning */}
