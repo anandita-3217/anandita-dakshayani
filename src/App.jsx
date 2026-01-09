@@ -4,13 +4,13 @@ import Footer from './components/Footer'
 import NotFound from './components/NotFound'
 import Hero  from './components/Hero'
 import About from './components/About'
-import Skills from './components/Skills'
+// import Skills from './components/Skills'
 import Projects from './components/Projects'
 import Contact from './components/Contact'
 import Resume from './components/Resume'
 import CommandPalette from './components/CommandPalette'
 import ScrollToTop from './components/ScrollToTop'
-
+import Skills from './components/options'
 import { useColorMode, useDisclosure, useColorModeValue } from '@chakra-ui/react';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
@@ -18,6 +18,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { motion, useScroll } from 'framer-motion'
 
 import useKeyboardShortcuts from './components/hooks/useKeyboardShortcuts'
+import TechSkills from './components/AboutPageBits/TechSkills'
 function App() {
   const { scrollYProgress } = useScroll();
   const { colorMode, toggleColorMode } = useColorMode();
@@ -75,11 +76,11 @@ const baseColor = useColorModeValue("#d4dadc", '#1a1a1a');
               returnDuration={1.5}/> 
               <Header/>
               <Hero />
+              <TechSkills/>
               <About />
               {/* <Hobbies/> */}
               {/* <Certificates/> */}
               {/* <Learning/> */}
-              <Skills/>
               {/* <ContributionMap/> */}
               <Projects /> 
               <Contact />
