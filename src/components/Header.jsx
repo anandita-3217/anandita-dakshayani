@@ -57,7 +57,7 @@ const Header = () => {
 
   const links = [
     { name: "Home", icon: Home, href: "#hero" },
-    { name: "About", icon: User, href: "#about" },
+    { name: "About", icon: User, href: "/about" },
     { name: "Projects", icon: FolderGit2, href: "#projects" },
     { name: "Contact", icon: Mail, href: "#contact" },
     { name: "Resume", icon: File, href: "#resume" },

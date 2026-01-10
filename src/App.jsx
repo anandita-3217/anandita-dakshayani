@@ -3,6 +3,7 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import NotFound from './components/NotFound'
 import Hero  from './components/Hero'
+import AboutPage from './pages/AboutPage'
 import About from './components/About'
 // import Skills from './components/Skills'
 import Projects from './components/Projects'
@@ -85,6 +86,8 @@ const baseColor = useColorModeValue("#d4dadc", '#1a1a1a');
             </>
           } />
 
+
+          <Route path="/about" element={<AboutPage />} />
           {/* 404 page for all other routes */}
           <Route path="*" element={<NotFound />} />
         </Routes>
