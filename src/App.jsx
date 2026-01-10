@@ -10,7 +10,7 @@ import Contact from './components/Contact'
 import Resume from './components/Resume'
 import CommandPalette from './components/CommandPalette'
 import ScrollToTop from './components/ScrollToTop'
-import Skills from './components/options'
+// import Skills from './components/options'
 import { useColorMode, useDisclosure, useColorModeValue } from '@chakra-ui/react';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
@@ -50,7 +50,7 @@ const baseColor = useColorModeValue("#d4dadc", '#1a1a1a');
           left: 0,
           right: 0,
           height: '4px',
-          background: 'linear-gradient(90deg, #14b8a6, #0d9488)',
+          background: 'linear-gradient(90deg,#059669, #2563eb, #9333ea)',
           transformOrigin: '0%',
           zIndex: 9999,
         }}
@@ -76,12 +76,8 @@ const baseColor = useColorModeValue("#d4dadc", '#1a1a1a');
               returnDuration={1.5}/> 
               <Header/>
               <Hero />
-              <TechSkills/>
               <About />
-              {/* <Hobbies/> */}
-              {/* <Certificates/> */}
-              {/* <Learning/> */}
-              {/* <ContributionMap/> */}
+              <TechSkills/>
               <Projects /> 
               <Contact />
               <Resume/>
@@ -102,11 +98,9 @@ const baseColor = useColorModeValue("#d4dadc", '#1a1a1a');
 // TODO: Better layout design and make it multi page
 // TODO: Make security better for contact form
 // TODO: Have separate pages and have like buttons with tech skills or stuff for like when clicked tge projects with those tech skills in tags will be displayed
-// TODO: MotionBox Works for about, learning, certificates,skills,resume , projects , hero but not for  contribution map, contact and test again and modify the code 
+// TODO: Redo contact and test again and modify the code 
 // TODO: Direct mailto: in contact.jsx is unsafe check that out
-// TODO: add keyboard shortcuts to toggle theme with ctrl+t
 // TODO: migrate resume to a drive link all assets
-// TODO: Change up the look with good fonts
 // TODO: Learn to make routes and setup separate pages 
 // TODO: Add guest book inspired by https://aayushbharti.in/ 
 // TODO: Add bucketlist inspired by https://aayushbharti.in/ 
@@ -115,7 +109,6 @@ const baseColor = useColorModeValue("#d4dadc", '#1a1a1a');
 // TODO: https://aayushbharti.in/about layout for new about page https://reactbits.dev/components/dome-gallery or https://reactbits.dev/components/masonry or https://reactbits.dev/components/stack or https://reactbits.dev/components/circular-gallery for rightside asset
 // TODO: https://reactbits.dev/text-animations/scroll-velocity works for other assets for the home page's about https://reactbits.dev/animations/logo-loop combine these
 // TODO: https://reactbits.dev/text-animations/split-text for separate contact page
-// TODO: https://github.com/aarabii/An/blob/master/src/components/sections/Skills.tsx for having a ribbon of tech skills in the home page> about section> bento box layout one of the bento boxes
   )
 }
 
