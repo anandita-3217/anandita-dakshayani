@@ -6,27 +6,13 @@ import TechSkills from '../components/AboutPageBits/TechSkills';
 import ContributionMap from '../components/AboutPageBits/ContributionMap';
 import Learning from '../components/AboutPageBits/Learning';
 import Resume from '../components/Resume';
-// import CommandPalette from '../components/CommandPalette';
-// import ScrollToTop from './components/ScrollToTop'
-import {BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import DotGrid from '../components/assets/DotGrid/DotGrid';
-import NotFound from '../components/NotFound';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import {motion,useScroll} from 'framer-motion'
-import { useColorMode,useDisclosure, useColorModeValue } from '@chakra-ui/react';
-import useKeyboardShortcuts from '../components/hooks/useKeyboardShortcuts';
+import {  useColorModeValue } from '@chakra-ui/react';
 function AboutPage() {
   const {scrollYProgress}= useScroll();
-  const {colorMode,toggleColorMode} = useColorMode();
-
-  const{
-    isOpen: isCommandPaletteOpen,
-    onOpen: onCommandPaletteOpen,
-    onClose: onCommandPaletteClose
-  } = useDisclosure();
-  // const isLight = colorMode = "light";
-  useKeyboardShortcuts({onCommandPaletteOpen,onThemeToggle:toggleColorMode});
   const gradientColors=useColorModeValue(
 
     ['#ff0080', '#6366f1', '#3b82f6'], // light mode: pink → indigo → blue
@@ -35,7 +21,6 @@ function AboutPage() {
   const baseColor = useColorModeValue("#d4dadc", '#1a1a1a');
   return (
     <>
-    <Router >
       <motion.div
       style={{
         scaleX: scrollYProgress,
@@ -47,9 +32,6 @@ function AboutPage() {
         transformOrigin: '0%',
         zIndex: 9999
       }}/>
-      
-      <Routes>
-        <Route path="/about" element={
           <>
             <DotGrid
             dotSize={5}
@@ -71,10 +53,6 @@ function AboutPage() {
             <Resume />
             <Footer/>
           </>
-        }/>
-        <Route path="*" element={<NotFound/>} />
-      </Routes>
-    </Router>
     </>
   );
 }
