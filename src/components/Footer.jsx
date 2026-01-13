@@ -11,6 +11,7 @@ import {
   Divider,
   Kbd,
   SimpleGrid,
+  Flex
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import {
@@ -60,6 +61,45 @@ export default function Footer() {
               <Text fontSize="sm" color="text.secondary" maxW="xs">
                 Full Stack Developer and Machine Learning Enthusiast.
               </Text>
+              <Flex align="center" gap={2}>
+      <Box position="relative" w="10px" h="10px">
+        {/* Pulsing outer ring */}
+        <MotionBox
+          position="absolute"
+          top="0"
+          left="0"
+          w="100%"
+          h="100%"
+          borderRadius="full"
+          bg="green.400"
+          animate={{
+            scale: [1, 1.8, 1],
+            opacity: [0.6, 0, 0.6],
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        
+        {/* Solid center dot */}
+        <Box
+          position="absolute"
+          top="0"
+          left="0"
+          w="100%"
+          h="100%"
+          borderRadius="full"
+          bg="green.500"
+          boxShadow="0 0 8px rgba(34, 197, 94, 0.6)"
+        />
+      </Box>
+      
+      <Text fontSize="sm" fontWeight="medium" color="text.secondary">
+        Available for work
+      </Text>
+    </Flex>
             </VStack>
 
             {/* Quick Links */}
