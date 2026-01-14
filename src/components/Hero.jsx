@@ -134,12 +134,12 @@ function Hero() {
       />
 
       <Container maxW="container.xl" position="relative" zIndex={1}>
-        <Grid
+        {/* <Grid
           templateColumns={{ base: '1fr', lg: '1fr 1fr' }}
           gap={{ base: 8, lg: 12 }}
           alignItems="center"
-        >
-          <GridItem>
+        > */}
+          {/* <GridItem>
             <MotionBox
               ref={imageRef}
               initial="hidden"
@@ -151,7 +151,7 @@ function Hero() {
               alignItems="center"
               justifyContent="center"
             >
-              {/* Coding Image with float animation */}
+              
               <MotionImage
                 src={CodingImg}
                 alt="Coding"
@@ -168,10 +168,10 @@ function Hero() {
                 filter="drop-shadow(0 10px 30px rgba(20, 184, 166, 0.3))"
               />
             </MotionBox>
-          </GridItem>
+          </GridItem> */}
 
           {/* Right side - Text content */}
-          <GridItem>
+          {/* <GridItem> */}
             <MotionBox
             ref={contentRef}
               initial="hidden"
@@ -291,8 +291,8 @@ function Hero() {
                 </MotionBox>
               </VStack>
             </MotionBox>
-          </GridItem>
-        </Grid>
+          {/* </GridItem> */}
+        {/* </Grid> */}
       </Container>
     </Box>
   );

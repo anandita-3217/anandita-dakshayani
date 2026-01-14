@@ -99,6 +99,7 @@ const baseColor = useColorModeValue("#d4dadc", '#1a1a1a');
 // TODO: https://sarayoussry.com/
 // TODO: https://aayushbharti.in/ -- layout
 // TODO: https://www.muhammadaamirmalik.com/
+//  TODO: should i just get rid of tech skills in  About?
 // TODO: Add a glimplse of github profile 
 // TODO: Better layout design and make it multi page
 // TODO: Make security better for contact form

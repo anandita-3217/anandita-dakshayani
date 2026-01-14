@@ -1411,7 +1411,7 @@ export default function Skills() {
             as="h2"
             fontSize={{ base: "3xl", sm: "4xl", md: "5xl" }}
             fontWeight="bold"
-            bgGradient="gradients.jewel"
+            bgGradient='linear(to-r, #dc2626, #c026d3, #7c3aed)'
             bgClip="text"
             mb={3}
           >
