@@ -212,7 +212,7 @@ function Hero() {
                   fontWeight="500"
                   variants={fadeInUp}
                 >
-                  Full-Stack Developer | ML Enthusiast
+                  Full-Stack Developer | ML Explorer
                 </MotionText>
 
                 {/* Tagline */}

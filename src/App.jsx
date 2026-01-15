@@ -115,6 +115,9 @@ const baseColor = useColorModeValue("#d4dadc", '#1a1a1a');
 // TODO: https://aayushbharti.in/about layout for new about page https://reactbits.dev/components/dome-gallery or https://reactbits.dev/components/masonry or https://reactbits.dev/components/stack or https://reactbits.dev/components/circular-gallery for rightside asset
 // TODO: https://reactbits.dev/text-animations/scroll-velocity works for other assets for the home page's about https://reactbits.dev/animations/logo-loop combine these
 // TODO: https://reactbits.dev/text-animations/split-text for separate contact page
+// TODO: Add  a an AI chatbot or whatev 
+//  Todo: commit today
+
   )
 }
 
