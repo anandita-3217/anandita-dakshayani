@@ -116,7 +116,7 @@ const baseColor = useColorModeValue("#d4dadc", '#1a1a1a');
 // TODO: https://reactbits.dev/text-animations/scroll-velocity works for other assets for the home page's about https://reactbits.dev/animations/logo-loop combine these
 // TODO: https://reactbits.dev/text-animations/split-text for separate contact page
 // TODO: Add  a an AI chatbot or whatev 
-//  Todo: commit today
+// TODO: Maybe add a picture of whatever hubble is seeing in the hobbies section?
 
   )
 }
