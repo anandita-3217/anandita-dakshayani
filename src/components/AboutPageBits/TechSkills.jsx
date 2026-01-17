@@ -1,1796 +1,885 @@
-// import React, { useState, useEffect } from "react";
+// import React from 'react';
 // import {
 //   Box,
-//   Container,
 //   Heading,
-//   Tabs,
-//   TabList,
-//   TabPanels,
-//   Tab,
-//   TabPanel,
-//   Flex,
-//   Badge,
-//   Image,
-//   Spinner,
-//   Center,
-//   transition,
-// } from "@chakra-ui/react";
-// import { motion } from "framer-motion";
-// import { Code } from "lucide-react";
-// import { useInView } from "react-intersection-observer";
-
-// const MotionBox = motion.create(Box);
-// const MotionHeading = motion.create(Heading);
-// const MotionBadge = motion.create(Badge);
-
-// const headerVariants = {
-//   hidden: {opacity:0,y:40},
-//   visible:{
-//     opacity:1,
-//     y:0,
-//     transition: {duration:0.7}
-//   }
-// }
-
-// const skillsVariants = {
-//   hidden: {opacity:0,y:-40},
-//   visible:{
-//     opacity:1,
-//     y:0,
-//     transition: {duration:0.7}
-//   }
-// }
-
-// // TechIcon Component
-// function TechIcon({ logoKey, name, size = 20 }) {
-//   const [imageError, setImageError] = useState(false);
-  
-//   const getIconUrl = () => {
-//     if (logoKey === 'nextjs') return 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg';
-//     if (logoKey === 'huggingface') return 'https://img.icons8.com/?size=100&id=sop9ROXku5bb&format=png&color=000000';
-//     return `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${logoKey}/${logoKey}-original.svg`;
-//   };
-  
-//   const getFallbackUrl = () => {
-//     return `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${logoKey}/${logoKey}-plain.svg`;
-//   };
-  
-//   if (imageError) {
-//     return (
-//       <Box 
-//         display="flex" 
-//         alignItems="center" 
-//         justifyContent="center" 
-//         bg="teal.100" 
-//         color="teal.600"
-//         borderRadius="sm"
-//         w={`${size}px`}
-//         h={`${size}px`}
-//       >
-//         <Code size={size * 0.6} />
-//       </Box>
-//     );
-//   }
-  
-//   return (
-//     <Image 
-//       src={getIconUrl()}
-//       alt={`${name} logo`}
-//       w={`${size}px`}
-//       h={`${size}px`}
-//       objectFit="contain"
-//       onError={(e) => {
-//         const target = e.currentTarget;
-//         if (target.src !== getFallbackUrl()) {
-//           target.src = getFallbackUrl();
-//         } else {
-//           setImageError(true);
-//         }
-//       }}
-//     />
-//   );
-// }
-
-// export default function Skills() {
-//   const [selectedCategory, setSelectedCategory] = useState("Languages");
-//   const [skills, setSkills] = useState({});
-//   const [loading, setLoading] = useState(true);
-//   const [headerRef,headerInView] = useInView({
-//     triggerOnce: false,
-//     threshold: 0.2
-//   });
-//   const [skillsRef,skillsInView] = useInView({
-//     triggerOnce: false,
-//     threshold: 0.2
-//   });
-//   useEffect(() => {
-//     // Load skills from JSON file
-//     fetch('../data/skills.json')
-//       .then(response => response.json())
-//       .then(data => {
-//         setSkills(data.skills || {});
-//         setLoading(false);
-//       })
-//       .catch(error => {
-//         console.error('Error loading skills:', error);
-//         setLoading(false);
-//       });
-//   }, []);
-
-//   const categories = Object.keys(skills);
-
-//   if (loading) {
-//     return (
-//       <Box as="section" py={{ base: 12, md: 24 }}>
-//         <Container maxW="6xl" px={{ base: 4, md: 6 }} mx="auto">
-//           <Center h="400px">
-//             <Spinner size="xl" color="teal.400" thickness="4px" />
-//           </Center>
-//         </Container>
-//       </Box>
-//     );
-//   }
-
-//   return (
-//     <Box as="section" py={{ base: 12, md: 24 }}>
-//       <Container maxW="6xl" px={{ base: 4, md: 6 }} mx="auto">
-//         <MotionBox
-//           initial={{ opacity: 0, y: 20 }}
-//           whileInView={{ opacity: 1, y: 0 }}
-//           viewport={{ once: true }}
-//           transition={{ duration: 0.5 }}
-//           textAlign="center"
-//           mb={8}
-//         >
-//           <MotionHeading
-//             ref={headerRef}
-//             as="h2"
-//             fontSize={{ base: "3xl", sm: "4xl", md: "5xl" }}
-//             fontWeight="bold"
-//             letterSpacing="tight"
-//             initial="hidden"
-//             animate={headerInView ? "visible" : "hidden"}
-//             variants={headerVariants}
-//             color="#14b8a6"
-//             mb={4}
-//           >
-//             Technical Skills
-//           </MotionHeading>
-//         </MotionBox>
-
-//         <MotionBox
-//           viewport={{ once: true }}
-//           mt={{ base: 8, md: 12 }}
-//           ref={skillsRef}
-//           initial="hidden"
-//           animate={skillsInView?"visible":"hidden"}
-//           variants={skillsVariants}
-//         >
-//           <Tabs
-//             variant="unstyled"
-//             index={categories.indexOf(selectedCategory)}
-//             onChange={(index) => setSelectedCategory(categories[index])}
-//           >
-//             <Flex justify="center" mb={8}>
-//               <TabList
-//                 display="flex"
-//                 flexWrap="wrap"
-//                 gap={2}
-//                 h="auto"
-//                 bg="transparent"
-//                 backdropFilter="blur(10px)"
-//                 p={1}
-//                 borderRadius="lg"
-//               >
-//                 {categories.map((category, i) => (
-//                   <MotionBox
-//                     key={category}
-//                     initial={{ opacity: 0, y: -10 }}
-//                     animate={{ opacity: 1, y: 0 }}
-//                     transition={{
-//                       delay: i * 0.05,
-//                       duration: 0.3,
-//                     }}
-//                     as={motion.div}
-//                     whileHover={{ scale: 1.05 }}
-//                     whileTap={{ scale: 0.95 }}
-//                   >
-//                     <Tab
-//                       px={4}
-//                       py={2}
-//                       fontSize="sm"
-//                       fontWeight="medium"
-//                       borderRadius="md"
-//                       color="text.secondary"
-//                       bg="teal.900"
-//                       _selected={{
-//                         bg: "teal.400",
-//                         color: "text.primary",
-//                         boxShadow: "sm",
-//                       }}
-//                       transition="all 0.2s"
-//                     >
-//                       {category}
-//                     </Tab>
-//                   </MotionBox>
-//                 ))}
-//               </TabList>
-//             </Flex>
-
-//             <TabPanels>
-//               {categories.map((category) => (
-//                 <TabPanel key={category} p={0}>
-//                   <Box
-//                     bg="transparent"
-//                     backdropFilter="blur(10px)"
-//                     borderRadius="lg"
-//                     p={6}
-//                   >
-//                     <Flex
-//                       flexWrap="wrap"
-//                       gap={3}
-//                       justify="center"
-//                     >
-//                       {skills[category]?.map((skill, index) => (
-//                         <MotionBadge
-//                           key={`${category}-${skill.name}`}
-//                           initial={{ opacity: 0, y: 20, scale: 0.8 }}
-//                           animate={{ opacity: 1, y: 0, scale: 1 }}
-//                           whileHover={{ scale: 1.05 }}
-//                           _hover={{ bg: "bg.hover" }}
-//                           transition={{ 
-//                             duration: 0.4, 
-//                             delay: index * 0.1,
-//                             ease: "easeOut"
-//                           }}
-//                           fontSize="sm"
-//                           py={2}
-//                           px={4}
-//                           bg="teal.900"
-//                           border="1px solid"
-//                           borderColor="border.primary"
-//                           borderRadius="md"
-//                           display="flex"
-//                           alignItems="center"
-//                           gap={2}
-//                           cursor="pointer"
-//                         >
-//                           <TechIcon logoKey={skill.logoKey} name={skill.name} size={20} />
-//                           {skill.name}
-//                         </MotionBadge>
-//                       ))}
-//                     </Flex>
-//                   </Box>
-//                 </TabPanel>
-//               ))}
-//             </TabPanels>
-//           </Tabs>
-//         </MotionBox>
-//       </Container>
-//     </Box>
-//   );
-// }
-
-// import React, { useState, useEffect, useRef } from "react";
-// import {
-//   Box,
-//   Container,
-//   Heading,
-//   VStack,
+//   Text,
+//   SimpleGrid,
 //   HStack,
-//   Badge,
-//   Image,
-//   Spinner,
-//   Center,
+//   VStack,
 //   Icon,
-//   Text,
-//   Grid,
-// } from "@chakra-ui/react";
-// import { motion, useMotionValue, useTransform } from "framer-motion";
-// import { Code, Sparkles } from "lucide-react";
-// import { useInView } from "react-intersection-observer";
-
-// const MotionBox = motion(Box);
-// const MotionHeading = motion(Heading);
-// const MotionBadge = motion(Badge);
-
-// const headerVariants = {
-//   hidden: { opacity: 0, y: 40 },
-//   visible: {
-//     opacity: 1,
-//     y: 0,
-//     transition: { duration: 0.7 }
-//   }
-// };
-
-// // Category colors with gradients
-// const categoryColors = {
-//   Languages: { color: '#f093fb', gradient: 'linear(to-r, #f093fb, #f5576c)' },
-//   Frameworks: { color: '#667eea', gradient: 'linear(to-r, #667eea, #764ba2)' },
-//   Tools: { color: '#4facfe', gradient: 'linear(to-r, #4facfe, #00f2fe)' },
-//   Databases: { color: '#68d391', gradient: 'linear(to-r, #68d391, #38a169)' },
-//   Cloud: { color: '#fbd38d', gradient: 'linear(to-r, #fbd38d, #ed8936)' },
-// };
-
-// // TechIcon Component
-// function TechIcon({ logoKey, name, size = 24 }) {
-//   const [imageError, setImageError] = useState(false);
-  
-//   const getIconUrl = () => {
-//     if (logoKey === 'nextjs') return 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg';
-//     if (logoKey === 'huggingface') return 'https://img.icons8.com/?size=100&id=sop9ROXku5bb&format=png&color=000000';
-//     return `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${logoKey}/${logoKey}-original.svg`;
-//   };
-  
-//   const getFallbackUrl = () => {
-//     return `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${logoKey}/${logoKey}-plain.svg`;
-//   };
-  
-//   if (imageError) {
-//     return (
-//       <Box 
-//         display="flex" 
-//         alignItems="center" 
-//         justifyContent="center" 
-//         bg="rgba(20, 184, 166, 0.2)" 
-//         color="brand.400"
-//         borderRadius="md"
-//         w={`${size}px`}
-//         h={`${size}px`}
-//       >
-//         <Code size={size * 0.6} />
-//       </Box>
-//     );
-//   }
-  
-//   return (
-//     <Image 
-//       src={getIconUrl()}
-//       alt={`${name} logo`}
-//       w={`${size}px`}
-//       h={`${size}px`}
-//       objectFit="contain"
-//       filter="drop-shadow(0 0 8px rgba(255, 255, 255, 0.3))"
-//       onError={(e) => {
-//         const target = e.currentTarget;
-//         if (target.src !== getFallbackUrl()) {
-//           target.src = getFallbackUrl();
-//         } else {
-//           setImageError(true);
-//         }
-//       }}
-//     />
-//   );
-// }
-
-// // Skill Card with 3D tilt
-// function SkillCard({ skill, index, categoryColor }) {
-//   const cardRef = useRef(null);
-//   const [isHovered, setIsHovered] = useState(false);
-
-//   const x = useMotionValue(0);
-//   const y = useMotionValue(0);
-//   const rotateX = useTransform(y, [-100, 100], [5, -5]);
-//   const rotateY = useTransform(x, [-100, 100], [-5, 5]);
-
-//   const handleMouseMove = (e) => {
-//     if (!cardRef.current) return;
-//     const rect = cardRef.current.getBoundingClientRect();
-//     const centerX = rect.left + rect.width / 2;
-//     const centerY = rect.top + rect.height / 2;
-//     x.set(e.clientX - centerX);
-//     y.set(e.clientY - centerY);
-//   };
-
-//   const handleMouseLeave = () => {
-//     x.set(0);
-//     y.set(0);
-//     setIsHovered(false);
-//   };
-
-//   return (
-//     <MotionBox
-//       ref={cardRef}
-//       onMouseMove={handleMouseMove}
-//       onMouseLeave={handleMouseLeave}
-//       onMouseEnter={() => setIsHovered(true)}
-//       initial={{ opacity: 0, y: 20, scale: 0.9 }}
-//       animate={{ opacity: 1, y: 0, scale: 1 }}
-//       style={{
-//         rotateX,
-//         rotateY,
-//         transformStyle: 'preserve-3d',
-//       }}
-//       transition={{
-//         duration: 0.4,
-//         delay: index * 0.05,
-//       }}
-//     >
-//       <Box
-//         bg="rgba(255, 255, 255, 0.02)"
-//         backdropFilter="blur(20px)"
-//         borderRadius="xl"
-//         border="2px solid"
-//         borderColor={isHovered ? categoryColor : 'rgba(255, 255, 255, 0.08)'}
-//         p={4}
-//         cursor="pointer"
-//         position="relative"
-//         overflow="hidden"
-//         transition="all 0.3s cubic-bezier(0.23, 1, 0.32, 1)"
-//         boxShadow={isHovered ? `0 20px 60px ${categoryColor}40` : 'none'}
-//         _hover={{
-//           borderColor: categoryColor,
-//         }}
-//       >
-//         {/* Gradient background */}
-//         <Box
-//           position="absolute"
-//           top="-50px"
-//           right="-50px"
-//           w="150px"
-//           h="150px"
-//           bgGradient={`radial(circle, ${categoryColor}, transparent)`}
-//           opacity={isHovered ? 0.3 : 0.1}
-//           transition="opacity 0.3s"
-//           pointerEvents="none"
-//           filter="blur(30px)"
-//         />
-
-//         {/* Shimmer effect */}
-//         <Box
-//           position="absolute"
-//           top={0}
-//           left="-100%"
-//           w="50%"
-//           h="100%"
-//           bgGradient="linear(to-r, transparent, rgba(255,255,255,0.1), transparent)"
-//           transform={isHovered ? 'translateX(300%)' : 'translateX(0)'}
-//           transition="transform 0.6s"
-//           pointerEvents="none"
-//         />
-
-//         <HStack spacing={3} position="relative" zIndex={1}>
-//           <Box
-//             p={2}
-//             bg={`${categoryColor}15`}
-//             borderRadius="lg"
-//             transition="transform 0.3s"
-//             transform={isHovered ? 'scale(1.1) rotate(5deg)' : 'scale(1)'}
-//           >
-//             <TechIcon logoKey={skill.logoKey} name={skill.name} size={24} />
-//           </Box>
-//           <Text
-//             fontSize="sm"
-//             fontWeight="600"
-//             color="text.primary"
-//           >
-//             {skill.name}
-//           </Text>
-//         </HStack>
-//       </Box>
-//     </MotionBox>
-//   );
-// }
-
-// // Category Section
-// function CategorySection({ category, skills, color, index }) {
-//   const [ref, inView] = useInView({
-//     triggerOnce: false,
-//     threshold: 0.1
-//   });
-
-//   return (
-//     <MotionBox
-//       ref={ref}
-//       initial={{ opacity: 0, x: -30 }}
-//       animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-//       transition={{ duration: 0.6, delay: index * 0.1 }}
-//     >
-//       <VStack align="stretch" spacing={4}>
-//         {/* Category Header */}
-//         <HStack spacing={3}>
-//           <Box
-//             w="40px"
-//             h="2px"
-//             bgGradient={categoryColors[category]?.gradient || 'linear(to-r, brand.400, purple.400)'}
-//           />
-//           <Heading
-//             size="md"
-//             color={color}
-//             display="flex"
-//             alignItems="center"
-//             gap={2}
-//           >
-//             {category}
-//             <Icon as={Sparkles} boxSize={4} />
-//           </Heading>
-//           <Badge
-//             colorScheme="purple"
-//             fontSize="xs"
-//             px={2}
-//             py={1}
-//             borderRadius="full"
-//           >
-//             {skills.length}
-//           </Badge>
-//         </HStack>
-
-//         {/* Skills Grid */}
-//         <Grid
-//           templateColumns={{
-//             base: '1fr',
-//             sm: 'repeat(2, 1fr)',
-//             md: 'repeat(3, 1fr)',
-//             lg: 'repeat(4, 1fr)',
-//           }}
-//           gap={3}
-//         >
-//           {skills.map((skill, i) => (
-//             <SkillCard
-//               key={`${category}-${skill.name}`}
-//               skill={skill}
-//               index={i}
-//               categoryColor={color}
-//             />
-//           ))}
-//         </Grid>
-//       </VStack>
-//     </MotionBox>
-//   );
-// }
-
-// export default function TechSkills() {
-//   const [skills, setSkills] = useState({});
-//   const [loading, setLoading] = useState(true);
-//   const [headerRef, headerInView] = useInView({
-//     triggerOnce: false,
-//     threshold: 0.2
-//   });
-
-//   useEffect(() => {
-//     fetch('../data/skills.json')
-//       .then(response => response.json())
-//       .then(data => {
-//         setSkills(data.skills || {});
-//         setLoading(false);
-//       })
-//       .catch(error => {
-//         console.error('Error loading skills:', error);
-//         setLoading(false);
-//       });
-//   }, []);
-
-//   const categories = Object.keys(skills);
-
-//   if (loading) {
-//     return (
-//       <Box as="section" py={{ base: 12, md: 24 }} bg="transparent">
-//         <Container maxW="container.xl">
-//           <Center h="400px">
-//             <Spinner size="xl" color="brand.400" thickness="4px" />
-//           </Center>
-//         </Container>
-//       </Box>
-//     );
-//   }
-
-//   return (
-//     <Box 
-//       as="section" 
-//       py={{ base: 12, md: 24 }}
-//       bg="transparent"
-//       position="relative"
-//       overflow="hidden"
-//     >
-//       {/* Background decoration */}
-//       <MotionBox
-//         position="absolute"
-//         top="10%"
-//         right="5%"
-//         w="300px"
-//         h="300px"
-//         bgGradient="radial(circle, purple.400, transparent)"
-//         opacity={0.1}
-//         filter="blur(80px)"
-//         animate={{
-//           scale: [1, 1.2, 1],
-//           opacity: [0.1, 0.15, 0.1]
-//         }}
-//         transition={{
-//           duration: 8,
-//           repeat: Infinity,
-//           ease: "easeInOut"
-//         }}
-//       />
-
-//       <Container maxW="container.xl">
-//         {/* Header */}
-//         <VStack spacing={6} textAlign="center" mb={16}>
-//           <MotionBox
-//             ref={headerRef}
-//             initial="hidden"
-//             animate={headerInView ? "visible" : "hidden"}
-//             variants={headerVariants}
-//           >
-//             <Heading
-//               as="h2"
-//               fontSize={{ base: '3xl', md: '5xl' }}
-//               fontWeight="bold"
-//               mb={3}
-//             >
-//               {"Technical Arsenal".split('').map((char, i) => (
-//                 <motion.span
-//                   key={i}
-//                   style={{
-//                     display: 'inline-block',
-//                     transformOrigin: 'center bottom',
-//                     perspective: '1000px',
-//                   }}
-//                   initial={{ opacity: 0, y: 50, rotateX: -90 }}
-//                   animate={headerInView ? { 
-//                     opacity: 1, 
-//                     y: 0, 
-//                     rotateX: 0 
-//                   } : { 
-//                     opacity: 0, 
-//                     y: 50, 
-//                     rotateX: -90 
-//                   }}
-//                   transition={{
-//                     duration: 0.5,
-//                     delay: i * 0.03,
-//                     ease: [0.23, 1, 0.32, 1]
-//                   }}
-//                 >
-//                   <Box
-//                     as="span"
-//                     bgGradient="linear(to-r, #059669, #2563eb, #9333ea)"
-//                     bgClip="text"
-//                   >
-//                     {char === ' ' ? '\u00A0' : char}
-//                   </Box>
-//                 </motion.span>
-//               ))}
-//             </Heading>
-
-//             <Text
-//               fontSize="lg"
-//               color="text.secondary"
-//               maxW="600px"
-//               mx="auto"
-//             >
-//               Tools and technologies I use to bring ideas to life
-//             </Text>
-//           </MotionBox>
-
-//           {/* Stats */}
-//           <HStack spacing={8} pt={4}>
-//             <VStack spacing={0}>
-//               <Heading size="xl" color="brand.400">
-//                 {Object.values(skills).flat().length}
-//               </Heading>
-//               <Text fontSize="sm" color="text.muted">
-//                 Total Skills
-//               </Text>
-//             </VStack>
-//             <VStack spacing={0}>
-//               <Heading size="xl" color="purple.400">
-//                 {categories.length}
-//               </Heading>
-//               <Text fontSize="sm" color="text.muted">
-//                 Categories
-//               </Text>
-//             </VStack>
-//           </HStack>
-//         </VStack>
-
-//         {/* Skills by Category */}
-//         <VStack spacing={12} align="stretch">
-//           {categories.map((category, index) => (
-//             <CategorySection
-//               key={category}
-//               category={category}
-//               skills={skills[category]}
-//               color={categoryColors[category]?.color || '#14b8a6'}
-//               index={index}
-//             />
-//           ))}
-//         </VStack>
-//       </Container>
-//     </Box>
-//   );
-// }
-// import React, { useState, useEffect, useRef } from "react";
-// import {
-//   Box,
-//   Container,
-//   Heading,
-//   Text,
-//   HStack,
-//   VStack,
-//   Image,
-//   Spinner,
-//   Center,
-// } from "@chakra-ui/react";
-// import { motion } from "framer-motion";
-// import { Code } from "lucide-react";
-// import { useInView } from "react-intersection-observer";
-// import { gsap } from "gsap";
-// import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-// gsap.registerPlugin(ScrollTrigger);
-
-// const MotionBox = motion.create(Box);
-// const MotionHeading = motion.create(Heading);
-
-// const headerVariants = {
-//   hidden: { opacity: 0, y: 40 },
-//   visible: {
-//     opacity: 1,
-//     y: 0,
-//     transition: { duration: 0.7 }
-//   }
-// };
-
-// // TechIcon Component
-// function TechIcon({ logoKey, name, size = 24 }) {
-//   const [imageError, setImageError] = useState(false);
-  
-//   const getIconUrl = () => {
-//     if (logoKey === 'nextjs') return 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg';
-//     if (logoKey === 'huggingface') return 'https://img.icons8.com/?size=100&id=sop9ROXku5bb&format=png&color=000000';
-//     return `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${logoKey}/${logoKey}-original.svg`;
-//   };
-  
-//   const getFallbackUrl = () => {
-//     return `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${logoKey}/${logoKey}-plain.svg`;
-//   };
-  
-//   if (imageError) {
-//     return (
-//       <Box 
-//         display="flex" 
-//         alignItems="center" 
-//         justifyContent="center" 
-//         bg="rgba(20, 184, 166, 0.1)" 
-//         color="brand.400"
-//         borderRadius="lg"
-//         w={`${size}px`}
-//         h={`${size}px`}
-//       >
-//         <Code size={size * 0.6} />
-//       </Box>
-//     );
-//   }
-  
-//   return (
-//     <Image 
-//       src={getIconUrl()}
-//       alt={`${name} logo`}
-//       w={`${size}px`}
-//       h={`${size}px`}
-//       objectFit="contain"
-//       onError={(e) => {
-//         const target = e.currentTarget;
-//         if (target.src !== getFallbackUrl()) {
-//           target.src = getFallbackUrl();
-//         } else {
-//           setImageError(true);
-//         }
-//       }}
-//     />
-//   );
-// }
-
-// // Floating Skill Orb Component
-// function SkillOrb({ skill, index, category }) {
-//   const orbRef = useRef(null);
-//   const [isHovered, setIsHovered] = useState(false);
-
-//   useEffect(() => {
-//     const orb = orbRef.current;
-//     if (!orb) return;
-
-//     // Random floating animation
-//     const tl = gsap.timeline({ repeat: -1, yoyo: true });
-//     tl.to(orb, {
-//       y: `${Math.sin(index) * 20}px`,
-//       x: `${Math.cos(index) * 15}px`,
-//       duration: 3 + (index % 3),
-//       ease: "sine.inOut",
-//     });
-
-//     // Rotation animation
-//     gsap.to(orb, {
-//       rotation: 360,
-//       duration: 20 + (index % 10),
-//       repeat: -1,
-//       ease: "none",
-//     });
-
-//     return () => {
-//       tl.kill();
-//     };
-//   }, [index]);
-
-//   const getCategoryColor = () => {
-//     const colors = {
-//       Languages: '#14b8a6',
-//       Frontend: '#667eea',
-//       Backend: '#f093fb',
-//       Database: '#4facfe',
-//       Tools: '#68d391',
-//       Cloud: '#fbbf24',
-//     };
-//     return colors[category] || '#14b8a6';
-//   };
-
-//   return (
-//     <Box
-//       ref={orbRef}
-//       onMouseEnter={() => setIsHovered(true)}
-//       onMouseLeave={() => setIsHovered(false)}
-//       position="relative"
-//       cursor="pointer"
-//       transition="all 0.3s"
-//       transform={isHovered ? 'scale(1.2)' : 'scale(1)'}
-//       zIndex={isHovered ? 10 : 1}
-//     >
-//       {/* Glow effect */}
-//       <Box
-//         position="absolute"
-//         top="50%"
-//         left="50%"
-//         transform="translate(-50%, -50%)"
-//         w={isHovered ? '100px' : '60px'}
-//         h={isHovered ? '100px' : '60px'}
-//         bg={getCategoryColor()}
-//         opacity={isHovered ? 0.3 : 0.1}
-//         borderRadius="full"
-//         filter="blur(20px)"
-//         transition="all 0.4s"
-//         pointerEvents="none"
-//       />
-
-//       {/* Main orb */}
-//       <Box
-//         position="relative"
-//         w="60px"
-//         h="60px"
-//         bg="rgba(255, 255, 255, 0.03)"
-//         backdropFilter="blur(10px)"
-//         borderRadius="full"
-//         border="2px solid"
-//         borderColor={isHovered ? getCategoryColor() : 'rgba(255, 255, 255, 0.1)'}
-//         display="flex"
-//         alignItems="center"
-//         justifyContent="center"
-//         transition="all 0.3s"
-//         boxShadow={isHovered ? `0 0 30px ${getCategoryColor()}50` : 'none'}
-//       >
-//         <TechIcon logoKey={skill.logoKey} name={skill.name} size={32} />
-//       </Box>
-
-//       {/* Name label on hover */}
-//       {isHovered && (
-//         <MotionBox
-//           initial={{ opacity: 0, y: 10 }}
-//           animate={{ opacity: 1, y: 0 }}
-//           position="absolute"
-//           top="70px"
-//           left="50%"
-//           transform="translateX(-50%)"
-//           bg={getCategoryColor()}
-//           color="white"
-//           px={3}
-//           py={1}
-//           borderRadius="md"
-//           fontSize="xs"
-//           fontWeight="600"
-//           whiteSpace="nowrap"
-//           boxShadow="lg"
-//         >
-//           {skill.name}
-//         </MotionBox>
-//       )}
-//     </Box>
-//   );
-// }
-
-// // Category Filter Button
-// function CategoryButton({ category, isActive, onClick, color }) {
-//   return (
-//     <Box
-//       as="button"
-//       onClick={onClick}
-//       px={6}
-//       py={3}
-//       bg={isActive ? `${color}20` : 'rgba(255, 255, 255, 0.03)'}
-//       borderRadius="full"
-//       border="2px solid"
-//       borderColor={isActive ? color : 'rgba(255, 255, 255, 0.1)'}
-//       color={isActive ? color : 'text.secondary'}
-//       fontWeight="600"
-//       fontSize="sm"
-//       transition="all 0.3s"
-//       cursor="pointer"
-//       _hover={{
-//         borderColor: color,
-//         bg: `${color}15`,
-//         transform: 'translateY(-2px)',
-//       }}
-//       _active={{
-//         transform: 'translateY(0)',
-//       }}
-//     >
-//       {category}
-//     </Box>
-//   );
-// }
-
-// export default function TechSkills() {
-//   const [selectedCategory, setSelectedCategory] = useState("all");
-//   const [skills, setSkills] = useState({});
-//   const [loading, setLoading] = useState(true);
-//   const containerRef = useRef(null);
-  
-//   const [headerRef, headerInView] = useInView({
-//     triggerOnce: false,
-//     threshold: 0.2
-//   });
-
-//   useEffect(() => {
-//     fetch('../data/skills.json')
-//       .then(response => response.json())
-//       .then(data => {
-//         setSkills(data.skills || {});
-//         setLoading(false);
-//       })
-//       .catch(error => {
-//         console.error('Error loading skills:', error);
-//         setLoading(false);
-//       });
-//   }, []);
-
-//   useEffect(() => {
-//     if (!containerRef.current || loading) return;
-
-//     const orbs = containerRef.current.querySelectorAll('.skill-orb');
-    
-//     gsap.fromTo(
-//       orbs,
-//       {
-//         opacity: 0,
-//         scale: 0,
-//         y: 100,
-//       },
-//       {
-//         opacity: 1,
-//         scale: 1,
-//         y: 0,
-//         duration: 0.6,
-//         stagger: 0.03,
-//         ease: "back.out(1.7)",
-//         scrollTrigger: {
-//           trigger: containerRef.current,
-//           start: "top 80%",
-//         },
-//       }
-//     );
-//   }, [selectedCategory, loading]);
-
-//   const categories = ['all', ...Object.keys(skills)];
-  
-//   const getCategoryColor = (category) => {
-//     const colors = {
-//       all: '#14b8a6',
-//       Languages: '#14b8a6',
-//       Frontend: '#667eea',
-//       Backend: '#f093fb',
-//       Database: '#4facfe',
-//       Tools: '#68d391',
-//       Cloud: '#fbbf24',
-//     };
-//     return colors[category] || '#14b8a6';
-//   };
-
-//   const getFilteredSkills = () => {
-//     if (selectedCategory === 'all') {
-//       return Object.entries(skills).flatMap(([cat, skillList]) => 
-//         skillList.map(skill => ({ ...skill, category: cat }))
-//       );
-//     }
-//     return (skills[selectedCategory] || []).map(skill => ({ 
-//       ...skill, 
-//       category: selectedCategory 
-//     }));
-//   };
-
-//   if (loading) {
-//     return (
-//       <Box as="section" py={{ base: 12, md: 24 }} bg="transparent">
-//         <Container maxW="6xl" px={{ base: 4, md: 6 }} mx="auto">
-//           <Center h="400px">
-//             <Spinner size="xl" color="brand.400" thickness="4px" />
-//           </Center>
-//         </Container>
-//       </Box>
-//     );
-//   }
-
-//   const filteredSkills = getFilteredSkills();
-
-//   return (
-//     <Box as="section" py={{ base: 12, md: 24 }} bg="transparent" position="relative" overflow="hidden">
-//       {/* Animated background */}
-//       <Box
-//         position="absolute"
-//         top="10%"
-//         left="5%"
-//         w="500px"
-//         h="500px"
-//         bgGradient="radial(circle, purple.500, transparent)"
-//         opacity={0.1}
-//         filter="blur(100px)"
-//         pointerEvents="none"
-//       />
-
-//       <Container maxW="6xl" px={{ base: 4, md: 6 }} mx="auto" position="relative" zIndex={1}>
-//         {/* Header */}
-//         <VStack spacing={6} mb={12}>
-//           <MotionHeading
-//             ref={headerRef}
-//             as="h2"
-//             fontSize={{ base: "3xl", sm: "4xl", md: "5xl" }}
-//             fontWeight="bold"
-//             textAlign="center"
-//             initial="hidden"
-//             animate={headerInView ? "visible" : "hidden"}
-//             variants={headerVariants}
-//             bgGradient="linear(to-r, #10b981, #06b6d4, #3b82f6, #8b5cf6, #ec4899)"
-//             bgClip="text"
-
-//           >
-//             <Text fontFamily="Silkscreen"as="span" >Technical Arsenal</Text>
-            
-//           </MotionHeading>
-
-//           <Text
-//             fontSize="lg"
-//             color="text.secondary"
-//             textAlign="center"
-//             maxW="600px"
-//           >
-//             Technologies I've mastered through countless projects and late-night coding sessions
-//           </Text>
-//         </VStack>
-
-//         {/* Category Filters */}
-//         <HStack 
-//           spacing={3} 
-//           mb={12} 
-//           justify="center" 
-//           flexWrap="wrap"
-//           gap={3}
-//         >
-//           {categories.map((category) => (
-//             <CategoryButton
-//               key={category}
-//               category={category.charAt(0).toUpperCase() + category.slice(1)}
-//               isActive={selectedCategory === category}
-//               onClick={() => setSelectedCategory(category)}
-//               color={getCategoryColor(category)}
-//             />
-//           ))}
-//         </HStack>
-
-//         {/* Floating Skills Grid */}
-//         <Box
-//           ref={containerRef}
-//           display="flex"
-//           flexWrap="wrap"
-//           gap={8}
-//           justify="center"
-//           alignItems="center"
-//           minH="400px"
-//           position="relative"
-//           p={8}
-//         >
-//           {filteredSkills.map((skill, index) => (
-//             <Box
-//               key={`${skill.category}-${skill.name}-${index}`}
-//               className="skill-orb"
-//             >
-//               <SkillOrb 
-//                 skill={skill} 
-//                 index={index} 
-//                 category={skill.category}
-//               />
-//             </Box>
-//           ))}
-//         </Box>
-
-//         {/* Stats */}
-//         <HStack 
-//           spacing={8} 
-//           justify="center" 
-//           mt={12}
-//           flexWrap="wrap"
-//         >
-//           <VStack spacing={1}>
-//             <Heading size="xl" color="brand.400">
-//               {filteredSkills.length}
-//             </Heading>
-//             <Text fontSize="sm" color="text.secondary">
-//               Technologies
-//             </Text>
-//           </VStack>
-          
-//           <VStack spacing={1}>
-//             <Heading size="xl" color="purple.400">
-//               {Object.keys(skills).length}
-//             </Heading>
-//             <Text fontSize="sm" color="text.secondary">
-//               Categories
-//             </Text>
-//           </VStack>
-          
-//           <VStack spacing={1}>
-//             <Heading size="xl" color="pink.400">
-//               ∞
-//             </Heading>
-//             <Text fontSize="sm" color="text.secondary">
-//               Learning
-//             </Text>
-//           </VStack>
-//         </HStack>
-//       </Container>
-//     </Box>
-//   );
-// }
-
-// import React, { useState, useEffect, useRef } from "react";
-// import {
-//   Box,
-//   Container,
-//   Heading,
-//   Text,
+//   useColorModeValue,
+//   Badge,
 //   Flex,
-//   Image,
-//   Spinner,
-//   Center,
-//   VStack,
-//   HStack,
-// } from "@chakra-ui/react";
-// import { motion } from "framer-motion";
-// import { Code } from "lucide-react";
-// import { useInView } from "react-intersection-observer";
-// import { gsap } from "gsap";
+// } from '@chakra-ui/react';
+// import { motion } from 'framer-motion';
 
-// const MotionBox = motion.create(Box);
-// const MotionHeading = motion.create(Heading);
+// // Example icons - replace with actual tech icons
+// const SkillIcon = () => <Box w={8} h={8} bg="blue.400" borderRadius="md" />;
 
-// const headerVariants = {
-//   hidden: { opacity: 0, y: 40 },
-//   visible: {
-//     opacity: 1,
-//     y: 0,
-//     transition: { duration: 0.7 }
-//   }
+// /**
+//  * LAYOUT OPTION 1: Categorized Grid (Best for portfolios)
+//  * Good for: Showing progression (beginner → advanced)
+//  * Impact: High - Shows depth and breadth
+//  */
+// const TechSkillsOption1 = () => {
+//   const bgColor = useColorModeValue('white', 'gray.800');
+//   const borderColor = useColorModeValue('gray.200', 'gray.700');
+
+//   const skillCategories = [
+//     {
+//       title: 'Frontend',
+//       skills: [
+//         { name: 'React', level: 'Advanced', yearsUsed: '2+ years' },
+//         { name: 'JavaScript', level: 'Advanced', yearsUsed: '2+ years' },
+//         { name: 'Chakra UI', level: 'Intermediate', yearsUsed: '1 year' },
+//         { name: 'HTML/CSS', level: 'Advanced', yearsUsed: '2+ years' },
+//       ],
+//     },
+//     {
+//       title: 'Backend',
+//       skills: [
+//         { name: 'Node.js', level: 'Intermediate', yearsUsed: '1 year' },
+//         { name: 'Express', level: 'Intermediate', yearsUsed: '1 year' },
+//         { name: 'MongoDB', level: 'Beginner', yearsUsed: '6 months' },
+//       ],
+//     },
+//     {
+//       title: 'Tools & Others',
+//       skills: [
+//         { name: 'Git', level: 'Intermediate', yearsUsed: '1+ years' },
+//         { name: 'VS Code', level: 'Advanced', yearsUsed: '2+ years' },
+//         { name: 'Figma', level: 'Beginner', yearsUsed: '6 months' },
+//       ],
+//     },
+//   ];
+
+//   const levelColor = (level) => {
+//     switch (level) {
+//       case 'Advanced': return 'green';
+//       case 'Intermediate': return 'blue';
+//       case 'Beginner': return 'purple';
+//       default: return 'gray';
+//     }
+//   };
+
+//   return (
+//     <VStack spacing={12} align="stretch">
+//       <Box textAlign="center">
+//         <Heading size="2xl" mb={4}>
+//           Technical Skills
+//         </Heading>
+//         <Text fontSize="lg" color="gray.600" maxW="2xl" mx="auto">
+//           Technologies I work with to build scalable and user-friendly applications
+//         </Text>
+//       </Box>
+
+//       <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6}>
+//         {skillCategories.map((category, idx) => (
+//           <motion.div
+//             key={category.title}
+//             initial={{ opacity: 0, y: 20 }}
+//             whileInView={{ opacity: 1, y: 0 }}
+//             transition={{ delay: idx * 0.1 }}
+//             viewport={{ once: true }}
+//           >
+//             <Box
+//               bg={bgColor}
+//               p={6}
+//               borderRadius="xl"
+//               borderWidth="1px"
+//               borderColor={borderColor}
+//               h="full"
+//               _hover={{ shadow: 'lg', transform: 'translateY(-4px)' }}
+//               transition="all 0.3s"
+//             >
+//               <Heading size="md" mb={4} color="blue.500">
+//                 {category.title}
+//               </Heading>
+//               <VStack align="stretch" spacing={3}>
+//                 {category.skills.map((skill) => (
+//                   <Box key={skill.name}>
+//                     <HStack justify="space-between" mb={1}>
+//                       <Text fontWeight="semibold">{skill.name}</Text>
+//                       <Badge colorScheme={levelColor(skill.level)}>
+//                         {skill.level}
+//                       </Badge>
+//                     </HStack>
+//                     <Text fontSize="sm" color="gray.500">
+//                       {skill.yearsUsed}
+//                     </Text>
+//                   </Box>
+//                 ))}
+//               </VStack>
+//             </Box>
+//           </motion.div>
+//         ))}
+//       </SimpleGrid>
+//     </VStack>
+//   );
 // };
 
-// // TechIcon Component
-// function TechIcon({ logoKey, name, size = 24 }) {
-//   const [imageError, setImageError] = useState(false);
-  
-//   const getIconUrl = () => {
-//     if (logoKey === 'nextjs') return 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg';
-//     if (logoKey === 'huggingface') return 'https://img.icons8.com/?size=100&id=sop9ROXku5bb&format=png&color=000000';
-//     return `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${logoKey}/${logoKey}-original.svg`;
-//   };
-  
-//   const getFallbackUrl = () => {
-//     return `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${logoKey}/${logoKey}-plain.svg`;
-//   };
-  
-//   if (imageError) {
-//     return (
-//       <Box 
-//         display="flex" 
-//         alignItems="center" 
-//         justifyContent="center" 
-//         bg="rgba(20, 184, 166, 0.1)" 
-//         color="brand.400"
-//         borderRadius="md"
-//         w={`${size}px`}
-//         h={`${size}px`}
-//       >
-//         <Code size={size * 0.6} />
+// /**
+//  * LAYOUT OPTION 2: Visual Proficiency Bars
+//  * Good for: Quick scanning, visual impact
+//  * Impact: Medium-High - Easy to understand at a glance
+//  */
+// const TechSkillsOption2 = () => {
+//   const skills = [
+//     { name: 'React', proficiency: 85, category: 'Frontend' },
+//     { name: 'JavaScript', proficiency: 80, category: 'Frontend' },
+//     { name: 'Chakra UI', proficiency: 70, category: 'Frontend' },
+//     { name: 'Node.js', proficiency: 65, category: 'Backend' },
+//     { name: 'MongoDB', proficiency: 55, category: 'Backend' },
+//     { name: 'Git', proficiency: 75, category: 'Tools' },
+//   ];
+
+//   const barBg = useColorModeValue('gray.200', 'gray.700');
+
+//   return (
+//     <VStack spacing={12} align="stretch" maxW="4xl" mx="auto">
+//       <Box textAlign="center">
+//         <Heading size="2xl" mb={4}>
+//           Technical Proficiency
+//         </Heading>
+//         <Text fontSize="lg" color="gray.600">
+//           Self-assessed skill levels based on project experience
+//         </Text>
 //       </Box>
-//     );
-//   }
-  
-//   return (
-//     <Image 
-//       src={getIconUrl()}
-//       alt={`${name} logo`}
-//       w={`${size}px`}
-//       h={`${size}px`}
-//       objectFit="contain"
-//       onError={(e) => {
-//         const target = e.currentTarget;
-//         if (target.src !== getFallbackUrl()) {
-//           target.src = getFallbackUrl();
-//         } else {
-//           setImageError(true);
-//         }
-//       }}
-//     />
-//   );
-// }
 
-// // Skill Item Component
-// function SkillItem({ skill, index, isActive }) {
-//   const itemRef = useRef(null);
-  
-//   useEffect(() => {
-//     if (!itemRef.current || !isActive) return;
-    
-//     gsap.fromTo(
-//       itemRef.current,
-//       { 
-//         opacity: 0, 
-//         y: 20,
-//         scale: 0.9
-//       },
-//       { 
-//         opacity: 1, 
-//         y: 0,
-//         scale: 1,
-//         duration: 0.5,
-//         delay: index * 0.05,
-//         ease: "back.out(1.7)"
-//       }
-//     );
-//   }, [index, isActive]);
-
-//   return (
-//     <Box
-//       ref={itemRef}
-//       as="button"
-//       display="flex"
-//       alignItems="center"
-//       gap={3}
-//       px={4}
-//       py={3}
-//       bg="rgba(255, 255, 255, 0.02)"
-//       backdropFilter="blur(10px)"
-//       border="1px solid"
-//       borderColor="rgba(255, 255, 255, 0.05)"
-//       borderRadius="lg"
-//       transition="all 0.3s ease"
-//       cursor="pointer"
-//       _hover={{
-//         bg: "rgba(20, 184, 166, 0.1)",
-//         borderColor: "brand.400",
-//         transform: "translateY(-2px)",
-//       }}
-//       opacity={0}
-//     >
-//       <TechIcon logoKey={skill.logoKey} name={skill.name} size={24} />
-//       <Text fontSize="sm" fontWeight="500" color="text.primary">
-//         {skill.name}
-//       </Text>
-//     </Box>
-//   );
-// }
-
-// // Category Button Component
-// function CategoryButton({ category, isActive, onClick, index }) {
-//   return (
-//     <MotionBox
-//       as="button"
-//       onClick={onClick}
-//       px={6}
-//       py={3}
-//       fontSize="md"
-//       fontWeight="600"
-//       color={isActive ? "brand.400" : "text.secondary"}
-//       bg="transparent"
-//       position="relative"
-//       transition="color 0.3s"
-//       initial={{ opacity: 0, x: -20 }}
-//       animate={{ opacity: 1, x: 0 }}
-//       whileHover={{ x: 5 }}
-//       _hover={{
-//         color: "brand.400"
-//       }}
-//       style={{
-//         transitionDelay: `${index * 0.05}s`
-//       }}
-//     >
-//       {/* Active indicator line */}
-//       {isActive && (
-//         <MotionBox
-//           position="absolute"
-//           left={0}
-//           top="50%"
-//           w="3px"
-//           h="60%"
-//           bg="brand.400"
-//           borderRadius="full"
-//           layoutId="activeCategory"
-//           initial={{ opacity: 0 }}
-//           animate={{ opacity: 1, y: "-50%" }}
-//           transition={{ duration: 0.3 }}
-//         />
-//       )}
-//       {category}
-//     </MotionBox>
-//   );
-// }
-
-// export default function Skills() {
-//   const [selectedCategory, setSelectedCategory] = useState("Languages");
-//   const [skills, setSkills] = useState({});
-//   const [loading, setLoading] = useState(true);
-//   const gridRef = useRef(null);
-  
-//   const [headerRef, headerInView] = useInView({
-//     triggerOnce: false,
-//     threshold: 0.2
-//   });
-
-//   useEffect(() => {
-//     fetch('../data/skills.json')
-//       .then(response => response.json())
-//       .then(data => {
-//         setSkills(data.skills || {});
-//         setLoading(false);
-//         if (data.skills) {
-//           setSelectedCategory(Object.keys(data.skills)[0]);
-//         }
-//       })
-//       .catch(error => {
-//         console.error('Error loading skills:', error);
-//         setLoading(false);
-//       });
-//   }, []);
-
-//   // GSAP animation for category change
-//   useEffect(() => {
-//     if (!gridRef.current) return;
-    
-//     gsap.fromTo(
-//       gridRef.current,
-//       { opacity: 0, y: 20 },
-//       { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }
-//     );
-//   }, [selectedCategory]);
-
-//   const categories = Object.keys(skills);
-
-//   if (loading) {
-//     return (
-//       <Box as="section" py={{ base: 12, md: 24 }}>
-//         <Container maxW="6xl" px={{ base: 4, md: 6 }} mx="auto">
-//           <Center h="400px">
-//             <Spinner size="xl" color="brand.400" thickness="4px" />
-//           </Center>
-//         </Container>
-//       </Box>
-//     );
-//   }
-
-//   return (
-//     <Box as="section" py={{ base: 12, md: 24 }} position="relative" overflow="hidden">
-//       {/* Background decoration */}
-//       <Box
-//         position="absolute"
-//         top="20%"
-//         right="5%"
-//         w="300px"
-//         h="300px"
-//         bg="rgba(20, 184, 166, 0.03)"
-//         borderRadius="full"
-//         filter="blur(100px)"
-//         pointerEvents="none"
-//       />
-
-//       <Container maxW="6xl" px={{ base: 4, md: 6 }} mx="auto">
-//         {/* Header */}
-//         <MotionBox
-//           ref={headerRef}
-//           textAlign="center"
-//           mb={16}
-//           initial="hidden"
-//           animate={headerInView ? "visible" : "hidden"}
-//           variants={headerVariants}
-//         >
-//           <MotionHeading
-//             as="h2"
-//             fontSize={{ base: "3xl", sm: "4xl", md: "5xl" }}
-//             fontWeight="bold"
-//             bgGradient='linear(to-r, #dc2626, #c026d3, #7c3aed)'
-//             bgClip="text"
-//             mb={3}
+//       <VStack spacing={6} align="stretch">
+//         {skills.map((skill, idx) => (
+//           <motion.div
+//             key={skill.name}
+//             initial={{ opacity: 0, x: -20 }}
+//             whileInView={{ opacity: 1, x: 0 }}
+//             transition={{ delay: idx * 0.05 }}
+//             viewport={{ once: true }}
 //           >
-//             Technical Skills
-//           </MotionHeading>
-//           <Text color="text.secondary" fontSize="lg">
-//             Tools and technologies I work with
-//           </Text>
-//         </MotionBox>
-
-//         {/* Main Layout: Sidebar + Grid */}
-//         <Flex
-//           gap={8}
-//           direction={{ base: "column", md: "row" }}
-//           align={{ base: "stretch", md: "flex-start" }}
-//         >
-//           {/* Category Sidebar */}
-//           <VStack
-//             align="stretch"
-//             spacing={2}
-//             minW={{ md: "200px" }}
-//             position={{ md: "sticky" }}
-//             top={{ md: "100px" }}
-//             alignSelf={{ md: "flex-start" }}
-//           >
-//             {categories.map((category, index) => (
-//               <CategoryButton
-//                 key={category}
-//                 category={category}
-//                 isActive={selectedCategory === category}
-//                 onClick={() => setSelectedCategory(category)}
-//                 index={index}
-//               />
-//             ))}
-//           </VStack>
-
-//           {/* Skills Grid */}
-//           <Box flex={1} ref={gridRef}>
-//             <Flex
-//               flexWrap="wrap"
-//               gap={3}
-//               justify={{ base: "center", md: "flex-start" }}
-//             >
-//               {skills[selectedCategory]?.map((skill, index) => (
-//                 <SkillItem
-//                   key={`${selectedCategory}-${skill.name}`}
-//                   skill={skill}
-//                   index={index}
-//                   isActive={selectedCategory === selectedCategory}
+//             <Box>
+//               <HStack justify="space-between" mb={2}>
+//                 <HStack>
+//                   <Text fontWeight="bold" fontSize="lg">
+//                     {skill.name}
+//                   </Text>
+//                   <Badge colorScheme="blue" fontSize="xs">
+//                     {skill.category}
+//                   </Badge>
+//                 </HStack>
+//                 <Text fontWeight="semibold" color="blue.500">
+//                   {skill.proficiency}%
+//                 </Text>
+//               </HStack>
+//               <Box h={3} bg={barBg} borderRadius="full" overflow="hidden">
+//                 <motion.div
+//                   initial={{ width: 0 }}
+//                   whileInView={{ width: `${skill.proficiency}%` }}
+//                   transition={{ duration: 0.8, delay: idx * 0.05 }}
+//                   viewport={{ once: true }}
+//                   style={{
+//                     height: '100%',
+//                     background: 'linear-gradient(to right, #3182ce, #805ad5)',
+//                     borderRadius: '999px',
+//                   }}
 //                 />
-//               ))}
-//             </Flex>
-//           </Box>
-//         </Flex>
-//       </Container>
-//     </Box>
+//               </Box>
+//             </Box>
+//           </motion.div>
+//         ))}
+//       </VStack>
+//     </VStack>
 //   );
-// }
+// };
 
-import React, { useState, useEffect, useRef } from "react";
+// /**
+//  * LAYOUT OPTION 3: Icon Grid (Best for visual impact)
+//  * Good for: Modern portfolios, showing tech stack
+//  * Impact: Very High - Memorable, scannable
+//  */
+// const TechSkillsOption3 = () => {
+//   const cardBg = useColorModeValue('white', 'gray.800');
+//   const borderColor = useColorModeValue('gray.200', 'gray.700');
+
+//   const techStack = [
+//     { name: 'React', description: 'Component-based UI', level: 'Advanced' },
+//     { name: 'JavaScript', description: 'Core language', level: 'Advanced' },
+//     { name: 'Chakra UI', description: 'Component library', level: 'Intermediate' },
+//     { name: 'Node.js', description: 'Backend runtime', level: 'Intermediate' },
+//     { name: 'Git', description: 'Version control', level: 'Intermediate' },
+//     { name: 'MongoDB', description: 'NoSQL database', level: 'Beginner' },
+//   ];
+
+//   return (
+//     <VStack spacing={12} align="stretch">
+//       <Box textAlign="center">
+//         <Heading size="2xl" mb={4}>
+//           My Tech Stack
+//         </Heading>
+//         <Text fontSize="lg" color="gray.600" maxW="2xl" mx="auto">
+//           Tools and technologies I use to bring ideas to life
+//         </Text>
+//       </Box>
+
+//       <SimpleGrid columns={{ base: 2, md: 3, lg: 6 }} spacing={6}>
+//         {techStack.map((tech, idx) => (
+//           <motion.div
+//             key={tech.name}
+//             initial={{ opacity: 0, scale: 0.9 }}
+//             whileInView={{ opacity: 1, scale: 1 }}
+//             transition={{ delay: idx * 0.05 }}
+//             viewport={{ once: true }}
+//             whileHover={{ scale: 1.05 }}
+//           >
+//             <VStack
+//               bg={cardBg}
+//               p={6}
+//               borderRadius="xl"
+//               borderWidth="2px"
+//               borderColor={borderColor}
+//               spacing={3}
+//               h="full"
+//               _hover={{ borderColor: 'blue.400', shadow: 'xl' }}
+//               transition="all 0.3s"
+//             >
+//               <SkillIcon />
+//               <Text fontWeight="bold" fontSize="lg" textAlign="center">
+//                 {tech.name}
+//               </Text>
+//               <Text fontSize="sm" color="gray.500" textAlign="center">
+//                 {tech.description}
+//               </Text>
+//               <Badge colorScheme="blue" fontSize="xs">
+//                 {tech.level}
+//               </Badge>
+//             </VStack>
+//           </motion.div>
+//         ))}
+//       </SimpleGrid>
+//     </VStack>
+//   );
+// };
+
+// // Export all options for comparison
+// export default TechSkillsOption3;
+// export { TechSkillsOption1, TechSkillsOption2 };
+
+import React, { useState } from 'react';
 import {
   Box,
-  Container,
   Heading,
   Text,
-  Flex,
-  Image,
-  VStack,
   HStack,
-  Spinner,
-  Center,
-} from "@chakra-ui/react";
-import { motion } from "framer-motion";
-import { Code } from "lucide-react";
-import { useInView } from "react-intersection-observer";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+  VStack,
+  Flex,
+  Badge,
+  useColorModeValue,
+  // keyframes,
+} from '@chakra-ui/react';
+import { motion } from 'framer-motion';
 
-gsap.registerPlugin(ScrollTrigger);
-
-const MotionBox = motion.create(Box);
-const MotionHeading = motion.create(Heading);
-
-const headerVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7 }
-  }
+// Sample data - replace with your actual skills
+const skillsData = {
+  frontend: ['React', 'JavaScript', 'Chakra UI', 'HTML/CSS', 'Framer Motion'],
+  backend: ['Node.js', 'Express', 'MongoDB', 'REST APIs'],
+  tools: ['Git', 'VS Code', 'Figma', 'npm'],
+  learning: ['TypeScript', 'Next.js', 'GraphQL']
 };
 
-// TechIcon Component
-function TechIcon({ logoKey, name, size = 24 }) {
-  const [imageError, setImageError] = useState(false);
-  
-  const getIconUrl = () => {
-    if (logoKey === 'nextjs') return 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg';
-    if (logoKey === 'huggingface') return 'https://img.icons8.com/?size=100&id=sop9ROXku5bb&format=png&color=000000';
-    return `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${logoKey}/${logoKey}-original.svg`;
-  };
-  
-  const getFallbackUrl = () => {
-    return `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${logoKey}/${logoKey}-plain.svg`;
-  };
-  
-  if (imageError) {
-    return (
-      <Box 
-        display="flex" 
-        alignItems="center" 
-        justifyContent="center" 
-        bg="rgba(20, 184, 166, 0.1)" 
-        color="brand.400"
-        borderRadius="md"
-        w={`${size}px`}
-        h={`${size}px`}
-      >
-        <Code size={size * 0.6} />
-      </Box>
-    );
-  }
+const allSkills = Object.entries(skillsData).flatMap(([category, skills]) =>
+  skills.map(skill => ({ name: skill, category }))
+);
+
+/**
+ * LAYOUT 1: Single Dense Row
+ * All skills in one continuous line with gradient category dividers
+ */
+export const TechSkillsDenseRow = () => {
+  const dividerGradient = 'gradients.jewel';
   
   return (
-    <Image 
-      src={getIconUrl()}
-      alt={`${name} logo`}
-      w={`${size}px`}
-      h={`${size}px`}
-      objectFit="contain"
-      onError={(e) => {
-        const target = e.currentTarget;
-        if (target.src !== getFallbackUrl()) {
-          target.src = getFallbackUrl();
-        } else {
-          setImageError(true);
-        }
-      }}
-    />
-  );
-}
-
-// Skill Item with stagger reveal
-function SkillItem({ skill, index }) {
-  const itemRef = useRef(null);
-
-  useEffect(() => {
-    const el = itemRef.current;
-    if (!el) return;
-
-    gsap.fromTo(
-      el,
-      {
-        opacity: 0,
-        y: 30,
-        scale: 0.9,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.6,
-        delay: index * 0.05,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: el,
-          start: "top 85%",
-          toggleActions: "play none none reverse",
-        },
-      }
-    );
-  }, [index]);
-
-  return (
-    <Box
-      ref={itemRef}
-      bg="rgba(255, 255, 255, 0.02)"
-      backdropFilter="blur(10px)"
-      border="1px solid"
-      borderColor="rgba(255, 255, 255, 0.08)"
-      borderRadius="lg"
-      p={3}
-      transition="all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)"
-      _hover={{
-        borderColor: "brand.400",
-        bg: "rgba(20, 184, 166, 0.05)",
-        transform: "translateY(-4px)",
-      }}
-    >
-      <HStack spacing={3}>
-        <TechIcon logoKey={skill.logoKey} name={skill.name} size={24} />
-        <Text fontSize="sm" fontWeight="500" color="text.primary">
-          {skill.name}
-        </Text>
-      </HStack>
-    </Box>
-  );
-}
-
-// Category Section with magnetic effect on hover
-function CategorySection({ category, skills, index }) {
-  const sectionRef = useRef(null);
-  const titleRef = useRef(null);
-
-  useEffect(() => {
-    const title = titleRef.current;
-    if (!title) return;
-
-    gsap.fromTo(
-      title,
-      {
-        opacity: 0,
-        x: -50,
-      },
-      {
-        opacity: 1,
-        x: 0,
-        duration: 0.8,
-        delay: index * 0.15,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: title,
-          start: "top 90%",
-          toggleActions: "play none none reverse",
-        },
-      }
-    );
-  }, [index]);
-
-  return (
-    <Box ref={sectionRef} mb={12}>
-      <HStack spacing={4} mb={6} ref={titleRef}>
-        <Box w="40px" h="2px" bg="brand.400" />
-        <Heading
-          size="md"
-          color="text.primary"
-          fontWeight="600"
-          letterSpacing="wide"
+    <VStack spacing={8} align="stretch">
+      <Box textAlign="center">
+        <Heading 
+          size="2xl" 
+          mb={3}
+          bgGradient={dividerGradient}
+          bgClip="text"
         >
-          {category}
+          Tech Stack
         </Heading>
+        <Text color="text.muted" fontSize="lg">
+          Technologies I work with
+        </Text>
+      </Box>
+
+      <Flex
+        wrap="wrap"
+        gap={3}
+        justify="center"
+        align="center"
+        maxW="1000px"
+        mx="auto"
+      >
+        {Object.entries(skillsData).map(([category, skills], catIdx) => (
+          <React.Fragment key={category}>
+            {catIdx > 0 && (
+              <Box
+                h="30px"
+                w="2px"
+                bgGradient={dividerGradient}
+                opacity={0.6}
+                mx={2}
+              />
+            )}
+            {skills.map((skill, idx) => (
+              <motion.div
+                key={skill}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: (catIdx * 5 + idx) * 0.03 }}
+                whileHover={{ scale: 1.1 }}
+              >
+                <Badge
+                  px={4}
+                  py={2}
+                  borderRadius="full"
+                  fontSize="md"
+                  fontWeight="semibold"
+                  bg="surface.elevated"
+                  borderWidth="1px"
+                  borderColor="border.primary"
+                  color="text.primary"
+                  cursor="pointer"
+                  transition="all 0.2s"
+                  _hover={{
+                    borderColor: 'brand.400',
+                    shadow: 'md',
+                    bgGradient: dividerGradient,
+                    color: 'white'
+                  }}
+                >
+                  {skill}
+                </Badge>
+              </motion.div>
+            ))}
+          </React.Fragment>
+        ))}
+      </Flex>
+
+      {/* Legend */}
+      <HStack spacing={6} justify="center" fontSize="sm" color="text.muted">
+        {Object.keys(skillsData).map(cat => (
+          <HStack key={cat} spacing={2}>
+            <Box w={2} h={2} borderRadius="full" bg="brand.400" />
+            <Text textTransform="capitalize">{cat}</Text>
+          </HStack>
+        ))}
       </HStack>
+    </VStack>
+  );
+};
+
+/**
+ * LAYOUT 2: Bento Grid
+ * Asymmetric card sizes for visual interest
+ */
+export const TechSkillsBento = () => {
+  const cardBg = 'surface.elevated';
+  const borderColor = 'border.primary';
+
+  return (
+    <VStack spacing={10} align="stretch">
+      <Box textAlign="center">
+        <Heading size="2xl" mb={3} bgGradient="gradients.jewel" bgClip="text">
+          My Toolkit
+        </Heading>
+        <Text color="text.muted" fontSize="lg">
+          Technologies organized by expertise
+        </Text>
+      </Box>
 
       <Box
         display="grid"
-        gridTemplateColumns={{
-          base: "repeat(2, 1fr)",
-          sm: "repeat(3, 1fr)",
-          md: "repeat(4, 1fr)",
-          lg: "repeat(5, 1fr)",
-        }}
-        gap={3}
+        gridTemplateColumns={{ base: "1fr", md: "repeat(6, 1fr)" }}
+        gridTemplateRows={{ base: "auto", md: "repeat(3, 120px)" }}
+        gap={4}
       >
-        {skills.map((skill, idx) => (
-          <SkillItem key={skill.name} skill={skill} index={idx} />
-        ))}
+        {/* Frontend - Large */}
+        <Box
+          gridColumn={{ base: "1", md: "1 / 4" }}
+          gridRow={{ base: "auto", md: "1 / 3" }}
+          bg={cardBg}
+          p={6}
+          borderRadius="xl"
+          borderWidth="1px"
+          borderColor={borderColor}
+          transition="all 0.3s"
+          _hover={{ borderColor: 'brand.400', shadow: 'lg' }}
+        >
+          <Text fontSize="sm" fontWeight="bold" color="brand.400" mb={3}>
+            FRONTEND
+          </Text>
+          <Flex wrap="wrap" gap={2}>
+            {skillsData.frontend.map(skill => (
+              <Badge key={skill} colorScheme="blue" fontSize="sm" px={3} py={1}>
+                {skill}
+              </Badge>
+            ))}
+          </Flex>
+        </Box>
+
+        {/* Backend - Medium */}
+        <Box
+          gridColumn={{ base: "1", md: "4 / 7" }}
+          gridRow={{ base: "auto", md: "1 / 2" }}
+          bg={cardBg}
+          p={6}
+          borderRadius="xl"
+          borderWidth="1px"
+          borderColor={borderColor}
+          transition="all 0.3s"
+          _hover={{ borderColor: 'brand.400', shadow: 'lg' }}
+        >
+          <Text fontSize="sm" fontWeight="bold" color="brand.400" mb={3}>
+            BACKEND
+          </Text>
+          <Flex wrap="wrap" gap={2}>
+            {skillsData.backend.map(skill => (
+              <Badge key={skill} colorScheme="purple" fontSize="sm" px={3} py={1}>
+                {skill}
+              </Badge>
+            ))}
+          </Flex>
+        </Box>
+
+        {/* Tools - Medium */}
+        <Box
+          gridColumn={{ base: "1", md: "4 / 7" }}
+          gridRow={{ base: "auto", md: "2 / 3" }}
+          bg={cardBg}
+          p={6}
+          borderRadius="xl"
+          borderWidth="1px"
+          borderColor={borderColor}
+          transition="all 0.3s"
+          _hover={{ borderColor: 'brand.400', shadow: 'lg' }}
+        >
+          <Text fontSize="sm" fontWeight="bold" color="brand.400" mb={3}>
+            TOOLS & PLATFORMS
+          </Text>
+          <Flex wrap="wrap" gap={2}>
+            {skillsData.tools.map(skill => (
+              <Badge key={skill} colorScheme="teal" fontSize="sm" px={3} py={1}>
+                {skill}
+              </Badge>
+            ))}
+          </Flex>
+        </Box>
+
+        {/* Learning - Wide */}
+        <Box
+          gridColumn={{ base: "1", md: "1 / 7" }}
+          gridRow={{ base: "auto", md: "3 / 4" }}
+          bg={cardBg}
+          p={6}
+          borderRadius="xl"
+          borderWidth="1px"
+          borderColor={borderColor}
+          position="relative"
+          overflow="hidden"
+          _before={{
+            content: '""',
+            position: 'absolute',
+            inset: 0,
+            bgGradient: 'gradients.jewel',
+            opacity: 0.05
+          }}
+        >
+          <Text fontSize="sm" fontWeight="bold" color="brand.400" mb={3} position="relative" zIndex={1}>
+            CURRENTLY LEARNING
+          </Text>
+          <Flex wrap="wrap" gap={2} position="relative" zIndex={1}>
+            {skillsData.learning.map(skill => (
+              <Badge key={skill} colorScheme="orange" fontSize="sm" px={3} py={1}>
+                {skill} 🌱
+              </Badge>
+            ))}
+          </Flex>
+        </Box>
       </Box>
-    </Box>
+    </VStack>
   );
+};
+
+/**
+ * LAYOUT 3: Ticker Tape Animation
+ * Continuous horizontal scroll effect
+ */
+const scroll ={
+  initial:{ x: 0 },
+  animate:{ x: '-50%' },
+  transition:{ duration: 1, ease: 'linear' }
+
 }
+;
 
-export default function Skills() {
-  const [skills, setSkills] = useState({});
-  const [loading, setLoading] = useState(true);
-  const [headerRef, headerInView] = useInView({
-    triggerOnce: false,
-    threshold: 0.2
-  });
-
-  useEffect(() => {
-    fetch('../data/skills.json')
-      .then(response => response.json())
-      .then(data => {
-        setSkills(data.skills || {});
-        setLoading(false);
-      })
-      .catch(error => {
-        console.error('Error loading skills:', error);
-        setLoading(false);
-      });
-  }, []);
-
-  const categories = Object.keys(skills);
-
-  if (loading) {
-    return (
-      <Box as="section" py={{ base: 12, md: 24 }}>
-        <Container maxW="6xl" px={{ base: 4, md: 6 }} mx="auto">
-          <Center h="400px">
-            <Spinner size="xl" color="brand.400" thickness="4px" />
-          </Center>
-        </Container>
+export const TechSkillsTicker = () => {
+  return (
+    <VStack spacing={10} align="stretch" overflow="hidden">
+      <Box textAlign="center" px={4}>
+        <Heading size="2xl" mb={3} bgGradient="gradients.jewel" bgClip="text">
+          Skills in Motion
+        </Heading>
+        <Text color="text.muted" fontSize="lg">
+          Hover to pause • Click a skill to highlight
+        </Text>
       </Box>
-    );
-  }
+
+      {/* Row 1 - Scrolling Right */}
+      <Box
+        position="relative"
+        overflow="hidden"
+        py={4}
+        _before={{
+          content: '""',
+          position: 'absolute',
+          left: 0,
+          top: 0,
+          bottom: 0,
+          width: '100px',
+          bgGradient: 'linear(to-r, bg.secondary, transparent)',
+          zIndex: 1,
+          pointerEvents: 'none'
+        }}
+        _after={{
+          content: '""',
+          position: 'absolute',
+          right: 0,
+          top: 0,
+          bottom: 0,
+          width: '100px',
+          bgGradient: 'linear(to-l, bg.secondary, transparent)',
+          zIndex: 1,
+          pointerEvents: 'none'
+        }}
+      >
+        <Flex
+          gap={4}
+          sx={{
+            animation: `${scroll} 30s linear infinite`,
+            '&:hover': { animationPlayState: 'paused' }
+          }}
+        >
+          {[...allSkills, ...allSkills].map((skill, idx) => (
+            <Badge
+              key={idx}
+              px={6}
+              py={3}
+              borderRadius="full"
+              fontSize="lg"
+              fontWeight="bold"
+              bg="surface.card"
+              borderWidth="2px"
+              borderColor="border.primary"
+              whiteSpace="nowrap"
+              cursor="pointer"
+              transition="all 0.3s"
+              _hover={{
+                borderColor: 'brand.400',
+                transform: 'scale(1.1)',
+                bgGradient: 'gradients.jewel',
+                color: 'white'
+              }}
+            >
+              {skill.name}
+            </Badge>
+          ))}
+        </Flex>
+      </Box>
+
+      {/* Row 2 - Scrolling Left (opposite direction) */}
+      <Box
+        position="relative"
+        overflow="hidden"
+        py={4}
+        _before={{
+          content: '""',
+          position: 'absolute',
+          left: 0,
+          top: 0,
+          bottom: 0,
+          width: '100px',
+          bgGradient: 'linear(to-r, bg.secondary, transparent)',
+          zIndex: 1,
+          pointerEvents: 'none'
+        }}
+        _after={{
+          content: '""',
+          position: 'absolute',
+          right: 0,
+          top: 0,
+          bottom: 0,
+          width: '100px',
+          bgGradient: 'linear(to-l, bg.secondary, transparent)',
+          zIndex: 1,
+          pointerEvents: 'none'
+        }}
+      >
+        <Flex
+          gap={4}
+          sx={{
+            animation: `${scroll} 25s linear infinite reverse`,
+            '&:hover': { animationPlayState: 'paused' }
+          }}
+        >
+          {[...allSkills.reverse(), ...allSkills].map((skill, idx) => (
+            <Badge
+              key={idx}
+              px={6}
+              py={3}
+              borderRadius="full"
+              fontSize="lg"
+              fontWeight="bold"
+              bg="surface.card"
+              borderWidth="2px"
+              borderColor="border.primary"
+              whiteSpace="nowrap"
+              cursor="pointer"
+              transition="all 0.3s"
+              _hover={{
+                borderColor: 'brand.400',
+                transform: 'scale(1.1)',
+                bgGradient: 'gradients.jewel',
+                color: 'white'
+              }}
+            >
+              {skill.name}
+            </Badge>
+          ))}
+        </Flex>
+      </Box>
+    </VStack>
+  );
+};
+
+/**
+ * LAYOUT 4: Minimal List with Expand on Hover
+ * Clean, space-efficient, elegant
+ */
+export const TechSkillsMinimal = () => {
+  const [hoveredCategory, setHoveredCategory] = useState(null);
 
   return (
-    <Box 
-      as="section" 
-      py={{ base: 12, md: 24 }}
-      position="relative"
-      overflow="hidden"
-    >
-      {/* Background decoration */}
-      <Box
-        position="absolute"
-        top="10%"
-        right="5%"
-        w="300px"
-        h="300px"
-        bg="rgba(20, 184, 166, 0.03)"
-        borderRadius="full"
-        filter="blur(80px)"
-        pointerEvents="none"
-      />
+    <VStack spacing={12} align="stretch" maxW="800px" mx="auto">
+      <Box textAlign="center">
+        <Heading size="2xl" mb={3} bgGradient="gradients.jewel" bgClip="text">
+          What I Work With
+        </Heading>
+        <Text color="text.muted" fontSize="lg">
+          Hover to explore each category
+        </Text>
+      </Box>
 
-      <Container maxW="6xl" px={{ base: 4, md: 6 }} mx="auto" position="relative">
-        {/* Header */}
-        <VStack spacing={4} mb={16} textAlign="center">
-          <MotionHeading
-            ref={headerRef}
-            as="h2"
-            fontSize={{ base: "3xl", sm: "4xl", md: "5xl" }}
-            fontWeight="bold"
-            initial="hidden"
-            animate={headerInView ? "visible" : "hidden"}
-            variants={headerVariants}
+      <VStack spacing={1} align="stretch">
+        {Object.entries(skillsData).map(([category, skills]) => (
+          <Box
+            key={category}
+            onMouseEnter={() => setHoveredCategory(category)}
+            onMouseLeave={() => setHoveredCategory(null)}
+            borderRadius="xl"
+            overflow="hidden"
+            transition="all 0.3s"
+            bg={hoveredCategory === category ? 'surface.card' : 'transparent'}
+            borderWidth="1px"
+            borderColor={hoveredCategory === category ? 'brand.400' : 'transparent'}
           >
-            {"Technical Skills".split('').map((char, i) => (
-              <motion.span
-                key={i}
-                style={{
-                  display: 'inline-block',
-                  transformOrigin: 'center bottom',
-                  perspective: '1000px',
-                  color: ['T', 'S'].includes(char) ? '#14b8a6' : 'inherit'
+            <HStack
+              p={6}
+              justify="space-between"
+              cursor="pointer"
+              spacing={4}
+            >
+              <HStack spacing={4} flex={1}>
+                <Box
+                  w={2}
+                  h={2}
+                  borderRadius="full"
+                  bg="brand.400"
+                  transition="all 0.3s"
+                  transform={hoveredCategory === category ? 'scale(1.5)' : 'scale(1)'}
+                />
+                <Text
+                  fontSize="2xl"
+                  fontWeight="bold"
+                  textTransform="uppercase"
+                  letterSpacing="wide"
+                  transition="all 0.3s"
+                  color={hoveredCategory === category ? 'brand.400' : 'text.primary'}
+                >
+                  {category}
+                </Text>
+                <Badge
+                  colorScheme="blue"
+                  borderRadius="full"
+                  px={3}
+                  opacity={hoveredCategory === category ? 1 : 0.5}
+                  transition="all 0.3s"
+                >
+                  {skills.length}
+                </Badge>
+              </HStack>
+
+              <motion.div
+                initial={false}
+                animate={{
+                  width: hoveredCategory === category ? 'auto' : 0,
+                  opacity: hoveredCategory === category ? 1 : 0
                 }}
-                initial={{ opacity: 0, y: 50, rotateX: -90 }}
-                animate={headerInView ? { 
-                  opacity: 1, 
-                  y: 0, 
-                  rotateX: 0 
-                } : { 
-                  opacity: 0, 
-                  y: 50, 
-                  rotateX: -90 
-                }}
-                transition={{
-                  duration: 0.5,
-                  delay: i * 0.05,
-                  ease: [0.23, 1, 0.32, 1]
+                transition={{ duration: 0.3 }}
+              >
+                <Flex gap={2} pr={hoveredCategory === category ? 0 : 4}>
+                  {skills.map((skill, idx) => (
+                    <motion.div
+                      key={skill}
+                      initial={false}
+                      animate={{
+                        opacity: hoveredCategory === category ? 1 : 0,
+                        x: hoveredCategory === category ? 0 : -20
+                      }}
+                      transition={{ delay: idx * 0.05 }}
+                    >
+                      <Badge
+                        px={3}
+                        py={1}
+                        borderRadius="full"
+                        fontSize="sm"
+                        bg="bg.accent"
+                        color="text.primary"
+                        whiteSpace="nowrap"
+                      >
+                        {skill}
+                      </Badge>
+                    </motion.div>
+                  ))}
+                </Flex>
+              </motion.div>
+            </HStack>
+          </Box>
+        ))}
+      </VStack>
+    </VStack>
+  );
+};
+
+/**
+ * LAYOUT 5: Word Cloud (Scattered by Importance)
+ * Visual hierarchy through size and position
+ */
+export const TechSkillsWordCloud = () => {
+  // Define importance (size) for each skill
+  const skillImportance = {
+    'React': 5,
+    'JavaScript': 5,
+    'Node.js': 4,
+    'Chakra UI': 4,
+    'MongoDB': 3,
+    'Express': 3,
+    'HTML/CSS': 4,
+    'Framer Motion': 3,
+    'Git': 4,
+    'VS Code': 2,
+    'Figma': 3,
+    'npm': 2,
+    'TypeScript': 3,
+    'Next.js': 3,
+    'GraphQL': 2
+  };
+
+  const positions = [
+    { top: '10%', left: '15%' },
+    { top: '15%', left: '60%' },
+    { top: '25%', left: '35%' },
+    { top: '30%', left: '75%' },
+    { top: '40%', left: '20%' },
+    { top: '45%', left: '55%' },
+    { top: '50%', left: '80%' },
+    { top: '55%', left: '10%' },
+    { top: '60%', left: '45%' },
+    { top: '65%', left: '70%' },
+    { top: '70%', left: '25%' },
+    { top: '75%', left: '60%' },
+    { top: '80%', left: '40%' },
+    { top: '85%', left: '15%' },
+    { top: '85%', left: '75%' }
+  ];
+
+  return (
+    <VStack spacing={8} align="stretch">
+      <Box textAlign="center">
+        <Heading size="2xl" mb={3} bgGradient="gradients.jewel" bgClip="text">
+          Skills Universe
+        </Heading>
+        <Text color="text.muted" fontSize="lg">
+          Size reflects proficiency • Hover to highlight
+        </Text>
+      </Box>
+
+      <Box
+        position="relative"
+        h={{ base: '500px', md: '600px' }}
+        bg="surface.card"
+        borderRadius="2xl"
+        borderWidth="1px"
+        borderColor="border.primary"
+        overflow="hidden"
+      >
+        {allSkills.map((skill, idx) => {
+          const importance = skillImportance[skill.name] || 3;
+          const fontSize = `${importance * 0.5}rem`;
+          const position = positions[idx % positions.length];
+
+          return (
+            <motion.div
+              key={skill.name}
+              style={{
+                position: 'absolute',
+                ...position
+              }}
+              initial={{ opacity: 0, scale: 0 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.05, type: 'spring' }}
+              whileHover={{ scale: 1.2, zIndex: 10 }}
+            >
+              <Badge
+                px={4}
+                py={2}
+                borderRadius="full"
+                fontSize={fontSize}
+                fontWeight="bold"
+                bg="bg.accent"
+                borderWidth="2px"
+                borderColor="transparent"
+                color="text.primary"
+                cursor="pointer"
+                transition="all 0.3s"
+                _hover={{
+                  borderColor: 'brand.400',
+                  bgGradient: 'gradients.jewel',
+                  color: 'white',
+                  shadow: 'xl'
                 }}
               >
-                {char === ' ' ? '\u00A0' : char}
-              </motion.span>
-            ))}
-          </MotionHeading>
-
-          <Text
-            fontSize="lg"
-            color="text.secondary"
-            maxW="600px"
-          >
-            Technologies and tools I use to bring ideas to life
-          </Text>
-        </VStack>
-
-        {/* Skills Grid */}
-        <Box>
-          {categories.map((category, index) => (
-            <CategorySection
-              key={category}
-              category={category}
-              skills={skills[category] || []}
-              index={index}
-            />
-          ))}
-        </Box>
-      </Container>
-    </Box>
+                {skill.name}
+              </Badge>
+            </motion.div>
+          );
+        })}
+      </Box>
+    </VStack>
   );
-}
+};
+
+
+// Default export - choose your favorite!
+export default TechSkillsDenseRow;
