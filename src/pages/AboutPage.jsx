@@ -486,5 +486,5 @@ const AboutPageOffset = () => {
   );
 };
 
-export default  AboutPageDiagonal ; // My recommended default
-export { AboutPageOffset, AboutPageBento };
+export default AboutPageBento; // My recommended default
+export { AboutPageOffset, AboutPageDiagonal };
