@@ -7,13 +7,8 @@ import {
   Button,
   VStack,
   HStack,
-  Image,
-  Grid,
-  GridItem
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
-import { ReactTyped } from "react-typed";
-import CodingImg from "./assets/Coding.png";
 import { useInView } from 'react-intersection-observer';
 import { useColorMode } from '@chakra-ui/react';
 import TextType from "./ui/TextType";
@@ -24,7 +19,7 @@ const MotionBox = motion.create(Box);
 const MotionHeading = motion.create(Heading);
 const MotionText = motion.create(Text);
 const MotionButton = motion.create(Button);
-const MotionImage = motion.create(Image);
+
 
 // Animation variants
 const fadeInUp = {
@@ -36,14 +31,6 @@ const fadeInUp = {
   }
 };
 
-const fadeInLeft = {
-  hidden: { opacity: 0, x: -50 },
-  visible: { 
-    opacity: 1, 
-    x: 0,
-    transition: { duration: 0.7, ease: "easeOut" }
-  }
-};
 const fadeInRight = {
   hidden: { opacity: 0, x: 50 },
   visible: { 
@@ -54,15 +41,6 @@ const fadeInRight = {
 };
 
 
-const scaleIn = {
-  hidden: { opacity: 0, scale: 0.8 },
-  visible: { 
-    opacity: 1, 
-    scale: 1,
-    transition: { duration: 0.5, ease: "easeOut" }
-  }
-};
-
 
 
 function Hero() {
@@ -71,10 +49,7 @@ function Hero() {
     triggerOnce: false,
     threshold: 0.2
   });
-  const [imageRef,imageInView] = useInView({
-    triggerOnce: false,
-    threshold: 0.2
-  });
+
   const [contentRef,contentInView] = useInView({
     triggerOnce: false,
     threshold: 0.2
@@ -134,44 +109,7 @@ function Hero() {
       />
 
       <Container maxW="container.xl" position="relative" zIndex={1}>
-        {/* <Grid
-          templateColumns={{ base: '1fr', lg: '1fr 1fr' }}
-          gap={{ base: 8, lg: 12 }}
-          alignItems="center"
-        > */}
-          {/* <GridItem>
-            <MotionBox
-              ref={imageRef}
-              initial="hidden"
-              animate={imageInView?"visible":"hidden"}
-              variants={fadeInLeft}
-              position="relative"
-              display="flex"
-              flexDirection="column"
-              alignItems="center"
-              justifyContent="center"
-            >
-              
-              <MotionImage
-                src={CodingImg}
-                alt="Coding"
-                boxSize={{ base: "200px", md: "250px", lg: "300px" }}
-                variants={scaleIn}
-                animate={{
-                  y: [0, -20, 0]
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-                filter="drop-shadow(0 10px 30px rgba(20, 184, 166, 0.3))"
-              />
-            </MotionBox>
-          </GridItem> */}
-
-          {/* Right side - Text content */}
-          {/* <GridItem> */}
+          {/* Text content */}
             <MotionBox
             ref={contentRef}
               initial="hidden"
@@ -291,8 +229,6 @@ function Hero() {
                 </MotionBox>
               </VStack>
             </MotionBox>
-          {/* </GridItem> */}
-        {/* </Grid> */}
       </Container>
     </Box>
   );
