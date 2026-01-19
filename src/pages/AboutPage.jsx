@@ -421,18 +421,28 @@ import {
 } from '@chakra-ui/react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useColorModeValue } from '@chakra-ui/react';
+import AboutPart from '../components/AboutPageBits/AboutPart'
+import Hobbies from '../components/AboutPageBits/Hobbies';
+import Certificates from '../components/AboutPageBits/Certificates';
+import TechSkills from '../components/AboutPageBits/TechSkills';
+import ContributionMap from '../components/AboutPageBits/ContributionMap';
+import Learning from '../components/AboutPageBits/Learning';
+import Resume from '../components/Resume';
+import DotGrid from '../components/assets/DotGrid/DotGrid';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 // Import your components (mock for demo)
-const AboutPart = () => <Box>About Content</Box>;
-const TechSkills = () => <Box>Tech Skills</Box>;
-const Learning = () => <Box>Learning Content</Box>;
-const Certificates = () => <Box>Certificates</Box>;
-const Hobbies = () => <Box>Hobbies</Box>;
-const ContributionMap = () => <Box>Contribution Map</Box>;
-const Resume = () => <Box>Resume</Box>;
-const Header = () => <Box h="80px" bg="surface.card" borderBottomWidth="1px" borderColor="border.primary" />;
-const Footer = () => <Box h="200px" bg="surface.card" borderTopWidth="1px" borderColor="border.primary" />;
-const DotGrid = (props) => <Box position="fixed" inset={0} zIndex={0} {...props} />;
+// const AboutPart = () => <Box>About Content</Box>;
+// const TechSkills = () => <Box>Tech Skills</Box>;
+// const Learning = () => <Box>Learning Content</Box>;
+// const Certificates = () => <Box>Certificates</Box>;
+// const Hobbies = () => <Box>Hobbies</Box>;
+// const ContributionMap = () => <Box>Contribution Map</Box>;
+// const Resume = () => <Box>Resume</Box>;
+// const Header = () => <Box h="80px" bg="surface.card" borderBottomWidth="1px" borderColor="border.primary" />;
+// const Footer = () => <Box h="200px" bg="surface.card" borderTopWidth="1px" borderColor="border.primary" />;
+// const DotGrid = (props) => <Box position="fixed" inset={0} zIndex={0} {...props} />;
 
 /**
  * LAYOUT 1: Split-Screen (Left Profile Sticky, Right Scrollable)
@@ -1539,4 +1549,4 @@ export const AboutPageFloatingIslands = () => {
 };
 
 // Export all layouts
-export default AboutPageDashboard;
+export default AboutPageSplitScreen;
