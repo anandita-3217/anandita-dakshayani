@@ -117,6 +117,7 @@ const baseColor = useColorModeValue("#d4dadc", '#1a1a1a');
 // TODO: https://reactbits.dev/text-animations/split-text for separate contact page
 // TODO: Add  a an AI chatbot or whatev 
 // TODO: Maybe add a picture of whatever hubble is seeing in the hobbies section?
+// TODO: maybe https://www.framer.com/marketplace/components/eyes-follow-cursor/ https://www.framer.com/marketplace/components/interactive-gradient/
 
   )
 }

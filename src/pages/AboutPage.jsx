@@ -468,7 +468,7 @@ export const AboutPageSplitScreen = () => {
         }}
       />
 
-      <Box position="relative" bg="bg.secondary" minH="100vh">
+      <Box position="relative" bg="transparent" minH="100vh">
         <DotGrid
           dotSize={5}
           gap={15}
@@ -488,7 +488,7 @@ export const AboutPageSplitScreen = () => {
             position={{ base: 'relative', lg: 'sticky' }}
             top="80px"
             h={{ base: 'auto', lg: 'calc(100vh - 80px)' }}
-            bg="surface.card"
+            bg="transparent"
             borderRightWidth={{ base: 0, lg: '1px' }}
             borderColor="border.primary"
             overflowY="auto"
@@ -597,7 +597,7 @@ export const AboutPageSplitScreen = () => {
                 <AboutPart />
               </Box>
 
-              <Box bg="surface.elevated" py={{ base: 12, md: 16 }} px={{ base: 6, md: 12 }}>
+              <Box bg="transparent" py={{ base: 12, md: 16 }} px={{ base: 6, md: 12 }}>
                 <TechSkills />
               </Box>
 
@@ -605,7 +605,7 @@ export const AboutPageSplitScreen = () => {
                 <Learning />
               </Box>
 
-              <Box bg="surface.elevated" py={{ base: 12, md: 16 }} px={{ base: 6, md: 12 }}>
+              <Box bg="transparent" py={{ base: 12, md: 16 }} px={{ base: 6, md: 12 }}>
                 <Certificates />
               </Box>
 
@@ -613,7 +613,7 @@ export const AboutPageSplitScreen = () => {
                 <ContributionMap />
               </Box>
 
-              <Box bg="surface.elevated" py={{ base: 12, md: 16 }} px={{ base: 6, md: 12 }}>
+              <Box bg="transparent" py={{ base: 12, md: 16 }} px={{ base: 6, md: 12 }}>
                 <Hobbies />
               </Box>
             </VStack>
@@ -636,7 +636,7 @@ export const AboutPageCardModular = () => {
 
   const CardWrapper = ({ children, ...props }) => (
     <Box
-      bg="surface.card"
+      bg="transparent"
       borderRadius="2xl"
       p={{ base: 6, md: 8 }}
       borderWidth="1px"
@@ -665,7 +665,7 @@ export const AboutPageCardModular = () => {
         }}
       />
 
-      <Box position="relative" bg="bg.secondary" minH="100vh">
+      <Box position="relative" bg="transparent" minH="100vh">
         <DotGrid
           dotSize={5}
           gap={15}
@@ -755,412 +755,19 @@ export const AboutPageCardModular = () => {
  * LAYOUT 3: Timeline-Based Growth Story
  * Shows journey as a fresher developer
  */
-export const AboutPageTimeline = () => {
-  const { scrollYProgress } = useScroll();
-  const baseColor = useColorModeValue("#d4dadc", '#1a1a1a');
 
-  const timelineData = [
-    {
-      year: '2021',
-      title: 'Started Coding Journey',
-      description: 'Began learning HTML, CSS, and JavaScript fundamentals',
-      component: <AboutPart />,
-      icon: '🚀'
-    },
-    {
-      year: '2022',
-      title: 'React & Modern Stack',
-      description: 'Dove deep into React, Node.js, and modern web development',
-      component: <TechSkills />,
-      icon: '⚛️'
-    },
-    {
-      year: '2023',
-      title: 'Project Building Phase',
-      description: 'Built multiple full-stack projects and contributed to open source',
-      component: <ContributionMap />,
-      icon: '🛠️'
-    },
-    {
-      year: '2024',
-      title: 'Certifications & Learning',
-      description: 'Earned professional certifications and expanded skillset',
-      component: <Certificates />,
-      icon: '🎓'
-    },
-    {
-      year: '2025',
-      title: 'Currently Exploring',
-      description: 'Learning TypeScript, Next.js, and advanced patterns',
-      component: <Learning />,
-      icon: '🌱'
-    }
-  ];
-
-  return (
-    <>
-      <motion.div
-        style={{
-          scaleX: scrollYProgress,
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          height: '4px',
-          background: 'linear-gradient(to right, #059669, #2563eb, #9333ea)',
-          transformOrigin: '0%',
-          zIndex: 9999
-        }}
-      />
-
-      <Box position="relative" bg="bg.secondary" minH="100vh">
-        <DotGrid
-          dotSize={5}
-          gap={15}
-          baseColor={baseColor}
-          activeColor={['#ff0080', '#6366f1', '#3b82f6']}
-        />
-
-        <Header />
-
-        <Container maxW="container.lg" py={20}>
-          {/* Hero */}
-          <VStack spacing={4} mb={20} textAlign="center">
-            <Heading size="3xl" bgGradient="linear(to-r, #059669, #2563eb, #9333ea)" bgClip="text">
-              My Developer Journey
-            </Heading>
-            <Text fontSize="xl" color="text.muted" maxW="2xl">
-              From first line of code to building production applications
-            </Text>
-          </VStack>
-
-          {/* Timeline */}
-          <VStack spacing={16} align="stretch" position="relative">
-            {/* Vertical line */}
-            <Box
-              position="absolute"
-              left={{ base: '20px', md: '50%' }}
-              top={0}
-              bottom={0}
-              w="3px"
-              bgGradient="linear(to-r, #059669, #2563eb, #9333ea)"
-              transform={{ base: 'none', md: 'translateX(-50%)' }}
-            />
-
-            {timelineData.map((item, idx) => (
-              <motion.div
-                key={item.year}
-                initial={{ opacity: 0, x: idx % 2 === 0 ? -50 : 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: '-100px' }}
-                transition={{ duration: 0.6, delay: idx * 0.1 }}
-              >
-                <Grid
-                  templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)' }}
-                  gap={8}
-                  alignItems="center"
-                >
-                  {/* Left side (desktop) */}
-                  <GridItem
-                    colStart={{ base: 1, md: idx % 2 === 0 ? 1 : 2 }}
-                    textAlign={{ base: 'left', md: idx % 2 === 0 ? 'right' : 'left' }}
-                  >
-                    <HStack
-                      spacing={4}
-                      justify={{ base: 'flex-start', md: idx % 2 === 0 ? 'flex-end' : 'flex-start' }}
-                      mb={4}
-                    >
-                      <Box
-                        fontSize="4xl"
-                        w={16}
-                        h={16}
-                        bg="surface.card"
-                        borderRadius="full"
-                        display="flex"
-                        alignItems="center"
-                        justifyContent="center"
-                        borderWidth="3px"
-                        borderColor="brand.400"
-                        position="relative"
-                        zIndex={1}
-                        order={{ base: 1, md: idx % 2 === 0 ? 2 : 1 }}
-                      >
-                        {item.icon}
-                      </Box>
-                      <VStack
-                        align={{ base: 'flex-start', md: idx % 2 === 0 ? 'flex-end' : 'flex-start' }}
-                        spacing={1}
-                        order={{ base: 2, md: idx % 2 === 0 ? 1 : 2 }}
-                      >
-                        <Text fontSize="3xl" fontWeight="bold" color="brand.400">
-                          {item.year}
-                        </Text>
-                        <Heading size="md">{item.title}</Heading>
-                        <Text fontSize="sm" color="text.muted">
-                          {item.description}
-                        </Text>
-                      </VStack>
-                    </HStack>
-                  </GridItem>
-
-                  {/* Content (mobile: below, desktop: opposite side) */}
-                  <GridItem
-                    colStart={{ base: 1, md: idx % 2 === 0 ? 2 : 1 }}
-                    rowStart={{ base: 2, md: 1 }}
-                  >
-                    <Box
-                      bg="surface.card"
-                      borderRadius="xl"
-                      p={6}
-                      borderWidth="1px"
-                      borderColor="border.primary"
-                      ml={{ base: 12, md: 0 }}
-                    >
-                      {item.component}
-                    </Box>
-                  </GridItem>
-                </Grid>
-              </motion.div>
-            ))}
-          </VStack>
-
-          {/* Resume CTA */}
-          <Box mt={20} textAlign="center">
-            <Box
-              bg="surface.card"
-              borderRadius="2xl"
-              p={10}
-              borderWidth="1px"
-              borderColor="brand.400"
-              position="relative"
-              overflow="hidden"
-              _before={{
-                content: '""',
-                position: 'absolute',
-                inset: 0,
-                bgGradient: 'linear(to-r, #059669, #2563eb, #9333ea)',
-                opacity: 0.05
-              }}
-            >
-              <Box position="relative" zIndex={1}>
-                <Resume />
-              </Box>
-            </Box>
-          </Box>
-        </Container>
-
-        <Footer />
-      </Box>
-    </>
-  );
-};
 
 /**
  * LAYOUT 4: Interactive Scroll-Driven (Advanced Animations)
  * Sections animate based on scroll position
  */
-export const AboutPageScrollDriven = () => {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  });
 
-  const baseColor = useColorModeValue("#d4dadc", '#1a1a1a');
-  
-  // Transform scroll into different animation values
-  const opacity1 = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
-  const scale1 = useTransform(scrollYProgress, [0, 0.2], [1, 0.8]);
-  
-  const opacity2 = useTransform(scrollYProgress, [0.15, 0.3, 0.45], [0, 1, 0]);
-  const y2 = useTransform(scrollYProgress, [0.15, 0.3], [50, 0]);
-
-  const opacity3 = useTransform(scrollYProgress, [0.4, 0.5, 0.65], [0, 1, 0]);
-  const scale3 = useTransform(scrollYProgress, [0.4, 0.5], [0.9, 1]);
-
-  return (
-    <>
-      <motion.div
-        style={{
-          scaleX: scrollYProgress,
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          height: '4px',
-          background: 'linear-gradient(to right, #059669, #2563eb, #9333ea)',
-          transformOrigin: '0%',
-          zIndex: 9999
-        }}
-      />
-
-      <Box ref={containerRef} position="relative" bg="bg.secondary">
-        <DotGrid
-          dotSize={5}
-          gap={15}
-          baseColor={baseColor}
-          activeColor={['#ff0080', '#6366f1', '#3b82f6']}
-        />
-
-        <Header />
-
-        {/* Section 1 - Fades out */}
-        <Box minH="100vh" display="flex" alignItems="center" position="relative">
-          <Container maxW="container.xl">
-            <motion.div style={{ opacity: opacity1, scale: scale1 }}>
-              <AboutPart />
-            </motion.div>
-          </Container>
-        </Box>
-
-        {/* Section 2 - Fades in from bottom */}
-        <Box minH="100vh" display="flex" alignItems="center" bg="surface.card">
-          <Container maxW="container.xl">
-            <motion.div style={{ opacity: opacity2, y: y2 }}>
-              <TechSkills />
-            </motion.div>
-          </Container>
-        </Box>
-
-        {/* Section 3 - Scales in */}
-        <Box minH="100vh" display="flex" alignItems="center">
-          <Container maxW="container.xl">
-            <motion.div style={{ opacity: opacity3, scale: scale3 }}>
-              <ContributionMap />
-            </motion.div>
-          </Container>
-        </Box>
-
-        {/* Regular sections below */}
-        <VStack spacing={0}>
-          <Box bg="surface.card" py={20} w="full">
-            <Container maxW="container.xl">
-              <Learning />
-            </Container>
-          </Box>
-
-          <Box py={20} w="full">
-            <Container maxW="container.xl">
-              <Certificates />
-            </Container>
-          </Box>
-
-          <Box bg="surface.card" py={20} w="full">
-            <Container maxW="container.xl">
-              <Resume />
-            </Container>
-          </Box>
-        </VStack>
-
-        <Footer />
-      </Box>
-    </>
-  );
-};
 
 /**
  * LAYOUT 5: Minimal One-Pager with Smooth Scroll
  * Each section = one viewport, anchor navigation
  */
-export const AboutPageOnePager = () => {
-  const { scrollYProgress } = useScroll();
-  const baseColor = useColorModeValue("#d4dadc", '#1a1a1a');
 
-  const sections = [
-    { id: 'about', label: 'About', component: <AboutPart /> },
-    { id: 'skills', label: 'Skills', component: <TechSkills /> },
-    { id: 'learning', label: 'Learning', component: <Learning /> },
-    { id: 'certificates', label: 'Certificates', component: <Certificates /> },
-    { id: 'contributions', label: 'Contributions', component: <ContributionMap /> },
-    { id: 'resume', label: 'Resume', component: <Resume /> },
-  ];
-
-  return (
-    <>
-      <motion.div
-        style={{
-          scaleX: scrollYProgress,
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          height: '4px',
-          background: 'linear-gradient(to right, #059669, #2563eb, #9333ea)',
-          transformOrigin: '0%',
-          zIndex: 9999
-        }}
-      />
-
-      {/* Floating Navigation */}
-      <HStack
-        position="fixed"
-        top="50%"
-        right={8}
-        transform="translateY(-50%)"
-        spacing={3}
-        zIndex={100}
-        display={{ base: 'none', lg: 'flex' }}
-      >
-        {sections.map(section => (
-          <Box
-            key={section.id}
-            as="a"
-            href={`#${section.id}`}
-            w={3}
-            h={3}
-            borderRadius="full"
-            bg="border.primary"
-            cursor="pointer"
-            transition="all 0.3s"
-            _hover={{
-              bg: 'brand.400',
-              transform: 'scale(1.5)'
-            }}
-            title={section.label}
-          />
-        ))}
-      </HStack>
-
-      <Box position="relative" bg="bg.secondary">
-        <DotGrid
-          dotSize={5}
-          gap={15}
-          baseColor={baseColor}
-          activeColor={['#ff0080', '#6366f1', '#3b82f6']}
-        />
-
-        <Header />
-
-        <VStack spacing={0} align="stretch">
-          {sections.map((section, idx) => (
-            <Box
-              key={section.id}
-              id={section.id}
-              minH="100vh"
-              display="flex"
-              alignItems="center"
-              bg={idx % 2 === 0 ? 'transparent' : 'surface.card'}
-              py={20}
-            >
-              <Container maxW="container.xl">
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.6 }}
-                >
-                  {section.component}
-                </motion.div>
-              </Container>
-            </Box>
-          ))}
-        </VStack>
-
-        <Footer />
-      </Box>
-    </>
-  );
-};
 
 /**
  * LAYOUT 6: Developer Dashboard
@@ -1193,7 +800,7 @@ export const AboutPageDashboard = () => {
         }}
       />
 
-      <Box position="relative" bg="bg.secondary" minH="100vh">
+      <Box position="relative" bg="transparent" minH="100vh">
         <DotGrid
           dotSize={5}
           gap={15}
@@ -1549,4 +1156,4 @@ export const AboutPageFloatingIslands = () => {
 };
 
 // Export all layouts
-export default AboutPageSplitScreen;
+export default AboutPageDashboard;
