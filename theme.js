@@ -41,6 +41,42 @@ fonts: {
       deep: 'linear(to-r, #047857, #1e40af, #7c3aed)',
       vibrant: 'linear(to-r, #10b981, #06b6d4, #3b82f6, #8b5cf6, #ec4899)',
       royalDeep: 'linear(to-r, #1e3a8a, #6b21a8, #be185d)',
+      // Soft romantic pink to purple
+      rose: 'linear(to-r, #fecaca, #fda4af, #f472b6)',
+        
+      // Hot pink to magenta
+      hotPink: 'linear(to-r, #ff1493, #ff69b4, #ff85c1)',
+        
+      // Pink to coral
+      coral: 'linear(to-r, #ff6b9d, #ff8fab, #ffa8b8)',
+        
+      // Sunset pink to orange
+      pinkSunset: 'linear(to-r, #ff6ec7, #ff8976, #ffa94d)',
+        
+      // Bubblegum pink
+      bubblegum: 'linear(to-r, #ff9a9e, #fecfef, #ffd8f4)',
+        
+      // Neon pink to purple
+      neonPink: 'linear(to-r, #ff0080, #ff00ff, #8000ff)',
+        
+      // Rose gold
+      roseGold: 'linear(to-r, #f4c4c4, #e8b4b4, #daa5a5)',
+        
+      // Pink to teal (complementary)
+      pinkTeal: 'linear(to-r, #ec4899, #14b8a6)',
+        
+      // Candy pink
+      candy: 'linear(to-r, #ff6b95, #ff8db3, #ffb3d1)',
+        
+      // Vibrant pink to blue
+      pinkBlue: 'linear(to-r, #ec4899, #8b5cf6, #3b82f6)',
+        
+      // Pastel pink dream
+      pastelPink: 'linear(to-r, #ffc2d1, #ffb3c1, #ffa4b0)',
+        
+      // Electric pink
+      electric: 'linear(to-r, #ff0099, #ff33cc, #ff66ff)',
+
 },
   },
 

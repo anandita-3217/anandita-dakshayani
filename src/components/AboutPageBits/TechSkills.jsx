@@ -293,7 +293,7 @@ const allSkills = Object.entries(skillsData).flatMap(([category, skills]) =>
  * All skills in one continuous line with gradient category dividers
  */
 export const TechSkillsDenseRow = () => {
-  const dividerGradient = 'gradients.jewel';
+  const dividerGradient = 'linear(to-r, #059669, #2563eb, #9333ea)';
   
   return (
     <VStack spacing={8} align="stretch">

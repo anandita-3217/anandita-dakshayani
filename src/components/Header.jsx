@@ -43,6 +43,7 @@ const Header = () => {
   const borderColor = useColorModeValue("gray.200", "whiteAlpha.200");
   const linkColor = useColorModeValue("gray.700", "gray.300");
   const activeLinkBg = useColorModeValue("brand.50", "teal.900");
+  // const activeLinkBg = useColorModeValue("brand.50", "teal.900");
   const hoverBg = useColorModeValue("brand.50", "teal.900");
   const iconHoverBg = useColorModeValue("gray.100", "whiteAlpha.200");
   const mobileDropdownBg = useColorModeValue("white", "gray.900");
