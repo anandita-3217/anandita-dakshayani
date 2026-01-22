@@ -23,6 +23,74 @@ fonts: {
       800: '#134e4a',
       900: '#0f3d3a',
     },
+      pink: {
+    50: '#fef1f7',
+    100: '#fee5ef',
+    200: '#fccce0',
+    300: '#faa2c8',
+    400: '#f472b6',  // Main hot pink
+    500: '#ec4899',  // Vibrant magenta
+    600: '#db2777',
+    700: '#be185d',
+    800: '#9d174d',
+    900: '#831843',
+  },
+  
+  // ROSE PALETTE - Softer, elegant pink
+  rose: {
+    50: '#fff1f2',
+    100: '#ffe4e6',
+    200: '#fecdd3',
+    300: '#fda4af',
+    400: '#fb7185',  // Main rose
+    500: '#f43f5e',  // Deep rose
+    600: '#e11d48',
+    700: '#be123c',
+    800: '#9f1239',
+    900: '#881337',
+  },
+  
+  // FUCHSIA PALETTE - Purple-leaning pink
+  fuchsia: {
+    50: '#fdf4ff',
+    100: '#fae8ff',
+    200: '#f5d0fe',
+    300: '#f0abfc',
+    400: '#e879f9',  // Main fuchsia
+    500: '#d946ef',  // Vibrant fuchsia
+    600: '#c026d3',
+    700: '#a21caf',
+    800: '#86198f',
+    900: '#701a75',
+  },
+  
+  // CORAL PALETTE - Pink-orange blend
+  coral: {
+    50: '#fff5f5',
+    100: '#ffe8e8',
+    200: '#ffd0d0',
+    300: '#ffb3b3',
+    400: '#ff8a8a',  // Main coral
+    500: '#ff6b6b',  // Vibrant coral
+    600: '#ff4757',
+    700: '#ee2c3c',
+    800: '#d62839',
+    900: '#b91f2f',
+  },
+  accent: {        // Add pink as accent
+    50: '#fef1f7',
+    100: '#fee5ef',
+    200: '#fccce0',
+    300: '#faa2c8',
+    400: '#f472b6',  // Use this for highlights
+    500: '#ec4899',
+    600: '#db2777',
+    700: '#be185d',
+    800: '#9d174d',
+    900: '#831843',
+  },
+
+
     gradients: {
       primary: 'linear(to-r, #10b981, #3b82f6, #8b5cf6)',
       brand: 'linear(to-r, #14b8a6, #667eea)',
@@ -76,6 +144,9 @@ fonts: {
         
       // Electric pink
       electric: 'linear(to-r, #ff0099, #ff33cc, #ff66ff)',
+      pinkBrand: 'linear(to-r, pink.400, brand.400)',
+  roseGold: 'linear(to-r, rose.400, rose.600)',
+  fuchsiaGlow: 'linear(to-r, fuchsia.400, fuchsia.600)',
 
 },
   },
