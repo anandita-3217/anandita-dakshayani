@@ -253,7 +253,7 @@ import { useInView } from 'react-intersection-observer';
 import { useColorMode } from '@chakra-ui/react';
 import CursorMaskReveal from './ui/CursorMaskReveal';
 import TextType from "./ui/TextType";
-
+import Heroimg from "./assets/Hero.jpg";
 const MotionBox = motion.create(Box);
 const MotionHeading = motion.create(Heading);
 const MotionText = motion.create(Text);
@@ -302,7 +302,8 @@ function Hero() {
       display="flex"
       alignItems="center"
       overflow="hidden"
-      bg={colorMode === 'dark' ? 'gray.900' : 'white'}
+      // bg={colorMode === 'dark' ? 'gray.900' : 'white'}
+      bg='transparent'
     >
       {/* Masked Background Image with Parallax */}
       <CursorMaskReveal
@@ -319,8 +320,9 @@ function Hero() {
           >
             {/* Colorful vibrant image */}
             <Image
-              src="https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?w=1920&q=80"
-              alt="Colorful gradient background"
+              // src="https://images.unsplash.com/photo-jr1OUvWYuTQ?w=1920&q=80"
+              src={Heroimg}
+              alt="Colorful light trails background"
               w="full"
               h="120%"
               objectFit="cover"
@@ -348,7 +350,7 @@ function Hero() {
           style={{ y: imageY }}
         >
           <Image
-            src="https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?w=1920&q=80"
+            src="https://images.unsplash.com/photo-1548438294-1ad5d5f4f063?w=1920&q=80"
             alt="Background"
             w="full"
             h="120%"
