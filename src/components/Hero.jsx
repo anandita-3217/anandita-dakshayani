@@ -236,7 +236,6 @@
 
 // export default Hero;
 
-
 import React, { useRef } from 'react';
 import {
   Box,
@@ -253,7 +252,8 @@ import { useInView } from 'react-intersection-observer';
 import { useColorMode } from '@chakra-ui/react';
 import CursorMaskReveal from './ui/CursorMaskReveal';
 import TextType from "./ui/TextType";
-import Heroimg from "./assets/Hero.jpg";
+import HeroImg from "./assets/Hero.jpg";
+import HeroFore from "./assets/HeroFore.jpg";
 const MotionBox = motion.create(Box);
 const MotionHeading = motion.create(Heading);
 const MotionText = motion.create(Text);
@@ -302,11 +302,10 @@ function Hero() {
       display="flex"
       alignItems="center"
       overflow="hidden"
-      // bg={colorMode === 'dark' ? 'gray.900' : 'white'}
-      bg='transparent'
+      bg={colorMode === 'dark' ? 'gray.900' : 'white'}
     >
       {/* Masked Background Image with Parallax */}
-      <CursorMaskReveal
+      {/* <CursorMaskReveal
         maskSize={250}
         springConfig={{ damping: 20, stiffness: 150 }}
         revealContent={
@@ -318,17 +317,16 @@ function Hero() {
             bottom="0"
             style={{ y: imageY }}
           >
-            {/* Colorful vibrant image */}
+            
             <Image
-              // src="https://images.unsplash.com/photo-jr1OUvWYuTQ?w=1920&q=80"
-              src={Heroimg}
+              src={HeroImg}
               alt="Colorful light trails background"
               w="full"
               h="120%"
               objectFit="cover"
               objectPosition="center"
             />
-            {/* Gradient overlay for revealed content */}
+            
             <Box
               position="absolute"
               top="0"
@@ -340,7 +338,7 @@ function Hero() {
           </MotionBox>
         }
       >
-        {/* Base grayscale/muted image */}
+        
         <MotionBox
           position="absolute"
           top="0"
@@ -360,7 +358,7 @@ function Hero() {
               ? 'grayscale(90%) brightness(0.3)' 
               : 'grayscale(80%) brightness(0.9) contrast(0.8)'}
           />
-          {/* Dark overlay for readability */}
+          
           <Box
             position="absolute"
             top="0"
@@ -371,7 +369,7 @@ function Hero() {
               ? 'rgba(0, 0, 0, 0.7)' 
               : 'rgba(255, 255, 255, 0.85)'}
           />
-          {/* Gradient accent overlay */}
+          
           <Box
             position="absolute"
             top="0"
@@ -383,10 +381,14 @@ function Hero() {
               : "linear(to-br, rgba(30, 64, 175, 0.08), rgba(124, 58, 237, 0.08), rgba(236, 72, 153, 0.1))"}
           />
         </MotionBox>
-      </CursorMaskReveal>
-
+      </CursorMaskReveal> */}
+<CursorMaskReveal
+      foreground={HeroFore}
+      background={HeroImg}
+      height="500px"
+    />
       {/* Floating particles/blobs */}
-      <MotionBox
+      {/* <MotionBox
         position="absolute"
         top="15%"
         right="8%"
@@ -405,7 +407,7 @@ function Hero() {
           repeat: Infinity,
           ease: "easeInOut"
         }}
-      />
+      /> */}
 
       <MotionBox
         position="absolute"
@@ -476,14 +478,7 @@ function Hero() {
                 </Box>
               </MotionHeading>
 
-              {/* Accent line */}
-              <MotionBox
-                w="100px"
-                h="4px"
-                bgGradient="linear(to-r, #ec4899, #a855f7)"
-                borderRadius="full"
-                variants={fadeInUp}
-              />
+
 
               {/* Subtitle */}
               <MotionText
@@ -588,59 +583,6 @@ function Hero() {
                     Get in Touch
                   </MotionButton>
                 </HStack>
-              </MotionBox>
-
-              {/* Scroll Indicator */}
-              <MotionBox
-                mt={12}
-                animate={{
-                  y: [0, 12, 0],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              >
-                <VStack spacing={2}>
-                  <Text
-                    fontSize="xs"
-                    fontWeight="600"
-                    letterSpacing="wider"
-                    textTransform="uppercase"
-                    color={colorMode === 'dark' ? 'gray.400' : 'gray.600'}
-                  >
-                    Scroll to explore
-                  </Text>
-                  <Box
-                    w="28px"
-                    h="45px"
-                    border="2px solid"
-                    borderColor={colorMode === 'dark' ? 'whiteAlpha.400' : 'blackAlpha.400'}
-                    borderRadius="full"
-                    position="relative"
-                  >
-                    <MotionBox
-                      w="4px"
-                      h="8px"
-                      bg={colorMode === 'dark' ? 'white' : 'gray.900'}
-                      borderRadius="full"
-                      position="absolute"
-                      top="8px"
-                      left="50%"
-                      transform="translateX(-50%)"
-                      animate={{
-                        y: [0, 16, 0],
-                        opacity: [1, 0.3, 1]
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                      }}
-                    />
-                  </Box>
-                </VStack>
               </MotionBox>
             </VStack>
           </MotionBox>
