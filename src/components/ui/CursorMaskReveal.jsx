@@ -228,63 +228,81 @@
 // };
 
 // export default CursorMaskReveal;
-"use client";
+import React, { useState } from 'react';
+import { ChakraProvider, Box, Text } from '@chakra-ui/react';
 
-import React, { useState } from "react";
-import { motion, useMotionValue, useMotionTemplate } from "framer-motion";
+const CursorMaskReveal = () => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-export default function CursorMaskReveal({ 
-  foreground, 
-  background, 
-  width = "100%",
-  height = "100%",
-}) {
-  const maskX = useMotionValue(0);
-  const maskY = useMotionValue(0);
-  const maskSize = useMotionValue(80);
-
-  // Create radial mask CSS
-  const maskImage = useMotionTemplate`
-    radial-gradient(
-      70px
-      at ${maskX}px ${maskY}px,
-      transparent 30%,
-      black 60%
-    )
-  `;
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setMousePosition({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
 
   return (
-    <motion.div
-      style={{
-        position: "relative",
-        width,
-        height,
-        backgroundImage: `url(${background})`,
-        backgroundSize: "cover",
-        WebkitMaskImage: maskImage,
-        maskImage,
-      }}
-      onMouseMove={(e) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        maskX.set(x);
-        maskY.set(y);
-      }}
-      onMouseEnter={() => maskSize.set(150)}
-      onMouseLeave={() => maskSize.set(80)}
-    >
-      <img
-        src={foreground}
-        alt="Foreground"
-        style={{
-          position: "absolute",
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          pointerEvents: "none",
-        }}
-      />
-    </motion.div>
+    <ChakraProvider>
+      <Box
+        position="relative"
+        width="100vw"
+        height="100vh"
+        overflow="hidden"
+        onMouseMove={handleMouseMove}
+        bg="black"
+      >
+        {/* Base layer - visible text */}
+        <Box
+          position="absolute"
+          inset="0"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          padding="4"
+        >
+          <Text
+            fontSize={{ base: '3xl', md: '6xl', lg: '8xl' }}
+            fontWeight="bold"
+            color="white"
+            textAlign="center"
+            lineHeight="1.2"
+          >
+            Hover to reveal
+            <br />
+            the magic
+          </Text>
+        </Box>
+
+        {/* Mask layer - revealed on hover */}
+        <Box
+          position="absolute"
+          inset="0"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          padding="4"
+          style={{
+            maskImage: `radial-gradient(circle 150px at ${mousePosition.x}px ${mousePosition.y}px, black 0%, transparent 100%)`,
+            WebkitMaskImage: `radial-gradient(circle 150px at ${mousePosition.x}px ${mousePosition.y}px, black 0%, transparent 100%)`,
+          }}
+        >
+          <Text
+            fontSize={{ base: '3xl', md: '6xl', lg: '8xl' }}
+            fontWeight="bold"
+            bgGradient="linear(to-r, cyan.400, purple.500, pink.500)"
+            bgClip="text"
+            textAlign="center"
+            lineHeight="1.2"
+          >
+            Hover to reveal
+            <br />
+            the magic
+          </Text>
+        </Box>
+      </Box>
+    </ChakraProvider>
   );
-}
+};
+
+export default CursorMaskReveal;

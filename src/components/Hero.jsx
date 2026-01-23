@@ -236,360 +236,181 @@
 
 // export default Hero;
 
-import React, { useRef } from 'react';
-import {
-  Box,
-  Container,
-  Heading,
-  Text,
-  Button,
-  VStack,
-  HStack,
-  Image,
-} from '@chakra-ui/react';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import { useColorMode } from '@chakra-ui/react';
-import CursorMaskReveal from './ui/CursorMaskReveal';
-import TextType from "./ui/TextType";
-import HeroImg from "./assets/Hero.jpg";
+// import React, { useState } from 'react';
+// import {  Box, Heading, Text, VStack } from '@chakra-ui/react';
+// import HeroBack from "./assets/Hero.jpg";
+// import HeroFore from "./assets/HeroFore.jpg";
+// const HeroMaskReveal = () => {
+//   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+//   const handleMouseMove = (e) => {
+//     const rect = e.currentTarget.getBoundingClientRect();
+//     setMousePosition({
+//       x: e.clientX - rect.left,
+//       y: e.clientY - rect.top,
+//     });
+//   };
+
+//   // Replace these URLs with your actual images
+//   const colorImage = HeroBack;
+//   const grayscaleImage = HeroFore;
+
+//   return (
+    
+//       <Box
+//         position="relative"
+//         width="100vw"
+//         height="100vh"
+//         overflow="hidden"
+//         onMouseMove={handleMouseMove}
+//       >
+//         {/* Background layer - Color image */}
+//         <Box
+//           position="absolute"
+//           inset="0"
+//           backgroundImage={`url(${colorImage})`}
+//           backgroundSize="cover"
+//           backgroundPosition="center"
+//           backgroundRepeat="no-repeat"
+//         />
+
+//         {/* Foreground layer - Grayscale image with mask */}
+//         <Box
+//           position="absolute"
+//           inset="0"
+//           backgroundImage={`url(${grayscaleImage})`}
+//           backgroundSize="cover"
+//           backgroundPosition="center"
+//           backgroundRepeat="no-repeat"
+//           filter="grayscale(100%)"
+//           style={{
+//             maskImage: `radial-gradient(circle 200px at ${mousePosition.x}px ${mousePosition.y}px, transparent 0%, black 100%)`,
+//             WebkitMaskImage: `radial-gradient(circle 200px at ${mousePosition.x}px ${mousePosition.y}px, transparent 0%, black 100%)`,
+//           }}
+//         />
+
+//         {/* Content overlay */}
+//         <Box
+//           position="absolute"
+//           inset="0"
+//           display="flex"
+//           alignItems="center"
+//           justifyContent="center"
+//           bg="rgba(0, 0, 0, 0.3)"
+//         >
+//           <VStack spacing={4} textAlign="center" px={4}>
+//             <Heading
+//               as="h1"
+//               fontSize={{ base: '4xl', md: '6xl', lg: '7xl' }}
+//               fontWeight="bold"
+//               color="white"
+//               textShadow="0 2px 10px rgba(0,0,0,0.5)"
+//             >
+//               Discover the World
+//             </Heading>
+//             <Text
+//               fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }}
+//               color="white"
+//               maxW="2xl"
+//               textShadow="0 2px 10px rgba(0,0,0,0.5)"
+//             >
+//               Move your cursor to reveal the beauty
+//             </Text>
+//           </VStack>
+//         </Box>
+//       </Box>
+    
+//   );
+// };
+
+// export default HeroMaskReveal;
+import HeroBack from "./assets/Hero.jpg";
 import HeroFore from "./assets/HeroFore.jpg";
-const MotionBox = motion.create(Box);
-const MotionHeading = motion.create(Heading);
-const MotionText = motion.create(Text);
-const MotionButton = motion.create(Button);
 
-const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { 
-    opacity: 1, 
-    y: 0,
-    transition: { duration: 0.6, ease: "easeOut" }
-  }
-};
+import React, { useState } from 'react';
+import { ChakraProvider, Box, Heading, Text, VStack } from '@chakra-ui/react';
 
-function Hero() {
-  const { colorMode } = useColorMode();
-  const containerRef = useRef(null);
-  
-  const [headerRef, headerInView] = useInView({
-    triggerOnce: false,
-    threshold: 0.2
-  });
+const HeroMaskReveal = () => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-  const [contentRef, contentInView] = useInView({
-    triggerOnce: false,
-    threshold: 0.2
-  });
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setMousePosition({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
 
-  // Parallax scroll effects
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"]
-  });
-
-  const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
-  const imageY = useSpring(useTransform(scrollYProgress, [0, 1], [0, 300]), springConfig);
-  const contentY = useSpring(useTransform(scrollYProgress, [0, 1], [0, 150]), springConfig);
-  const opacity = useSpring(useTransform(scrollYProgress, [0, 0.5], [1, 0]), springConfig);
+  // Replace these URLs with your actual images
+  const colorImage = HeroBack;
+  const grayscaleImage = HeroBack;
 
   return (
-    <Box
-      ref={containerRef}
-      id="hero"
-      position="relative"
-      minH="100vh"
-      display="flex"
-      alignItems="center"
-      overflow="hidden"
-      bg={colorMode === 'dark' ? 'gray.900' : 'white'}
-    >
-      {/* Masked Background Image with Parallax */}
-      {/* <CursorMaskReveal
-        maskSize={250}
-        springConfig={{ damping: 20, stiffness: 150 }}
-        revealContent={
-          <MotionBox
-            position="absolute"
-            top="0"
-            left="0"
-            right="0"
-            bottom="0"
-            style={{ y: imageY }}
-          >
-            
-            <Image
-              src={HeroImg}
-              alt="Colorful light trails background"
-              w="full"
-              h="120%"
-              objectFit="cover"
-              objectPosition="center"
-            />
-            
-            <Box
-              position="absolute"
-              top="0"
-              left="0"
-              right="0"
-              bottom="0"
-              bgGradient="linear(to-br, rgba(236, 72, 153, 0.4), rgba(168, 85, 247, 0.4), rgba(59, 130, 246, 0.3))"
-            />
-          </MotionBox>
-        }
+    
+      <Box
+        position="relative"
+        width="100vw"
+        height="100vh"
+        overflow="hidden"
+        onMouseMove={handleMouseMove}
       >
-        
-        <MotionBox
+        {/* Background layer - Color image */}
+        <Box
           position="absolute"
-          top="0"
-          left="0"
-          right="0"
-          bottom="0"
-          style={{ y: imageY }}
-        >
-          <Image
-            src="https://images.unsplash.com/photo-1548438294-1ad5d5f4f063?w=1920&q=80"
-            alt="Background"
-            w="full"
-            h="120%"
-            objectFit="cover"
-            objectPosition="center"
-            filter={colorMode === 'dark' 
-              ? 'grayscale(90%) brightness(0.3)' 
-              : 'grayscale(80%) brightness(0.9) contrast(0.8)'}
-          />
-          
-          <Box
-            position="absolute"
-            top="0"
-            left="0"
-            right="0"
-            bottom="0"
-            bg={colorMode === 'dark' 
-              ? 'rgba(0, 0, 0, 0.7)' 
-              : 'rgba(255, 255, 255, 0.85)'}
-          />
-          
-          <Box
-            position="absolute"
-            top="0"
-            left="0"
-            right="0"
-            bottom="0"
-            bgGradient={colorMode === 'dark'
-              ? "linear(to-br, rgba(30, 64, 175, 0.15), rgba(124, 58, 237, 0.15), rgba(236, 72, 153, 0.2))"
-              : "linear(to-br, rgba(30, 64, 175, 0.08), rgba(124, 58, 237, 0.08), rgba(236, 72, 153, 0.1))"}
-          />
-        </MotionBox>
-      </CursorMaskReveal> */}
-<CursorMaskReveal
-      foreground={HeroFore}
-      background={HeroImg}
-      height="500px"
-    />
-      {/* Floating particles/blobs */}
-      {/* <MotionBox
-        position="absolute"
-        top="15%"
-        right="8%"
-        w="350px"
-        h="350px"
-        borderRadius="full"
-        bgGradient="radial(circle, rgba(236, 72, 153, 0.3), transparent)"
-        filter="blur(80px)"
-        style={{ y: useTransform(scrollYProgress, [0, 1], [0, -150]) }}
-        animate={{
-          scale: [1, 1.3, 1],
-          opacity: [0.3, 0.6, 0.3]
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      /> */}
+          inset="0"
+          backgroundImage={`url(${colorImage})`}
+          backgroundSize="cover"
+          backgroundPosition="center"
+          backgroundRepeat="no-repeat"
+        />
 
-      <MotionBox
-        position="absolute"
-        bottom="10%"
-        left="10%"
-        w="400px"
-        h="400px"
-        borderRadius="full"
-        bgGradient="radial(circle, rgba(168, 85, 247, 0.3), transparent)"
-        filter="blur(90px)"
-        style={{ y: useTransform(scrollYProgress, [0, 1], [0, 100]) }}
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.2, 0.5, 0.2]
-        }}
-        transition={{
-          duration: 10,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
+        {/* Foreground layer - Grayscale image with mask */}
+        <Box
+          position="absolute"
+          inset="0"
+          backgroundImage={`url(${grayscaleImage})`}
+          backgroundSize="cover"
+          backgroundPosition="center"
+          backgroundRepeat="no-repeat"
+          filter="grayscale(100%)"
+          style={{
+            maskImage: `radial-gradient(circle 200px at ${mousePosition.x}px ${mousePosition.y}px, transparent 0%, transparent 100%, black 100%, black 100%)`,
+            WebkitMaskImage: `radial-gradient(circle 200px at ${mousePosition.x}px ${mousePosition.y}px, transparent 0%, transparent 100%, black 100%, black 100%)`,
+          }}
+        />
 
-      {/* Content */}
-      <Container maxW="container.xl" position="relative" zIndex={10}>
-        <MotionBox
-          style={{ y: contentY, opacity }}
-          py={{ base: 20, md: 24 }}
+        {/* Content overlay */}
+        <Box
+          position="absolute"
+          inset="0"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          bg="rgba(0, 0, 0, 0.3)"
         >
-          <MotionBox
-            ref={contentRef}
-            initial="hidden"
-            animate={contentInView ? "visible" : "hidden"}
-            variants={fadeInUp}
-          >
-            <VStack 
-              spacing={6} 
-              align={{ base: 'center', lg: 'flex-start' }} 
-              textAlign={{ base: 'center', lg: 'left' }}
+          <VStack spacing={4} textAlign="center" px={4}>
+            <Heading
+              as="h1"
+              fontSize={{ base: '4xl', md: '6xl', lg: '7xl' }}
+              fontWeight="bold"
+              color="white"
+              textShadow="0 2px 10px rgba(0,0,0,0.5)"
             >
-              {/* Main Heading with Typing Effect */}
-              <MotionHeading
-                ref={headerRef}
-                as="h1"
-                fontSize={{ base: '4xl', md: '5xl', lg: '6xl', xl: '7xl' }}
-                fontWeight="bold"
-                lineHeight="1.1"
-                initial="hidden"
-                animate={headerInView ? "visible" : "hidden"}
-                variants={fadeInUp}
-                color={colorMode === 'dark' ? 'white' : 'gray.900'}
-                fontFamily="Silkscreen"
-                textShadow={colorMode === 'dark' 
-                  ? '0 0 40px rgba(236, 72, 153, 0.5), 0 0 80px rgba(168, 85, 247, 0.3)'
-                  : 'none'}
-              >
-                <Box
-                  as="span"
-                  bgGradient="linear(to-r, #ec4899, #a855f7, #6366f1)"
-                  bgClip="text"
-                >
-                  <TextType 
-                    text={["Hi! I'm Anandita!"]}
-                    typingSpeed={75}
-                    pauseDuration={1500}
-                    showCursor={true}
-                    cursorCharacter="_"
-                  />
-                </Box>
-              </MotionHeading>
-
-
-
-              {/* Subtitle */}
-              <MotionText
-                fontSize={{ base: 'xl', md: '2xl', lg: '3xl' }}
-                color={colorMode === 'dark' ? 'gray.200' : 'gray.700'}
-                fontWeight="600"
-                variants={fadeInUp}
-              >
-                Full-Stack Developer | ML Explorer
-              </MotionText>
-
-              {/* Tagline */}
-              <MotionText
-                fontSize={{ base: 'md', md: 'lg', lg: 'xl' }}
-                color={colorMode === 'dark' ? 'gray.400' : 'gray.600'}
-                maxW={{ base: "full", lg: "600px" }}
-                lineHeight="1.8"
-                variants={fadeInUp}
-              >
-                Building AI-powered web applications with React, Django, and Python. 
-                Turning ideas into elegant, functional solutions.
-              </MotionText>
-
-              {/* CTA Buttons */}
-              <MotionBox variants={fadeInUp} w="full" pt={4}>
-                <HStack
-                  spacing={4}
-                  flexWrap="wrap"
-                  justify={{ base: 'center', lg: 'flex-start' }}
-                >
-                  <MotionButton
-                    as="a"
-                    href="#projects"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      document.getElementById('projects')?.scrollIntoView({ 
-                        behavior: 'smooth',
-                        block: 'start'
-                      });
-                    }}
-                    size="lg"
-                    px={10}
-                    py={7}
-                    fontSize="md"
-                    fontWeight="700"
-                    position="relative"
-                    overflow="hidden"
-                    color="white"
-                    border="none"
-                    bgGradient="linear(to-r, #ec4899, #a855f7)"
-                    _before={{
-                      content: '""',
-                      position: 'absolute',
-                      top: 0,
-                      left: '-100%',
-                      right: 0,
-                      bottom: 0,
-                      bgGradient: 'linear(to-r, #a855f7, #6366f1)',
-                      transition: 'left 0.4s ease',
-                    }}
-                    _hover={{
-                      _before: {
-                        left: 0,
-                      }
-                    }}
-                    whileHover={{
-                      scale: 1.05,
-                      boxShadow: '0 10px 40px rgba(236, 72, 153, 0.5)',
-                    }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Box position="relative" zIndex={1}>
-                      View Projects
-                    </Box>
-                  </MotionButton>
-
-                  <MotionButton
-                    as="a"
-                    href="#contact"
-                    size="lg"
-                    px={10}
-                    py={7}
-                    fontSize="md"
-                    fontWeight="700"
-                    position="relative"
-                    overflow="hidden"
-                    bg={colorMode === 'dark' ? 'whiteAlpha.100' : 'blackAlpha.100'}
-                    backdropFilter="blur(10px)"
-                    borderWidth="2px"
-                    borderColor={colorMode === 'dark' ? 'whiteAlpha.300' : 'blackAlpha.300'}
-                    color={colorMode === 'dark' ? 'white' : 'gray.900'}
-                    _hover={{
-                      bg: colorMode === 'dark' ? 'whiteAlpha.200' : 'blackAlpha.200',
-                      borderColor: '#ec4899',
-                    }}
-                    whileHover={{ 
-                      scale: 1.05,
-                      boxShadow: '0 10px 40px rgba(168, 85, 247, 0.3)',
-                    }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    Get in Touch
-                  </MotionButton>
-                </HStack>
-              </MotionBox>
-            </VStack>
-          </MotionBox>
-        </MotionBox>
-      </Container>
-    </Box>
+              Discover the World
+            </Heading>
+            <Text
+              fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }}
+              color="white"
+              maxW="2xl"
+              textShadow="0 2px 10px rgba(0,0,0,0.5)"
+            >
+              Move your cursor to reveal the beauty
+            </Text>
+          </VStack>
+        </Box>
+      </Box>
+    
   );
-}
+};
 
-export default Hero;
+export default HeroMaskReveal;
