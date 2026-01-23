@@ -118,7 +118,6 @@
 // // TODO: Add  a an AI chatbot or whatev 
 // // TODO: Maybe add a picture of whatever hubble is seeing in the hobbies section?
 // // TODO: maybe https://www.framer.com/marketplace/components/eyes-follow-cursor/ https://www.framer.com/marketplace/components/interactive-gradient/
-// // TODO: https://www.framer.com/marketplace/components/cursor-mask-reveal/
 // TODO: Add a cool loading screen
 //   )
 // }
@@ -144,8 +143,7 @@ import ScrollToTop from './components/ScrollToTop';
 import NotFound from './components/NotFound'
 import useKeyboardShortcuts from './components/hooks/useKeyboardShortcuts';
 
-// Parallax wrapper for sections
-import ParallaxSection from './components/ui/ParallaxSection';
+
 
 function App() {
   const { scrollYProgress } = useScroll();
@@ -208,25 +206,12 @@ function App() {
             /> 
             
             <Header />
-            
-            {/* Hero with built-in parallax */}
             <Hero />
-            
-            {/* Wrap sections with ParallaxSection for scroll effects */}
-            <ParallaxSection speed={0.3} direction="up">
-              <About />
-            </ParallaxSection>
-            
+            <About />
             {/* Projects with enhanced parallax */}
             <Projects /> 
-            
-            <ParallaxSection speed={0.2} direction="up">
               <Contact />
-            </ParallaxSection>
-            
-            <ParallaxSection speed={0.1} direction="up">
               <Resume />
-            </ParallaxSection>
             
             <Footer />
           </>
