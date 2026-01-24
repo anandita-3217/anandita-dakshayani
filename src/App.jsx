@@ -119,6 +119,7 @@
 // // TODO: Maybe add a picture of whatever hubble is seeing in the hobbies section?
 // // TODO: maybe https://www.framer.com/marketplace/components/eyes-follow-cursor/ https://www.framer.com/marketplace/components/interactive-gradient/
 // TODO: Add a cool loading screen
+// TODO: Change hero section buttons with better cta
 //   )
 // }
 

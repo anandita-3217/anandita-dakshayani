@@ -47,7 +47,7 @@ const CursorMaskReveal = ({
         backgroundSize="cover"
         backgroundPosition="center"
         backgroundRepeat="no-repeat"
-        filter="grayscale(100%)"
+        filter="grayscale(100%) invert(100%) brightness(40%)"
         style={{
           maskImage: `radial-gradient(circle ${maskSize}px at ${mousePosition.x}px ${mousePosition.y}px, transparent 0%, transparent 100%, black 100%, black 100%)`,
           WebkitMaskImage: `radial-gradient(circle ${maskSize}px at ${mousePosition.x}px ${mousePosition.y}px, transparent 0%, transparent 100%, black 100%, black 100%)`,
