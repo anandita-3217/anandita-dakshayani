@@ -8,17 +8,20 @@ import {
   VStack,
   HStack,
 } from '@chakra-ui/react';
-import { motion } from 'framer-motion';
+import { GoArrowRight } from "react-icons/go";
+import { motion, useAnimation  } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { useColorMode } from '@chakra-ui/react';
 import TextType from "./ui/TextType";
-
+import MagicButton from "./ui/MagicButton"
 
 // Create motion components
 const MotionBox = motion.create(Box);
 const MotionHeading = motion.create(Heading);
 const MotionText = motion.create(Text);
 const MotionButton = motion.create(Button);
+
+// const controls = useAnimation();
 
 
 // Animation variants
@@ -31,6 +34,7 @@ const fadeInUp = {
   }
 };
 
+  
 
 function Hero() {
   const { colorMode } = useColorMode();
@@ -212,33 +216,90 @@ function Hero() {
                 >
                   Get in Touch
                 </MotionButton>*/}
-                <MotionButton
+                {/* <MotionButton
   size="lg"
-  px={8}
+  // px={6}
   py={6}
   fontSize="md"
+  h={10}
   fontWeight="600"
   bg="rgba(255, 255, 255, 0.1)"
   color="white"
   border="2px solid"
   borderColor="rgba(255, 255, 255, 0.2)"
   borderRadius="full"
-  rightIcon={<span>→</span>}
   _hover={{
     bg: 'white',
     color: 'gray.900',
-    borderColor: 'white'
+    // borderColor: 'white'
   }}
   whileHover={{
     scale: 1.02,
-    y: -2,
     boxShadow: '0 10px 30px rgba(255, 255, 255, 0.3)'
   }}
   whileTap={{ scale: 0.98 }}
   transition={{ duration: 0.3 }}
+  justifyContent="space-between"
 >
-  Let's Connect
+  <Box>Let's Connect </Box>
+  <Box bg="text.primary" h={10} w={10} p={3} ml={5} borderRadius="50px" _hover={{ }} >
+    <GoArrowRight fontSize={15} color='black' /></Box>
+</MotionButton> */}
+          <MotionButton
+  size="lg"
+  px={1}          // outer pill padding
+  py={1}
+  minW="170px"    // controls pill width (adjust as needed)
+  bg="rgba(255, 255, 255, 0.1)"
+  color="white"
+  border="2px solid"
+  borderColor="rgba(255, 255, 255, 0.2)"
+  borderRadius="full"
+  _hover={{
+    bg: "white",
+    color: "gray.900",
+  }}
+  whileHover={{
+    scale: 1.02,
+    boxShadow: "0 10px 30px rgba(255, 255, 255, 0.3)",
+  }}
+  whileTap={{ scale: 0.98 }}
+  transition={{ duration: 0.3 }}
+  // onHoverStart={handleHoverStart}   
+>
+  <Box
+    w="full"
+    display="flex"
+    alignItems="center"
+    justifyContent="space-between"   // 👈 key part
+    pl={4}                           // left text padding
+  >
+    {/* Text */}
+    <Box fontWeight="600" fontSize="md" mr={3}>
+      Let's Connect
+    </Box>
+
+    {/* Right circular icon */}
+    <Box
+                bg="white"
+          h={10}
+          w={10}
+          borderRadius="full"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          overflow="hidden"                 
+    >
+      {/* <MotionBox animate={controls}> */}
+            <GoArrowRight fontSize={16} color="black" />
+          {/* </MotionBox> */}
+{/* <MagicButton/> */}
+    </Box>
+  </Box>
 </MotionButton>
+
+
+
 {/* TODO: make changes to this button so it looks more refined */}
               </HStack>
             </MotionBox>
