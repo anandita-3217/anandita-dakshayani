@@ -190,7 +190,7 @@ function Hero() {
                   View Projects
                 </MotionButton>
 
-                <MotionButton
+                {/*<MotionButton
                   as="a"
                   href="#contact"
                   variant="outline"
@@ -211,7 +211,35 @@ function Hero() {
                   transition={{ duration: 0.2 }}
                 >
                   Get in Touch
-                </MotionButton>
+                </MotionButton>*/}
+                <MotionButton
+  size="lg"
+  px={8}
+  py={6}
+  fontSize="md"
+  fontWeight="600"
+  bg="rgba(255, 255, 255, 0.1)"
+  color="white"
+  border="2px solid"
+  borderColor="rgba(255, 255, 255, 0.2)"
+  borderRadius="full"
+  rightIcon={<span>→</span>}
+  _hover={{
+    bg: 'white',
+    color: 'gray.900',
+    borderColor: 'white'
+  }}
+  whileHover={{
+    scale: 1.02,
+    y: -2,
+    boxShadow: '0 10px 30px rgba(255, 255, 255, 0.3)'
+  }}
+  whileTap={{ scale: 0.98 }}
+  transition={{ duration: 0.3 }}
+>
+  Let's Connect
+</MotionButton>
+{/* TODO: make changes to this button so it looks more refined */}
               </HStack>
             </MotionBox>
           </VStack>

@@ -120,6 +120,7 @@
 // // TODO: maybe https://www.framer.com/marketplace/components/eyes-follow-cursor/ https://www.framer.com/marketplace/components/interactive-gradient/
 // TODO: Add a cool loading screen
 // TODO: Change hero section buttons with better cta
+//  TODO: On scroll away from the current component and component can become smaller and smaller and then the next component can pop up 
 //   )
 // }
 
