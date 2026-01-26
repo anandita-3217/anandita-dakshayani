@@ -300,9 +300,11 @@ const handleProjectsHoverEnd = () => {
     transform="translateY(-50%)"
     h={10}
     w={10}
-    bg="white"
+    // bg="white"
+    bgGradient="linear(to-r,  #7c3aed, #ec4899)"
     borderRadius="full"
     zIndex={1}
+    initial={{ opacity: 0 }}
     animate={projectsCircleControls}
   />
 </MotionButton>
@@ -377,9 +379,11 @@ const handleProjectsHoverEnd = () => {
                     transform="translateY(-50%)"
                     h={10}
                     w={10}
-                    bg="white"
+                    // bg="white"
+                    bgGradient="linear(to-r,  #7c3aed, #ec4899)"
                     borderRadius="full"
                     zIndex={1}
+                    initial={{ opacity: 0 }}
                     animate={connectCircleControls}
                   />
                 </MotionButton>
