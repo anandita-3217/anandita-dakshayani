@@ -150,6 +150,15 @@ const cardVariants = {
 const BentoCard = ({ children, rowSpan, colSpan, index, color = '#14b8a6', accentColor = '#0d9488' }) => {
   const cardRef = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
+  const [particlesAssembled, setParticlesAssembled] = useState(false);
+
+    useEffect(() => {
+    const timer = setTimeout(() => {
+      setParticlesAssembled(true);
+    }, index * 100); // Stagger based on card index
+    
+    return () => clearTimeout(timer);
+  }, [index]);
 
   // 3D tilt effect
   // const x = useMotionValue(0);
@@ -217,6 +226,41 @@ const BentoCard = ({ children, rowSpan, colSpan, index, color = '#14b8a6', accen
       //   transformStyle: 'preserve-3d',
       // }}
     >
+      {/* Add particle elements */}
+      {!particlesAssembled && (
+        <Box position="absolute" inset={0} pointerEvents="none">
+          {[...Array(20)].map((_, i) => (
+            <MotionBox
+              key={i}
+              position="absolute"
+              w="4px"
+              h="4px"
+              bg={color}
+              borderRadius="full"
+              initial={{
+                x: Math.random() * 400 - 200,
+                y: Math.random() * 400 - 200,
+                opacity: 0
+              }}
+              animate={{
+                x: 0,
+                y: 0,
+                opacity: [1, 0]
+              }}
+              transition={{
+                duration: 1.2,
+                delay: i * 0.05
+              }}
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`
+              }}
+            />
+          ))}
+        </Box>
+      )}
+
+
       <Box
         bg="rgba(255, 255, 255, 0.02)"
         backdropFilter="blur(20px)"
@@ -344,37 +388,11 @@ function About() {
     <Heading
       as="h2"
       fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}
-      fontWeight="bold"
-      color="text.primary"
+      fontWeight="normal"
+      bgGradient="linear(to-r, #1e40af, #7c3aed,#ec4899)"
+      bgClip="text"
     >
-      {"About Me".split('').map((char, i) => (
-        <motion.span
-          key={i}
-          style={{
-            display: 'inline-block',
-            transformOrigin: 'center bottom',
-            perspective: '1000px',
-            color: char === 'M' || char === 'e' ? '#14b8a6' : 'inherit'
-          }}
-          initial={{ opacity: 0, y: 50, rotateX: -90 }}
-          animate={headerInView ? { 
-            opacity: 1, 
-            y: 0, 
-            rotateX: 0 
-          } : { 
-            opacity: 0, 
-            y: 50, 
-            rotateX: -90 
-          }}
-          transition={{
-            duration: 0.5,
-            delay: i * 0.08,
-            ease: [0.23, 1, 0.32, 1]
-          }}
-        >
-          {char === ' ' ? '\u00A0' : char}
-        </motion.span>
-      ))}
+      About Me
     </Heading>
   </MotionBox>
   
@@ -772,3 +790,5 @@ function About() {
 }
 
 export default About;
+
+
