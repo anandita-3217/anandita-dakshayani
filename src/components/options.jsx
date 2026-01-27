@@ -139,46 +139,93 @@ const headerVariants = {
 };
 
 // Card animation variants based on position (left, middle, right column)
+// const createCardVariants = (index, position = 'middle') => {
+//   let initialState = {};
+  
+  
+//   if (position === 'left') {
+//     // Left cards: scaled down with left tilt
+//     initialState = {
+//       opacity: 0,
+//       scale: 0.7,
+//       x: 0,
+//       y: 0,
+//       rotate: -120,
+//     };
+//   } else if (position === 'middle') {
+//     // Middle cards: scaled down, no tilt
+//     initialState = {
+//       opacity: 0,
+//       scale: 0.7,
+//       x: 0,
+//       y: 0,
+//       rotate: 0,
+//     };
+//   } else if (position === 'right') {
+//     // Right cards: scaled down with right tilt
+//     initialState = {
+//       opacity: 0,
+//       scale: 0.7,
+//       x: 0,
+//       y: 0,
+//       rotate: 120,
+//     };
+//   }
+  
+//   return {
+//     hidden: initialState,
+//     visible: { 
+//       opacity: 1, 
+//       scale: 1,
+//       x: 0,
+//       y: 0,
+//       rotate: 0,
+//       transition: { 
+//         duration: 0.8,
+//         delay: index * 0.1,
+//         ease: [0.22, 1, 0.36, 1],
+//         opacity: { duration: 0.4 }
+//       }
+//     }
+//   };
+// };
 const createCardVariants = (index, position = 'middle') => {
   let initialState = {};
-  
+  let origin = { originX: 0.5, originY: 0.5 }; // default center
+
   if (position === 'left') {
-    // Left cards: scaled down with left tilt
     initialState = {
       opacity: 0,
-      scale: 0.7,
-      x: 0,
-      y: 0,
-      rotate: -15,
+      scale: 0.9,
+      // rotate: -30,
     };
+    origin = { originX: 0, originY: 1 }; // bottom-left
   } else if (position === 'middle') {
-    // Middle cards: scaled down, no tilt
     initialState = {
       opacity: 0,
-      scale: 0.7,
-      x: 0,
-      y: 0,
-      rotate: 0,
+      scale: 0.9,
+      // rotate: 0,
     };
+    origin = { originX: 0.5, originY: 0.5 }; // center
   } else if (position === 'right') {
-    // Right cards: scaled down with right tilt
     initialState = {
       opacity: 0,
-      scale: 0.7,
-      x: 0,
-      y: 0,
-      rotate: 15,
+      scale: 0.9,
+      // rotate: 30,
     };
+    origin = { originX: 1, originY: 1 }; // bottom-right
   }
-  
+
   return {
-    hidden: initialState,
-    visible: { 
-      opacity: 1, 
+    hidden: {
+      ...initialState,
+      ...origin,
+    },
+    visible: {
+      opacity: 1,
       scale: 1,
-      x: 0,
-      y: 0,
       rotate: 0,
+      ...origin,
       transition: { 
         duration: 0.8,
         delay: index * 0.1,
@@ -193,6 +240,12 @@ const createCardVariants = (index, position = 'middle') => {
 const BentoCard = ({ children, rowSpan, colSpan, index, position = 'middle', color = '#14b8a6', accentColor = '#0d9488' }) => {
   const cardRef = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
+  
+  // Individual scroll trigger for each card
+  const [ref, inView] = useInView({
+    triggerOnce: false,
+    threshold: 0.2
+  });
 
   const handleMouseLeave = () => {
     setIsHovered(false);
@@ -200,7 +253,7 @@ const BentoCard = ({ children, rowSpan, colSpan, index, position = 'middle', col
 
   return (
     <MotionGridItem
-      ref={cardRef}
+      ref={ref}
       rowSpan={rowSpan}
       colSpan={colSpan}
       minW={0}              
@@ -208,6 +261,8 @@ const BentoCard = ({ children, rowSpan, colSpan, index, position = 'middle', col
       overflow="visible"
       onMouseLeave={handleMouseLeave}
       onMouseEnter={() => setIsHovered(true)}
+      initial="hidden"
+      animate={inView ? "visible" : "hidden"}
       variants={createCardVariants(index, position)}
     >
       <Box
@@ -286,11 +341,6 @@ function About() {
     threshold: 0.2
   });
 
-  const [gridRef, gridInView] = useInView({
-    triggerOnce: false,
-    threshold: 0.1
-  });
-
   return (
     <Box
       id="about"
@@ -356,14 +406,8 @@ function About() {
           </MotionBox>
         </VStack>
 
-        <MotionBox
-          ref={gridRef}
-          initial="hidden"
-          animate={gridInView ? "visible" : "hidden"}
-          variants={staggerContainer}
-        >
+        <Box>
           <Grid
-            as={motion.div}
             templateColumns={{
               base: "1fr",
               md: "repeat(2, 1fr)",
@@ -741,7 +785,7 @@ function About() {
             </BentoCard>
             
           </Grid>
-        </MotionBox>
+        </Box>
       </Container>
     </Box>
   );

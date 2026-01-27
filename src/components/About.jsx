@@ -389,7 +389,7 @@ function About() {
       as="h2"
       fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}
       fontWeight="normal"
-      bgGradient="linear(to-r, #1e40af, #7c3aed,#ec4899)"
+      bgGradient="linear(to-r, #ec4899, #7c3aed, #1e40af)"
       bgClip="text"
     >
       About Me
