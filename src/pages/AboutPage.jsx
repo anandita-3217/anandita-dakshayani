@@ -1187,7 +1187,12 @@ const FadeInSection = ({ children, delay = 0 }) => {
 
 function AboutPage() {
   const { scrollYProgress } = useScroll();
-  
+  const scaleX = useSpring(scrollYProgress,{
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+    
+  })
   const gradientColors = useColorModeValue(
     ['#ff0080', '#6366f1', '#3b82f6'],
     ['#ff00ff', '#8000ff', '#0080ff']
@@ -1197,8 +1202,8 @@ function AboutPage() {
   
   // Progress bar background
   const progressBg = useColorModeValue(
-    'linear-gradient(to right, #059669, #2563eb, #9333ea)',
-    'linear-gradient(to right, #10b981, #3b82f6, #a855f7)'
+    'linear-gradient(90deg, #ec4899, #a855f7, #6366f1)',
+    'linear-gradient(90deg, #ec4899, #a855f7, #6366f1)'
   );
 
   return (
@@ -1206,7 +1211,7 @@ function AboutPage() {
       {/* Scroll Progress Bar */}
       <motion.div
         style={{
-          scaleX: scrollYProgress,
+          scaleX,
           position: 'fixed',
           top: 0,
           left: 0,

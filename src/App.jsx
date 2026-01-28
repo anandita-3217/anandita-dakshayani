@@ -128,7 +128,7 @@
 
 import { useColorMode, useDisclosure, useColorModeValue } from '@chakra-ui/react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { motion, useScroll } from 'framer-motion';
+import { motion, useScroll, useSpring } from 'framer-motion';
 
 // Import new components
 import DotGrid from './components/assets/DotGrid/DotGrid';
@@ -149,6 +149,11 @@ import Options from './components/options';
 
 function App() {
   const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress,{
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  })
   const { colorMode, toggleColorMode } = useColorMode();
   const isLight = colorMode === "light";
 
@@ -174,7 +179,7 @@ function App() {
       {/* Progress Bar */}
       <motion.div
         style={{
-          scaleX: scrollYProgress,
+          scaleX,
           position: 'fixed',
           top: 0,
           left: 0,
