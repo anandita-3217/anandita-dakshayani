@@ -214,7 +214,7 @@ function App() {
             
             <Header />
             <Hero />
-            <Options/>
+            {/* <Options/> */}
             <About />
             {/* Projects with enhanced parallax */}
             <Projects /> 
