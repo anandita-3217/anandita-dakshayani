@@ -1,794 +1,451 @@
-import React, { useEffect, useRef, useState } from 'react';
-import Marquee from "react-fast-marquee";
+import React, { useRef, useEffect } from 'react';
 import {
   Box,
   Container,
-  Grid,
-  GridItem,
   Heading,
   Text,
   VStack,
   HStack,
-  Icon,
+  Tag,
+  Link,
+  Image,
 } from '@chakra-ui/react';
-import { motion, useMotionValue, useTransform } from 'framer-motion';
-import { Code, Brain, Zap, Link, UserRound, ListChecks ,MailOpen, Copy,CheckCheck  } from 'lucide-react';
-import { FaGithub, FaLinkedin, FaTwitter, } from 'react-icons/fa';
-import { useInView } from 'react-intersection-observer';
-import {
-  DiReact,
-  DiNodejsSmall,
-  DiPython,
-  DiJavascript1,
-  DiMongodb,
-  DiPostgresql,
-  DiGit,
-  DiDocker,
-  DiHtml5,
-  DiCss3,
-  DiSass,
-  DiNpm,
-  DiGithubBadge,
-  DiRedis,
-  DiFirebase,
-  DiVisualstudio,
-  DiBootstrap,
-  DiJqueryLogo,
-  DiLinux,
-  DiTerminal,
-  DiPhotoshop,
-  DiIllustrator,
-} from 'react-icons/di';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+gsap.registerPlugin(ScrollTrigger);
 
 const MotionBox = motion(Box);
-const MotionGridItem = motion(GridItem);
 
+// Sample projects - same as before
+const projects = [
+  {
+    id: 1,
+    title: 'E-Commerce Platform',
+    description: 'Full-stack shopping platform with real-time inventory and payment integration',
+    image: 'https://images.unsplash.com/photo-1557821552-17105176677c?w=800&h=600&fit=crop',
+    tags: ['React', 'Node.js', 'Stripe', 'MongoDB'],
+    link: '#',
+    color: '#FF6B6B',
+  },
+  {
+    id: 2,
+    title: 'AI Task Manager',
+    description: 'Smart task management with AI-powered priority suggestions and natural language input',
+    image: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&h=600&fit=crop',
+    tags: ['TypeScript', 'OpenAI', 'PostgreSQL', 'Next.js'],
+    link: '#',
+    color: '#4ECDC4',
+  },
+  {
+    id: 3,
+    title: 'Real-Time Analytics Dashboard',
+    description: 'Live data visualization dashboard with WebSocket streaming and custom charts',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop',
+    tags: ['D3.js', 'WebSocket', 'React', 'Express'],
+    link: '#',
+    color: '#95E1D3',
+  },
+  {
+    id: 4,
+    title: 'Social Media Scheduler',
+    description: 'Multi-platform content scheduler with analytics and automated posting',
+    image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&h=600&fit=crop',
+    tags: ['Vue.js', 'Firebase', 'Cloud Functions', 'API Integration'],
+    link: '#',
+    color: '#FFE66D',
+  },
+];
 
-// Copyable Email Component
-const CopyableEmail = () => {
-  const [copied, setCopied] = useState(false);
-  const email = 'ananditad21@gmail.com';
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
-  return (
-    <Box
-      as="button"
-      onClick={handleCopy}
-      bg="rgba(255, 255, 255, 0.05)"
-      border="2px solid"
-      borderColor={copied ? '#4facfe' : 'rgba(255, 255, 255, 0.1)'}
-      borderRadius="lg"
-      p={4}
-      cursor="pointer"
-      transition="all 0.3s"
-      position="relative"
-      overflow="hidden"
-      w="100%"
-      _hover={{
-        borderColor: '#4facfe',
-        bg: "rgba(79, 172, 254, 0.15)",
-        transform: 'translateY(-2px)',
-      }}
-      _active={{
-        transform: 'translateY(0)',
-      }}
-    >
-      {/* Email or Copied Text */}
-      <Box position="relative" zIndex={1}>
-        {!copied ? (
-          <HStack spacing={3} justify="center" flexWrap="wrap">
-            <Icon as={Copy} boxSize={5} color="#4facfe" flexShrink={0} />
-            <Text
-              fontSize={{ base: 'xs', sm: 'sm', md: 'md' }}
-              fontWeight="600"
-              color="text.primary"
-              wordBreak="break-all"
-              textAlign="center"
-            >
-              {email}
-            </Text>
-          </HStack>
-        ) : (
-          <MotionBox
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.3 }}
-          >
-            <HStack spacing={2} justify="center">
-              <Icon as={CheckCheck} boxSize={5} color="#4facfe" />
-              <Text
-                fontSize={{ base: 'sm', md: 'md' }}
-                fontWeight="600"
-                color="#4facfe"
-              >
-                Copied to clipboard
-              </Text>
-            </HStack>
-          </MotionBox>
-        )}
-      </Box>
-    </Box>
-  );
-};
-
-// Animation variants
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.2
-    }
-  }
-};
-
-const headerVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7 }
-  }
-};
-
-// Card animation variants based on position (left, middle, right column)
-// const createCardVariants = (index, position = 'middle') => {
-//   let initialState = {};
-  
-  
-//   if (position === 'left') {
-//     // Left cards: scaled down with left tilt
-//     initialState = {
-//       opacity: 0,
-//       scale: 0.7,
-//       x: 0,
-//       y: 0,
-//       rotate: -120,
-//     };
-//   } else if (position === 'middle') {
-//     // Middle cards: scaled down, no tilt
-//     initialState = {
-//       opacity: 0,
-//       scale: 0.7,
-//       x: 0,
-//       y: 0,
-//       rotate: 0,
-//     };
-//   } else if (position === 'right') {
-//     // Right cards: scaled down with right tilt
-//     initialState = {
-//       opacity: 0,
-//       scale: 0.7,
-//       x: 0,
-//       y: 0,
-//       rotate: 120,
-//     };
-//   }
-  
-//   return {
-//     hidden: initialState,
-//     visible: { 
-//       opacity: 1, 
-//       scale: 1,
-//       x: 0,
-//       y: 0,
-//       rotate: 0,
-//       transition: { 
-//         duration: 0.8,
-//         delay: index * 0.1,
-//         ease: [0.22, 1, 0.36, 1],
-//         opacity: { duration: 0.4 }
-//       }
-//     }
-//   };
-// };
-const createCardVariants = (index, position = 'middle') => {
-  let initialState = {};
-  let origin = { originX: 0.5, originY: 0.5 }; // default center
-
-  if (position === 'left') {
-    initialState = {
-      opacity: 0,
-      scale: 0.9,
-      // rotate: -30,
-    };
-    origin = { originX: 0, originY: 1 }; // bottom-left
-  } else if (position === 'middle') {
-    initialState = {
-      opacity: 0,
-      scale: 0.9,
-      // rotate: 0,
-    };
-    origin = { originX: 0.5, originY: 0.5 }; // center
-  } else if (position === 'right') {
-    initialState = {
-      opacity: 0,
-      scale: 0.9,
-      // rotate: 30,
-    };
-    origin = { originX: 1, originY: 1 }; // bottom-right
-  }
-
-  return {
-    hidden: {
-      ...initialState,
-      ...origin,
-    },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      rotate: 0,
-      ...origin,
-      transition: { 
-        duration: 0.8,
-        delay: index * 0.1,
-        ease: [0.22, 1, 0.36, 1],
-        opacity: { duration: 0.4 }
-      }
-    }
-  };
-};
-
-// Enhanced Card Component
-const BentoCard = ({ children, rowSpan, colSpan, index, position = 'middle', color = '#14b8a6', accentColor = '#0d9488' }) => {
+const StackedCard = ({ project, index, total }) => {
   const cardRef = useRef(null);
-  const [isHovered, setIsHovered] = useState(false);
-  
-  // Individual scroll trigger for each card
-  const [ref, inView] = useInView({
-    triggerOnce: false,
-    threshold: 0.2
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ['start end', 'end start'],
   });
 
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
+  // Calculate stacking offset based on position
+  const baseOffset = (total - index - 1) * 20;
+  const scale = useTransform(
+    scrollYProgress,
+    [0, 0.2, 0.5, 0.8, 1],
+    [0.95 - index * 0.05, 1, 1, 1, 1.05]
+  );
+  const y = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    [baseOffset, 0, -100]
+  );
+  const rotateZ = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    [index % 2 === 0 ? -2 : 2, 0, index % 2 === 0 ? 3 : -3]
+  );
+  const opacity = useTransform(
+    scrollYProgress,
+    [0, 0.2, 0.8, 1],
+    [0.5, 1, 1, 0]
+  );
+
+  useEffect(() => {
+    const card = cardRef.current;
+    if (!card) return;
+
+    // Perspective tilt on hover
+    const handleMouseMove = (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
+      const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
+
+      gsap.to(card, {
+        rotateY: x * 15,
+        rotateX: -y * 15,
+        duration: 0.3,
+        ease: 'power2.out',
+      });
+
+      // Move color gradient
+      gsap.to(card.querySelector('.gradient-overlay'), {
+        x: x * 50,
+        y: y * 50,
+        duration: 0.3,
+      });
+    };
+
+    const handleMouseLeave = () => {
+      gsap.to(card, {
+        rotateY: 0,
+        rotateX: 0,
+        duration: 0.5,
+        ease: 'power2.out',
+      });
+
+      gsap.to(card.querySelector('.gradient-overlay'), {
+        x: 0,
+        y: 0,
+        duration: 0.5,
+      });
+    };
+
+    card.addEventListener('mousemove', handleMouseMove);
+    card.addEventListener('mouseleave', handleMouseLeave);
+
+    return () => {
+      card.removeEventListener('mousemove', handleMouseMove);
+      card.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, []);
 
   return (
-    <MotionGridItem
-      ref={ref}
-      rowSpan={rowSpan}
-      colSpan={colSpan}
-      minW={0}              
-      maxW="100%"           
-      overflow="visible"
-      onMouseLeave={handleMouseLeave}
-      onMouseEnter={() => setIsHovered(true)}
-      initial="hidden"
-      animate={inView ? "visible" : "hidden"}
-      variants={createCardVariants(index, position)}
+    <MotionBox
+      style={{ scale, y, rotateZ, opacity }}
+      position="sticky"
+      top="100px"
+      zIndex={total - index}
+      mb={8}
     >
       <Box
-        bg="rgba(255, 255, 255, 0.02)"
-        backdropFilter="blur(20px)"
-        borderRadius="32px"
-        border="2px solid"
-        borderColor={isHovered ? color : 'rgba(255, 255, 255, 0.08)'}
-        p={6}
-        h="100%"
+        ref={cardRef}
+        as={Link}
+        href={project.link}
+        display="block"
         position="relative"
+        maxW="900px"
+        mx="auto"
+        borderRadius="32px"
         overflow="hidden"
-        transition="all 0.4s cubic-bezier(0.23, 1, 0.32, 1)"
-        boxShadow={isHovered ? `0 30px 80px ${color}40` : 'none'}
+        bg="rgba(20, 20, 30, 0.8)"
+        backdropFilter="blur(20px)"
+        border="2px solid rgba(255, 255, 255, 0.1)"
+        transformStyle="preserve-3d"
+        transition="all 0.4s cubic-bezier(0.4, 0, 0.2, 1)"
+        boxShadow={`0 20px 60px ${project.color}20, 0 0 0 1px ${project.color}10`}
         _hover={{
-          borderColor: color,
+          textDecoration: 'none',
+          border: `2px solid ${project.color}`,
+          boxShadow: `0 30px 80px ${project.color}40, 0 0 0 1px ${project.color}30`,
+          transform: 'translateY(-5px)',
         }}
       >
-        {/* Animated gradient background */}
+        {/* Animated gradient overlay */}
         <Box
+          className="gradient-overlay"
           position="absolute"
-          top="-100px"
-          right="-100px"
-          w="300px"
-          h="300px"
-          bgGradient={`radial(circle, ${color}, transparent)`}
-          opacity={isHovered ? 0.3 : 0.15}
-          transition="opacity 0.6s"
+          top="-50%"
+          left="-50%"
+          width="200%"
+          height="200%"
+          bgGradient={`radial-gradient(circle, ${project.color}30, transparent 50%)`}
           pointerEvents="none"
-          filter="blur(40px)"
+          zIndex={0}
         />
 
-        {/* Decorative corner pattern */}
-        <Box
-          position="absolute"
-          top={0}
-          right={0}
-          w="120px"
-          h="120px"
-          opacity={0.05}
-          pointerEvents="none"
-        >
-          <Box
-            w="100%"
-            h="100%"
-            bgGradient={`linear(to-br, ${color}, ${accentColor})`}
-            clipPath="polygon(100% 0, 100% 100%, 0 0)"
-          />
-        </Box>
+        <VStack spacing={0} align="stretch" position="relative" zIndex={1}>
+          {/* Image section with split effect */}
+          <Box position="relative" height="300px" overflow="hidden">
+            <Image
+              src={project.image}
+              alt={project.title}
+              objectFit="cover"
+              width="100%"
+              height="100%"
+              transition="transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)"
+              _groupHover={{ transform: 'scale(1.08)' }}
+            />
+            
+            {/* Overlay gradient */}
+            <Box
+              position="absolute"
+              bottom={0}
+              left={0}
+              right={0}
+              height="60%"
+              bgGradient="linear(to-t, rgba(20, 20, 30, 1), transparent)"
+            />
 
-        {/* Shimmer effect on hover */}
-        <Box
-          position="absolute"
-          top={0}
-          left="-100%"
-          w="50%"
-          h="100%"
-          bgGradient="linear(to-r, transparent, rgba(255,255,255,0.1), transparent)"
-          transform={isHovered ? 'translateX(300%)' : 'translateX(0)'}
-          transition="transform 0.8s"
-          pointerEvents="none"
-        />
+            {/* Project number badge */}
+            <Box
+              position="absolute"
+              top={6}
+              right={6}
+              bg={project.color}
+              color="black"
+              fontWeight="900"
+              fontSize="2xl"
+              width="60px"
+              height="60px"
+              borderRadius="full"
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              boxShadow="0 4px 20px rgba(0, 0, 0, 0.3)"
+            >
+              {String(index + 1).padStart(2, '0')}
+            </Box>
+          </Box>
 
-        <Box position="relative" zIndex={1} h="100%">
-          {children}
-        </Box>
+          {/* Content section */}
+          <VStack
+            align="flex-start"
+            spacing={4}
+            p={8}
+            bg="rgba(20, 20, 30, 0.6)"
+          >
+            <Heading
+              as="h3"
+              fontSize={{ base: '2xl', md: '3xl' }}
+              fontWeight="700"
+              color="white"
+              lineHeight="1.2"
+              position="relative"
+              _after={{
+                content: '""',
+                position: 'absolute',
+                bottom: '-8px',
+                left: 0,
+                width: '60px',
+                height: '3px',
+                bg: project.color,
+              }}
+            >
+              {project.title}
+            </Heading>
+
+            <Text
+              fontSize="md"
+              color="gray.300"
+              lineHeight="1.7"
+              mt={2}
+            >
+              {project.description}
+            </Text>
+
+            <HStack spacing={2} flexWrap="wrap" pt={4}>
+              {project.tags.map((tag, i) => (
+                <Tag
+                  key={i}
+                  size="md"
+                  bg={`${project.color}20`}
+                  color={project.color}
+                  border="1px solid"
+                  borderColor={`${project.color}40`}
+                  borderRadius="full"
+                  fontWeight="600"
+                  fontSize="xs"
+                  px={4}
+                  py={2}
+                  transition="all 0.3s ease"
+                  _hover={{
+                    bg: `${project.color}40`,
+                    transform: 'translateY(-2px)',
+                  }}
+                >
+                  {tag}
+                </Tag>
+              ))}
+            </HStack>
+
+            <HStack
+              pt={4}
+              spacing={2}
+              color={project.color}
+              fontWeight="600"
+              fontSize="sm"
+              transition="gap 0.3s ease"
+            >
+              <Text>Explore Project</Text>
+              <Box
+                as="span"
+                transform="translateX(0)"
+                transition="transform 0.3s ease"
+                _groupHover={{ transform: 'translateX(5px)' }}
+              >
+                →
+              </Box>
+            </HStack>
+          </VStack>
+        </VStack>
       </Box>
-    </MotionGridItem>
+    </MotionBox>
   );
 };
 
-// About Section Component
-function About() {
-  const [headerRef, headerInView] = useInView({ 
-    triggerOnce: false,
-    threshold: 0.2
-  });
+const Options = () => {
+  const sectionRef = useRef(null);
+  const titleRef = useRef(null);
+
+  useEffect(() => {
+    const title = titleRef.current;
+    if (!title) return;
+
+    // Split text animation
+    const chars = title.textContent.split('');
+    title.innerHTML = chars
+      .map(
+        (char, i) =>
+          `<span style="display: inline-block; opacity: 0;">${char === ' ' ? '&nbsp;' : char}</span>`
+      )
+      .join('');
+
+    gsap.to(title.children, {
+      opacity: 1,
+      y: 0,
+      rotateX: 0,
+      stagger: 0.03,
+      duration: 0.8,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: title,
+        start: 'top 80%',
+      },
+    });
+
+    // Floating animation for background elements
+    gsap.to('.float-1', {
+      y: -30,
+      x: 20,
+      rotation: 5,
+      duration: 3,
+      repeat: -1,
+      yoyo: true,
+      ease: 'sine.inOut',
+    });
+
+    gsap.to('.float-2', {
+      y: -40,
+      x: -15,
+      rotation: -5,
+      duration: 4,
+      repeat: -1,
+      yoyo: true,
+      ease: 'sine.inOut',
+    });
+  }, []);
 
   return (
     <Box
-      id="about"
-      bg="transparent"
-      color="text.primary"
-      py={{ base: 12, md: 20 }}
-      minH="100vh"
-      display="flex"
-      alignItems="center"
+      ref={sectionRef}
       position="relative"
+      minH="100vh"
+      py={{ base: 16, md: 24 }}
       overflow="hidden"
-      px={{ base: 4, md: 8, lg: 16 }}
+      bg="#0a0a0f"
     >
-      {/* Background decoration */}
-      <MotionBox
+      {/* Floating background elements */}
+      <Box
+        className="float-1"
         position="absolute"
-        top="20%"
+        top="10%"
+        right="5%"
+        width="400px"
+        height="400px"
+        borderRadius="50%"
+        bg="radial-gradient(circle, #FF6B6B15, transparent 70%)"
+        filter="blur(60px)"
+        pointerEvents="none"
+      />
+      <Box
+        className="float-2"
+        position="absolute"
+        bottom="15%"
         left="5%"
-        w="200px"
-        h="200px"
-        bg="rgba(20, 184, 166, 0.03)"
-        borderRadius="full"
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.3, 0.5, 0.3]
-        }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
+        width="350px"
+        height="350px"
+        borderRadius="50%"
+        bg="radial-gradient(circle, #4ECDC415, transparent 70%)"
+        filter="blur(60px)"
+        pointerEvents="none"
       />
 
-      <Container maxW="container.xl" position="relative" zIndex={1}>
-        <VStack spacing={6} textAlign="center" mb={12}>
-          <MotionBox
-            ref={headerRef}
-            initial="hidden"
-            animate={headerInView ? "visible" : "hidden"}
-            variants={headerVariants}
-          >
-            <Heading
-              as="h2"
-              fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}
-              fontWeight="normal"
-              bgGradient="linear(to-r, #1e40af, #7c3aed,#ec4899)"
-              bgClip="text"
+      <Container maxW="1200px" position="relative" zIndex={1}>
+        <VStack spacing={16} align="stretch">
+          {/* Header */}
+          <VStack spacing={4} textAlign="center" mb={12}>
+            <Text
+              fontSize="xs"
+              fontWeight="700"
+              letterSpacing="4px"
+              textTransform="uppercase"
+              color="gray.500"
             >
-              About Me
+              Portfolio
+            </Text>
+            <Heading
+              ref={titleRef}
+              as="h2"
+              fontSize={{ base: '5xl', md: '7xl' }}
+              fontWeight="900"
+              color="white"
+              lineHeight="1"
+            >
+              Featured Works
             </Heading>
-          </MotionBox>
-          
-          <MotionBox
-            as={Text}
-            fontSize="lg"
-            color="text.secondary"
-            maxW="600px"
-            initial={{ opacity: 0, y: 20 }}
-            animate={headerInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-          >
-            Full-stack developer and ML enthusiast crafting innovative solutions
-          </MotionBox>
+            <Text
+              fontSize="lg"
+              color="gray.400"
+              maxW="600px"
+              mx="auto"
+            >
+              Scroll through my latest projects, each card revealing more as you explore
+            </Text>
+          </VStack>
+
+          {/* Stacked Cards */}
+          <Box position="relative">
+            {projects.map((project, index) => (
+              <StackedCard
+                key={project.id}
+                project={project}
+                index={index}
+                total={projects.length}
+              />
+            ))}
+          </Box>
         </VStack>
-
-        <Box>
-          <Grid
-            templateColumns={{
-              base: "1fr",
-              md: "repeat(2, 1fr)",
-              lg: "repeat(3, 1fr)"
-            }}
-            templateRows={{
-              base: "auto",
-              lg: "repeat(5, 1fr)"
-            }}
-            gap={4}
-            w="100%"
-            h={{ base: "auto", lg: "100vh" }}  
-          >
-            {/* Top Left - Introduction */}
-            <BentoCard rowSpan={{ base: 1, lg: 2 }} colSpan={{ base: 1, md: 2, lg: 1 }} index={0} position="left" color="#14b8a6" accentColor="#0d9488">
-              <VStack spacing={3} align="stretch" h="100%">
-                <Box
-                  p={4}
-                  bg="rgba(102, 234, 219, 0.15)"
-                  borderRadius="2xl"
-                  w="fit-content"
-                >
-                  <Icon as={UserRound} boxSize={10} color="#14b8a6" />
-                </Box>
-
-                <Text
-                  fontSize={{ base: 'sm', md: 'md' }}
-                  color="text.primary"
-                  lineHeight="1.5"
-                >
-                  Hi! I'm a <Text as="span" color="#14b8a6" fontWeight="600">Computer Science graduate</Text> specializing 
-                  in full-stack web development and machine learning. I'm passionate about building 
-                  practical solutions to real-world problems.
-                </Text>
-              </VStack>
-            </BentoCard>
-
-            {/* Middle Top - Currently Learning */}
-            <BentoCard rowSpan={{ base: 1, md: 1, lg: 3 }} colSpan={{ base: 1, md: 2, lg: 1 }} index={1} position="middle" color="#667eea" accentColor="#764ba2">
-              <VStack spacing={4} align="stretch" h="100%" justify="space-between">
-                <Box
-                  p={3}
-                  bg="rgba(102, 126, 234, 0.15)"
-                  borderRadius="xl"
-                  w="fit-content"
-                >
-                  <Icon as={Brain} boxSize={8} color="#764ba2" />
-                </Box>
-                
-                <VStack spacing={3} align="stretch" flex={1}>
-                  <Heading
-                    as="h3"
-                    fontSize={{ base: 'xl', md: '2xl' }}
-                    fontWeight="bold"
-                    color="#764ba2"
-                  >
-                    🎯 Currently Mastering
-                  </Heading>
-
-                  <Box
-                    p={4}
-                    bg="rgba(102, 126, 234, 0.1)"
-                    borderRadius="xl"
-                    border="1px solid"
-                    borderColor="rgba(102, 126, 234, 0.2)"
-                  >
-                    <VStack spacing={2} align="stretch">
-                      <Text
-                        fontSize={{ base: 'md', md: 'lg' }}
-                        fontWeight="600"
-                        color="#667eea"
-                      >
-                        Deep Learning Specialization
-                      </Text>
-                      <Text
-                        fontSize={{ base: 'xs', md: 'sm' }}
-                        color="text.secondary"
-                      >
-                        by Andrew Ng - Coursera
-                      </Text>
-                    </VStack>
-                  </Box>
-
-                  <Text
-                    fontSize={{ base: 'sm', md: 'md' }}
-                    color="text.primary"
-                    lineHeight="1.6"
-                  >
-                    Building neural networks and computer vision models to solve real-world problems
-                  </Text>
-
-                  <HStack spacing={2} pt={2}>
-                    <Box
-                      px={3}
-                      py={1}
-                      bg="rgba(102, 126, 234, 0.2)"
-                      borderRadius="full"
-                      border="1px solid"
-                      borderColor="rgba(102, 126, 234, 0.3)"
-                    >
-                      <Text fontSize="xs" fontWeight="600" color="#667eea">
-                        📅 Week 3 of 5
-                      </Text>
-                    </Box>
-                  </HStack>
-                </VStack>
-              </VStack>
-            </BentoCard>
-
-            {/* Top Right - Socials */}
-            <BentoCard rowSpan={{ base: 1, md: 1, lg: 2 }} colSpan={{ base: 1, md: 2, lg: 1 }} index={2} position="right" color="#68d391" accentColor="#38a169">
-              <VStack spacing={3} align="stretch" h="100%" justify="center">
-                <Box
-                  p={3}
-                  bg="rgba(104, 211, 145, 0.15)"
-                  borderRadius="xl"
-                  w="fit-content"
-                >
-                  <Icon as={Link} boxSize={7} color="#68d391" />
-                </Box>
-                <Heading
-                  as="h3"
-                  fontSize={{ base: 'lg', md: 'xl' }}
-                  fontWeight="bold"
-                  color="#68d391"
-                >
-                  Let's Connect!
-                </Heading>
-                <HStack spacing={3} justify="flex-start" flexWrap="wrap">
-                  {[
-                    {
-                      name: 'GitHub',
-                      icon: FaGithub,
-                      url: 'https://github.com/anandita-3217',
-                      color: '#68d391',
-                    },
-                    {
-                      name: 'LinkedIn',
-                      icon: FaLinkedin,
-                      url: 'https://linkedin.com/in/yourusername',
-                      color: '#68d391',
-                    },
-                  ].map((social, i) => (
-                    <Box
-                      key={i}
-                      as="a"
-                      href={social.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      w="40px"
-                      h="40px"
-                      display="flex"
-                      alignItems="center"
-                      justifyContent="center"
-                      bg="rgba(255, 255, 255, 0.05)"
-                      borderRadius="full"
-                      border="1px solid"
-                      borderColor="rgba(255, 255, 255, 0.1)"
-                      transition="all 0.3s"
-                      cursor="pointer"
-                      title={social.name}
-                      _hover={{
-                        borderColor: social.color,
-                        bg: `${social.color}15`,
-                        transform: 'scale(1.15))',
-                      }}
-                    >
-                      <Box color={social.color}>
-                        <social.icon />
-                      </Box>
-                    </Box>
-                  ))}
-                </HStack>
-              </VStack>
-            </BentoCard>
-          
-            {/* Bottom Left - Copyable Email */}
-            <BentoCard rowSpan={{ base: 1, md: 1, lg: 3 }} colSpan={{ base: 1, md: 1, lg: 1 }} index={3} position="left" color="#4facfe" accentColor="#00f2fe">
-              <VStack spacing={3} align="stretch" h="100%" justify="center">
-                <Box
-                  p={3}
-                  bg="rgba(79, 172, 254, 0.15)"
-                  borderRadius="xl"
-                  w="fit-content"
-                >
-                  <Icon as={MailOpen} boxSize={7} color="#4facfe" />
-                </Box>
-                <Heading
-                  as="h3"
-                  fontSize={{ base: 'lg', md: 'xl' }}
-                  fontWeight="bold"
-                  color="#4facfe"
-                >
-                  Write To Me!
-                </Heading>
-                <CopyableEmail/>
-              </VStack>
-            </BentoCard>
-
-            {/* Bottom Right - Tech Stack */}
-            <BentoCard rowSpan={{ base: 1, md: 1, lg: 3 }} colSpan={{ base: 1, md: 1, lg: 1 }} index={4} position="right" color="#f093fb" accentColor="#f5576c">
-              <VStack spacing={2} align="stretch" h="100%" overflow="hidden" justify="space-between">
-                <Box flex={1}/>
-                <VStack spacing={3} align="stretch" mb={3}>
-                  <Box
-                    p={2}
-                    bg="rgba(240, 147, 251, 0.15)"
-                    borderRadius="lg"
-                    flexShrink={0} w="fit-content"
-                  >
-                    <Icon as={Zap} boxSize={9} color="#f093fb" />
-                  </Box>
-                            
-                  <Heading
-                    as="h3"
-                    fontSize={{ base: 'lg', md: 'xl' }}
-                    fontWeight="bold"
-                    color="#f093fb"
-                  >
-                    Tech Stack
-                  </Heading>
-                </VStack>
-                            
-                {/* Marquee Section - Takes remaining space */}
-                <VStack spacing={2} justify="flex-end" overflow="hidden">
-                  <Box w="100%" overflow="hidden">
-                    <Marquee
-                      gradient={false}
-                      speed={30}
-                      pauseOnHover={true}
-                    >
-                      {[
-                        { icon: DiReact, color: '#61dafb' },
-                        { icon: DiNodejsSmall, color: '#68a063' },
-                        { icon: DiPython, color: '#3776ab' },
-                        { icon: DiMongodb, color: '#47a248' },
-                        { icon: DiGit, color: '#f05032' },
-                      ].map((tech, i) => (
-                        <Box
-                          key={i}
-                          p={2}
-                          bg="rgba(255, 255, 255, 0.05)"
-                          borderRadius="lg"
-                          border="1px solid"
-                          borderColor="rgba(255, 255, 255, 0.1)"
-                          mx={1.5}
-                        >
-                          <Icon as={tech.icon} boxSize={6} color={tech.color} />
-                        </Box>
-                      ))}
-                    </Marquee>
-                  </Box>
-                    
-                  <Box w="100%" overflow="hidden">
-                    <Marquee
-                      gradient={false}
-                      speed={30}
-                      direction="right"
-                      pauseOnHover={true}
-                    >
-                      {[
-                        { icon: DiHtml5, color: '#e34f26' },
-                        { icon: DiCss3, color: '#1572b6' },
-                        { icon: DiJavascript1, color: '#f7df1e' },
-                        { icon: DiNpm, color: '#cb3837' },
-                        { icon: DiGithubBadge, color: '#fff' },
-                        { icon: DiVisualstudio, color: '#007acc' },
-                      ].map((tech, i) => (
-                        <Box
-                          key={i}
-                          p={2}
-                          bg="rgba(255, 255, 255, 0.05)"
-                          borderRadius="lg"
-                          border="1px solid"
-                          borderColor="rgba(255, 255, 255, 0.1)"
-                          mx={1.5}
-                        >
-                          <Icon as={tech.icon} boxSize={6} color={tech.color} />
-                        </Box>
-                      ))}
-                    </Marquee>
-                  </Box>
-                    
-                  <Box w="100%" overflow="hidden">
-                    <Marquee
-                      gradient={false}
-                      speed={30}
-                      pauseOnHover={true}
-                    >
-                      {[
-                        { icon: DiBootstrap, color: '#7952b3' },
-                        { icon: DiLinux, color: '#fcc624' },
-                        { icon: DiTerminal, color: '#4eaa25' },
-                      ].map((tech, i) => (
-                        <Box
-                          key={i}
-                          p={2}
-                          bg="rgba(255, 255, 255, 0.05)"
-                          borderRadius="lg"
-                          border="1px solid"
-                          borderColor="rgba(255, 255, 255, 0.1)"
-                          mx={1.5}
-                        >
-                          <Icon as={tech.icon} boxSize={6} color={tech.color} />
-                        </Box>
-                      ))}
-                    </Marquee>
-                  </Box>
-                </VStack>
-              </VStack>
-            </BentoCard>
-
-            {/* Bottom Middle - Monthly Goals */}
-            <BentoCard rowSpan={{ base: 1, md: 1, lg: 2 }} colSpan={{ base: 1, md: 2, lg: 1 }} index={5} position="middle" color="#667eea" accentColor="#764ba2">
-              <VStack spacing={4} align="stretch" h="100%" justify="space-between">
-                <Box
-                  p={3}
-                  bg="#8b42d544"
-                  borderRadius="xl"
-                  w="fit-content"
-                >
-                  <Icon as={ListChecks} boxSize={7} color="#8b42d5ff" />
-                </Box>
-                <Heading
-                  as="h3"
-                  fontSize={{ base: 'lg', md: 'xl' }}
-                  fontWeight="bold"
-                  color="#8b42d5ff"
-                >
-                  Current Goals
-                </Heading>
-
-                <VStack spacing={3} align="stretch" flex={1}>
-                  {[
-                    { text: 'Complete ML certification', checked: true },
-                    { text: 'Build AI-powered chat application', checked: false },
-                    { text: 'Contribute to React documentation', checked: false },
-                  ].map((goal, i) => (
-                    <HStack key={i} spacing={3} align="flex-start">
-                      <Box
-                        mt={1}
-                        w="18px"
-                        h="18px"
-                        borderRadius="md"
-                        border="2px solid"
-                        borderColor={goal.checked ? "#667eea" : "rgba(255, 255, 255, 0.2)"}
-                        bg={goal.checked ? "rgba(102, 126, 234, 0.2)" : "transparent"}
-                        display="flex"
-                        alignItems="center"
-                        justifyContent="center"
-                        flexShrink={0}
-                        transition="all 0.3s"
-                      >
-                        {goal.checked && (
-                          <Box
-                            w="8px"
-                            h="8px"
-                            bg="#667eea"
-                            borderRadius="sm"
-                          />
-                        )}
-                      </Box>
-                      <Text
-                        fontSize={{ base: 'sm', md: 'md' }}
-                        color={goal.checked ? "text.secondary" : "text.primary"}
-                        textDecoration={goal.checked ? "line-through" : "none"}
-                        opacity={goal.checked ? 0.7 : 1}
-                      >
-                        {goal.text}
-                      </Text>
-                    </HStack>
-                  ))}
-                </VStack>
-              </VStack>
-            </BentoCard>
-            
-          </Grid>
-        </Box>
       </Container>
     </Box>
   );
-}
+};
 
-export default About;
+export default Options;
