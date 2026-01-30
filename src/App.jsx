@@ -98,10 +98,8 @@
 // // TODO: https://www.achyutkatiyar.com/ use this as a base s 
 // // TODO: https://sarayoussry.com/
 // // TODO: https://aayushbharti.in/ -- layout
-// // TODO: https://www.muhammadaamirmalik.com/
-// //  TODO: should i just get rid of tech skills in  About?
 // // TODO: Add a glimplse of github profile 
-// // TODO: Better layout design and make it multi page
+// // TODO: Better layout design and make it multi page -TODO: Working on this 
 // // TODO: Make security better for contact form
 // // TODO: Have separate pages and have like buttons with tech skills or stuff for like when clicked tge projects with those tech skills in tags will be displayed
 // // TODO: Redo contact and test again and modify the code 
@@ -119,7 +117,6 @@
 // // TODO: Maybe add a picture of whatever hubble is seeing in the hobbies section?
 // // TODO: maybe https://www.framer.com/marketplace/components/eyes-follow-cursor/ https://www.framer.com/marketplace/components/interactive-gradient/
 // TODO: Add a cool loading screen
-// TODO: Change hero section buttons with better cta
 //  TODO: On scroll away from the current component and component can become smaller and smaller and then the next component can pop up 
 //   )
 // }
@@ -134,8 +131,8 @@ import { motion, useScroll, useSpring } from 'framer-motion';
 import DotGrid from './components/assets/DotGrid/DotGrid';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Hero from './components/Hero'; // Updated with parallax
-import Projects from './components/Projects'; // Updated with parallax
+import Hero from './components/Hero'; 
+import Projects from './components/Projects'; 
 import About from './components/About';
 import AboutPage from './pages/AboutPage';
 import Contact from './components/Contact';
@@ -229,6 +226,47 @@ function App() {
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
+    // TODO: Use this https://motion.dev/tutorials/react-scroll-zoom-hero
+//     const ref = useRef(null)
+// const { scrollYProgress } = useScroll({
+//   target: ref,
+//   offset: ["start end", "center center"]
+// })
+
+// const clipPath = useTransform(
+//   scrollYProgress,
+//   [0, 1],
+//   ["inset(0% 50% 0% 50%)", "inset(0% 0% 0% 0%)"]
+// )
+
+// return (
+//   <motion.div ref={ref} style={{ clipPath }}>
+//     <img src="/photo.jpg" alt="Revealed image" />
+//   </motion.div>
+// )
+// TODO: PRojects -> major ones inspired by aayushbharathi  in home page 
+// minor projects:  in projects page
+// const containerRef = useRef(null)
+// const { scrollYProgress } = useScroll({
+//   target: containerRef,
+//   offset: ["start start", "end end"]
+// })
+
+// const x = useTransform(scrollYProgress, [0, 1], ["0%", "-75%"])
+
+// return (
+//   <div ref={containerRef} style={{ height: "300vh" }}>
+//     <div style={{ position: "sticky", top: 0, height: "100vh", overflow: "hidden" }}>
+//       <motion.div style={{ x, display: "flex", gap: 20 }}>
+//         {items.map(item => (
+//           <div key={item.id} style={{ flexShrink: 0, width: 400 }}>
+//             {item.content}
+//           </div>
+//         ))}
+//       </motion.div>
+//     </div>
+//   </div>
+// )
   );
 }
 
