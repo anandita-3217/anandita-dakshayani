@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import {
   Box,
   Container,
@@ -7,8 +7,7 @@ import {
   VStack,
   HStack,
   Tag,
-  Link,
-  Image,
+  Button,
 } from '@chakra-ui/react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { gsap } from 'gsap';
@@ -18,434 +17,383 @@ gsap.registerPlugin(ScrollTrigger);
 
 const MotionBox = motion(Box);
 
-// Sample projects - same as before
 const projects = [
   {
     id: 1,
-    title: 'E-Commerce Platform',
-    description: 'Full-stack shopping platform with real-time inventory and payment integration',
-    image: 'https://images.unsplash.com/photo-1557821552-17105176677c?w=800&h=600&fit=crop',
-    tags: ['React', 'Node.js', 'Stripe', 'MongoDB'],
+    number: '01',
+    category: 'Web App',
+    title: 'Next Ventures',
+    description: 'A space for entrepreneurs to pitch ideas, explore others, and gain exposure with clean design. Built with modern tech stack for blazing fast performance.',
+    images: [
+      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop',
+    ],
+    tags: ['Next.js', 'React', 'TypeScript', 'Sanity CMS', 'Tailwind CSS'],
+    year: 'Q1 2025',
     link: '#',
-    color: '#FF6B6B',
+    color: '#6366F1',
   },
   {
     id: 2,
-    title: 'AI Task Manager',
-    description: 'Smart task management with AI-powered priority suggestions and natural language input',
-    image: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&h=600&fit=crop',
-    tags: ['TypeScript', 'OpenAI', 'PostgreSQL', 'Next.js'],
+    number: '02',
+    category: 'Mobile App',
+    title: 'Finote App',
+    description: 'An intuitive mobile companion for organizing your digital wallets and analyzing your financial health with real-time insights.',
+    images: [
+      'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&h=600&fit=crop',
+    ],
+    tags: ['Expo', 'TypeScript', 'Firebase', 'Zustand', 'Reanimated'],
+    year: 'Q4 2025',
     link: '#',
-    color: '#4ECDC4',
+    color: '#10B981',
   },
   {
     id: 3,
-    title: 'Real-Time Analytics Dashboard',
-    description: 'Live data visualization dashboard with WebSocket streaming and custom charts',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop',
-    tags: ['D3.js', 'WebSocket', 'React', 'Express'],
+    number: '03',
+    category: 'Web App',
+    title: 'Zenith Minds',
+    description: 'A platform connecting students and instructors for enhanced learning experiences. Features real-time collaboration and progress tracking.',
+    images: [
+      'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=600&fit=crop',
+    ],
+    tags: ['Next.js', 'Node.js', 'Express.js', 'MongoDB', 'Turborepo'],
+    year: '2025',
     link: '#',
-    color: '#95E1D3',
+    color: '#F59E0B',
   },
   {
     id: 4,
-    title: 'Social Media Scheduler',
-    description: 'Multi-platform content scheduler with analytics and automated posting',
-    image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&h=600&fit=crop',
-    tags: ['Vue.js', 'Firebase', 'Cloud Functions', 'API Integration'],
+    number: '04',
+    category: 'Web App',
+    title: 'Snippix',
+    description: 'A platform for creating and sharing code snippets with syntax highlighting, version control, and collaborative features.',
+    images: [
+      'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=600&fit=crop',
+    ],
+    tags: ['Next.js', 'React', 'Zustand', 'TypeScript', 'Tailwind CSS'],
+    year: '2025',
     link: '#',
-    color: '#FFE66D',
+    color: '#EC4899',
   },
 ];
 
-const StackedCard = ({ project, index, total }) => {
-  const cardRef = useRef(null);
+const ScrollLinkedShowcase = () => {
+  const containerRef = useRef(null);
+  const imagesContainerRef = useRef(null);
+  const [activeProject, setActiveProject] = useState(0);
+
   const { scrollYProgress } = useScroll({
-    target: cardRef,
-    offset: ['start end', 'end start'],
+    target: containerRef,
+    offset: ['start start', 'end end'],
   });
 
-  // Calculate stacking offset based on position
-  const baseOffset = (total - index - 1) * 20;
-  const scale = useTransform(
-    scrollYProgress,
-    [0, 0.2, 0.5, 0.8, 1],
-    [0.95 - index * 0.05, 1, 1, 1, 1.05]
-  );
-  const y = useTransform(
-    scrollYProgress,
-    [0, 0.5, 1],
-    [baseOffset, 0, -100]
-  );
-  const rotateZ = useTransform(
-    scrollYProgress,
-    [0, 0.5, 1],
-    [index % 2 === 0 ? -2 : 2, 0, index % 2 === 0 ? 3 : -3]
-  );
-  const opacity = useTransform(
-    scrollYProgress,
-    [0, 0.2, 0.8, 1],
-    [0.5, 1, 1, 0]
-  );
-
   useEffect(() => {
-    const card = cardRef.current;
-    if (!card) return;
+    const container = containerRef.current;
+    if (!container) return;
 
-    // Perspective tilt on hover
-    const handleMouseMove = (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
-      const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
-
-      gsap.to(card, {
-        rotateY: x * 15,
-        rotateX: -y * 15,
-        duration: 0.3,
-        ease: 'power2.out',
+    // Create scroll triggers for each project
+    projects.forEach((project, index) => {
+      ScrollTrigger.create({
+        trigger: container,
+        start: () => `top+=${index * window.innerHeight} top`,
+        end: () => `top+=${(index + 1) * window.innerHeight} top`,
+        onEnter: () => setActiveProject(index),
+        onEnterBack: () => setActiveProject(index),
       });
-
-      // Move color gradient
-      gsap.to(card.querySelector('.gradient-overlay'), {
-        x: x * 50,
-        y: y * 50,
-        duration: 0.3,
-      });
-    };
-
-    const handleMouseLeave = () => {
-      gsap.to(card, {
-        rotateY: 0,
-        rotateX: 0,
-        duration: 0.5,
-        ease: 'power2.out',
-      });
-
-      gsap.to(card.querySelector('.gradient-overlay'), {
-        x: 0,
-        y: 0,
-        duration: 0.5,
-      });
-    };
-
-    card.addEventListener('mousemove', handleMouseMove);
-    card.addEventListener('mouseleave', handleMouseLeave);
+    });
 
     return () => {
-      card.removeEventListener('mousemove', handleMouseMove);
-      card.removeEventListener('mouseleave', handleMouseLeave);
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
   }, []);
 
-  return (
-    <MotionBox
-      style={{ scale, y, rotateZ, opacity }}
-      position="sticky"
-      top="100px"
-      zIndex={total - index}
-      mb={8}
-    >
-      <Box
-        ref={cardRef}
-        as={Link}
-        href={project.link}
-        display="block"
-        position="relative"
-        maxW="900px"
-        mx="auto"
-        borderRadius="32px"
-        overflow="hidden"
-        bg="rgba(20, 20, 30, 0.8)"
-        backdropFilter="blur(20px)"
-        border="2px solid rgba(255, 255, 255, 0.1)"
-        transformStyle="preserve-3d"
-        transition="all 0.4s cubic-bezier(0.4, 0, 0.2, 1)"
-        boxShadow={`0 20px 60px ${project.color}20, 0 0 0 1px ${project.color}10`}
-        _hover={{
-          textDecoration: 'none',
-          border: `2px solid ${project.color}`,
-          boxShadow: `0 30px 80px ${project.color}40, 0 0 0 1px ${project.color}30`,
-          transform: 'translateY(-5px)',
-        }}
-      >
-        {/* Animated gradient overlay */}
-        <Box
-          className="gradient-overlay"
-          position="absolute"
-          top="-50%"
-          left="-50%"
-          width="200%"
-          height="200%"
-          bgGradient={`radial-gradient(circle, ${project.color}30, transparent 50%)`}
-          pointerEvents="none"
-          zIndex={0}
-        />
-
-        <VStack spacing={0} align="stretch" position="relative" zIndex={1}>
-          {/* Image section with split effect */}
-          <Box position="relative" height="300px" overflow="hidden">
-            <Image
-              src={project.image}
-              alt={project.title}
-              objectFit="cover"
-              width="100%"
-              height="100%"
-              transition="transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)"
-              _groupHover={{ transform: 'scale(1.08)' }}
-            />
-            
-            {/* Overlay gradient */}
-            <Box
-              position="absolute"
-              bottom={0}
-              left={0}
-              right={0}
-              height="60%"
-              bgGradient="linear(to-t, rgba(20, 20, 30, 1), transparent)"
-            />
-
-            {/* Project number badge */}
-            <Box
-              position="absolute"
-              top={6}
-              right={6}
-              bg={project.color}
-              color="black"
-              fontWeight="900"
-              fontSize="2xl"
-              width="60px"
-              height="60px"
-              borderRadius="full"
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-              boxShadow="0 4px 20px rgba(0, 0, 0, 0.3)"
-            >
-              {String(index + 1).padStart(2, '0')}
-            </Box>
-          </Box>
-
-          {/* Content section */}
-          <VStack
-            align="flex-start"
-            spacing={4}
-            p={8}
-            bg="rgba(20, 20, 30, 0.6)"
-          >
-            <Heading
-              as="h3"
-              fontSize={{ base: '2xl', md: '3xl' }}
-              fontWeight="700"
-              color="white"
-              lineHeight="1.2"
-              position="relative"
-              _after={{
-                content: '""',
-                position: 'absolute',
-                bottom: '-8px',
-                left: 0,
-                width: '60px',
-                height: '3px',
-                bg: project.color,
-              }}
-            >
-              {project.title}
-            </Heading>
-
-            <Text
-              fontSize="md"
-              color="gray.300"
-              lineHeight="1.7"
-              mt={2}
-            >
-              {project.description}
-            </Text>
-
-            <HStack spacing={2} flexWrap="wrap" pt={4}>
-              {project.tags.map((tag, i) => (
-                <Tag
-                  key={i}
-                  size="md"
-                  bg={`${project.color}20`}
-                  color={project.color}
-                  border="1px solid"
-                  borderColor={`${project.color}40`}
-                  borderRadius="full"
-                  fontWeight="600"
-                  fontSize="xs"
-                  px={4}
-                  py={2}
-                  transition="all 0.3s ease"
-                  _hover={{
-                    bg: `${project.color}40`,
-                    transform: 'translateY(-2px)',
-                  }}
-                >
-                  {tag}
-                </Tag>
-              ))}
-            </HStack>
-
-            <HStack
-              pt={4}
-              spacing={2}
-              color={project.color}
-              fontWeight="600"
-              fontSize="sm"
-              transition="gap 0.3s ease"
-            >
-              <Text>Explore Project</Text>
-              <Box
-                as="span"
-                transform="translateX(0)"
-                transition="transform 0.3s ease"
-                _groupHover={{ transform: 'translateX(5px)' }}
-              >
-                →
-              </Box>
-            </HStack>
-          </VStack>
-        </VStack>
-      </Box>
-    </MotionBox>
+  // Parallax effect for images - they scroll slower than the page
+  const imageY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [0, -(projects.length - 1) * 400] // Adjust based on number of projects
   );
-};
-
-const Options = () => {
-  const sectionRef = useRef(null);
-  const titleRef = useRef(null);
-
-  useEffect(() => {
-    const title = titleRef.current;
-    if (!title) return;
-
-    // Split text animation
-    const chars = title.textContent.split('');
-    title.innerHTML = chars
-      .map(
-        (char, i) =>
-          `<span style="display: inline-block; opacity: 0;">${char === ' ' ? '&nbsp;' : char}</span>`
-      )
-      .join('');
-
-    gsap.to(title.children, {
-      opacity: 1,
-      y: 0,
-      rotateX: 0,
-      stagger: 0.03,
-      duration: 0.8,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: title,
-        start: 'top 80%',
-      },
-    });
-
-    // Floating animation for background elements
-    gsap.to('.float-1', {
-      y: -30,
-      x: 20,
-      rotation: 5,
-      duration: 3,
-      repeat: -1,
-      yoyo: true,
-      ease: 'sine.inOut',
-    });
-
-    gsap.to('.float-2', {
-      y: -40,
-      x: -15,
-      rotation: -5,
-      duration: 4,
-      repeat: -1,
-      yoyo: true,
-      ease: 'sine.inOut',
-    });
-  }, []);
 
   return (
-    <Box
-      ref={sectionRef}
-      position="relative"
-      minH="100vh"
-      py={{ base: 16, md: 24 }}
-      overflow="hidden"
-      bg="#0a0a0f"
-    >
-      {/* Floating background elements */}
+    <Box bg="#0a0a0f" minH="100vh" position="relative" overflow="hidden">
+      {/* Background gradients */}
       <Box
-        className="float-1"
-        position="absolute"
-        top="10%"
-        right="5%"
-        width="400px"
-        height="400px"
-        borderRadius="50%"
-        bg="radial-gradient(circle, #FF6B6B15, transparent 70%)"
-        filter="blur(60px)"
+        position="fixed"
+        top="20%"
+        right="10%"
+        width="500px"
+        height="500px"
+        borderRadius="full"
+        bg={`radial-gradient(circle, ${projects[activeProject]?.color}15, transparent 70%)`}
+        filter="blur(80px)"
         pointerEvents="none"
-      />
-      <Box
-        className="float-2"
-        position="absolute"
-        bottom="15%"
-        left="5%"
-        width="350px"
-        height="350px"
-        borderRadius="50%"
-        bg="radial-gradient(circle, #4ECDC415, transparent 70%)"
-        filter="blur(60px)"
-        pointerEvents="none"
+        transition="background 0.6s ease"
+        zIndex={0}
       />
 
-      <Container maxW="1200px" position="relative" zIndex={1}>
-        <VStack spacing={16} align="stretch">
-          {/* Header */}
-          <VStack spacing={4} textAlign="center" mb={12}>
+      {/* Header */}
+      <Box
+        position="relative"
+        pt={{ base: 20, md: 24 }}
+        pb={12}
+        zIndex={2}
+      >
+        <Container maxW="1400px" px={{ base: 4, md: 8 }}>
+          <VStack spacing={3} align="flex-start">
             <Text
               fontSize="xs"
               fontWeight="700"
-              letterSpacing="4px"
+              letterSpacing="3px"
               textTransform="uppercase"
               color="gray.500"
             >
-              Portfolio
+              Case Studies
             </Text>
             <Heading
-              ref={titleRef}
-              as="h2"
               fontSize={{ base: '5xl', md: '7xl' }}
               fontWeight="900"
               color="white"
-              lineHeight="1"
+              lineHeight="0.95"
+              bgGradient="linear(to-r, white, gray.400)"
+              bgClip="text"
             >
-              Featured Works
+              Featured Work
             </Heading>
-            <Text
-              fontSize="lg"
-              color="gray.400"
-              maxW="600px"
-              mx="auto"
-            >
-              Scroll through my latest projects, each card revealing more as you explore
-            </Text>
           </VStack>
+        </Container>
+      </Box>
 
-          {/* Stacked Cards */}
-          <Box position="relative">
-            {projects.map((project, index) => (
-              <StackedCard
-                key={project.id}
-                project={project}
-                index={index}
-                total={projects.length}
-              />
-            ))}
-          </Box>
-        </VStack>
-      </Container>
+      {/* Main Content Area */}
+      <Box
+        ref={containerRef}
+        position="relative"
+        height={`${projects.length * 100}vh`}
+        zIndex={1}
+      >
+        <Box
+          position="sticky"
+          top={0}
+          height="100vh"
+          display="flex"
+          alignItems="center"
+        >
+          <Container maxW="1400px" px={{ base: 4, md: 8 }}>
+            <Box
+              display="grid"
+              gridTemplateColumns={{ base: '1fr', lg: '1fr 1fr' }}
+              gap={{ base: 8, lg: 16 }}
+              alignItems="center"
+            >
+              {/* LEFT SIDE - Scrolling Images (Background) */}
+              <MotionBox
+                ref={imagesContainerRef}
+                style={{ y: imageY }}
+                position="relative"
+                display={{ base: 'none', lg: 'block' }}
+              >
+                <VStack spacing={8} align="stretch">
+                  {projects.map((project, index) => (
+                    <Box
+                      key={project.id}
+                      position="relative"
+                      opacity={activeProject === index ? 1 : 0.3}
+                      transform={activeProject === index ? 'scale(1)' : 'scale(0.95)'}
+                      transition="all 0.6s cubic-bezier(0.4, 0, 0.2, 1)"
+                    >
+                      {/* Image Grid */}
+                      <Box
+                        display="grid"
+                        gridTemplateColumns={project.images.length === 1 ? '1fr' : 'repeat(2, 1fr)'}
+                        gap={3}
+                      >
+                        {project.images.map((image, imgIndex) => (
+                          <Box
+                            key={imgIndex}
+                            gridColumn={imgIndex === 0 && project.images.length > 2 ? 'span 2' : 'span 1'}
+                            position="relative"
+                            overflow="hidden"
+                            borderRadius="16px"
+                            height={
+                              imgIndex === 0 && project.images.length > 2
+                                ? '350px'
+                                : '250px'
+                            }
+                            bg="rgba(255, 255, 255, 0.02)"
+                            border="1px solid rgba(255, 255, 255, 0.1)"
+                          >
+                            <Box
+                              as="img"
+                              src={image}
+                              alt={`${project.title} ${imgIndex + 1}`}
+                              width="100%"
+                              height="100%"
+                              objectFit="cover"
+                            />
+                            {/* Color overlay */}
+                            <Box
+                              position="absolute"
+                              top={0}
+                              left={0}
+                              right={0}
+                              bottom={0}
+                              bgGradient={`linear(to-br, ${project.color}15, transparent)`}
+                            />
+                          </Box>
+                        ))}
+                      </Box>
+
+                      {/* Glow effect */}
+                      <Box
+                        position="absolute"
+                        top="-20px"
+                        left="-20px"
+                        width="150px"
+                        height="150px"
+                        borderRadius="full"
+                        bg={`${project.color}20`}
+                        filter="blur(60px)"
+                        pointerEvents="none"
+                        opacity={activeProject === index ? 1 : 0}
+                        transition="opacity 0.6s ease"
+                      />
+                    </Box>
+                  ))}
+                </VStack>
+              </MotionBox>
+
+              {/* RIGHT SIDE - Sticky Content (Foreground) */}
+              <Box position="relative" zIndex={2}>
+                <VStack align="flex-start" spacing={5}>
+                  {/* Project Number & Category */}
+                  <HStack spacing={3}>
+                    <Text
+                      fontSize="5xl"
+                      fontWeight="900"
+                      color={projects[activeProject]?.color}
+                      lineHeight="1"
+                      transition="color 0.4s ease"
+                    >
+                      {projects[activeProject]?.number}
+                    </Text>
+                    <VStack align="flex-start" spacing={0}>
+                      <Text
+                        fontSize="xs"
+                        fontWeight="700"
+                        textTransform="uppercase"
+                        letterSpacing="2px"
+                        color="gray.500"
+                      >
+                        {projects[activeProject]?.category}
+                      </Text>
+                      <Text
+                        fontSize="xs"
+                        fontWeight="500"
+                        color="gray.500"
+                      >
+                        {projects[activeProject]?.year}
+                      </Text>
+                    </VStack>
+                  </HStack>
+
+                  {/* Title */}
+                  <Heading
+                    fontSize={{ base: '4xl', md: '5xl', lg: '6xl' }}
+                    fontWeight="900"
+                    color="white"
+                    lineHeight="1.05"
+                    transition="opacity 0.4s ease"
+                  >
+                    {projects[activeProject]?.title}
+                  </Heading>
+
+                  {/* Description */}
+                  <Text
+                    fontSize={{ base: 'md', md: 'lg' }}
+                    color="gray.300"
+                    lineHeight="1.7"
+                    maxW="550px"
+                    transition="opacity 0.4s ease"
+                  >
+                    {projects[activeProject]?.description}
+                  </Text>
+
+                  {/* Tags */}
+                  <HStack spacing={2} flexWrap="wrap" pt={2}>
+                    {projects[activeProject]?.tags.map((tag, i) => (
+                      <Tag
+                        key={i}
+                        size="md"
+                        bg="rgba(255, 255, 255, 0.05)"
+                        color="gray.300"
+                        border="1px solid rgba(255, 255, 255, 0.1)"
+                        borderRadius="full"
+                        px={3}
+                        py={1}
+                        fontSize="xs"
+                        fontWeight="500"
+                        transition="all 0.3s ease"
+                        _hover={{
+                          bg: `${projects[activeProject]?.color}20`,
+                          borderColor: projects[activeProject]?.color,
+                          color: 'white',
+                        }}
+                      >
+                        {tag}
+                      </Tag>
+                    ))}
+                  </HStack>
+
+                  {/* CTA Button */}
+                  <Button
+                    as="a"
+                    href={projects[activeProject]?.link}
+                    size="md"
+                    bg={projects[activeProject]?.color}
+                    color="white"
+                    px={6}
+                    py={5}
+                    fontSize="sm"
+                    fontWeight="700"
+                    borderRadius="full"
+                    mt={4}
+                    transition="all 0.3s ease"
+                    _hover={{
+                      transform: 'translateY(-2px)',
+                      boxShadow: `0 10px 30px ${projects[activeProject]?.color}50`,
+                    }}
+                  >
+                    <HStack spacing={2}>
+                      <Text>View Project</Text>
+                      <Text>→</Text>
+                    </HStack>
+                  </Button>
+
+                  {/* Progress Indicator */}
+                  <HStack spacing={2} pt={6}>
+                    {projects.map((_, index) => (
+                      <Box
+                        key={index}
+                        width={activeProject === index ? '40px' : '8px'}
+                        height="3px"
+                        bg={activeProject === index ? projects[activeProject]?.color : 'rgba(255, 255, 255, 0.2)'}
+                        borderRadius="full"
+                        transition="all 0.4s cubic-bezier(0.4, 0, 0.2, 1)"
+                      />
+                    ))}
+                  </HStack>
+                </VStack>
+              </Box>
+            </Box>
+          </Container>
+        </Box>
+      </Box>
+
+      {/* Bottom padding */}
+      <Box height="50vh" position="relative" zIndex={1} />
     </Box>
   );
 };
 
-export default Options;
+export default ScrollLinkedShowcase;

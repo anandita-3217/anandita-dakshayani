@@ -245,6 +245,7 @@ function App() {
 //   </motion.div>
 // )
 // TODO: PRojects -> major ones inspired by aayushbharathi  in home page 
+//  TODO: card style https://www.framer.com/marketplace/components/cms-showcase-card/
 // minor projects:  in projects page
 // const containerRef = useRef(null)
 // const { scrollYProgress } = useScroll({
