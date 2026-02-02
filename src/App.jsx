@@ -141,8 +141,9 @@ import CommandPalette from './components/CommandPalette';
 import ScrollToTop from './components/ScrollToTop';
 import NotFound from './components/NotFound'
 import useKeyboardShortcuts from './components/hooks/useKeyboardShortcuts';
+import ProjectAlt from './components/ProjectAlt';
 
-import Options from './components/options';
+// import Options from './components/options';
 
 function App() {
   const { scrollYProgress } = useScroll();
@@ -211,8 +212,9 @@ function App() {
             
             <Header />
             <Hero />
-            <Options/>
+            {/* <Options/> */}
             <About />
+            {/* <ProjectAlt/> */}
             {/* Projects with enhanced parallax */}
             <Projects /> 
               <Contact />
