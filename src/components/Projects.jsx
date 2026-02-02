@@ -561,6 +561,7 @@ import {
   Badge,
   Link,
   useColorModeValue,
+  AspectRatio 
 } from '@chakra-ui/react';
 import { motion, useScroll, useTransform, useSpring, useInView } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
