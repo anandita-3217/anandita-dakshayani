@@ -141,7 +141,6 @@ import CommandPalette from './components/CommandPalette';
 import ScrollToTop from './components/ScrollToTop';
 import NotFound from './components/NotFound'
 import useKeyboardShortcuts from './components/hooks/useKeyboardShortcuts';
-import ProjectAlt from './components/ProjectAlt';
 
 // import Options from './components/options';
 
@@ -214,8 +213,6 @@ function App() {
             <Hero />
             {/* <Options/> */}
             <About />
-            {/* <ProjectAlt/> */}
-            {/* Projects with enhanced parallax */}
             <Projects /> 
               <Contact />
               <Resume />
@@ -245,8 +242,7 @@ function App() {
 //   <motion.div ref={ref} style={{ clipPath }}>
 //     <img src="/photo.jpg" alt="Revealed image" />
 //   </motion.div>
-// )
-// TODO: PRojects -> major ones inspired by aayushbharathi  in home page 
+// ) 
 //  TODO: card style https://www.framer.com/marketplace/components/cms-showcase-card/
 // minor projects:  in projects page
 // const containerRef = useRef(null)
