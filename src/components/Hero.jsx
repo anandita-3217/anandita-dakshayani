@@ -13,6 +13,8 @@ import { motion, useAnimation  } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { useColorMode } from '@chakra-ui/react';
 import TextType from "./ui/TextType";
+import { useDisclosure } from '@chakra-ui/react';
+import Contact  from './Contact';
 
 // Create motion components
 const MotionButton = motion.create(Button);
@@ -112,7 +114,7 @@ const handleProjectsHoverEnd = () => {
     triggerOnce: false,
     threshold: 0.2
   });
-  
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Box
       id="hero"
@@ -314,7 +316,7 @@ const handleProjectsHoverEnd = () => {
                 {/* Contact CTA */}
                 <MotionButton
                   as="a"
-                  href="#contact"
+                  onClick={onOpen}
                   size="lg"
                   px={1}
                   py={1}
@@ -386,7 +388,9 @@ const handleProjectsHoverEnd = () => {
                     initial={{ opacity: 0 }}
                     animate={connectCircleControls}
                   />
+
                 </MotionButton>
+                <Contact isOpen={isOpen} onClose={onClose} />
               </HStack>
             </MotionBox>
           </VStack>

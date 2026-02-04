@@ -108,11 +108,8 @@
 // // TODO: Learn to make routes and setup separate pages 
 // // TODO: Add guest book inspired by https://aayushbharti.in/ 
 // // TODO: Add bucketlist inspired by https://aayushbharti.in/ 
-// // TODO: In techSkills remove the name of the tech and add it as a tooltip inspired by https://aayushbharti.in/  https://v2.chakra-ui.com/docs/components/tooltip
 // // TODO: For the main projects think of a better layout and add filters and sorts option
 // // TODO: https://aayushbharti.in/about layout for new about page https://reactbits.dev/components/dome-gallery or https://reactbits.dev/components/masonry or https://reactbits.dev/components/stack or https://reactbits.dev/components/circular-gallery for rightside asset
-// // TODO: https://reactbits.dev/text-animations/scroll-velocity works for other assets for the home page's about https://reactbits.dev/animations/logo-loop combine these
-// // TODO: https://reactbits.dev/text-animations/split-text for separate contact page
 // // TODO: Add  a an AI chatbot or whatev 
 // // TODO: Maybe add a picture of whatever hubble is seeing in the hobbies section?
 // // TODO: maybe https://www.framer.com/marketplace/components/eyes-follow-cursor/ https://www.framer.com/marketplace/components/interactive-gradient/
