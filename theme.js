@@ -221,6 +221,83 @@ fonts: {
         default: '#fafafa', // slightly elevated
         _dark: '#2a2a2a',
       },
+      // NEW SURFACE OPTIONS:
+    
+    // Glassmorphic surfaces
+    'surface.glass': {
+      default: 'rgba(255, 255, 255, 0.7)',
+      _dark: 'rgba(255, 255, 255, 0.02)',
+    },
+    'surface.glassElevated': {
+      default: 'rgba(255, 255, 255, 0.9)',
+      _dark: 'rgba(255, 255, 255, 0.05)',
+    },
+    
+    // Tinted surfaces
+    'surface.teal': {
+      default: 'rgba(20, 184, 166, 0.03)',
+      _dark: 'rgba(20, 184, 166, 0.05)',
+    },
+    'surface.pink': {
+      default: 'rgba(236, 72, 153, 0.03)',
+      _dark: 'rgba(236, 72, 153, 0.05)',
+    },
+    'surface.purple': {
+      default: 'rgba(139, 92, 246, 0.03)',
+      _dark: 'rgba(139, 92, 246, 0.05)',
+    },
+    
+    // Subtle gradient surfaces
+    'surface.gradientSubtle': {
+      default: 'linear-gradient(135deg, rgba(20, 184, 166, 0.05), rgba(236, 72, 153, 0.05))',
+      _dark: 'linear-gradient(135deg, rgba(20, 184, 166, 0.08), rgba(236, 72, 153, 0.08))',
+    },
+    
+    // Darker variants for contrast
+    'surface.darker': {
+      default: '#e5e7eb',
+      _dark: '#0f0f0f',
+    },
+    'surface.darkest': {
+      default: '#d1d5db',
+      _dark: '#050505',
+    },
+    
+    // Frosted glass effect
+    'surface.frosted': {
+      default: 'rgba(247, 247, 248, 0.8)',
+      _dark: 'rgba(31, 31, 31, 0.8)',
+    },
+    
+    // Overlay surfaces
+    'surface.overlay': {
+      default: 'rgba(0, 0, 0, 0.5)',
+      _dark: 'rgba(0, 0, 0, 0.7)',
+    },
+    'surface.overlayLight': {
+      default: 'rgba(0, 0, 0, 0.3)',
+      _dark: 'rgba(0, 0, 0, 0.5)',
+    },
+    
+    // Highlight surfaces
+    'surface.highlight': {
+      default: 'rgba(20, 184, 166, 0.1)',
+      _dark: 'rgba(20, 184, 166, 0.15)',
+    },
+    'surface.highlightPink': {
+      default: 'rgba(236, 72, 153, 0.1)',
+      _dark: 'rgba(236, 72, 153, 0.15)',
+    },
+    
+    // Subtle depth variants
+    'surface.sunken': {
+      default: '#f1f1f3',
+      _dark: '#161616',
+    },
+    'surface.raised': {
+      default: '#ffffff',
+      _dark: '#2d2d2d',
+    },
     },
   },
 
