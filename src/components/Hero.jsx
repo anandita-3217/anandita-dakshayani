@@ -293,7 +293,6 @@ const handleProjectsHoverEnd = () => {
   </Box>
   
   {/* Expanding white circle background */}
-  {/* TODO: Take care of the whites so they look ok even in light theme */}
   <MotionBox
   style={{ transformOrigin: "center center" }}
     position="absolute"
@@ -330,6 +329,7 @@ const handleProjectsHoverEnd = () => {
                   overflow="hidden"
                   _hover={{
                     color: "black",
+                    cursor: "pointer"
                   }}
                   whileHover={{
                     scale: 1.02,

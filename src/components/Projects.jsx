@@ -562,6 +562,7 @@ export function Projects(){
             whileTap={{ scale: 0.95 }}
             role="group"
             fontWeight="600"
+            // fontFamily="Orbitron"
           >
             <Text>See more projects</Text>
             <Box

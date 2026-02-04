@@ -581,8 +581,8 @@ export default function Contact({ isOpen, onClose }) {
                   <HStack spacing={4} justify="center">
                     <SocialIcon
                       icon={Github}
-                      href="https://github.com/yourusername"
-                      color="#ffffff"
+                      href="https://github.com/anandita-3217"
+                      color="text.secondary"
                     />
                     <SocialIcon
                       icon={Linkedin}
@@ -592,7 +592,7 @@ export default function Contact({ isOpen, onClose }) {
                     <SocialIcon
                       icon={FaXTwitter}
                       href="https://x.com/yourusername"
-                      color="#ffffff"
+                      color="text.secondary"
                     />
                   </HStack>
                 </Box>
