@@ -59,47 +59,6 @@ export default function Contact({ isOpen, onClose }) {
     setFormData({ name: '', email: '', message: '' });
     onClose();
   };
-
-  // const CTAButton = ({ icon: Icon, label, onClick, gradient,subtext }) => {
-  //   const { r, g, b } = hexToRgb(gradient);
-  //   const rgba = (a) => `rgba(${r},${g},${b},${a})`;
-
-  //   return (
-  //     <MotionBox
-  //       as="button"
-  //       onClick={onClick}
-  //       p={6}
-  //       borderRadius="2xl"
-  //       border="1px solid"
-  //       borderColor="surface.darker"
-  //       // bg={rgba(0.15)}
-  //       bg="surface.darker"
-  //       backdropFilter="blur(20px)"
-  //       cursor="pointer"
-  //       whileHover={{ scale: 1.03, y: -4 }}
-  //       whileTap={{ scale: 0.98 }}
-  //       transition={{ duration: 0.2 }}
-  //       w="full"
-  //     >
-  //       <VStack spacing={3}>
-  //         <Box
-  //           p={3}
-  //           borderRadius="50%"
-  //           bg={rgba(0.25)}
-  //           border="1px solid"
-  //           borderColor={rgba(0.35)}
-  //         >
-  //           <Icon size={24} color={gradient} />
-  //         </Box>
-  //         <Text fontSize="lg" fontWeight="600" color="text.primary">
-  //           {label}
-  //         </Text>
-  //         <Text fontSize="md" color="text.primary" fontWeight="400">{subtext}</Text>
-  //       </VStack>
-  //     </MotionBox>
-  //   );
-  // };
-
   const CTAButton = ({ icon: Icon, label, onClick, gradient, subtext }) => {
   const { r, g, b } = hexToRgb(gradient);
   const rgba = (a) => `rgba(${r},${g},${b},${a})`;
@@ -129,8 +88,9 @@ export default function Contact({ isOpen, onClose }) {
           border="1px solid"
           borderColor={rgba(0.35)}
           flexShrink={0}
+          color={"text.primary"}
         >
-          <Icon size={24} color={gradient} />
+          <Icon size={24}  />
         </Box>
 
         {/* Text content */}
@@ -172,16 +132,20 @@ export default function Contact({ isOpen, onClose }) {
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={handleClose} isCentered size="4xl">
+    <Modal isOpen={isOpen} onClose={handleClose} isCentered motionPreset="slideInBottom" size="4xl">
       <ModalOverlay bg="blackAlpha.700" backdropFilter="blur(10px)" />
       <ModalContent
-        bg="surface.glass"
+        bg="surface.glassElevated"
         backdropFilter="blur(40px)"
         border="1px solid"
         borderColor="border.primary"
         borderRadius="3xl"
         overflow="hidden"
         mx={4}
+        mb={0}  // Bottom margin
+        mt="auto"  // Push to bottom
+        maxH="90vh"  // Prevent overflow on small screens
+        overflowY="auto"
       >
         <ModalHeader
           fontSize="2xl"
@@ -221,15 +185,15 @@ export default function Contact({ isOpen, onClose }) {
                     icon={Calendar}
                     label="Book a Call"
                     onClick={() => window.open('https://calendly.com/your-link', '_blank')}
-                    gradient="#6366f1"
-                    subtext="schedule a 30 min chat"
+                    gradient="text.primary"
+                    subtext="Schedule a chat"
                   />
                   <CTAButton flex="1"
                   w="full"
                     icon={Mail}
                     label="Email Me"
                     onClick={() => window.location.href = 'mailto:your@email.com'}
-                    gradient="#10b981"
+                    gradient="#text.primary"
                     subtext="ananditad21@gmail.com"
                   />
 
@@ -238,7 +202,7 @@ export default function Contact({ isOpen, onClose }) {
                     icon={MessageSquare}
                     label="Write a Message"
                     onClick={() => setShowMessageForm(true)}
-                    gradient="#ec4899"
+                    gradient="#text.primary"
                     subtext="Send a message directly"
                   />
                 </VStack>
