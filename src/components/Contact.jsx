@@ -60,45 +60,92 @@ export default function Contact({ isOpen, onClose }) {
     onClose();
   };
 
-  const CTAButton = ({ icon: Icon, label, onClick, gradient,subtext }) => {
-    const { r, g, b } = hexToRgb(gradient);
-    const rgba = (a) => `rgba(${r},${g},${b},${a})`;
+  // const CTAButton = ({ icon: Icon, label, onClick, gradient,subtext }) => {
+  //   const { r, g, b } = hexToRgb(gradient);
+  //   const rgba = (a) => `rgba(${r},${g},${b},${a})`;
 
-    return (
-      <MotionBox
-        as="button"
-        onClick={onClick}
-        p={6}
-        borderRadius="2xl"
-        border="1px solid"
-        borderColor={rgba(0.3)}
-        // bg={rgba(0.15)}
-        bg="surface.darker"
-        backdropFilter="blur(20px)"
-        cursor="pointer"
-        whileHover={{ scale: 1.03, y: -4 }}
-        whileTap={{ scale: 0.98 }}
-        transition={{ duration: 0.2 }}
-        w="full"
-      >
-        <VStack spacing={3}>
-          <Box
-            p={3}
-            borderRadius="50%"
-            bg={rgba(0.25)}
-            border="1px solid"
-            borderColor={rgba(0.35)}
-          >
-            <Icon size={24} color={gradient} />
-          </Box>
+  //   return (
+  //     <MotionBox
+  //       as="button"
+  //       onClick={onClick}
+  //       p={6}
+  //       borderRadius="2xl"
+  //       border="1px solid"
+  //       borderColor="surface.darker"
+  //       // bg={rgba(0.15)}
+  //       bg="surface.darker"
+  //       backdropFilter="blur(20px)"
+  //       cursor="pointer"
+  //       whileHover={{ scale: 1.03, y: -4 }}
+  //       whileTap={{ scale: 0.98 }}
+  //       transition={{ duration: 0.2 }}
+  //       w="full"
+  //     >
+  //       <VStack spacing={3}>
+  //         <Box
+  //           p={3}
+  //           borderRadius="50%"
+  //           bg={rgba(0.25)}
+  //           border="1px solid"
+  //           borderColor={rgba(0.35)}
+  //         >
+  //           <Icon size={24} color={gradient} />
+  //         </Box>
+  //         <Text fontSize="lg" fontWeight="600" color="text.primary">
+  //           {label}
+  //         </Text>
+  //         <Text fontSize="md" color="text.primary" fontWeight="400">{subtext}</Text>
+  //       </VStack>
+  //     </MotionBox>
+  //   );
+  // };
+
+  const CTAButton = ({ icon: Icon, label, onClick, gradient, subtext }) => {
+  const { r, g, b } = hexToRgb(gradient);
+  const rgba = (a) => `rgba(${r},${g},${b},${a})`;
+
+  return (
+    <MotionBox
+      as="button"
+      onClick={onClick}
+      p={6}
+      borderRadius="2xl"
+      border="1px solid"
+      borderColor="transparent"
+      bg="surface.darker"
+      backdropFilter="blur(20px)"
+      cursor="pointer"
+      whileHover={{ borderColor: 'var(--chakra-colors-border-primary)' }}
+      whileTap={{ scale: 0.98 }}
+      transition={{ duration: 0.2 }}
+      w="full"
+    >
+      <HStack spacing={4} align="start" w="full">
+        {/* Icon */}
+        <Box
+          p={3}
+          borderRadius="50%"
+          bg={rgba(0.25)}
+          border="1px solid"
+          borderColor={rgba(0.35)}
+          flexShrink={0}
+        >
+          <Icon size={24} color={gradient} />
+        </Box>
+
+        {/* Text content */}
+        <VStack align="start" spacing={1} flex={1}>
           <Text fontSize="lg" fontWeight="600" color="text.primary">
             {label}
           </Text>
-          <Text fontSize="md" color="text.primary" fontWeight="400">{subtext}</Text>
+          <Text fontSize="md" color="text.secondary" fontWeight="400">
+            {subtext}
+          </Text>
         </VStack>
-      </MotionBox>
-    );
-  };
+      </HStack>
+    </MotionBox>
+  );
+};
 
   const SocialIcon = ({ icon: Icon, href, color }) => {
     const { r, g, b } = hexToRgb(color);
@@ -151,7 +198,10 @@ export default function Contact({ isOpen, onClose }) {
           top={6}
           right={6}
           color="text.secondary"
-          _hover={{ color: "text.primary" }}
+          _hover={{ color: "text.primary", 
+            transform: 'rotate(90deg)'
+          }}
+          transition="all 0.3s ease"
         />
 
         <ModalBody p={8}>
@@ -215,7 +265,7 @@ export default function Contact({ isOpen, onClose }) {
                     <SocialIcon
                       icon={FaLinkedin}
                       href="https://linkedin.com/in/yourusername"
-                      color="#0a66c2"
+                      color="text.secondary"
                     />
                     <SocialIcon
                       icon={FaXTwitter}
