@@ -17,7 +17,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar, Mail, MessageSquare, Send } from 'lucide-react';
+import { FileText , Mail, MessageSquare, Send } from 'lucide-react';
 import { FaXTwitter,FaGithub, FaLinkedin   } from 'react-icons/fa6';
 
 const MotionBox = motion.create(Box);
@@ -182,11 +182,11 @@ export default function Contact({ isOpen, onClose }) {
                   <HStack spacing={4} w="full">
                   <CTAButton flex="1"
                   w="full"
-                    icon={Calendar}
-                    label="Book a Call"
-                    onClick={() => window.open('https://calendly.com/your-link', '_blank')}
+                    icon={FileText}
+                    label="View Resume"
+                    onClick={() => window.open('/#resume', '_blank')} // TODO: Change this link
                     gradient="text.primary"
-                    subtext="Schedule a chat"
+                    subtext="View my experience & skills"
                   />
                   <CTAButton flex="1"
                   w="full"
