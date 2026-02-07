@@ -90,17 +90,17 @@ const education = [
     role: 'Bachelor of Technology in Computer Science',
     company: 'University Name',
     location: 'City, Country',
-    period: '2017 - 2021',
-    description: 'CGPA: 8.5/10',
+    period: '2019 - 2023',
+    description: 'CGPA: 7.3/10',
     color: '#f59e0b',
   },
 ];
 
 const skills = {
   'Frontend': ['React', 'Next.js', 'TypeScript', 'Chakra UI', 'Tailwind CSS', 'Framer Motion'],
-  'Backend': ['Node.js', 'Django', 'Python', 'Express.js', 'REST APIs', 'GraphQL'],
+  'Backend': ['Node.js', 'Django', 'Python', 'Express.js', 'REST APIs'],
   'Database': ['MongoDB', 'PostgreSQL', 'Firebase', 'Redis'],
-  'ML/AI': ['TensorFlow', 'PyTorch', 'Scikit-learn', 'OpenAI API'],
+  'ML/AI': ['TensorFlow', 'PyTorch', 'Scikit-learn', 'Hugging Face API'],
   'DevOps': ['Docker', 'AWS', 'Vercel', 'GitHub Actions', 'CI/CD'],
   'Tools': ['Git', 'VS Code', 'Postman', 'Figma', 'Jira'],
 };
@@ -137,7 +137,7 @@ const hexToRgb = (hex) => {
 // ---------------------------------------------------------------------------
 const TimelineItem = ({ item, index, isLast }) => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-50px' });
+  const isInView = useInView(ref, { triggerOnce: false, margin: '-50px' });
 
   const { r, g, b } = hexToRgb(item.color);
   const rgba = (a) => `rgba(${r},${g},${b},${a})`;
@@ -256,7 +256,7 @@ const TimelineItem = ({ item, index, isLast }) => {
 // ---------------------------------------------------------------------------
 const SkillCategory = ({ category, skills, index }) => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { triggerOnce: false, margin: '-50px' });
+  const isInView = useInView(ref, { triggerOnce: false, thereshold: 0.2, margin: '-50px' });
 
   const textPrimary = useColorModeValue('text.primary', 'white');
 
@@ -322,7 +322,7 @@ const SkillCategory = ({ category, skills, index }) => {
 export const Resume = () => {
   const containerRef = useRef(null);
   const headerRef = useRef(null);
-  const headerInView = useInView(headerRef, { triggerOnce: false });
+  const headerInView = useInView(headerRef, { once: true });
 
   const textPrimary = useColorModeValue('text.primary', 'white');
   const textSecondary = useColorModeValue('text.secondary', 'text.secondary');
@@ -403,7 +403,7 @@ export const Resume = () => {
           <MotionBox
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.2 }}
             mb={8}
           >
             <HStack spacing={3} mb={2}>
@@ -506,7 +506,7 @@ export const Resume = () => {
           <MotionBox
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
+            viewport={{ triggerOnce: false }}
             mb={8}
           >
             <HStack spacing={3} mb={2}>
@@ -537,7 +537,7 @@ export const Resume = () => {
                   key={cert.id}
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
+                  viewport={{ triggerOnce: false }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   whileHover={{ scale: 1.03, y: -4 }}
                 >
@@ -608,8 +608,7 @@ export const Resume = () => {
               <Button
                 size="lg"
                 onClick={handleDownload}
-                // bgGradient="linear(to-r, #7c3aed, #ec4899)"
-                bg="fuchsia.600"
+                bgGradient="linear(to-r, #7c3aed, #ec4899)"
                 color="white"
                 leftIcon={<Download size={20} />}
                 px={8}
