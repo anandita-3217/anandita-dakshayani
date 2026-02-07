@@ -263,6 +263,7 @@ function App() {
 //     </div>
 //   </div>
 // )
+// TODO: Add a favicon
   );
 }
 

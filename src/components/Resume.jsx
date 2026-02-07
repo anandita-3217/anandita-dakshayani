@@ -1,108 +1,3 @@
-// import React from "react";
-// import { Container, Button, Box, VStack, Heading, Text, transition } from '@chakra-ui/react';
-// import pdf from "./assets/Anandita_Dakshayani_Garimella.pdf";
-// import { motion } from 'framer-motion';
-// import { FaFileDownload } from 'react-icons/fa';
-// import { useInView } from "react-intersection-observer";
-
-// // Motion components
-// const MotionBox = motion.create(Box);
-// const MotionHeading = motion.create(Heading);
-// // TODO: make the source come from google drive no direct assets
-
-// const headerVariants = {
-//   hidden: {opacity:0, y: 40},
-//   visible:{
-//     opacity: 1,
-//     y: 0,
-//     transition: {duration: 0.7}
-//   }
-// }
-
-// const resumeVariants = {
-//   hidden: {opacity:0, y: -40},
-//   visible:{
-//     opacity: 1,
-//     y: 0,
-//     transition: {duration: 0.7}
-//   }
-// }
-
-// function Resume() {
-//   const [headerRef, headerInView] = useInView({ 
-//     triggerOnce: false,
-//     threshold: 0.2
-//   });
-//   const [resumeRef, resumeInView] = useInView({ 
-//     triggerOnce: false,
-//     threshold: 0.2
-//   });
-  
-//   return (
-//     <Box bg="transparent" minH="100vh" py={20} id="resume">
-//       <Container maxW="container.xl">
-//         <VStack spacing={8}>
-//           <MotionHeading 
-//             ref={headerRef}
-//             color="brand.400" 
-//             size="2xl"
-//             initial="hidden"
-//             animate={headerInView ? "visible" : "hidden"}
-//             variants={headerVariants}
-//           >
-//             Resume
-//           </MotionHeading>
-          
-//           <MotionBox 
-//             ref={resumeRef}
-//             textAlign="center"
-//             initial="hidden"
-//             viewport={{ once: true }}
-//             animate={resumeInView ? "visible" : "hidden"}
-//             variants={resumeVariants}
-//           >
-//             <Button
-//               as="a"
-//               href={pdf}
-//               download
-//               size="lg"
-//               bg="brand.400"
-//               color="white"
-//               px={10}
-//               py={7}
-//               fontSize="md"
-//               fontWeight="600"
-//               leftIcon={<FaFileDownload />}
-//               _hover={{
-//                 bg: 'brand.500',
-//                 transform: 'translateY(-2px)',
-//                 boxShadow: '0 8px 25px rgba(20, 184, 166, 0.4)'
-//               }}
-//               transition="all 0.3s"
-//             >
-//               Download Resume
-//             </Button>
-//           </MotionBox>
-          
-
-//           {/* Simple iframe - works everywhere */}
-//           <Box
-//             as="iframe"
-//             src={`${pdf}#toolbar=0`}
-//             width="60%"
-//             height="800px"
-//             border="none"
-//             borderRadius="lg"
-//             bg="white"
-//           />
-//         </VStack>
-//       </Container>
-//     </Box>
-//   );
-// }
-
-// export default Resume;
-
 import React, { useRef } from 'react';
 import {
   Box,
@@ -116,20 +11,18 @@ import {
   Badge,
   useColorModeValue,
 } from '@chakra-ui/react';
-import { motion, useScroll, useTransform, useSpring, useInView } from 'framer-motion';
+import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import {
   Download,
   Briefcase,
   GraduationCap,
   Award,
   Code,
-  Rocket,
   Calendar,
   MapPin,
 } from 'lucide-react';
 
 const MotionBox = motion(Box);
-const MotionDiv = motion.div;
 
 // ---------------------------------------------------------------------------
 // Data
@@ -194,11 +87,11 @@ const experience = [
 const education = [
   {
     id: 1,
-    role: 'Bachelor of Technology in Computer Science', // Changed from 'degree'
-    company: 'University Name', // Changed from 'institution'
-    location: 'City, Country', // Added
+    role: 'Bachelor of Technology in Computer Science',
+    company: 'University Name',
+    location: 'City, Country',
     period: '2017 - 2021',
-    description: 'CGPA: 8.5/10', // Changed from 'grade'
+    description: 'CGPA: 8.5/10',
     color: '#f59e0b',
   },
 ];
@@ -363,7 +256,7 @@ const TimelineItem = ({ item, index, isLast }) => {
 // ---------------------------------------------------------------------------
 const SkillCategory = ({ category, skills, index }) => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-50px' });
+  const isInView = useInView(ref, { triggerOnce: false, margin: '-50px' });
 
   const textPrimary = useColorModeValue('text.primary', 'white');
 
@@ -427,14 +320,28 @@ const SkillCategory = ({ category, skills, index }) => {
 // Main Resume Component
 // ---------------------------------------------------------------------------
 export const Resume = () => {
+  const containerRef = useRef(null);
   const headerRef = useRef(null);
-  const headerInView = useInView(headerRef, { once: true });
+  const headerInView = useInView(headerRef, { triggerOnce: false });
 
   const textPrimary = useColorModeValue('text.primary', 'white');
   const textSecondary = useColorModeValue('text.secondary', 'text.secondary');
 
+  // Scroll-based blur effect on header
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start start', '200px start'],
+  });
+
+  const headerBlur = useTransform(
+    scrollYProgress,
+    [0, 1],
+    ['blur(0px)', 'blur(10px)']
+  );
+
+  const headerOpacity = useTransform(scrollYProgress, [0, 1], [1, 0.3]);
+
   const handleDownload = () => {
-    // Replace with your actual resume PDF path
     const link = document.createElement('a');
     link.href = '/resume.pdf';
     link.download = 'Anandita-Resume.pdf';
@@ -442,11 +349,12 @@ export const Resume = () => {
   };
 
   return (
-    <Box bg="transparent" minH="100vh" py={20} px={4}>
+    <Box ref={containerRef} bg="transparent" minH="100vh" py={20} px={4}>
       <Container maxW="1200px">
-        {/* Header */}
+        {/* Header with scroll blur */}
         <MotionBox
           ref={headerRef}
+          style={{ filter: headerBlur, opacity: headerOpacity }}
           initial={{ opacity: 0, y: 40 }}
           animate={headerInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
@@ -694,14 +602,14 @@ export const Resume = () => {
               <Text fontSize="lg" color={textSecondary}>
                 Download a PDF copy of my resume for your records
               </Text>
-              </Box>
-            </VStack>
+            </Box>
 
             <MotionBox whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button
                 size="lg"
                 onClick={handleDownload}
-                bgGradient="linear(to-r, #7c3aed, #ec4899)"
+                // bgGradient="linear(to-r, #7c3aed, #ec4899)"
+                bg="fuchsia.600"
                 color="white"
                 leftIcon={<Download size={20} />}
                 px={8}
@@ -713,6 +621,7 @@ export const Resume = () => {
                 Download Resume
               </Button>
             </MotionBox>
+          </VStack>
         </MotionBox>
       </Container>
     </Box>
