@@ -248,9 +248,24 @@ export default function Contact({ isOpen, onClose }) {
                 transition={{ duration: 0.3 }}
               >
                 <form onSubmit={handleSubmit}>
-                  <VStack spacing={4}>
+                  <VStack w="full" spacing={4} align="stretch">
+                    <Box
+                      as="button"
+                      type="button"
+                      onClick={() => setShowMessageForm(false)}
+                      fontSize="md"
+                      color="text.secondary"
+                      // textDecoration="underline"
+                      textAlign="left"
+                      cursor="pointer"
+                      _hover={{ color: 'text.primary' }}
+                      transition="color 0.2s"
+                    >
+                      ← Back to options
+                    </Box>
+                    <HStack spacing={4} align="start" w="full">
                     <Input
-                      placeholder="Your Name"
+                      placeholder="Jane Doe"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       required
@@ -260,15 +275,15 @@ export default function Contact({ isOpen, onClose }) {
                       border="1px solid"
                       borderColor="border.primary"
                       color="text.primary"
-                      _hover={{ borderColor: 'brand.400' }}
+                      _hover={{ borderColor: 'button.primary.bg' }}
                       _focus={{
-                        borderColor: 'brand.400',
+                        borderColor: 'button.primary.bg',
                         boxShadow: '0 0 0 1px var(--chakra-colors-brand-400)',
                       }}
                     />
                     <Input
                       type="email"
-                      placeholder="Your Email"
+                      placeholder="janedoe@example.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       required
@@ -278,14 +293,15 @@ export default function Contact({ isOpen, onClose }) {
                       border="1px solid"
                       borderColor="border.primary"
                       color="text.primary"
-                      _hover={{ borderColor: 'brand.400' }}
+                      _hover={{ borderColor: 'button.primary.bg' }}
                       _focus={{
-                        borderColor: 'brand.400',
+                        borderColor: 'button.primary.bg',
                         boxShadow: '0 0 0 1px var(--chakra-colors-brand-400)',
                       }}
                     />
+                    </HStack>
                     <Textarea
-                      placeholder="Your Message"
+                      placeholder="How can I help"
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       required
@@ -295,32 +311,21 @@ export default function Contact({ isOpen, onClose }) {
                       border="1px solid"
                       borderColor="border.primary"
                       color="text.primary"
-                      _hover={{ borderColor: 'brand.400' }}
+                      _hover={{ borderColor: 'button.primary.bg' }}
                       _focus={{
-                        borderColor: 'brand.400',
+                        borderColor: 'button.primary.bg',
                         boxShadow: '0 0 0 1px var(--chakra-colors-brand-400)',
                       }}
                     />
 
                     <HStack w="full" spacing={3}>
-                      <Button
-                        variant="outline"
-                        size="lg"
-                        flex={1}
-                        onClick={() => setShowMessageForm(false)}
-                        borderColor="border.primary"
-                        color="text.secondary"
-                        _hover={{ borderColor: 'brand.400', color: "text.primary" }}
-                      >
-                        Back
-                      </Button>
                       <MotionBox flex={1} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                         <Button
                           type="submit"
                           size="lg"
                           w="full"
-                          bgGradient="linear(to-r, #7c3aed, #ec4899)"
-                          color="white"
+                          bg="button.primary.bg"
+                          color="button.primary.text"
                           rightIcon={<Send size={18} />}
                           isLoading={isSubmitting}
                           _hover={{ opacity: 0.9 }}

@@ -209,6 +209,14 @@ fonts: {
         default: 'brand.200',
         _dark: 'brand.700',
       },
+      'button.primary.bg': {
+      default: 'black',      // Light mode: black button
+      _dark: 'white',        // Dark mode: white button
+    },
+    'button.primary.text': {
+      default: 'white',      // Light mode: white text
+      _dark: 'black',        // Dark mode: black text
+    },
 
       // -------------------------
       // SURFACES
