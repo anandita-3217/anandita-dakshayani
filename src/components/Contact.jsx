@@ -17,7 +17,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FileText , Mail, MessageSquare, Send } from 'lucide-react';
+import { FileText , Mail, MessageSquare, Send, ArrowLeft } from 'lucide-react';
 import { FaXTwitter,FaGithub, FaLinkedin   } from 'react-icons/fa6';
 
 const MotionBox = motion.create(Box);
@@ -248,92 +248,112 @@ export default function Contact({ isOpen, onClose }) {
                 transition={{ duration: 0.3 }}
               >
                 <form onSubmit={handleSubmit}>
+                 
                   <VStack w="full" spacing={4} align="stretch">
+                    {/* Back link */}
                     <Box
                       as="button"
                       type="button"
                       onClick={() => setShowMessageForm(false)}
                       fontSize="md"
                       color="text.secondary"
-                      // textDecoration="underline"
                       textAlign="left"
                       cursor="pointer"
                       _hover={{ color: 'text.primary' }}
                       transition="color 0.2s"
                     >
-                      ← Back to options
+                      ← Back
                     </Box>
-                    <HStack spacing={4} align="start" w="full">
-                    <Input
-                      placeholder="Jane Doe"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      required
-                      size="lg"
-                      variant="outline"
-                      bg="rgba(255, 255, 255, 0.05)"
-                      border="1px solid"
-                      borderColor="border.primary"
-                      color="text.primary"
-                      _hover={{ borderColor: 'button.primary.bg' }}
-                      _focus={{
-                        borderColor: 'button.primary.bg',
-                        boxShadow: '0 0 0 1px var(--chakra-colors-brand-400)',
-                      }}
-                    />
-                    <Input
-                      type="email"
-                      placeholder="janedoe@example.com"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      required
-                      size="lg"
-                      variant="outline"
-                      bg="rgba(255, 255, 255, 0.05)"
-                      border="1px solid"
-                      borderColor="border.primary"
-                      color="text.primary"
-                      _hover={{ borderColor: 'button.primary.bg' }}
-                      _focus={{
-                        borderColor: 'button.primary.bg',
-                        boxShadow: '0 0 0 1px var(--chakra-colors-brand-400)',
-                      }}
-                    />
-                    </HStack>
-                    <Textarea
-                      placeholder="How can I help"
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      required
-                      rows={6}
-                      variant="outline"
-                      bg="rgba(255, 255, 255, 0.05)"
-                      border="1px solid"
-                      borderColor="border.primary"
-                      color="text.primary"
-                      _hover={{ borderColor: 'button.primary.bg' }}
-                      _focus={{
-                        borderColor: 'button.primary.bg',
-                        boxShadow: '0 0 0 1px var(--chakra-colors-brand-400)',
-                      }}
-                    />
 
-                    <HStack w="full" spacing={3}>
-                      <MotionBox flex={1} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                        <Button
-                          type="submit"
+                    {/* Name & Email row with labels */}
+                    <HStack spacing={4} align="start" w="full">
+                      <VStack align="start" spacing={2} flex={1}>
+                        <Text fontSize="sm" fontWeight="600" color="text.secondary">
+                          Name
+                        </Text>
+                        <Input
+                          placeholder="Jane Doe"
+                          value={formData.name}
+                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                          required
                           size="lg"
-                          w="full"
-                          bg="button.primary.bg"
-                          color="button.primary.text"
-                          rightIcon={<Send size={18} />}
-                          isLoading={isSubmitting}
-                          _hover={{ opacity: 0.9 }}
-                        >
-                          Send Message
-                        </Button>
-                      </MotionBox>
+                          variant="outline"
+                          bg="rgba(255, 255, 255, 0.05)"
+                          border="1px solid"
+                          borderColor="border.primary"
+                          color="text.primary"
+                          _hover={{ borderColor: 'button.primary.bg' }}
+                          _focus={{
+                            borderColor: 'button.primary.bg',
+                            boxShadow: '0 0 0 1px var(--chakra-colors-button-primary-bg)',
+                          }}
+                        />
+                      </VStack>
+                        
+                      <VStack align="start" spacing={2} flex={1}>
+                        <Text fontSize="sm" fontWeight="600" color="text.secondary">
+                          Email
+                        </Text>
+                        <Input
+                          type="email"
+                          placeholder="janedoe@example.com"
+                          value={formData.email}
+                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                          required
+                          size="lg"
+                          variant="outline"
+                          bg="rgba(255, 255, 255, 0.05)"
+                          border="1px solid"
+                          borderColor="border.primary"
+                          color="text.primary"
+                          _hover={{ borderColor: 'button.primary.bg' }}
+                          _focus={{
+                            borderColor: 'button.primary.bg',
+                            boxShadow: '0 0 0 1px var(--chakra-colors-button-primary-bg)',
+                          }}
+                        />
+                      </VStack>
                     </HStack>
+                        
+                    {/* Message with label */}
+                    <VStack align="start" spacing={2} w="full">
+                      <Text fontSize="sm" fontWeight="600" color="text.secondary">
+                        Message
+                      </Text>
+                      <Textarea
+                        placeholder="How can I help?"
+                        value={formData.message}
+                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                        required
+                        rows={6}
+                        variant="outline"
+                        bg="rgba(255, 255, 255, 0.05)"
+                        border="1px solid"
+                        borderColor="border.primary"
+                        color="text.primary"
+                        _hover={{ borderColor: 'button.primary.bg' }}
+                        _focus={{
+                          borderColor: 'button.primary.bg',
+                          boxShadow: '0 0 0 1px var(--chakra-colors-button-primary-bg)',
+                        }}
+                      />
+                    </VStack>
+                      
+                    {/* Send button */}
+                    <MotionBox whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                      <Button
+                        type="submit"
+                        size="lg"
+                        w="full"
+                        bg="button.primary.bg"
+                        color="button.primary.text"
+                        rightIcon={<Send size={18} />}
+                        isLoading={isSubmitting}
+                        _hover={{ opacity: 0.9 }}
+                      >
+                        Send Message
+                      </Button>
+                    </MotionBox>
                   </VStack>
                 </form>
               </MotionBox>
