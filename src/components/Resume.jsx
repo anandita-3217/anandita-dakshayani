@@ -39,10 +39,10 @@ const personalInfo = {
 const experience = [
   {
     id: 1,
-    role: 'Senior Full-Stack Developer',
-    company: 'Tech Company Inc.',
-    location: 'Remote',
-    period: 'Jan 2024 - Present',
+    role: 'Analyst',
+    company: 'Capgemini.',
+    location: 'Mumbai',
+    period: 'Nov 2023 - March 2024',
     description:
       'Leading development of AI-powered web applications using React and Django.',
     achievements: [
@@ -88,8 +88,8 @@ const education = [
   {
     id: 1,
     role: 'Bachelor of Technology in Computer Science',
-    company: 'University Name',
-    location: 'City, Country',
+    company: 'Jawaharlal Nehru Technological University ',
+    location: 'Visakhapatnam, India',
     period: '2019 - 2023',
     description: 'CGPA: 7.3/10',
     color: '#f59e0b',
@@ -97,12 +97,12 @@ const education = [
 ];
 
 const skills = {
-  'Frontend': ['React', 'Next.js', 'TypeScript', 'Chakra UI', 'Tailwind CSS', 'Framer Motion'],
-  'Backend': ['Node.js', 'Django', 'Python', 'Express.js', 'REST APIs'],
+  'Frontend': ['React', 'Next.js', 'TypeScript', 'Chakra UI', 'Tailwind CSS', 'Framer Motion','Material UI'],
+  'Backend': ['Node.js', 'Django', 'Python', 'Express.js', 'REST APIs','Java'],
   'Database': ['MongoDB', 'PostgreSQL', 'Firebase', 'Redis'],
-  'ML/AI': ['TensorFlow', 'PyTorch', 'Scikit-learn', 'Hugging Face API'],
+  'ML/AI': ['TensorFlow', 'PyTorch', 'Scikit-learn', 'Hugging Face API','R'],
   'DevOps': ['Docker', 'AWS', 'Vercel', 'GitHub Actions', 'CI/CD'],
-  'Tools': ['Git', 'VS Code', 'Postman', 'Figma', 'Jira'],
+  'Tools': ['Git', 'VS Code', 'Postman'],
 };
 
 const certifications = [
@@ -115,9 +115,9 @@ const certifications = [
   },
   {
     id: 2,
-    title: 'Machine Learning Specialization',
-    issuer: 'Coursera',
-    date: '2022',
+    title: 'CS50: Introduction to Computer Science',
+    issuer: 'Harvard University',
+    date: '2025',
     color: '#10b981',
   },
 ];
@@ -349,7 +349,7 @@ export const Resume = () => {
   };
 
   return (
-    <Box ref={containerRef} bg="transparent" minH="100vh" py={20} px={4}>
+    <Box ref={containerRef} bg="transparent" minH="100vh" py={20} px={4} id='resume'>
       <Container maxW="1200px">
         {/* Header with scroll blur */}
         <MotionBox
