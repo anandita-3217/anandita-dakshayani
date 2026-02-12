@@ -146,7 +146,7 @@ const CommandPalette = ({ isOpen, onClose }) => {
         bg="blackAlpha.600"
       />
       <ModalContent
-        bg="bg.primary"
+        bg="surface.card"
         borderColor="border.primary"
         border="1px solid"
         borderRadius="xl"
@@ -258,7 +258,7 @@ const CommandPalette = ({ isOpen, onClose }) => {
             py={2.5}
             borderTop="1px solid"
             borderColor="border.primary"
-            bg="bg.secondary"
+            bg="surface.elevated"
           >
             <HStack justify="space-between" fontSize="xs" color="text.secondary">
               <HStack spacing={4}>
