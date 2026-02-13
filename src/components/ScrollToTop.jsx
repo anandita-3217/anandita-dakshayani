@@ -1,6 +1,6 @@
 // components/ScrollToTop.js
 import React, { useState, useEffect } from 'react';
-import { IconButton } from '@chakra-ui/react';
+import { IconButton, useColorModeValue  } from '@chakra-ui/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUp } from 'lucide-react';
 
@@ -8,6 +8,9 @@ const MotionIconButton = motion.create(IconButton);
 
 const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const buttonBg = useColorModeValue('black', 'white');
+  const buttonText = useColorModeValue('white', 'black');
+  const hoverBg = useColorModeValue('gray.800', 'gray.200');
 
   // Show button when page is scrolled down
   useEffect(() => {
@@ -51,17 +54,17 @@ const ScrollToTop = () => {
           bottom={{ base: 4, md: 8 }}
           right={{ base: 4, md: 8 }}
           size="lg"
-          bg="brand.400"
-          color="white"
+          bg={buttonBg}
+          color={buttonText}
           borderRadius="full"
           boxShadow="lg"
           zIndex={999}
           _hover={{
-            bg: 'brand.500',
+            bg: {hoverBg},
             boxShadow: '0 8px 25px rgba(20, 184, 166, 0.4)',
           }}
           _active={{
-            bg: 'brand.600',
+            bg: {hoverBg},
           }}
         />
       )}

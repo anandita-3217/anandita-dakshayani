@@ -39,8 +39,7 @@ const CommandPalette = ({ isOpen, onClose }) => {
   const navItems = [
     { title: 'Home', href: '#hero', icon: Home, group: 'Navigation' },
     { title: 'About', href: '#about', icon: User, group: 'Navigation' },
-    { title: 'Skills', href: '#skills', icon: Code, group: 'Navigation' },
-    { title: 'Projects', href: '#projects', icon: FolderGit2, group: 'Navigation' },
+    { title: 'Work', href: '#projects', icon: FolderGit2, group: 'Navigation' },
     { title: 'Contact', href: '#contact', icon: Mail, group: 'Navigation' },
     { title: 'Resume', href: '#resume', icon: File, group: 'Navigation' },
   ];
@@ -214,12 +213,12 @@ const CommandPalette = ({ isOpen, onClose }) => {
                           py={2.5}
                           spacing={3}
                           cursor="pointer"
-                          bg={globalIndex === selectedIndex ? 'bg.hover' : 'transparent'}
-                          _hover={{ bg: 'bg.hover' }}
+                          bg={globalIndex === selectedIndex ? 'surface.glassElevated' : 'transparent'}
+                          _hover={{ bg: 'surface.glass' }}
                           onClick={() => handleSelect(item)}
                           transition="all 0.15s"
                         >
-                          <Icon size={16} color="var(--chakra-colors-brand-400)" />
+                          <Icon size={16} color="var(--chakra-colors-text-secondary)" />
                           <Text 
                             flex={1} 
                             fontSize="sm" 
