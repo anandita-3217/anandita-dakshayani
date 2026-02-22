@@ -138,7 +138,7 @@ import CommandPalette from './components/CommandPalette';
 import ScrollToTop from './components/ScrollToTop';
 import NotFound from './components/NotFound'
 import useKeyboardShortcuts from './components/hooks/useKeyboardShortcuts';
-
+import ProjectsPage from './components/ProjectPageBits/ProjectPage'
 // import Options from './components/options';
 
 function App() {
@@ -208,7 +208,7 @@ function App() {
             
             <Header />
             <Hero />
-            {/* <Options/> */}
+            <ProjectsPage/>
             <About />
             <Projects /> 
               <Contact />

@@ -287,7 +287,7 @@ const FilterButton = ({ label, isActive, onClick, color }) => {
 // ---------------------------------------------------------------------------
 // Main ProjectsPage Component
 // ---------------------------------------------------------------------------
-export const ProjectsPage = () => {
+export default function ProjectsPage()  {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeType, setActiveType] = useState('All');
   const [activeTags, setActiveTags] = useState([]);
@@ -530,7 +530,7 @@ export const ProjectsPage = () => {
               textAlign="center"
               py={20}
             >
-              <Text fontSize="5xl" mb={4}>🔍</Text>
+              <Text fontSize="5xl" mb={4} alignSelf="center"><Search/></Text>
               <Heading
                 as="h3"
                 fontSize="2xl"
@@ -568,4 +568,4 @@ export const ProjectsPage = () => {
   );
 };
 
-export default ProjectsPage;
+// export default ProjectsPage;
