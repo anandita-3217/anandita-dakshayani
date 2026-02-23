@@ -268,9 +268,9 @@ const FilterButton = ({ label, isActive, onClick, color }) => {
       py={2}
       borderRadius="full"
       border="1px solid"
-      borderColor={isActive ? color || 'brand.400' : inactiveBorder}
-      bg={isActive ? color ? `${color}20` : 'brand.400' : 'transparent'}
-      color={isActive ? color || 'brand.400' : 'text.secondary'}
+      borderColor={isActive ? color || 'button.primary.bg' : inactiveBorder}
+      bg={isActive ? color ? `${color}20` : 'button.primary.bg' : 'transparent'}
+      color={isActive ? color || 'button.primary.text' : 'text.secondary'}
       fontSize="sm"
       fontWeight={isActive ? '600' : '400'}
       cursor="pointer"
