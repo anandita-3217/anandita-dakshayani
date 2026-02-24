@@ -138,7 +138,8 @@ import CommandPalette from './components/CommandPalette';
 import ScrollToTop from './components/ScrollToTop';
 import NotFound from './components/NotFound'
 import useKeyboardShortcuts from './components/hooks/useKeyboardShortcuts';
-import ProjectsPage from './components/ProjectPageBits/ProjectPage'
+import ProjectsIndex from './components/ProjectPageBits/ProjectsIndex'
+import ProjectsPage from './pages/ProjectsPage'; 
 // import Options from './components/options';
 
 function App() {
@@ -208,7 +209,7 @@ function App() {
             
             <Header />
             <Hero />
-            <ProjectsPage/>
+            <ProjectsIndex/>
             <About />
             <Projects /> 
               <Contact />
@@ -219,6 +220,7 @@ function App() {
         } />
 
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/work" element={<ProjectsPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

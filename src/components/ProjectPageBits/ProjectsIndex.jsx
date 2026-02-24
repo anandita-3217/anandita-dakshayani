@@ -287,7 +287,7 @@ const FilterButton = ({ label, isActive, onClick, color }) => {
 // ---------------------------------------------------------------------------
 // Main ProjectsPage Component
 // ---------------------------------------------------------------------------
-export default function ProjectsPage()  {
+export default function ProjectsIndex()  {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeType, setActiveType] = useState('All');
   const [activeTags, setActiveTags] = useState([]);
@@ -409,10 +409,10 @@ export default function ProjectsPage()  {
                 borderRadius="2xl"
                 color={textPrimary}
                 fontSize="md"
-                _placeholder={{ color: 'text.secondary' }}
-                _hover={{ borderColor: 'brand.400' }}
+                _placeholder={{ color: 'button.primary.bg' }}
+                _hover={{ borderColor: 'button.primary.bg' }}
                 _focus={{
-                  borderColor: 'brand.400',
+                  borderColor: 'button.primary.bg',
                   boxShadow: '0 0 0 1px var(--chakra-colors-brand-400)',
                 }}
               />
