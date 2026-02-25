@@ -113,7 +113,7 @@ export default function ProjectsPage() {
       {/* Fixed Header */}
       <Header />
       <Box position="relative" zIndex={1}>
-              
+              {/* TODO: https://aayushbharti.in/projects/snippix  make a page like this for the first 4 projects */}
       {/* About Section - Slow upward parallax */}
       <FadeInSection>
         <ParallaxSection speed={0.3} direction={1}>

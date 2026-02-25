@@ -9,7 +9,8 @@ import {
   Heading,
   Image,
   Grid,
-  GridItem
+  GridItem,
+  useColorModeValue
 } from '@chakra-ui/react'
 import { motion } from 'framer-motion';
 import Error from "./assets/Error404.gif"
@@ -53,6 +54,7 @@ const staggerContainer = {
 
 
 function NotFound(){
+  const baseColor = useColorModeValue("#d4dadc", '#1a1a1a');
   const navigate = useNavigate();
   const handleProjectsClick = ()  => {
     navigate('/');
@@ -66,7 +68,7 @@ function NotFound(){
     return (
         <Box 
           id="notFound" 
-          bg="bg.secondary" 
+          bg="baseColor" 
           minH="100vh"
           display="flex"
           alignItems="center"
