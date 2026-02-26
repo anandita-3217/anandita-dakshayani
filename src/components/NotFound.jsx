@@ -218,8 +218,8 @@ function NotFound(){
                         <MotionButton
                           as="a"
                           href="/"
-                          bg = "brand.400"
-                          color="white"
+                          bg = "button.secondary.bg."
+                          color="button.secondary.text"
                           size="lg"
                           px={10}
                           py={6}
@@ -228,10 +228,9 @@ function NotFound(){
                           w={{ base: "full", sm: "auto" }}
                           whileHover={{ 
                             scale: 1.05,
-                            boxShadow: '0 8px 25px rgba(20, 184, 166, 0.4)'
+                            border:"button.secondary.text"
                           }}
-                          whileTap={{ scale: 0.95 }}
-                          transition={{ duration: 0.2 }}
+                          
                         >
                           Return to Home
                         </MotionButton>
@@ -245,15 +244,13 @@ function NotFound(){
                           fontSize="md"
                           fontWeight="600"
                           borderColor="border.secondary"
-                          color="text.primary"
+                          color="button.primary.text"
+                          bg="button.primary.bg"
                           w={{ base: "full", sm: "auto" }}
                           _hover={{
-                            borderColor: 'brand.400',
-                            color: 'brand.400',
-                            bg: 'bg.accent'
+                            borderColor: 'button.primary.text',  
                           }}
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
+                          
                           transition={{ duration: 0.2 }}
                         >
                           View Projects
