@@ -15,8 +15,8 @@ export default function AboutPart() {
           <Heading
             as="h2"
             fontSize={{ base: '3xl', md: '5xl' }}
-            fontWeight="bold"
-            bgGradient='linear(to-r, #059669, #2563eb, #9333ea)'
+            fontWeight="normal"
+            bgGradient='linear(to-r, #1e40af, #7c3aed,#ec4899)'
             bgClip="text"
             letterSpacing="tight"
           >

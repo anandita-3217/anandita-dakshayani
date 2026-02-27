@@ -160,7 +160,7 @@ const Hobbies = () => {
                   : 'linear(to-r, brand.500, purple.500)'
               }
               bgClip="text"
-              fontWeight="extrabold"
+              fontWeight="normal"
             >
               Hobbies & Interests
             </Heading>
