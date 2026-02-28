@@ -272,337 +272,580 @@
 // };
 
 // export default Hobbies;
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from "react";
+import { keyframes } from "@emotion/react";
 import {
   Box,
-  Container,
+  ChakraProvider,
+  extendTheme,
+  Flex,
+  Grid,
   Heading,
   Text,
   VStack,
-  useColorModeValue,
-} from '@chakra-ui/react';
-import { motion, useMotionValue, useSpring, AnimatePresence } from 'framer-motion';
+  HStack,
+  Badge,
+} from "@chakra-ui/react";
 
-const MotionBox = motion(Box);
+// ─── Theme ───────────────────────────────────────────────────────────────────
+const theme = extendTheme({
+  styles: {
+    global: {
+      "@import":
+        "url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap')",
+      body: {
+        bg: "transparent",
+        fontFamily: "'DM Sans', sans-serif",
+        color: "white",
+      },
+    },
+  },
+});
 
-// ---------------------------------------------------------------------------
-// Hobbies Data - Just emojis and names
-// ---------------------------------------------------------------------------
+// ─── Keyframes ────────────────────────────────────────────────────────────────
+const floatAnim = keyframes`
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-8px) rotate(1deg); }
+  66% { transform: translateY(-4px) rotate(-1deg); }
+`;
+
+const glowPulse = keyframes`
+  0%, 100% { box-shadow: 0 0 20px var(--glow-color, rgba(120,80,255,0.3)); }
+  50% { box-shadow: 0 0 40px var(--glow-color, rgba(120,80,255,0.6)); }
+`;
+
+const shimmer = keyframes`
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+`;
+
+const orbitAnim = keyframes`
+  from { transform: rotate(0deg) translateX(18px) rotate(0deg); }
+  to { transform: rotate(360deg) translateX(18px) rotate(-360deg); }
+`;
+
+// ─── Data ─────────────────────────────────────────────────────────────────────
 const hobbies = [
-  // { id: 1, emoji: '💻', name: 'Coding', color: '#6366f1', left: 10, top: 20, size: 140 },
-  { id: 2, emoji: '🎵', name: 'Music', color: '#ec4899', left: 65, top: 15, size: 110 },
-  { id: 3, emoji: '📸', name: 'Photography', color: '#8b5cf6', left: 35, top: 55, size: 120 },
-  { id: 4, emoji: '📚', name: 'Reading', color: '#10b981', left: 75, top: 60, size: 100 },
-  { id: 5, emoji: '🎮', name: 'Gaming', color: '#f59e0b', left: 15, top: 75, size: 130 },
-  { id: 6, emoji: '💪', name: 'Fitness', color: '#06b6d4', left: 55, top: 85, size: 95 },
-  { id: 7, emoji: '☕', name: 'Coffee', color: '#78350f', left: 85, top: 35, size: 85 },
-  { id: 8, emoji: '🎨', name: 'Design', color: '#e11d48', left: 45, top: 30, size: 105 },
+  {
+    id: 1,
+    title: "Photography",
+    emoji: "📸",
+    level: 88,
+    tag: "Creative",
+    desc: "Capturing fleeting moments through urban landscapes and portrait sessions.",
+    color: "#ff6b6b",
+    glow: "rgba(255,107,107,0.4)",
+    accent: "linear-gradient(135deg, #ff6b6b, #feca57)",
+    orbs: ["#ff6b6b", "#feca57"],
+    years: "6 yrs",
+    freq: "Weekly",
+  },
+  {
+    id: 2,
+    title: "Rock Climbing",
+    emoji: "🧗",
+    level: 72,
+    tag: "Sport",
+    desc: "Bouldering indoors and outdoor sport climbing across granite faces.",
+    color: "#48dbfb",
+    glow: "rgba(72,219,251,0.4)",
+    accent: "linear-gradient(135deg, #48dbfb, #0abde3)",
+    orbs: ["#48dbfb", "#00d2d3"],
+    years: "3 yrs",
+    freq: "Daily",
+  },
+  {
+    id: 3,
+    title: "Generative Art",
+    emoji: "🎨",
+    level: 65,
+    tag: "Digital",
+    desc: "Crafting algorithmic visuals with p5.js and custom WebGL shaders.",
+    color: "#ff9ff3",
+    glow: "rgba(255,159,243,0.4)",
+    accent: "linear-gradient(135deg, #ff9ff3, #a29bfe)",
+    orbs: ["#ff9ff3", "#a29bfe"],
+    years: "2 yrs",
+    freq: "Monthly",
+  },
+  {
+    id: 4,
+    title: "Fermentation",
+    emoji: "🧫",
+    level: 80,
+    tag: "Culinary",
+    desc: "Brewing kombucha, fermenting hot sauces and crafting sourdough cultures.",
+    color: "#55efc4",
+    glow: "rgba(85,239,196,0.4)",
+    accent: "linear-gradient(135deg, #55efc4, #00b894)",
+    orbs: ["#55efc4", "#00b894"],
+    years: "4 yrs",
+    freq: "Weekly",
+  },
+  {
+    id: 5,
+    title: "Synthesizers",
+    emoji: "🎹",
+    level: 91,
+    tag: "Music",
+    desc: "Patching modular systems and designing ambient soundscapes from noise.",
+    color: "#fdcb6e",
+    glow: "rgba(253,203,110,0.4)",
+    accent: "linear-gradient(135deg, #fdcb6e, #e17055)",
+    orbs: ["#fdcb6e", "#e17055"],
+    years: "8 yrs",
+    freq: "Daily",
+  },
+  {
+    id: 6,
+    title: "Speleology",
+    emoji: "🕳️",
+    level: 55,
+    tag: "Adventure",
+    desc: "Exploring cave systems and mapping underground river passages.",
+    color: "#a29bfe",
+    glow: "rgba(162,155,254,0.4)",
+    accent: "linear-gradient(135deg, #a29bfe, #6c5ce7)",
+    orbs: ["#a29bfe", "#6c5ce7"],
+    years: "1 yr",
+    freq: "Monthly",
+  },
 ];
 
-// ---------------------------------------------------------------------------
-// Helper
-// ---------------------------------------------------------------------------
-const hexToRgb = (hex) => {
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
-  return { r, g, b };
-};
+// ─── Floating Orb ─────────────────────────────────────────────────────────────
+const FloatingOrb = ({ color, size, top, left, delay, duration }) => (
+  <Box
+    position="absolute"
+    top={top}
+    left={left}
+    w={size}
+    h={size}
+    borderRadius="full"
+    bg={color}
+    filter="blur(60px)"
+    opacity={0.15}
+    animation={`${floatAnim} ${duration}s ease-in-out ${delay}s infinite`}
+    pointerEvents="none"
+  />
+);
 
-// ---------------------------------------------------------------------------
-// Hobby Bubble Component
-// ---------------------------------------------------------------------------
-const HobbyBubble = ({ hobby, index }) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const [ripples, setRipples] = useState([]);
+// ─── Orbit Dot ────────────────────────────────────────────────────────────────
+const OrbitDot = ({ color, delay }) => (
+  <Box
+    position="absolute"
+    top="50%"
+    left="50%"
+    w="6px"
+    h="6px"
+    borderRadius="full"
+    bg={color}
+    boxShadow={`0 0 8px ${color}`}
+    ml="-3px"
+    mt="-3px"
+    animation={`${orbitAnim} 3s linear ${delay}s infinite`}
+  />
+);
 
-  const { r, g, b } = hexToRgb(hobby.color);
-  const rgba = (a) => `rgba(${r},${g},${b},${a})`;
-
-  const textPrimary = useColorModeValue('text.primary', 'white');
-
-  // Mouse tracking for tilt effect
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const rotateX = useSpring(useMotionValue(0), { stiffness: 300, damping: 20 });
-  const rotateY = useSpring(useMotionValue(0), { stiffness: 300, damping: 20 });
+// ─── Hobby Card ───────────────────────────────────────────────────────────────
+const HobbyCard = ({ hobby, index }) => {
+  const [hovered, setHovered] = useState(false);
+  const [clicked, setClicked] = useState(false);
+  const cardRef = useRef(null);
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
 
   const handleMouseMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-
-    const rotateXValue = ((e.clientY - centerY) / rect.height) * -20;
-    const rotateYValue = ((e.clientX - centerX) / rect.width) * 20;
-
-    rotateX.set(rotateXValue);
-    rotateY.set(rotateYValue);
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const dx = (e.clientX - cx) / (rect.width / 2);
+    const dy = (e.clientY - cy) / (rect.height / 2);
+    setTilt({ x: dy * -8, y: dx * 8 });
   };
 
   const handleMouseLeave = () => {
-    rotateX.set(0);
-    rotateY.set(0);
-    setIsHovered(false);
+    setHovered(false);
+    setTilt({ x: 0, y: 0 });
   };
 
-  const handleClick = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    
-    const newRipple = { id: Date.now(), x, y };
-    setRipples(prev => [...prev, newRipple]);
-    
-    setTimeout(() => {
-      setRipples(prev => prev.filter(r => r.id !== newRipple.id));
-    }, 600);
+  const handleClick = () => {
+    setClicked(true);
+    setTimeout(() => setClicked(false), 400);
   };
 
   return (
-    <MotionBox
-      position="absolute"
-      left={`${hobby.left}%`}
-      top={`${hobby.top}%`}
-      w={`${hobby.size}px`}
-      h={`${hobby.size}px`}
-      style={{
-        rotateX,
-        rotateY,
-        transformStyle: 'preserve-3d',
-      }}
-      initial={{ opacity: 0, scale: 0 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{
-        duration: 0.6,
-        delay: index * 0.1,
-        type: 'spring',
-        bounce: 0.5,
-      }}
+    <Box
+      ref={cardRef}
+      position="relative"
+      borderRadius="24px"
+      overflow="hidden"
+      cursor="pointer"
+      onMouseEnter={() => setHovered(true)}
       onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
       onClick={handleClick}
-      cursor="pointer"
+      style={{
+        transform: `perspective(800px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale(${hovered ? 1.04 : 1}) ${clicked ? "scale(0.97)" : ""}`,
+        transition: "transform 0.2s cubic-bezier(.23,1,.32,1)",
+        "--glow-color": hobby.glow,
+      }}
+      animation={
+        hovered
+          ? `${glowPulse} 1.8s ease-in-out infinite`
+          : `${floatAnim} ${4 + index * 0.4}s ease-in-out ${index * 0.3}s infinite`
+      }
     >
-      {/* Floating animation */}
-      <MotionBox
-        animate={{
-          y: [0, -10, 0],
-        }}
-        transition={{
-          duration: 3 + index * 0.5,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-        position="relative"
-        w="full"
-        h="full"
-      >
-        {/* Outer glow ring */}
-        <MotionBox
+      {/* Glass layer */}
+      <Box
+        position="absolute"
+        inset={0}
+        bg="rgba(255,255,255,0.04)"
+        backdropFilter="blur(24px) saturate(180%)"
+        borderRadius="24px"
+        border="1px solid rgba(255,255,255,0.12)"
+        zIndex={0}
+      />
+
+      {/* Gradient shimmer on hover */}
+      {hovered && (
+        <Box
           position="absolute"
-          inset="-8px"
-          borderRadius="full"
-          border="2px solid"
-          borderColor={hobby.color}
-          animate={{
-            scale: isHovered ? [1, 1.15, 1] : 1,
-            opacity: isHovered ? [0.3, 0, 0.3] : 0,
-          }}
-          transition={{
-            duration: 1.5,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
+          inset={0}
+          borderRadius="24px"
+          zIndex={1}
+          opacity={0.12}
+          background={hobby.accent}
+          animation={`${shimmer} 1.5s linear infinite`}
+          backgroundSize="200% auto"
         />
+      )}
 
-        {/* Main bubble */}
-        <MotionBox
-          position="relative"
-          w="full"
-          h="full"
-          borderRadius="full"
-          bg={rgba(0.15)}
-          border="2px solid"
-          borderColor={rgba(0.3)}
-          backdropFilter="blur(20px)"
-          overflow="hidden"
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
-          boxShadow={`0 8px 32px ${rgba(0.3)}`}
-          animate={{
-            scale: isHovered ? 1.08 : 1,
-            boxShadow: isHovered 
-              ? `0 16px 48px ${rgba(0.5)}` 
-              : `0 8px 32px ${rgba(0.3)}`,
-          }}
-          transition={{ duration: 0.3 }}
-        >
-          {/* Gradient background */}
-          <Box
-            position="absolute"
-            inset={0}
-            bgGradient={`radial(circle at 30% 30%, ${rgba(0.25)} 0%, transparent 70%)`}
-          />
+      {/* Top accent line */}
+      <Box
+        position="absolute"
+        top={0}
+        left={0}
+        right={0}
+        h="2px"
+        background={hobby.accent}
+        zIndex={2}
+        opacity={hovered ? 1 : 0.5}
+        transition="opacity 0.3s"
+      />
 
-          {/* Click ripple effects */}
-          <AnimatePresence>
-            {ripples.map(ripple => (
-              <MotionBox
-                key={ripple.id}
-                position="absolute"
-                left={ripple.x}
-                top={ripple.y}
-                w="20px"
-                h="20px"
-                borderRadius="full"
-                border="2px solid"
-                borderColor={hobby.color}
-                initial={{ scale: 0, opacity: 1 }}
-                animate={{ scale: 4, opacity: 0 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.6, ease: 'easeOut' }}
-              />
-            ))}
-          </AnimatePresence>
-
-          {/* Emoji */}
-          <MotionBox
-            fontSize={`${hobby.size * 0.4}px`}
-            lineHeight="none"
-            mb={2}
-            animate={{
-              rotate: isHovered ? [0, 5, -5, 0] : 0,
-            }}
-            transition={{ duration: 0.4 }}
-            style={{ transformStyle: 'preserve-3d', transform: 'translateZ(20px)' }}
-          >
-            {hobby.emoji}
-          </MotionBox>
-
-          {/* Name label */}
-          <MotionBox
-            fontSize="sm"
-            fontWeight="600"
-            color={textPrimary}
-            textAlign="center"
-            px={3}
-            animate={{
-              opacity: isHovered ? 1 : 0.8,
-              y: isHovered ? 0 : 5,
-            }}
-            transition={{ duration: 0.2 }}
-            style={{ transformStyle: 'preserve-3d', transform: 'translateZ(10px)' }}
-          >
-            {hobby.name}
-          </MotionBox>
-
-          {/* Sparkle particles on hover */}
-          <AnimatePresence>
-            {isHovered && (
+      {/* Content */}
+      <VStack
+        position="relative"
+        zIndex={3}
+        align="start"
+        p={6}
+        spacing={4}
+      >
+        {/* Header row */}
+        <Flex w="full" justify="space-between" align="center">
+          {/* Emoji with orbit */}
+          <Box position="relative" w="52px" h="52px">
+            <Box
+              w="52px"
+              h="52px"
+              borderRadius="16px"
+              bg="rgba(255,255,255,0.06)"
+              border="1px solid rgba(255,255,255,0.1)"
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              fontSize="26px"
+              backdropFilter="blur(8px)"
+              transition="transform 0.3s"
+              style={{ transform: hovered ? "rotate(-8deg) scale(1.1)" : "none" }}
+            >
+              {hobby.emoji}
+            </Box>
+            {hovered && (
               <>
-                {[...Array(4)].map((_, i) => (
-                  <MotionBox
-                    key={i}
-                    position="absolute"
-                    w="6px"
-                    h="6px"
-                    borderRadius="full"
-                    bg={hobby.color}
-                    initial={{
-                      x: 0,
-                      y: 0,
-                      opacity: 0,
-                    }}
-                    animate={{
-                      x: [0, (Math.cos(i * Math.PI / 2) * 40)],
-                      y: [0, (Math.sin(i * Math.PI / 2) * 40)],
-                      opacity: [0, 1, 0],
-                    }}
-                    transition={{
-                      duration: 1,
-                      delay: i * 0.1,
-                      ease: 'easeOut',
-                    }}
-                  />
-                ))}
+                <OrbitDot color={hobby.orbs[0]} delay={0} />
+                <OrbitDot color={hobby.orbs[1]} delay={1.5} />
               </>
             )}
-          </AnimatePresence>
-        </MotionBox>
-      </MotionBox>
-    </MotionBox>
-  );
-};
+          </Box>
 
-// ---------------------------------------------------------------------------
-// Main Hobbies Component
-// ---------------------------------------------------------------------------
-export const Hobbies = () => {
-  const textPrimary = useColorModeValue('text.primary', 'white');
-  const textMuted = useColorModeValue('text.muted', 'text.muted');
-
-  return (
-    <Box bg="transparent" py={20} px={4}>
-      <Container maxW="1400px">
-        {/* Header */}
-        <MotionBox
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          mb={16}
-          textAlign="center"
-        >
-          <Text
-            fontSize="sm"
-            color={textMuted}
-            textTransform="uppercase"
-            letterSpacing="0.3em"
-            mb={4}
-            fontWeight="600"
-          >
-            Beyond Code
-          </Text>
-          <Heading
-            as="h2"
-            fontSize={{ base: '5xl', md: '7xl', lg: '8xl' }}
-            fontWeight="normal"
-            color={textPrimary}
-            fontFamily="heading"
-            mb={6}
-          >
-            What I{' '}
-            <Text as="span" bgGradient="linear(to-r, #1e40af, #7c3aed, #ec4899)" bgClip="text">
-              Love
+          <VStack align="end" spacing={1}>
+            <Badge
+              px={3}
+              py={1}
+              borderRadius="full"
+              fontSize="10px"
+              fontWeight="700"
+              letterSpacing="0.08em"
+              textTransform="uppercase"
+              bg="rgba(255,255,255,0.07)"
+              color={hobby.color}
+              border={`1px solid ${hobby.color}44`}
+              fontFamily="'Syne', sans-serif"
+            >
+              {hobby.tag}
+            </Badge>
+            <Text
+              fontSize="10px"
+              color="whiteAlpha.500"
+              fontFamily="'DM Sans', sans-serif"
+              fontStyle="italic"
+            >
+              {hobby.freq}
             </Text>
-          </Heading>
-          <Text fontSize="lg" color="text.secondary" maxW="600px" mx="auto">
-            Click on any bubble to create ripples, hover to see them float and sparkle.
-          </Text>
-        </MotionBox>
+          </VStack>
+        </Flex>
 
-        {/* Scattered Bubble Layout */}
-        <Box
-          position="relative"
-          h={{ base: '600px', md: '700px', lg: '800px' }}
-          w="full"
-          borderRadius="3xl"
-          border="1px solid"
-          borderColor="border.primary"
-          bg={useColorModeValue('rgba(255,255,255,0.02)', 'rgba(0,0,0,0.2)')}
-          backdropFilter="blur(10px)"
-          overflow="hidden"
+        {/* Title */}
+        <VStack align="start" spacing={1} w="full">
+          <Heading
+            fontFamily="'Syne', sans-serif"
+            fontSize="22px"
+            fontWeight="800"
+            letterSpacing="-0.02em"
+            color="white"
+            lineHeight={1.1}
+            style={{
+              background: hovered ? hobby.accent : "white",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: hovered ? "transparent" : "white",
+              transition: "all 0.3s",
+            }}
+          >
+            {hobby.title}
+          </Heading>
+          <Text
+            fontSize="11px"
+            color="whiteAlpha.400"
+            fontFamily="'Syne', sans-serif"
+            letterSpacing="0.1em"
+            textTransform="uppercase"
+          >
+            {hobby.years} experience
+          </Text>
+        </VStack>
+
+        {/* Description */}
+        <Text
+          fontSize="13px"
+          color="whiteAlpha.600"
+          lineHeight={1.6}
+          fontWeight="300"
+          noOfLines={hovered ? undefined : 2}
+          transition="all 0.3s"
         >
-          {hobbies.map((hobby, index) => (
-            <HobbyBubble key={hobby.id} hobby={hobby} index={index} />
-          ))}
+          {hobby.desc}
+        </Text>
+
+        {/* Skill bar */}
+        <Box w="full">
+          <Flex justify="space-between" mb={1}>
+            <Text fontSize="10px" color="whiteAlpha.500" letterSpacing="0.1em" textTransform="uppercase">
+              Proficiency
+            </Text>
+            <Text
+              fontSize="10px"
+              fontWeight="700"
+              fontFamily="'Syne', sans-serif"
+              color={hobby.color}
+            >
+              {hobby.level}%
+            </Text>
+          </Flex>
+          <Box
+            h="4px"
+            w="full"
+            borderRadius="full"
+            bg="rgba(255,255,255,0.07)"
+            overflow="hidden"
+          >
+            <Box
+              h="full"
+              borderRadius="full"
+              background={hobby.accent}
+              style={{
+                width: hovered ? `${hobby.level}%` : "0%",
+                transition: "width 0.8s cubic-bezier(.23,1,.32,1)",
+                boxShadow: `0 0 12px ${hobby.color}`,
+              }}
+            />
+          </Box>
         </Box>
-      </Container>
+      </VStack>
     </Box>
   );
 };
 
-export default Hobbies;
+// ─── Main Component ───────────────────────────────────────────────────────────
+export default function HobbiesComponent() {
+  const [filter, setFilter] = useState("All");
+  const tags = ["All", ...new Set(hobbies.map((h) => h.tag))];
+
+  const filtered =
+    filter === "All" ? hobbies : hobbies.filter((h) => h.tag === filter);
+
+  return (
+      <Box
+        minH="100vh"
+        position="relative"
+        overflow="hidden"
+        bg="#080810"
+        fontFamily="'DM Sans', sans-serif"
+        p={{ base: 6, md: 12 }}
+      >
+        {/* Background orbs */}
+        <FloatingOrb color="#6c5ce7" size="500px" top="-10%" left="-15%" delay={0} duration={7} />
+        <FloatingOrb color="#00b894" size="400px" top="40%" left="70%" delay={1} duration={9} />
+        <FloatingOrb color="#e17055" size="350px" top="70%" left="-5%" delay={2} duration={8} />
+        <FloatingOrb color="#0984e3" size="300px" top="10%" left="60%" delay={0.5} duration={10} />
+
+        {/* Subtle grid overlay */}
+        <Box
+          position="absolute"
+          inset={0}
+          opacity={0.03}
+          backgroundImage="linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px)"
+          backgroundSize="40px 40px"
+          pointerEvents="none"
+        />
+
+        {/* Header */}
+        <VStack align="start" mb={10} spacing={3} position="relative" zIndex={1}>
+          <HStack spacing={3} align="center">
+            <Box
+              px={3}
+              py={1}
+              borderRadius="full"
+              bg="rgba(255,255,255,0.05)"
+              border="1px solid rgba(255,255,255,0.1)"
+              backdropFilter="blur(10px)"
+            >
+              <Text
+                fontSize="11px"
+                color="whiteAlpha.500"
+                letterSpacing="0.2em"
+                textTransform="uppercase"
+                fontFamily="'Syne', sans-serif"
+              >
+                Personal interests
+              </Text>
+            </Box>
+          </HStack>
+
+          <Heading
+            fontFamily="'Syne', sans-serif"
+            fontSize={{ base: "42px", md: "60px" }}
+            fontWeight="800"
+            letterSpacing="-0.04em"
+            lineHeight={0.95}
+            color="white"
+          >
+            My
+            <Box
+              as="span"
+              display="block"
+              style={{
+                background: "linear-gradient(135deg, #a29bfe, #fd79a8, #fdcb6e)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
+              Hobbies.
+            </Box>
+          </Heading>
+
+          <Text
+            color="whiteAlpha.400"
+            fontSize="15px"
+            fontWeight="300"
+            maxW="420px"
+            lineHeight={1.6}
+          >
+            Things I obsess over outside of work — hover a card to explore.
+          </Text>
+        </VStack>
+
+        {/* Filter pills */}
+        <HStack mb={8} spacing={2} flexWrap="wrap" position="relative" zIndex={1}>
+          {tags.map((t) => (
+            <Box
+              key={t}
+              as="button"
+              px={4}
+              py={2}
+              borderRadius="full"
+              fontSize="12px"
+              fontWeight={filter === t ? "700" : "400"}
+              fontFamily="'Syne', sans-serif"
+              letterSpacing="0.05em"
+              border="1px solid"
+              borderColor={filter === t ? "rgba(255,255,255,0.3)" : "rgba(255,255,255,0.08)"}
+              bg={filter === t ? "rgba(255,255,255,0.1)" : "rgba(255,255,255,0.03)"}
+              color={filter === t ? "white" : "whiteAlpha.500"}
+              backdropFilter="blur(10px)"
+              onClick={() => setFilter(t)}
+              transition="all 0.2s"
+              _hover={{ borderColor: "rgba(255,255,255,0.2)", color: "white" }}
+            >
+              {t}
+            </Box>
+          ))}
+        </HStack>
+
+        {/* Grid */}
+        <Grid
+          templateColumns={{
+            base: "1fr",
+            md: "repeat(2, 1fr)",
+            lg: "repeat(3, 1fr)",
+          }}
+          gap={5}
+          position="relative"
+          zIndex={1}
+        >
+          {filtered.map((hobby, i) => (
+            <HobbyCard key={hobby.id} hobby={hobby} index={i} />
+          ))}
+        </Grid>
+
+        {/* Footer stat strip */}
+        <Flex
+          mt={10}
+          gap={6}
+          flexWrap="wrap"
+          position="relative"
+          zIndex={1}
+          px={4}
+          py={4}
+          borderRadius="16px"
+          bg="rgba(255,255,255,0.02)"
+          border="1px solid rgba(255,255,255,0.06)"
+          backdropFilter="blur(10px)"
+          justify="center"
+        >
+          {[
+            { label: "Active Hobbies", val: hobbies.length },
+            { label: "Avg. Proficiency", val: `${Math.round(hobbies.reduce((a, h) => a + h.level, 0) / hobbies.length)}%` },
+            { label: "Daily Practices", val: hobbies.filter((h) => h.freq === "Daily").length },
+            { label: "Years Combined", val: "24+" },
+          ].map((s) => (
+            <VStack key={s.label} spacing={0} align="center" minW="80px">
+              <Text
+                fontFamily="'Syne', sans-serif"
+                fontSize="24px"
+                fontWeight="800"
+                color="white"
+                letterSpacing="-0.03em"
+              >
+                {s.val}
+              </Text>
+              <Text fontSize="10px" color="whiteAlpha.400" letterSpacing="0.1em" textTransform="uppercase">
+                {s.label}
+              </Text>
+            </VStack>
+          ))}
+        </Flex>
+      </Box>
+  
+  );
+}
