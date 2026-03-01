@@ -93,11 +93,9 @@ fonts: {
 
     gradients: {
       primary: 'linear(to-r, #10b981, #3b82f6, #8b5cf6)',
-      brand: 'linear(to-r, #14b8a6, #667eea)',
       accent: 'linear(to-r, #f093fb, #667eea, #4facfe)',
       rainbow: 'linear(to-r, #14b8a6, #667eea, #f093fb, #4facfe)',
       ruby: 'linear(to-r, #dc2626, #c026d3, #7c3aed)',
-      jewel: 'linear(to-r, #059669, #2563eb, #9333ea)', // Top choice
       warm: 'linear(to-r, #f59e0b, #ef4444, #dc2626)',
       royal: 'linear(to-r, #1d4ed8, #7c3aed, #be123c)',
       sunset: 'linear(to-r, #059669, #f59e0b, #dc2626)',

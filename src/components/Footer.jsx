@@ -55,7 +55,7 @@ export default function Footer() {
           <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={10}>
             {/* About Section */}
             <VStack align="flex-start" spacing={4}>
-              <Heading size="md" color="brand.400">
+              <Heading size="md" bgGradient="linear(to-r, #1e40af, #7c3aed,#ec4899)" bgClip="text">
                 Anandita Dakshayani
               </Heading>
               <Text fontSize="sm" color="text.secondary" maxW="xs">
@@ -104,7 +104,7 @@ export default function Footer() {
 
             {/* Quick Links */}
             <VStack align="flex-start" spacing={3}>
-              <Heading size="md" color="brand.400">
+              <Heading size="md" bgGradient="linear(to-r, #1e40af, #7c3aed,#ec4899)" bgClip="text">
                 Quick Links
               </Heading>
               <VStack align="flex-start" spacing={2}>
@@ -127,7 +127,7 @@ export default function Footer() {
 
             {/* Connect Section */}
             <VStack align="flex-start" spacing={4}>
-              <Heading size="md" color="brand.400">
+              <Heading size="md" bgGradient="linear(to-r, #1e40af, #7c3aed,#ec4899)" bgClip="text">
                 Connect
               </Heading>
               <HStack spacing={3} flexWrap="wrap">
@@ -153,7 +153,7 @@ export default function Footer() {
 
             {/* Keyboard Shortcuts */}
             <VStack align="flex-start" spacing={4}>
-              <Heading size="md" color="brand.400">
+              <Heading size="md" bgGradient="linear(to-r, #1e40af, #7c3aed,#ec4899)" bgClip="text">
                 Keyboard Shortcuts
               </Heading>
               <VStack align="flex-start" spacing={2}>

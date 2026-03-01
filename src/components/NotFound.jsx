@@ -12,17 +12,22 @@ import {
   GridItem,
   useColorModeValue
 } from '@chakra-ui/react'
+import DotGrid from "./assets/DotGrid/DotGrid";
 import { motion } from 'framer-motion';
 import Error from "./assets/Error404.gif"
 import { useNavigate } from "react-router-dom";
-
+import {useColorMode, useDisclosure, useColorModeValue} from '@chakra-ui/react'
 // Create motion components
 const MotionBox = motion.create(Box);
 const MotionButton = motion.create(Button);
 const MotionImage = motion.create(Image);
 const MotionText = motion.create(Text);
 const MotionHeading = motion.create(Heading);
-
+const baseColor = useColorModeValue("#d4dadc", '#1a1a1a');
+  const gradientColors = useColorModeValue(
+    ['#ff0080', '#6366f1', '#3b82f6'],
+    ['#ff00ff', '#8000ff', '#0080ff']
+  );
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
   visible: { 
@@ -74,6 +79,17 @@ function NotFound(){
           alignItems="center"
           py={{ base: 12, md: 20 }}
         >
+          <DotGrid
+              dotSize={5}
+              gap={15}
+              baseColor={baseColor}
+              activeColor={gradientColors} 
+              proximity={85}
+              shockRadius={170}
+              shockStrength={3}
+              resistance={750}
+              returnDuration={1.5}
+            /> 
             <Container maxW="container.md" position="relative" zIndex={1}>
                 <MotionBox
                     initial="hidden"

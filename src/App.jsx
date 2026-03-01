@@ -209,7 +209,6 @@ function App() {
             
             <Header />
             <Hero />
-            <ProjectsIndex/>
             <About />
             <Projects /> 
               <Contact />
