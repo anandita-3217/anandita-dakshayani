@@ -138,7 +138,6 @@ import CommandPalette from './components/CommandPalette';
 import ScrollToTop from './components/ScrollToTop';
 import NotFound from './components/NotFound'
 import useKeyboardShortcuts from './components/hooks/useKeyboardShortcuts';
-import ProjectsIndex from './components/ProjectPageBits/ProjectsIndex'
 import ProjectsPage from './pages/ProjectsPage'; 
 // import Options from './components/options';
 

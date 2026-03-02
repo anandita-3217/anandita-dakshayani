@@ -25,8 +25,7 @@ import {
   ExternalLink,
 } from 'lucide-react';
 
-const MotionBox = motion(Box);
-const MotionHeading = motion(Heading);
+const MotionBox = motion.create(Box);
 
 // Fun project categories with playful colors
 const categories = [

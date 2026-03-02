@@ -16,18 +16,14 @@ import DotGrid from "./assets/DotGrid/DotGrid";
 import { motion } from 'framer-motion';
 import Error from "./assets/Error404.gif"
 import { useNavigate } from "react-router-dom";
-import {useColorMode, useDisclosure, useColorModeValue} from '@chakra-ui/react'
+// import {useColorMode, useDisclosure, useColorModeValue} from '@chakra-ui/react'
 // Create motion components
 const MotionBox = motion.create(Box);
 const MotionButton = motion.create(Button);
 const MotionImage = motion.create(Image);
 const MotionText = motion.create(Text);
 const MotionHeading = motion.create(Heading);
-const baseColor = useColorModeValue("#d4dadc", '#1a1a1a');
-  const gradientColors = useColorModeValue(
-    ['#ff0080', '#6366f1', '#3b82f6'],
-    ['#ff00ff', '#8000ff', '#0080ff']
-  );
+
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
   visible: { 
@@ -59,7 +55,12 @@ const staggerContainer = {
 
 
 function NotFound(){
+  // const baseColor = useColorModeValue("#d4dadc", '#1a1a1a');
   const baseColor = useColorModeValue("#d4dadc", '#1a1a1a');
+  const gradientColors = useColorModeValue(
+    ['#ff0080', '#6366f1', '#3b82f6'],
+    ['#ff00ff', '#8000ff', '#0080ff']
+  );
   const navigate = useNavigate();
   const handleProjectsClick = ()  => {
     navigate('/');
@@ -242,10 +243,10 @@ function NotFound(){
                           fontSize="md"
                           fontWeight="600"
                           w={{ base: "full", sm: "auto" }}
-                          whileHover={{ 
-                            scale: 1.05,
-                            border:"button.secondary.text"
-                          }}
+                          // whileHover={{ 
+                          //   scale: 1.05,
+                          //   border:"button.secondary.text"
+                          // }}
                           
                         >
                           Return to Home
@@ -263,9 +264,9 @@ function NotFound(){
                           color="button.primary.text"
                           bg="button.primary.bg"
                           w={{ base: "full", sm: "auto" }}
-                          _hover={{
-                            borderColor: 'button.primary.text',  
-                          }}
+                          // _hover={{
+                          //   borderColor: 'button.primary.text',  
+                          // }}
                           
                           transition={{ duration: 0.2 }}
                         >

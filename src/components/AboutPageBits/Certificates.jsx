@@ -39,7 +39,7 @@ import { DiReact, DiJavascript1, DiNodejsSmall, DiPython, DiCode } from "react-i
 import { BsGlobe } from "react-icons/bs";
 import { FaChartBar, FaChartLine } from "react-icons/fa";
 import { useInView } from 'react-intersection-observer';
-const MotionBox = motion(Box);
+const MotionBox = motion.create(Box);
 
 // Icon mapping helper
 const iconMap = {
