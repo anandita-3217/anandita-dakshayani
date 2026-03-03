@@ -143,7 +143,7 @@ function NotFound(){
                     <GridItem>
                     <MotionBox
                       variants={fadeInUp}
-                      bg="bg.primary"
+                      bg="surface.darker"
                       p={{ base: 4, md: 6 }}
                       borderRadius="xl"
                       border="2px solid"
@@ -156,8 +156,7 @@ function NotFound(){
                       color="text.primary"
                       textAlign="left"
                       _hover={{
-                        borderColor: 'brand.400',
-                        boxShadow: '0 0 20px rgba(20, 184, 166, 0.2)'
+                        borderColor: 'brand.200',
                       }}
                       transition="all 0.3s"
                     >
@@ -235,7 +234,7 @@ function NotFound(){
                         <MotionButton
                           as="a"
                           href="/"
-                          bg = "button.secondary.bg."
+                          bg = "button.secondary.bg"
                           color="button.secondary.text"
                           size="lg"
                           px={10}
@@ -243,10 +242,13 @@ function NotFound(){
                           fontSize="md"
                           fontWeight="600"
                           w={{ base: "full", sm: "auto" }}
-                          // whileHover={{ 
-                          //   scale: 1.05,
-                          //   border:"button.secondary.text"
-                          // }}
+                          whileHover={{ 
+                            scale: 1.05
+                          }}
+                          _hover={{
+                            bg: "button.primary.bg",
+                            color: "button.primary.text"
+                          }}
                           
                         >
                           Return to Home
@@ -264,13 +266,17 @@ function NotFound(){
                           color="button.primary.text"
                           bg="button.primary.bg"
                           w={{ base: "full", sm: "auto" }}
-                          // _hover={{
-                          //   borderColor: 'button.primary.text',  
-                          // }}
+                          whileHover={{
+                            scale: 1.05,
+                            
+                          }}
+                          _hover={{
+                            borderColor: "brand.400", 
+                          }}
                           
                           transition={{ duration: 0.2 }}
                         >
-                          View Projects
+                          View Work
                         </MotionButton>
                       </HStack>
                     </MotionBox>

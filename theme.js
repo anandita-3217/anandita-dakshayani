@@ -208,25 +208,7 @@ fonts: {
       _dark: 'rgba(255, 255, 255, 0.05)',
     },
     
-    // Tinted surfaces
-    'surface.teal': {
-      default: 'rgba(20, 184, 166, 0.03)',
-      _dark: 'rgba(20, 184, 166, 0.05)',
-    },
-    'surface.pink': {
-      default: 'rgba(236, 72, 153, 0.03)',
-      _dark: 'rgba(236, 72, 153, 0.05)',
-    },
-    'surface.purple': {
-      default: 'rgba(139, 92, 246, 0.03)',
-      _dark: 'rgba(139, 92, 246, 0.05)',
-    },
-    
-    // Subtle gradient surfaces
-    'surface.gradientSubtle': {
-      default: 'linear-gradient(135deg, rgba(20, 184, 166, 0.05), rgba(236, 72, 153, 0.05))',
-      _dark: 'linear-gradient(135deg, rgba(20, 184, 166, 0.08), rgba(236, 72, 153, 0.08))',
-    },
+
     
     // Darker variants for contrast
     'surface.darker': {
