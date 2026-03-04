@@ -88,9 +88,9 @@ const education = [
   {
     id: 1,
     role: 'Bachelor of Technology in Computer Science',
-    company: 'University Name',
-    location: 'City, Country',
-    period: '2017 - 2021',
+    company: 'Jawaharlal Nehru Technological University',
+    location: 'Visakhapatnam, India',
+    period: '2019 - 2023',
     description: 'CGPA: 8.5/10',
     color: '#f59e0b',
   },
