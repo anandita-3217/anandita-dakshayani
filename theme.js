@@ -11,7 +11,7 @@ fonts: {
   },
 
   colors: {
-    brand: {
+    brand: { // Try to avoid if possible 
       50: '#e6fffa',
       100: '#b2f5ea',
       200: '#81e6d9',
@@ -23,34 +23,34 @@ fonts: {
       800: '#134e4a',
       900: '#0f3d3a',
     },
-      pink: {
-    50: '#fef1f7',
-    100: '#fee5ef',
-    200: '#fccce0',
-    300: '#faa2c8',
-    400: '#f472b6',  // Main hot pink
-    500: '#ec4899',  // Vibrant magenta
-    600: '#db2777',
-    700: '#be185d',
-    800: '#9d174d',
-    900: '#831843',
-  },
+  //     pink: { didnt use this
+  //   50: '#fef1f7',
+  //   100: '#fee5ef',
+  //   200: '#fccce0',
+  //   300: '#faa2c8',
+  //   400: '#f472b6',  // Main hot pink
+  //   500: '#ec4899',  // Vibrant magenta
+  //   600: '#db2777',
+  //   700: '#be185d',
+  //   800: '#9d174d',
+  //   900: '#831843',
+  // },
   
-  // ROSE PALETTE - Softer, elegant pink
-  rose: {
-    50: '#fff1f2',
-    100: '#ffe4e6',
-    200: '#fecdd3',
-    300: '#fda4af',
-    400: '#fb7185',  // Main rose
-    500: '#f43f5e',  // Deep rose
-    600: '#e11d48',
-    700: '#be123c',
-    800: '#9f1239',
-    900: '#881337',
-  },
+  // ROSE PALETTE - Softer, elegant pink - didnt use this 
+  // rose: {
+  //   50: '#fff1f2',
+  //   100: '#ffe4e6',
+  //   200: '#fecdd3',
+  //   300: '#fda4af',
+  //   400: '#fb7185',  // Main rose
+  //   500: '#f43f5e',  // Deep rose
+  //   600: '#e11d48',
+  //   700: '#be123c',
+  //   800: '#9f1239',
+  //   900: '#881337',
+  // },
   
-  // FUCHSIA PALETTE - Purple-leaning pink
+  // FUCHSIA PALETTE - Purple-leaning pink- barely used any of these
   fuchsia: {
     50: '#fdf4ff',
     100: '#fae8ff',
@@ -64,34 +64,9 @@ fonts: {
     900: '#701a75',
   },
   
-  // CORAL PALETTE - Pink-orange blend
-  coral: {
-    50: '#fff5f5',
-    100: '#ffe8e8',
-    200: '#ffd0d0',
-    300: '#ffb3b3',
-    400: '#ff8a8a',  // Main coral
-    500: '#ff6b6b',  // Vibrant coral
-    600: '#ff4757',
-    700: '#ee2c3c',
-    800: '#d62839',
-    900: '#b91f2f',
-  },
-  accent: {        // Add pink as accent
-    50: '#fef1f7',
-    100: '#fee5ef',
-    200: '#fccce0',
-    300: '#faa2c8',
-    400: '#f472b6',  // Use this for highlights
-    500: '#ec4899',
-    600: '#db2777',
-    700: '#be185d',
-    800: '#9d174d',
-    900: '#831843',
-  },
-
-
+ 
     gradients: {
+      most: 'linear(to-r, #1e40af, #7c3aed,#ec4899)', // most used
       primary: 'linear(to-r, #10b981, #3b82f6, #8b5cf6)',
       accent: 'linear(to-r, #f093fb, #667eea, #4facfe)',
       rainbow: 'linear(to-r, #14b8a6, #667eea, #f093fb, #4facfe)',
