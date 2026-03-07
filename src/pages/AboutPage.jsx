@@ -1325,6 +1325,7 @@ import Resume from '../components/Resume';
 import DotGrid from '../components/assets/DotGrid/DotGrid';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import TechSkillsPreview from '../components/options';
 
 // ─── Chakra + Framer Motion bridge ───────────────────────────────────────────
 const MotionBox = chakra(motion.div, {
@@ -1569,6 +1570,9 @@ function AboutPage() {
 
         <Layer index={1} label={LAYER_META[1].label} bg={LAYER_BG[1]} zIndex={LAYER_META.length} speed={0.3}>
           <Reveal><AboutPart /></Reveal>
+        </Layer>
+        <Layer index={1} label={LAYER_META[1].label} bg={LAYER_BG[1]} zIndex={LAYER_META.length} speed={0.3}>
+          <Reveal><TechSkillsPreview /></Reveal>
         </Layer>
 
         <Layer index={2} label={LAYER_META[2].label} bg={LAYER_BG[2]} zIndex={LAYER_META.length - 1} speed={0.5}>
