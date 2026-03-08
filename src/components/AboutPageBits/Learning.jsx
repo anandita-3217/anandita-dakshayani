@@ -1,656 +1,487 @@
-import React, { useState, useRef } from 'react';
-import {
-  Box,
-  Container,
-  Heading,
-  Text,
-  VStack,
-  HStack,
-  Badge,
-  Button,
-  Grid,
-  Flex,
-  Icon,
-} from '@chakra-ui/react';
-import { motion, useMotionValue, useTransform } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import {
-  Sparkles,
-  Code2,
-  Rocket,
-  Gamepad2,
-  Palette,
-  Zap,
-  Github,
-  ExternalLink,
-} from 'lucide-react';
 
-const MotionBox = motion(Box);
-const MotionHeading = motion(Heading);
+import { useState, useRef } from 'react';
+import { Box, Text, HStack, VStack, Badge, Flex, chakra } from '@chakra-ui/react';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { Github, ExternalLink, ArrowUpRight } from 'lucide-react';
 
-// Fun project categories with playful colors
-const categories = [
-  { id: 'all', label: 'All Projects', icon: Sparkles, color: '#14b8a6' },
-  { id: 'web', label: 'Web Experiments', icon: Code2, color: '#667eea' },
-  { id: 'game', label: 'Games & Fun', icon: Gamepad2, color: '#f093fb' },
-  { id: 'design', label: 'UI/UX Play', icon: Palette, color: '#4facfe' },
-  { id: 'tool', label: 'Mini Tools', icon: Zap, color: '#68d391' },
-];
+const MotionBox = motion.create(Box);
 
-// Sample learning projects data
-// Shift this to json
+const H    = 'Orbitron, sans-serif';
+const B    = 'Sora, sans-serif';
+const MONO = "'JetBrains Mono', monospace";
+const GRAD = 'linear(to-r, #1e40af, #7c3aed, #ec4899)';
+
 const learningProjects = [
   {
     id: 1,
+    num: '01',
     title: 'Noracle',
-    description: 'Ask the chatbot any question and it finds reasons to not do it',
-    category: 'web',
-    techStack: ["NextJS", "Vercel"],
-    color: '#667eea',
-    emoji: '🚫',
-    learned: ['api-wrapper', 'chatbot', 'text-to-speech'],
-    githubUrl: "https://github.com/anandita-3217/Noracle",
+    description: 'Ask the chatbot any question and it finds reasons to not do it. An API-wrapped reverse motivator that will make your blood boil.',
+    category: 'Web',
+    accent: '#667eea',
+    techStack: ['NextJS', 'Vercel', 'OpenAI API'],
+    funFact: 'Spent 3 days building a chatbot designed to be useless.',
+    githubUrl: 'https://github.com/anandita-3217/Noracle',
     liveUrl: '#',
-    funFact: 'Spent  3 making a chatbot that will make your blood boil',
   },
   {
     id: 2,
-    title: 'Retro Snake Game',
-    description: 'Built the classic snake game from scratch. Added neon colors and dubstep vibes.',
-    category: 'game',
-    techStack: ['Canvas API', 'JavaScript', 'Game Logic'],
-    color: '#f093fb',
-    emoji: '🐍',
-    learned: ['Canvas rendering', 'Game loops', 'Collision detection'],
+    num: '02',
+    title: 'Retro Snake',
+    description: 'The classic snake game rebuilt from scratch with neon aesthetics and a game loop written entirely without libraries.',
+    category: 'Game',
+    accent: '#f093fb',
+    techStack: ['Canvas API', 'JavaScript', 'Vanilla'],
+    funFact: 'My personal high score is embarrassingly low.',
     githubUrl: '#',
     liveUrl: '#',
-    funFact: 'My high score is embarrassingly low',
   },
   {
-    id: 3, // Skip this - over done
-    title: 'GitHub User Finder',
-    description: 'Find any github users stats using only their username. ',
-    category: 'tool',
-    techStack: ['React', 'GitHub API', 'REST API'],
-    color: '#4a6d6da6',
-    emoji: <Github size={40}/>,
-    learned: ['api-integration', 'Clipboard API', 'React hooks'],
+    id: 3,
+    num: '03',
+    title: 'GitHub Stalker',
+    description: 'Pull any GitHub user\'s full stats, repos, and activity using only their username. Clipboard copy coming soon.',
+    category: 'Tool',
+    accent: '#4a90d9',
+    techStack: ['React', 'GitHub API', 'REST'],
+    funFact: 'The name says it all.',
     githubUrl: '#',
     liveUrl: '#',
-    funFact: 'Stalk anyone on github TODO: Add a copied to clip board feature',
   },
   {
     id: 4,
-    title: 'Glassmorphism Generator',
-    description: 'Tool to create those trendy glass effect cards. Made my portfolio look fancy.',
-    category: 'tool',
+    num: '04',
+    title: 'Glass Generator',
+    description: 'A live glassmorphism card generator. Tweak blur, opacity, and color in real time. Used to style this very portfolio.',
+    category: 'Tool',
+    accent: '#4facfe',
     techStack: ['React', 'CSS', 'Design Systems'],
-    color: '#4facfe',
-    emoji: '✨',
-    learned: ['Backdrop filters', 'Design patterns', 'UI trends'],
+    funFact: 'Meta: I used it to build this site.',
     githubUrl: '#',
     liveUrl: '#',
-    funFact: 'Used on this very website!',
   },
   {
     id: 5,
+    num: '05',
     title: 'Wordle Clone',
-    description: 'A worlde clone with infinit challeneges that runs locally in your desktop',
-    category: 'game',
+    description: 'Infinite Wordle challenges that run offline as a desktop app. Built to understand Electron and local app distribution.',
+    category: 'Game',
+    accent: '#f093fb',
     techStack: ['JavaScript', 'Electron', 'DOM'],
-    color: '#f093fb',
-    emoji: '⌨️',
-    learned: ['Event handling', 'Time calculations', 'Performance'], // Imporve this 
+    funFact: 'I wasted an embarrassing amount of time on this.',
     githubUrl: 'https://github.com/anandita-3217/WordGame',
     liveUrl: '#',
-    funFact: 'I wasted so much time playing this',
   },
   {
     id: 6,
+    num: '06',
     title: 'Meme Generator',
-    description: 'Create dank memes with custom text. Essential developer tool tbh.',
-    category: 'web',
+    description: 'Create custom memes with text overlays using the Imgflip API and Canvas rendering. Essential developer utility.',
+    category: 'Web',
+    accent: '#667eea',
     techStack: ['React', 'Canvas', 'Imgflip API'],
-    color: '#667eea',
-    emoji: '😂',
-    learned: ['Canvas text rendering', 'API integration', 'Meme culture'],
+    funFact: 'Produced 50+ memes about semicolons.',
     githubUrl: '#',
     liveUrl: '#',
-    funFact: 'Made 50+ memes about semicolons',
   },
 ];
 
-// Animated Project Card
-const ProjectCard = ({ project, index }) => {
-  const cardRef = useRef(null);
-  const [isHovered, setIsHovered] = useState(false);
-  const [showDetails, setShowDetails] = useState(false);
+// ── Single cinematic row ──────────────────────────────────────────────────────
+const ProjectRow = ({ project, index }) => {
+  const [hovered, setHovered] = useState(false);
+  const rowRef = useRef(null);
 
-  // 3D tilt effect
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const rotateX = useTransform(y, [-100, 100], [8, -8]);
-  const rotateY = useTransform(x, [-100, 100], [-8, 8]);
-
-  const handleMouseMove = (e) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    x.set(e.clientX - centerX);
-    y.set(e.clientY - centerY);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-    setIsHovered(false);
-  };
+  const { scrollYProgress } = useScroll({
+    target: rowRef,
+    offset: ['start 0.95', 'start 0.3'],
+  });
+  const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  const x       = useTransform(scrollYProgress, [0, 1], [-40, 0]);
 
   return (
     <MotionBox
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      onMouseEnter={() => setIsHovered(true)}
-      style={{
-        rotateX,
-        rotateY,
-        transformStyle: 'preserve-3d',
-      }}
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
+      ref={rowRef}
+      style={{ opacity, x }}
+      onHoverStart={() => setHovered(true)}
+      onHoverEnd={() => setHovered(false)}
+      position="relative"
     >
+      {/* Full-width row */}
       <Box
-        bg="rgba(255, 255, 255, 0.02)"
-        backdropFilter="blur(20px)"
-        borderRadius="32px"
-        border="2px solid"
-        borderColor={isHovered ? project.color : 'rgba(255, 255, 255, 0.08)'}
-        p={6}
-        h="100%"
-        minH="380px"
         position="relative"
-        overflow="hidden"
-        transition="all 0.4s cubic-bezier(0.23, 1, 0.32, 1)"
-        boxShadow={isHovered ? `0 30px 80px ${project.color}40` : 'none'}
-        cursor="pointer"
-        onClick={() => setShowDetails(!showDetails)}
+        py={8}
+        px={0}
+        cursor="default"
+        _before={{
+          content: '""',
+          position: 'absolute',
+          top: 0, left: 0, right: 0,
+          height: '1px',
+          background: hovered
+            ? `linear-gradient(to right, transparent, ${project.accent}55, transparent)`
+            : 'linear-gradient(to right, transparent, rgba(255,255,255,0.06), transparent)',
+          transition: 'background 0.4s',
+        }}
       >
-        {/* Animated gradient background */}
+        {/* Hover: full-row background wash */}
         <Box
           position="absolute"
-          top="-100px"
-          right="-100px"
-          w="300px"
-          h="300px"
-          bgGradient={`radial(circle, ${project.color}, transparent)`}
-          opacity={isHovered ? 0.3 : 0.15}
-          transition="opacity 0.6s"
+          inset={0}
+          bgGradient={`linear(to-r, ${project.accent}06, transparent)`}
+          opacity={hovered ? 1 : 0}
+          transition="opacity 0.5s"
           pointerEvents="none"
-          filter="blur(40px)"
+          borderRadius="12px"
         />
 
-        {/* Decorative corner */}
-        <Box
-          position="absolute"
-          top={0}
-          right={0}
-          w="120px"
-          h="120px"
-          opacity={0.05}
-          pointerEvents="none"
+        <Flex
+          align="center"
+          gap={{ base: 4, md: 8 }}
+          position="relative"
+          zIndex={1}
+          flexWrap={{ base: 'wrap', md: 'nowrap' }}
         >
-          <Box
-            w="100%"
-            h="100%"
-            bgGradient={`linear(to-br, ${project.color}, ${project.color})`}
-            clipPath="polygon(100% 0, 100% 100%, 0 0)"
-          />
-        </Box>
 
-        {/* Shimmer effect */}
-        <Box
-          position="absolute"
-          top={0}
-          left="-100%"
-          w="50%"
-          h="100%"
-          bgGradient="linear(to-r, transparent, rgba(255,255,255,0.1), transparent)"
-          transform={isHovered ? 'translateX(300%)' : 'translateX(0)'}
-          transition="transform 0.8s"
-          pointerEvents="none"
-        />
+          {/* Number */}
+          <Text
+            fontFamily={MONO}
+            fontSize={{ base: '32px', md: '56px' }}
+            fontWeight="900"
+            lineHeight={1}
+            color={hovered ? project.accent : 'rgba(255,255,255,0.06)'}
+            transition="color 0.4s"
+            flexShrink={0}
+            w={{ base: '60px', md: '90px' }}
+            userSelect="none"
+          >
+            {project.num}
+          </Text>
 
-        <VStack align="stretch" spacing={4} h="100%" position="relative" zIndex={1}>
-          {/* Emoji Icon */}
-          <Flex justify="space-between" align="start">
-            <Box
-              fontSize="4xl"
-              transform={isHovered ? 'scale(1.2) rotate(10deg)' : 'scale(1)'}
-              transition="transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)"
-            >
-              {project.emoji}
-            </Box>
-            
+          {/* Title block */}
+          <Box flex="0 0 auto" w={{ base: '100%', md: '280px' }}>
+            <HStack spacing={3} mb={1.5} align="center">
+              <Text
+                fontFamily={H}
+                fontSize={{ base: '18px', md: '24px' }}
+                fontWeight="900"
+                letterSpacing="-0.02em"
+                color={hovered ? 'white' : 'rgba(255,255,255,0.8)'}
+                transition="color 0.3s"
+                lineHeight={1.1}
+              >
+                {project.title}
+              </Text>
+              {/* Arrow animates on hover */}
+              <Box
+                color={project.accent}
+                opacity={hovered ? 1 : 0}
+                transform={hovered ? 'translate(0,0)' : 'translate(-4px, 4px)'}
+                transition="all 0.3s"
+              >
+                <ArrowUpRight size={18} />
+              </Box>
+            </HStack>
+
             <Badge
-              colorScheme="purple"
-              fontSize="xs"
-              px={2}
-              py={1}
-              borderRadius="md"
-              textTransform="capitalize"
+              fontFamily={H}
+              fontSize="8px"
+              letterSpacing="0.18em"
+              textTransform="uppercase"
+              px={2} py={0.5}
+              borderRadius="5px"
+              bg={`${project.accent}14`}
+              color={project.accent}
+              border="1px solid"
+              borderColor={`${project.accent}30`}
             >
-              {categories.find(c => c.id === project.category)?.label.split(' ')[0]}
+              {project.category}
             </Badge>
-          </Flex>
+          </Box>
 
-          {/* Title and Description */}
-          <VStack align="stretch" spacing={2} flex={1}>
-            <Heading
-              as="h3"
-              size="md"
-              color="text.primary"
-              lineHeight="1.3"
-            >
-              {project.title}
-            </Heading>
-            
+          {/* Description — expands on hover */}
+          <Box
+            flex={1}
+            minW={0}
+            overflow="hidden"
+          >
             <Text
-              fontSize="sm"
-              color="text.secondary"
-              lineHeight="1.6"
+              fontFamily={B}
+              fontSize="14px"
+              lineHeight={1.75}
+              color={hovered ? 'rgba(255,255,255,0.6)' : 'rgba(255,255,255,0.28)'}
+              transition="color 0.4s"
+              noOfLines={hovered ? undefined : 2}
             >
               {project.description}
             </Text>
 
-            {/* Fun Fact (shows on hover or click) */}
-            {(isHovered || showDetails) && (
-              <MotionBox
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3 }}
-                bg={`${project.color}15`}
-                p={3}
-                borderRadius="lg"
-                borderLeft="3px solid"
-                borderColor={project.color}
+            {/* Fun fact — slides in on hover */}
+            <AnimatePresence>
+              {hovered && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0, y: -4 }}
+                  animate={{ opacity: 1, height: 'auto', y: 0 }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.3 }}
+                  style={{ overflow: 'hidden' }}
+                >
+                  <HStack spacing={2} mt={3}>
+                    <Box w="2px" h="28px" bg={project.accent} borderRadius="full" flexShrink={0} />
+                    <Text
+                      fontFamily={B}
+                      fontSize="12px"
+                      color={project.accent}
+                      opacity={0.8}
+                      fontStyle="italic"
+                    >
+                      {project.funFact}
+                    </Text>
+                  </HStack>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </Box>
+
+          {/* Right side: tech stack + links */}
+          <VStack
+            align="flex-end"
+            spacing={3}
+            flexShrink={0}
+            w={{ base: '100%', md: 'auto' }}
+          >
+            {/* Tech tags */}
+            <Flex gap={1.5} flexWrap="wrap" justify="flex-end">
+              {project.techStack.map(t => (
+                <Badge
+                  key={t}
+                  fontFamily={B}
+                  fontSize="9px"
+                  px={2} py={0.5}
+                  borderRadius="5px"
+                  bg="rgba(255,255,255,0.04)"
+                  color={hovered ? 'rgba(255,255,255,0.5)' : 'rgba(255,255,255,0.22)'}
+                  border="1px solid rgba(255,255,255,0.07)"
+                  transition="color 0.3s"
+                >
+                  {t}
+                </Badge>
+              ))}
+            </Flex>
+
+            {/* Link buttons */}
+            <HStack spacing={2}>
+              <Box
+                as="a"
+                href={project.githubUrl}
+                target="_blank"
+                display="flex" alignItems="center" gap={1}
+                fontFamily={H} fontSize="9px" letterSpacing="0.15em"
+                color={hovered ? project.accent : 'rgba(255,255,255,0.2)'}
+                transition="color 0.3s"
+                _hover={{ color: project.accent }}
+                onClick={e => e.stopPropagation()}
               >
-                <Text fontSize="xs" color={project.color} fontWeight="600" mb={1}>
-                  Fun Fact 🎉
-                </Text>
-                <Text fontSize="xs" color="text.secondary">
-                  {project.funFact}
-                </Text>
-              </MotionBox>
-            )}
+                <Github size={13} />
+                <Text>Code</Text>
+              </Box>
+              <Text color="rgba(255,255,255,0.1)" fontSize="10px">/</Text>
+              <Box
+                as="a"
+                href={project.liveUrl}
+                target="_blank"
+                display="flex" alignItems="center" gap={1}
+                fontFamily={H} fontSize="9px" letterSpacing="0.15em"
+                color={hovered ? project.accent : 'rgba(255,255,255,0.2)'}
+                transition="color 0.3s"
+                _hover={{ color: project.accent }}
+                onClick={e => e.stopPropagation()}
+              >
+                <ExternalLink size={13} />
+                <Text>Demo</Text>
+              </Box>
+            </HStack>
           </VStack>
 
-          {/* Tech Stack Tags */}
-          <Flex flexWrap="wrap" gap={2}>
-            {project.techStack.map((tech, i) => (
-              <Badge
-                key={i}
-                fontSize="10px"
-                px={2}
-                py={1}
-                borderRadius="md"
-                bg="rgba(255, 255, 255, 0.05)"
-                color="text.secondary"
-                borderWidth="1px"
-                borderColor="rgba(255, 255, 255, 0.1)"
-              >
-                {tech}
-              </Badge>
-            ))}
-          </Flex>
-
-          {/* Action Buttons */}
-          <HStack spacing={2}>
-            <Button
-              as="a"
-              href={project.githubUrl}
-              target="_blank"
-              size="sm"
-              variant="ghost"
-              leftIcon={<Github size={16} />}
-              flex={1}
-              color={project.color}
-              _hover={{ bg: `${project.color}15` }}
-            >
-              Code
-            </Button>
-            <Button
-              as="a"
-              href={project.liveUrl}
-              target="_blank"
-              size="sm"
-              variant="ghost"
-              leftIcon={<ExternalLink size={16} />}
-              flex={1}
-              color={project.color}
-              _hover={{ bg: `${project.color}15` }}
-            >
-              Demo
-            </Button>
-          </HStack>
-        </VStack>
+        </Flex>
       </Box>
+
+      {/* Bottom border — last item has none */}
+      {index < learningProjects.length - 1 && (
+        <Box
+          h="1px"
+          bgGradient="linear(to-r, transparent, rgba(255,255,255,0.05), transparent)"
+        />
+      )}
     </MotionBox>
   );
 };
-const headerVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7 }
-  }
-};
-const statsVariants = {
-  hidden: { opacity: 0, scale: 0.8 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: { duration: 0.5, ease: "backOut" }
-  }
-};
 
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.3
-    }
-  }
-};
-// Main Learning Projects Component
+// ── Main ──────────────────────────────────────────────────────────────────────
 export default function Learning() {
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [headerRef, headerInView] = useInView({ 
-    triggerOnce: false,
-    threshold: 0.2
-  });
+  const [filter, setFilter] = useState('All');
+  const filters = ['All', 'Web', 'Game', 'Tool'];
 
-  const filteredProjects = selectedCategory === 'all' 
-    ? learningProjects 
-    : learningProjects.filter(p => p.category === selectedCategory);
+  const filtered = filter === 'All'
+    ? learningProjects
+    : learningProjects.filter(p => p.category === filter);
 
   return (
-    <Box
-      bg="transparent"
-      minH="100vh"
-      py={{ base: 12, md: 20 }}
-      position="relative"
-      overflow="hidden"
-    >
-      {/* Background decorations */}
-      <MotionBox
-        position="absolute"
-        top="10%"
-        left="5%"
-        w="400px"
-        h="400px"
-        bgGradient="radial(circle, purple.400, transparent)"
-        opacity={0.1}
-        filter="blur(100px)"
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.1, 0.15, 0.1]
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
+    <Box bg="transparent" py={{ base: 4, md: 6 }}>
 
-      <Container maxW="container.xl" position="relative" zIndex={1}>
-        <VStack spacing={12} align="stretch">
-          {/* Header Section */}
-          {/* <VStack spacing={6} textAlign="center">
-            <MotionBox
-              ref={headerRef}
-              initial={{ opacity: 0, y: 40 }}
-              animate={headerInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-              transition={{ duration: 0.7 }}
-            >
-              <Heading
-                as="h2"
-                fontSize={{ base: '3xl', md: '5xl' }}
-                fontWeight="bold"
-                color="text.primary"
-                mb={3}
-              >
-                Learning & Experiments{' '}
-                
-              </Heading>
-              
+      {/* ── Header ─────────────────────────────────────────────────────── */}
+      <Flex justify="space-between" align="flex-end" mb={12} flexWrap="wrap" gap={4}>
+        <Box>
+          <HStack spacing={3} mb={3}>
+            <Box w="24px" h="1px" bgGradient="linear(to-r, #ec4899, #7c3aed)" />
+            <Text fontFamily={H} fontSize="9px" letterSpacing="0.3em"
+              textTransform="uppercase" color="whiteAlpha.400">
+              Side quests
+            </Text>
+          </HStack>
+          <Text
+            fontFamily={H}
+            fontSize={{ base: '26px', md: '40px' }}
+            fontWeight="900"
+            letterSpacing="-0.02em"
+            lineHeight={1.05}
+            bgGradient={GRAD}
+            bgClip="text"
+          >
+            Learning &amp;
+          </Text>
+          <Text
+            fontFamily={H}
+            fontSize={{ base: '26px', md: '40px' }}
+            fontWeight="900"
+            letterSpacing="-0.02em"
+            lineHeight={1.05}
+            color="rgba(255,255,255,0.13)"
+          >
+            Experiments
+          </Text>
+        </Box>
+
+        {/* Stats */}
+        <HStack spacing={8} align="flex-end" pb={1}>
+          {[
+            { val: learningProjects.length, label: 'Projects',      color: '#14b8a6' },
+            { val: '∞',                     label: 'Things Learned', color: '#a855f7' },
+            { val: '100%',                  label: 'Fun Factor',    color: '#3b82f6' },
+          ].map(({ val, label, color }) => (
+            <VStack key={label} spacing={0} align="center">
               <Text
-                fontSize="lg"
-                color="text.secondary"
-                maxW="700px"
-                mx="auto"
+                fontFamily={H}
+                fontSize={{ base: '24px', md: '32px' }}
+                fontWeight="900"
+                lineHeight={1}
+                style={{
+                  background: `linear-gradient(135deg, ${color}, ${color}55)`,
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
               >
-                Side projects built purely for learning, experimenting, and having fun. 
-                No pressure, just vibes and good code. ✨
+                {val}
               </Text>
-            </MotionBox>
-
-            
-            <HStack spacing={8} pt={4} flexWrap="wrap" justify="center">
-              <VStack spacing={1}>
-                <Heading size="xl" color="brand.400">
-                  {learningProjects.length}
-                </Heading>
-                <Text fontSize="sm" color="text.secondary">
-                  Fun Projects
-                </Text>
-              </VStack>
-              
-              <VStack spacing={1}>
-                <Heading size="xl" color="purple.400">
-                  ∞
-                </Heading>
-                <Text fontSize="sm" color="text.secondary">
-                  Things Learned
-                </Text>
-              </VStack>
-              
-              <VStack spacing={1}>
-                <Heading size="xl" color="blue.400">
-                  100%
-                </Heading>
-                <Text fontSize="sm" color="text.secondary">
-                  Fun Factor
-                </Text>
-              </VStack>
-            </HStack>
-          </VStack> */}
-          <VStack spacing={6} textAlign="center">
-            <MotionBox
-              ref={headerRef}
-              initial="hidden"
-              animate={headerInView ? "visible" : "hidden"}
-              variants={headerVariants}
-            >
-              <Heading
-                as="h2"
-                fontSize={{ base: '3xl', md: '5xl' }}
-                fontWeight="bold"
-                color="text.primary"
-              >
-                {/* Character-by-character animation */}
-                {"Learning & Experiments".split('').map((char, i) => (
-                  <motion.span
-                    key={i}
-                    style={{
-                      display: 'inline-block',
-                      transformOrigin: 'center bottom',
-                      perspective: '1000px',
-                      color: char === '&'  ? '#14b8a6' : 'inherit'
-                    }}
-                    initial={{ opacity: 0, y: 50, rotateX: -90 }}
-                    animate={headerInView ? { 
-                      opacity: 1, 
-                      y: 0, 
-                      rotateX: 0 
-                    } : { 
-                      opacity: 0, 
-                      y: 50, 
-                      rotateX: -90 
-                    }}
-                    transition={{
-                      duration: 0.5,
-                      delay: i * 0.03,
-                      ease: [0.23, 1, 0.32, 1]
-                    }}
-                  >
-                    {char === ' ' ? '\u00A0' : char}
-                  </motion.span>
-                ))}
-              </Heading>
-            </MotionBox>
-              
-            <MotionBox
-              as={Text}
-              fontSize="lg"
-              color="text.secondary"
-              maxW="600px"
-              initial={{ opacity: 0, y: 20 }}
-              animate={headerInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-            >
-               Side projects built purely for learning, experimenting, and having fun. 
-                No pressure, just vibes and good code. ✨
-            </MotionBox>
-              
-            {/* Stats Summary with stagger animation */}
-            <MotionBox
-              as={HStack}
-              spacing={{ base: 4, md: 8 }}
-              pt={4}
-              flexWrap="wrap"
-              justify="center"
-              initial="hidden"
-              animate={headerInView ? "visible" : "hidden"}
-              variants={staggerContainer}
-            >
-              <MotionBox as={VStack} spacing={1} variants={statsVariants}>
-                <Heading size="xl" color="brand.400">
-                  {learningProjects.length}
-                </Heading>
-                <Text fontSize="sm" color="text.secondary">
-                    Fun Projects
-                </Text>
-              </MotionBox>
-              
-              <MotionBox as={VStack} spacing={1} variants={statsVariants}>
-                <Heading size="xl" color="purple.400">
-                  ∞
-                </Heading>
-                <Text fontSize="sm" color="text.secondary">
-                  Things Learned
-                </Text>
-              </MotionBox>
-              
-              <MotionBox as={VStack} spacing={1} variants={statsVariants}>
-                <Heading size="xl" color="blue.400">
-                  100%
-                </Heading>
-                <Text fontSize="sm" color="text.secondary">
-                  Fun Factor
-                </Text>
-              </MotionBox>
-            </MotionBox>
-          </VStack>
-
-          {/* Category Filter Pills */}
-          <Flex 
-            gap={3} 
-            flexWrap="wrap" 
-            justify="center"
-            px={{ base: 4, md: 0 }}
-          >
-            {categories.map((cat) => {
-              const isActive = selectedCategory === cat.id;
-              return (
-                <Button
-                  key={cat.id}
-                  onClick={() => setSelectedCategory(cat.id)}
-                  leftIcon={<Icon as={cat.icon} boxSize={4} />}
-                  size="md"
-                  bg={isActive ? `${cat.color}20` : 'rgba(255, 255, 255, 0.02)'}
-                  color={isActive ? cat.color : 'text.secondary'}
-                  borderWidth="2px"
-                  borderColor={isActive ? cat.color : 'rgba(255, 255, 255, 0.08)'}
-                  _hover={{
-                    bg: `${cat.color}15`,
-                    borderColor: cat.color,
-                    transform: 'translateY(-2px)',
-                  }}
-                  transition="all 0.3s"
-                  fontWeight="600"
-                >
-                  {cat.label}
-                </Button>
-              );
-            })}
-          </Flex>
-
-          {/* Projects Grid */}
-          <Grid
-            templateColumns={{
-              base: '1fr',
-              md: 'repeat(2, 1fr)',
-              lg: 'repeat(3, 1fr)',
-            }}
-            gap={6}
-          >
-            {filteredProjects.map((project, index) => (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                index={index}
-              />
-            ))}
-          </Grid>
-
-          {/* Call to Action */}
-          <Box
-            bg="rgba(255, 255, 255, 0.02)"
-            backdropFilter="blur(20px)"
-            borderRadius="32px"
-            border="2px solid"
-            borderColor="rgba(255, 255, 255, 0.08)"
-            p={8}
-            textAlign="center"
-          >
-            <VStack spacing={4}>
-              <Heading size="md" color="text.primary">
-                Want to see more? 🚀
-              </Heading>
-              <Text color="text.secondary" maxW="500px">
-                Check out my GitHub for more experiments, half-finished ideas, 
-                and projects that taught me valuable lessons!
+              <Text fontFamily={H} fontSize="8px" letterSpacing="0.2em"
+                textTransform="uppercase" color="whiteAlpha.350" mt={0.5}>
+                {label}
               </Text>
-              <Button
-                as="a"
-                href="https://github.com/anandita-3217"
-                target="_blank"
-                leftIcon={<Github size={20} />}
-                colorScheme="purple"
-                size="lg"
-              >
-                View All on GitHub
-              </Button>
             </VStack>
+          ))}
+        </HStack>
+      </Flex>
+
+      {/* ── Filter pills ──────────────────────────────────────────────── */}
+      <HStack spacing={2} mb={6} flexWrap="wrap">
+        {filters.map(f => (
+          <Box
+            key={f}
+            as="button"
+            onClick={() => setFilter(f)}
+            fontFamily={H}
+            fontSize="9px"
+            letterSpacing="0.18em"
+            textTransform="uppercase"
+            px={4} py={2}
+            borderRadius="8px"
+            border="1px solid"
+            borderColor={filter === f ? 'rgba(20,184,166,0.45)' : 'rgba(255,255,255,0.07)'}
+            bg={filter === f ? 'rgba(20,184,166,0.08)' : 'rgba(255,255,255,0.02)'}
+            color={filter === f ? '#14b8a6' : 'rgba(255,255,255,0.3)'}
+            backdropFilter="blur(12px)"
+            transition="all 0.2s"
+            _hover={{ borderColor: 'rgba(20,184,166,0.3)', color: '#14b8a6' }}
+          >
+            {f}
           </Box>
+        ))}
+        <Text fontFamily={MONO} fontSize="11px" color="whiteAlpha.200" pl={2}>
+          {filtered.length} projects
+        </Text>
+      </HStack>
+
+      {/* ── Cinematic list ────────────────────────────────────────────── */}
+      <Box>
+        <AnimatePresence mode="popLayout">
+          {filtered.map((project, i) => (
+            <motion.div
+              key={project.id}
+              layout
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.35, delay: i * 0.04 }}
+            >
+              <ProjectRow project={project} index={i} />
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </Box>
+
+      {/* ── CTA ──────────────────────────────────────────────────────── */}
+      <Box
+        mt={12} pt={8}
+        borderTop="1px solid rgba(255,255,255,0.05)"
+        display="flex"
+        alignItems="center"
+        justifyContent="space-between"
+        flexWrap="wrap"
+        gap={4}
+      >
+        <VStack align="start" spacing={0.5}>
+          <Text fontFamily={H} fontSize="14px" fontWeight="800" color="white">
+            There's more.
+          </Text>
+          <Text fontFamily={B} fontSize="13px" color="whiteAlpha.400">
+            Half-finished ideas, experiments, and lessons on GitHub.
+          </Text>
         </VStack>
-      </Container>
+
+        <Box
+          as="a"
+          href="https://github.com/anandita-3217"
+          target="_blank"
+          display="flex" alignItems="center" gap={2}
+          fontFamily={H} fontSize="10px" letterSpacing="0.18em"
+          textTransform="uppercase"
+          px={5} py={3}
+          borderRadius="10px"
+          bg="rgba(255,255,255,0.04)"
+          border="1px solid rgba(255,255,255,0.1)"
+          color="white"
+          _hover={{
+            bg: 'rgba(124,58,237,0.14)',
+            borderColor: 'rgba(124,58,237,0.4)',
+            transform: 'translateY(-2px)',
+          }}
+          transition="all 0.25s"
+        >
+          <Github size={15} />
+          <Text>GitHub</Text>
+          <ArrowUpRight size={13} />
+        </Box>
+      </Box>
+
     </Box>
   );
 }

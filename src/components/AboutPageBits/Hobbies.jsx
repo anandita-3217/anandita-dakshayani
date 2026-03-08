@@ -2,7 +2,7 @@ import { useRef, useState, useEffect, useCallback } from 'react';
 import { Box, Text, HStack, VStack, Badge, Flex } from '@chakra-ui/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import gsap from 'gsap';
-
+import {Camera,Music4,MountainSnow,Book,Coffee} from 'lucide-react';
 const MotionBox = motion.create(Box);
 
 const H    = 'Orbitron, sans-serif';
@@ -13,7 +13,7 @@ const hobbies = [
   {
     title: 'Photography',
     subtitle: 'Chasing light',
-    icon: '◉',
+    icon: <Camera/>,
     accent: '#1e40af',
     tags: ['Street', 'Analog', 'Portrait'],
     years: '6 yrs',
@@ -23,7 +23,7 @@ const hobbies = [
   {
     title: 'Rock Climbing',
     subtitle: 'Vertical problems',
-    icon: '△',
+    icon: <Music4/>,
     accent: '#7c3aed',
     tags: ['Bouldering', 'Sport', 'Outdoor'],
     years: '4 yrs',
@@ -33,7 +33,7 @@ const hobbies = [
   {
     title: 'Music Production',
     subtitle: 'Sculpting sound',
-    icon: '◈',
+    icon: <Music4/>,
     accent: '#ec4899',
     tags: ['Ambient', 'Electronic', 'Synths'],
     years: '5 yrs',
@@ -43,7 +43,7 @@ const hobbies = [
   {
     title: 'Hiking',
     subtitle: 'Moving meditation',
-    icon: '→',
+    icon: <MountainSnow/>,
     accent: '#059669',
     tags: ['Trail', 'Alpine', 'Endurance'],
     years: '8 yrs',
@@ -53,7 +53,7 @@ const hobbies = [
   {
     title: 'Reading',
     subtitle: 'Other worlds',
-    icon: '▣',
+    icon: <Book/>,
     accent: '#06b6d4',
     tags: ['Sci-fi', 'Philosophy', 'History'],
     years: '∞',
@@ -63,7 +63,7 @@ const hobbies = [
   {
     title: 'Coffee',
     subtitle: 'The ritual',
-    icon: '◎',
+    icon: <Coffee/>,
     accent: '#fb923c',
     tags: ['Pour-over', 'Espresso', 'Origin'],
     years: '7 yrs',

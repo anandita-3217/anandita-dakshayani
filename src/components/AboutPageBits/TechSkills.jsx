@@ -29,135 +29,6 @@ const catColors = {
   DevOps:   { color: "#f4845f", bg: "rgba(244,132,95,0.08)",  border: "rgba(244,132,95,0.25)"  },
   Design:   { color: "#e8c547", bg: "rgba(232,197,71,0.08)",  border: "rgba(232,197,71,0.25)"  },
 };
-
-// ─── LAYOUT 1: Periodic Table ────────────────────────────────────────────────
-function PeriodicTable() {
-  const [hovered, setHovered] = useState(null);
-
-  const rows = [
-    skills.filter(s => s.category === "Frontend"),
-    skills.filter(s => s.category === "Backend"),
-    skills.filter(s => s.category === "DevOps" || s.category === "Design"),
-  ];
-
-  const rowLabels = ["Frontend", "Backend", "DevOps & Design"];
-
-  return (
-    <div style={{ fontFamily: H, padding: "0 0 32px" }}>
-      {/* Legend */}
-      <div style={{ display: "flex", gap: 16, marginBottom: 32, flexWrap: "wrap" }}>
-        {Object.entries(catColors).map(([cat, style]) => (
-          <div key={cat} style={{ display: "flex", alignItems: "center", gap: 6 }}>
-            <div style={{ width: 8, height: 8, borderRadius: "50%", background: style.color }} />
-            <span style={{ fontFamily: B, fontSize: 11, color: "rgba(255,255,255,0.4)", letterSpacing: "0.05em" }}>{cat}</span>
-          </div>
-        ))}
-      </div>
-
-      {rows.map((row, ri) => (
-        <div key={ri} style={{ marginBottom: 12 }}>
-          <div style={{ fontFamily: H, fontSize: "8px", letterSpacing: "0.3em", color: "rgba(255,255,255,0.2)", textTransform: "uppercase", marginBottom: 8, paddingLeft: 2 }}>
-            {rowLabels[ri]}
-          </div>
-          <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-            {row.map((skill, i) => {
-              const cs = catColors[skill.category];
-              const isHov = hovered === skill.name;
-              return (
-                <motion.div
-                  key={skill.name}
-                  onHoverStart={() => setHovered(skill.name)}
-                  onHoverEnd={() => setHovered(null)}
-                  initial={{ opacity: 0, scale: 0.7 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: (ri * 5 + i) * 0.04, duration: 0.4, ease: [0.23,1,0.32,1] }}
-                  style={{
-                    width: 88,
-                    height: 96,
-                    borderRadius: 10,
-                    border: `1px solid ${isHov ? cs.color : "rgba(255,255,255,0.07)"}`,
-                    background: isHov ? cs.bg : "rgba(255,255,255,0.025)",
-                    backdropFilter: "blur(12px)",
-                    padding: "8px 8px 10px",
-                    cursor: "default",
-                    position: "relative",
-                    overflow: "hidden",
-                    transition: "border-color 0.3s, background 0.3s",
-                    boxShadow: isHov ? `0 12px 32px ${cs.color}22` : "none",
-                    flexShrink: 0,
-                  }}
-                >
-                  {/* Glow */}
-                  {isHov && (
-                    <div style={{ position: "absolute", inset: 0, background: `radial-gradient(circle at 50% 0%, ${cs.color}22, transparent 70%)`, pointerEvents: "none" }} />
-                  )}
-
-                  {/* Atomic number */}
-                  <div style={{ fontFamily: MONO, fontSize: 9, color: cs.color, opacity: 0.7, lineHeight: 1 }}>{skill.num}</div>
-
-                  {/* Symbol */}
-                  <div style={{
-                    fontFamily: H, fontWeight: 900, fontSize: 26,
-                    color: isHov ? cs.color : "rgba(255,255,255,0.85)",
-                    lineHeight: 1, margin: "4px 0 2px",
-                    transition: "color 0.3s",
-                  }}>{skill.symbol}</div>
-
-                  {/* Name */}
-                  <div style={{ fontFamily: B, fontSize: 8.5, color: "rgba(255,255,255,0.5)", lineHeight: 1.2, marginBottom: 4, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{skill.name}</div>
-
-                  {/* Mass / version */}
-                  <div style={{ fontFamily: MONO, fontSize: 8, color: cs.color, opacity: 0.6 }}>{skill.mass}</div>
-
-                  {/* Level bar at bottom */}
-                  <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 2, background: "rgba(255,255,255,0.05)" }}>
-                    <motion.div
-                      animate={{ width: isHov ? `${skill.level}%` : "0%" }}
-                      transition={{ duration: 0.5, ease: "easeOut" }}
-                      style={{ height: "100%", background: cs.color, borderRadius: 1 }}
-                    />
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      ))}
-
-      {/* Hover detail */}
-      <AnimatePresence>
-        {hovered && (() => {
-          const s = skills.find(x => x.name === hovered);
-          const cs = catColors[s.category];
-          return (
-            <motion.div
-              initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 4 }}
-              style={{
-                marginTop: 24, padding: "14px 20px",
-                background: cs.bg, border: `1px solid ${cs.border}`,
-                borderRadius: 12, display: "flex", gap: 24, alignItems: "center",
-                backdropFilter: "blur(12px)",
-              }}
-            >
-              <div style={{ fontFamily: H, fontSize: 36, fontWeight: 900, color: cs.color }}>{s.symbol}</div>
-              <div>
-                <div style={{ fontFamily: H, fontSize: 14, color: "white", fontWeight: 700 }}>{s.name}</div>
-                <div style={{ fontFamily: B, fontSize: 12, color: "rgba(255,255,255,0.4)", marginTop: 2 }}>
-                  {s.category} · {s.years} yrs · v{s.mass}
-                </div>
-              </div>
-              <div style={{ marginLeft: "auto", textAlign: "right" }}>
-                <div style={{ fontFamily: H, fontSize: 22, fontWeight: 900, color: cs.color }}>{s.level}%</div>
-                <div style={{ fontFamily: B, fontSize: 10, color: "rgba(255,255,255,0.3)" }}>proficiency</div>
-              </div>
-            </motion.div>
-          );
-        })()}
-      </AnimatePresence>
-    </div>
-  );
-}
-
 // ─── LAYOUT 2: Terminal ──────────────────────────────────────────────────────
 const ALL_LINES = [
   { type: "prompt", text: "ls --skills --verbose" },
@@ -303,7 +174,6 @@ function Terminal() {
 // ─── Switcher shell ──────────────────────────────────────────────────────────
 const layouts = [
   { id: "periodic", label: "Periodic Table" },
-  { id: "terminal", label: "Terminal" },
 ];
 
 export default function TechSkillsPreview() {
@@ -319,37 +189,9 @@ export default function TechSkillsPreview() {
       <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Sora:wght@300;400;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
 
       {/* Switcher */}
-      <div style={{ display: "flex", gap: 8, marginBottom: 40, justifyContent: "center" }}>
-        {layouts.map(l => (
-          <button
-            key={l.id}
-            onClick={() => setActive(l.id)}
-            style={{
-              fontFamily: H, fontSize: "9px", letterSpacing: "0.2em",
-              textTransform: "uppercase", padding: "8px 18px", borderRadius: 8,
-              border: `1px solid ${active === l.id ? "rgba(20,184,166,0.5)" : "rgba(255,255,255,0.07)"}`,
-              background: active === l.id ? "rgba(20,184,166,0.1)" : "rgba(255,255,255,0.02)",
-              color: active === l.id ? "#14b8a6" : "rgba(255,255,255,0.35)",
-              cursor: "pointer",
-              transition: "all 0.2s",
-            }}
-          >
-            {l.label}
-          </button>
-        ))}
-      </div>
-
       <AnimatePresence mode="wait">
-        <motion.div
-          key={active}
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -8 }}
-          transition={{ duration: 0.35 }}
-        >
-          {active === "periodic"     && <PeriodicTable />}
-          {active === "terminal"     && <Terminal />}
-        </motion.div>
+        <Terminal />
+        
       </AnimatePresence>
     </div>
   );
