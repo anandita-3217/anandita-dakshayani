@@ -328,6 +328,8 @@ const LAYER_BG = [
   'rgba(10, 10, 10, 0.88)',   // 7 — Resume:      slightly more solid to anchor
 ];
 
+
+
 const LAYER_META = [
   { label: null },
   { label: 'About' },
@@ -454,9 +456,11 @@ function AboutPage() {
           </Reveal>
         </Layer>
 
-        <Layer index={1} label={LAYER_META[1].label} bg={LAYER_BG[1]} zIndex={LAYER_META.length} speed={0.3}>
-          <Reveal><Options /></Reveal>
-        </Layer>
+        {/* <Layer index={1} label={LAYER_META[1].label} bg={LAYER_BG[1]} zIndex={LAYER_META.length} speed={0.3}> */}
+          {/* <Reveal> */}
+            <Options />
+            {/* </Reveal> */}
+        {/* </Layer> */}
         <Layer index={1} label={LAYER_META[1].label} bg={LAYER_BG[1]} zIndex={LAYER_META.length} speed={0.3}>
           <Reveal><AboutPart /></Reveal>
         </Layer>
