@@ -5,8 +5,6 @@ import gsap from 'gsap';
 import {Camera,Music4,MountainSnow,Book,Coffee} from 'lucide-react';
 const MotionBox = motion.create(Box);
 
-const H    = 'Orbitron, sans-serif';
-const B    = 'Sora, sans-serif';
 const GRAD = 'linear(to-r, #1e40af, #7c3aed, #ec4899)';
 
 const hobbies = [
@@ -128,11 +126,11 @@ export default function Hobbies() {
           </Text>
         </HStack>
         <Text fontSize={{ base: '26px', md: '40px' }} fontWeight="900"
-          letterSpacing="-0.02em" lineHeight={1.05} bgGradient={GRAD} bgClip="text">
+          letterSpacing="-0.02em" lineHeight={1.05} bgGradient="linear(to-r, #7c3aed, #ec4899)" bgClip="text">
           What I Do
         </Text>
         <Text fontSize={{ base: '26px', md: '40px' }} fontWeight="900"
-          letterSpacing="-0.02em" lineHeight={1.05} color="rgba(255,255,255,0.13)">
+          letterSpacing="-0.02em" lineHeight={1.05} color="text.subdued">
           When I'm Not Coding
         </Text>
       </Box>
@@ -319,7 +317,7 @@ export default function Hobbies() {
                         {/* Subtitle — idle only */}
                         {!isExpanded && (
                           <div style={{
-                            fontFamily: B, fontSize: '11px',
+                            fontSize: '11px',
                             color: `${hobby.accent}bb`, marginBottom: '12px',
                           }}>
                             {hobby.subtitle}
@@ -337,7 +335,7 @@ export default function Hobbies() {
                               style={{ overflow: 'hidden' }}
                             >
                               <div style={{
-                                fontFamily: B, fontSize: '13px', lineHeight: 1.75,
+                                fontSize: '13px', lineHeight: 1.75,
                                 color: 'rgba(255,255,255,0.6)', marginBottom: '16px',
                                 maxWidth: '380px',
                               }}>

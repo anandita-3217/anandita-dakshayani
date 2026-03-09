@@ -23,32 +23,6 @@ fonts: {
       800: '#134e4a',
       900: '#0f3d3a',
     },
-  //     pink: { didnt use this
-  //   50: '#fef1f7',
-  //   100: '#fee5ef',
-  //   200: '#fccce0',
-  //   300: '#faa2c8',
-  //   400: '#f472b6',  // Main hot pink
-  //   500: '#ec4899',  // Vibrant magenta
-  //   600: '#db2777',
-  //   700: '#be185d',
-  //   800: '#9d174d',
-  //   900: '#831843',
-  // },
-  
-  // ROSE PALETTE - Softer, elegant pink - didnt use this 
-  // rose: {
-  //   50: '#fff1f2',
-  //   100: '#ffe4e6',
-  //   200: '#fecdd3',
-  //   300: '#fda4af',
-  //   400: '#fb7185',  // Main rose
-  //   500: '#f43f5e',  // Deep rose
-  //   600: '#e11d48',
-  //   700: '#be123c',
-  //   800: '#9f1239',
-  //   900: '#881337',
-  // },
   
   // FUCHSIA PALETTE - Purple-leaning pink- barely used any of these
   fuchsia: {
@@ -64,7 +38,7 @@ fonts: {
     900: '#701a75',
   },
   
- 
+
     gradients: {
       most: 'linear(to-r, #1e40af, #7c3aed,#ec4899)', // most used
       primary: 'linear(to-r, #10b981, #3b82f6, #8b5cf6)',
@@ -101,6 +75,11 @@ fonts: {
       'text.muted': {
         default: 'gray.500',
         _dark: 'gray.500',
+      },
+      'text.subdued':{
+        default: 'rgba(0,0,0,0.13)',
+        _dark: 'rgba(255,255,255,0.13)',
+
       },
 
       // -------------------------

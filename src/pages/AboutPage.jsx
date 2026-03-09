@@ -356,10 +356,19 @@ function AboutPage() {
     ['#ff0080', '#6366f1', '#3b82f6'],
     ['#ff00ff', '#8000ff', '#0080ff']
   );
+  const bg1 = useColorModeValue('rgba(235, 237, 242, 0.88)', 'rgba(10, 10, 18, 0.82)');
+  const bg2 = useColorModeValue('rgba(242, 238, 248, 0.84)', 'rgba(18, 10, 22, 0.78)');
+  const bg3 = useColorModeValue('rgba(236, 242, 240, 0.88)', 'rgba(8,  18, 14, 0.82)');
+  const bg4 = useColorModeValue('rgba(242, 240, 248, 0.84)', 'rgba(14, 10, 22, 0.78)');
+  const bg5 = useColorModeValue('rgba(238, 236, 246, 0.88)', 'rgba(10,  8, 20, 0.82)');
+  const bg6 = useColorModeValue('rgba(236, 244, 242, 0.84)', 'rgba(8,  16, 14, 0.78)');
+  const bg7 = useColorModeValue('rgba(232, 234, 244, 0.92)', 'rgba(8,   8, 18, 0.88)');
+
+  const LAYER_BG = ['transparent', bg1, bg2, bg3, bg4, bg5, bg6, bg7];
+
 
   return (
-  <>
-
+    <>
       {/* ── Scroll progress bar ── */}
            <motion.div
         style={{
@@ -458,7 +467,7 @@ function AboutPage() {
 
         {/* <Layer index={1} label={LAYER_META[1].label} bg={LAYER_BG[1]} zIndex={LAYER_META.length} speed={0.3}> */}
           {/* <Reveal> */}
-            <Options />
+            {/* <Options /> */}
             {/* </Reveal> */}
         {/* </Layer> */}
         <Layer index={1} label={LAYER_META[1].label} bg={LAYER_BG[1]} zIndex={LAYER_META.length} speed={0.3}>

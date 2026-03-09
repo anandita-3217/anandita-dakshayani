@@ -97,7 +97,7 @@ function Terminal() {
             onClick={startTyping}
             style={{
               marginLeft: "auto", fontFamily: MONO, fontSize: 9, letterSpacing: "0.1em",
-              color: "rgba(255,255,255,0.3)", background: "transparent",
+              color: "text.subdued", background: "transparent",
               border: "1px solid rgba(255,255,255,0.08)", borderRadius: 4,
               padding: "2px 8px", cursor: "pointer",
             }}
