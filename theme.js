@@ -4,8 +4,8 @@ const theme = extendTheme({
   config: {
     initialColorMode: 'dark',
     useSystemColorMode: false,
-  },
-fonts: {
+    },
+  fonts: {
     heading: `'Orbitron', sans-serif`,
     body: `'Sora', sans-serif`,
   },
@@ -13,32 +13,11 @@ fonts: {
   colors: {
     brand: { // Try to avoid if possible 
       50: '#e6fffa',
-      100: '#b2f5ea',
-      200: '#81e6d9',
-      300: '#4fd1c5',
       400: '#14b8a6', // teal
       500: '#0d9488',
       600: '#0f766e',
-      700: '#115e59',
-      800: '#134e4a',
-      900: '#0f3d3a',
     },
   
-  // FUCHSIA PALETTE - Purple-leaning pink- barely used any of these
-  fuchsia: {
-    50: '#fdf4ff',
-    100: '#fae8ff',
-    200: '#f5d0fe',
-    300: '#f0abfc',
-    400: '#e879f9',  // Main fuchsia
-    500: '#d946ef',  // Vibrant fuchsia
-    600: '#c026d3',
-    700: '#a21caf',
-    800: '#86198f',
-    900: '#701a75',
-  },
-  
-
     gradients: {
       most: 'linear(to-r, #1e40af, #7c3aed,#ec4899)', // most used
       primary: 'linear(to-r, #10b981, #3b82f6, #8b5cf6)',
@@ -76,10 +55,9 @@ fonts: {
         default: 'gray.500',
         _dark: 'gray.500',
       },
-      'text.subdued':{
-        default: 'rgba(0,0,0,0.13)',
-        _dark: 'rgba(255,255,255,0.13)',
-
+      'text.subdued': {
+        default: 'gray.500',
+        _dark: 'whiteAlpha.400',
       },
 
       // -------------------------
@@ -102,10 +80,10 @@ fonts: {
         default: '#e2e4e7', // softer hover
         _dark: 'gray.700',
       },
-      'bg.accent': {
-        default: 'rgba(20, 184, 166, 0.08)', // subtle teal tint
-        _dark: 'rgba(20, 184, 166, 0.1)',
-      },
+      'bg.subdued': {
+      default: 'gray.100',
+      _dark: 'gray.900',
+    },
 
       // -------------------------
       // BORDERS
@@ -119,25 +97,34 @@ fonts: {
         _dark: 'gray.600',
       },
       'border.accent': {
-        default: 'brand.200',
-        _dark: 'brand.700',
+        default: '#81e6d9',
+        _dark: '#115e59',
       },
+      'border.subdued': {
+        default: 'gray.200',
+        _dark: 'rgba(255,255,255,0.08)',
+      },
+
+      // -------------------------
+      // BORDERS
+      // -------------------------
+
       'button.primary.bg': {
       default: 'black',      // Light mode: black button
       _dark: 'white',        // Dark mode: white button
-    },
-    'button.primary.text': {
-      default: 'white',      // Light mode: white text
-      _dark: 'black',        // Dark mode: black text
-    },
-      'button.secondary.bg': {
-      default: 'white',      // Light mode: black button
-      _dark: 'black',        // Dark mode: white button
-    },
-    'button.secondary.text': {
-      default: 'black',      // Light mode: white text
-      _dark: 'white',        // Dark mode: black text
-    },
+      },
+      'button.primary.text': {
+        default: 'white',      // Light mode: white text
+        _dark: 'black',        // Dark mode: black text
+      },
+        'button.secondary.bg': {
+        default: 'white',      // Light mode: black button
+        _dark: 'black',        // Dark mode: white button
+      },
+      'button.secondary.text': {
+        default: 'black',      // Light mode: white text
+        _dark: 'white',        // Dark mode: black text
+      },
 
       // -------------------------
       // SURFACES
@@ -150,65 +137,20 @@ fonts: {
         default: '#fafafa', // slightly elevated
         _dark: '#2a2a2a',
       },
-      // NEW SURFACE OPTIONS:
-    
-    // Glassmorphic surfaces
-    'surface.glass': {
-      default: 'rgba(255, 255, 255, 0.7)',
-      _dark: 'rgba(255, 255, 255, 0.02)',
-    },
-    'surface.glassElevated': {
-      default: 'rgba(255, 255, 255, 0.9)',
-      _dark: 'rgba(255, 255, 255, 0.05)',
-    },
-    
-
-    
-    // Darker variants for contrast
-    'surface.darker': {
-      default: '#e5e7eb',
-      _dark: '#0f0f0f',
-    },
-    'surface.darkest': {
-      default: '#d1d5db',
-      _dark: '#050505',
-    },
-    
-    // Frosted glass effect
-    'surface.frosted': {
-      default: 'rgba(247, 247, 248, 0.8)',
-      _dark: 'rgba(31, 31, 31, 0.8)',
-    },
-    
-    // Overlay surfaces
-    'surface.overlay': {
-      default: 'rgba(0, 0, 0, 0.5)',
-      _dark: 'rgba(0, 0, 0, 0.7)',
-    },
-    'surface.overlayLight': {
-      default: 'rgba(0, 0, 0, 0.3)',
-      _dark: 'rgba(0, 0, 0, 0.5)',
-    },
-    
-    // Highlight surfaces
-    'surface.highlight': {
-      default: 'rgba(20, 184, 166, 0.1)',
-      _dark: 'rgba(20, 184, 166, 0.15)',
-    },
-    'surface.highlightPink': {
-      default: 'rgba(236, 72, 153, 0.1)',
-      _dark: 'rgba(236, 72, 153, 0.15)',
-    },
-    
-    // Subtle depth variants
-    'surface.sunken': {
-      default: '#f1f1f3',
-      _dark: '#161616',
-    },
-    'surface.raised': {
-      default: '#ffffff',
-      _dark: '#2d2d2d',
-    },
+      // Glassmorphic surfaces
+      'surface.glass': {
+        default: 'rgba(255, 255, 255, 0.7)',
+        _dark: 'rgba(255, 255, 255, 0.02)',
+      },
+      'surface.glassElevated': {
+        default: 'rgba(255, 255, 255, 0.9)',
+        _dark: 'rgba(255, 255, 255, 0.05)',
+      },
+        // Darker variant for contrast
+      'surface.darker': {
+        default: '#e5e7eb',
+        _dark: '#0f0f0f',
+      },
     },
   },
 

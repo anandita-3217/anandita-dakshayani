@@ -3,7 +3,7 @@ import { Box } from '@chakra-ui/react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { useColorModeValue } from '@chakra-ui/react';
 
-import Learning from '../components/Learning';
+import Learning from '../components/AboutPageBits/Learning';
 import Projects from '../components/Projects';
 import ProjectsIndex from '../components/ProjectPageBits/ProjectsIndex';
 import DotGrid from '../components/assets/DotGrid/DotGrid';

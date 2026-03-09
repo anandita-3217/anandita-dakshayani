@@ -156,7 +156,7 @@ function NotFound(){
                       color="text.primary"
                       textAlign="left"
                       _hover={{
-                        borderColor: 'brand.200',
+                        borderColor: '#81e6d9',
                       }}
                       transition="all 0.3s"
                     >

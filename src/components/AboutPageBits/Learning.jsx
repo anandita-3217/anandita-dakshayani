@@ -1,4 +1,3 @@
-
 import { useState, useRef } from 'react';
 import { Box, Text, HStack, VStack, Badge, Flex, chakra } from '@chakra-ui/react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
@@ -140,6 +139,7 @@ const ProjectRow = ({ project, index }) => {
           position="relative"
           zIndex={1}
           flexWrap={{ base: 'wrap', md: 'nowrap' }}
+          justify="center"
         >
 
           {/* Number */}
@@ -153,15 +153,15 @@ const ProjectRow = ({ project, index }) => {
             flexShrink={0}
             w={{ base: '60px', md: '90px' }}
             userSelect="none"
+            textAlign="center"
           >
             {project.num}
           </Text>
 
           {/* Title block */}
-          <Box flex="0 0 auto" w={{ base: '100%', md: '280px' }}>
-            <HStack spacing={3} mb={1.5} align="center">
+          <Box flex="0 0 auto" w={{ base: '100%', md: '280px' }} textAlign={{ base: 'center', md: 'left' }}>
+            <HStack spacing={3} mb={1.5} align="center" justify={{ base: 'center', md: 'flex-start' }}>
               <Text
-                fontFamily={H}
                 fontSize={{ base: '18px', md: '24px' }}
                 fontWeight="900"
                 letterSpacing="-0.02em"
@@ -182,20 +182,22 @@ const ProjectRow = ({ project, index }) => {
               </Box>
             </HStack>
 
-            <Badge
-              fontFamily={H}
-              fontSize="8px"
-              letterSpacing="0.18em"
-              textTransform="uppercase"
-              px={2} py={0.5}
-              borderRadius="5px"
-              bg={`${project.accent}14`}
-              color={project.accent}
-              border="1px solid"
-              borderColor={`${project.accent}30`}
-            >
-              {project.category}
-            </Badge>
+            <Flex justify={{ base: 'center', md: 'flex-start' }}>
+              <Badge
+                fontFamily="fonts.heading"
+                fontSize="8px"
+                letterSpacing="0.18em"
+                textTransform="uppercase"
+                px={2} py={0.5}
+                borderRadius="5px"
+                bg={`${project.accent}14`}
+                color={project.accent}
+                border="1px solid"
+                borderColor={`${project.accent}30`}
+              >
+                {project.category}
+              </Badge>
+            </Flex>
           </Box>
 
           {/* Description — expands on hover */}
@@ -203,6 +205,7 @@ const ProjectRow = ({ project, index }) => {
             flex={1}
             minW={0}
             overflow="hidden"
+            textAlign={{ base: 'center', md: 'left' }}
           >
             <Text
               fontFamily={B}
@@ -225,7 +228,7 @@ const ProjectRow = ({ project, index }) => {
                   transition={{ duration: 0.3 }}
                   style={{ overflow: 'hidden' }}
                 >
-                  <HStack spacing={2} mt={3}>
+                  <HStack spacing={2} mt={3} justify={{ base: 'center', md: 'flex-start' }}>
                     <Box w="2px" h="28px" bg={project.accent} borderRadius="full" flexShrink={0} />
                     <Text
                       fontFamily={B}
@@ -244,13 +247,13 @@ const ProjectRow = ({ project, index }) => {
 
           {/* Right side: tech stack + links */}
           <VStack
-            align="flex-end"
+            align={{ base: 'center', md: 'flex-end' }}
             spacing={3}
             flexShrink={0}
             w={{ base: '100%', md: 'auto' }}
           >
             {/* Tech tags */}
-            <Flex gap={1.5} flexWrap="wrap" justify="flex-end">
+            <Flex gap={1.5} flexWrap="wrap" justify="center">
               {project.techStack.map(t => (
                 <Badge
                   key={t}
@@ -269,13 +272,13 @@ const ProjectRow = ({ project, index }) => {
             </Flex>
 
             {/* Link buttons */}
-            <HStack spacing={2}>
+            <HStack spacing={2} justify="center">
               <Box
                 as="a"
                 href={project.githubUrl}
                 target="_blank"
                 display="flex" alignItems="center" gap={1}
-                fontFamily={H} fontSize="9px" letterSpacing="0.15em"
+                fontFamily={H} fontSize="12px" letterSpacing="0.15em"
                 color={hovered ? project.accent : 'rgba(255,255,255,0.2)'}
                 transition="color 0.3s"
                 _hover={{ color: project.accent }}
@@ -290,7 +293,7 @@ const ProjectRow = ({ project, index }) => {
                 href={project.liveUrl}
                 target="_blank"
                 display="flex" alignItems="center" gap={1}
-                fontFamily={H} fontSize="9px" letterSpacing="0.15em"
+                fontFamily={H} fontSize="12px" letterSpacing="0.15em"
                 color={hovered ? project.accent : 'rgba(255,255,255,0.2)'}
                 transition="color 0.3s"
                 _hover={{ color: project.accent }}
@@ -329,14 +332,22 @@ export default function Learning() {
     <Box bg="transparent" py={{ base: 4, md: 6 }}>
 
       {/* ── Header ─────────────────────────────────────────────────────── */}
-      <Flex justify="space-between" align="flex-end" mb={12} flexWrap="wrap" gap={4}>
-        <Box>
-          <HStack spacing={3} mb={3}>
+      <Flex
+        justify="center"
+        align="center"
+        mb={12}
+        flexWrap="wrap"
+        gap={4}
+        direction={{ base: 'column', md: 'row' }}
+      >
+        <Box textAlign="center">
+          <HStack spacing={3} mb={3} justify="center">
             <Box w="24px" h="1px" bgGradient="linear(to-r, #ec4899, #7c3aed)" />
             <Text fontFamily={H} fontSize="9px" letterSpacing="0.3em"
               textTransform="uppercase" color="whiteAlpha.400">
               Side quests
             </Text>
+            <Box w="24px" h="1px" bgGradient="linear(to-r, #7c3aed, #ec4899)" />
           </HStack>
           <Text
             fontFamily={H}
@@ -355,14 +366,14 @@ export default function Learning() {
             fontWeight="900"
             letterSpacing="-0.02em"
             lineHeight={1.05}
-            color="rgba(255,255,255,0.13)"
+            color="text.subdued"
           >
             Experiments
           </Text>
         </Box>
 
         {/* Stats */}
-        <HStack spacing={8} align="flex-end" pb={1}>
+        <HStack spacing={8} align="center" pb={1} mt={{ base: 2, md: 0 }}>
           {[
             { val: learningProjects.length, label: 'Projects',      color: '#14b8a6' },
             { val: '∞',                     label: 'Things Learned', color: '#a855f7' },
@@ -392,7 +403,7 @@ export default function Learning() {
       </Flex>
 
       {/* ── Filter pills ──────────────────────────────────────────────── */}
-      <HStack spacing={2} mb={6} flexWrap="wrap">
+      <Flex justify="center" mb={6} gap={2} flexWrap="wrap" align="center">
         {filters.map(f => (
           <Box
             key={f}
@@ -418,10 +429,10 @@ export default function Learning() {
         <Text fontFamily={MONO} fontSize="11px" color="whiteAlpha.200" pl={2}>
           {filtered.length} projects
         </Text>
-      </HStack>
+      </Flex>
 
       {/* ── Cinematic list ────────────────────────────────────────────── */}
-      <Box>
+      <Box maxW="1100px" mx="auto">
         <AnimatePresence mode="popLayout">
           {filtered.map((project, i) => (
             <motion.div
@@ -444,11 +455,11 @@ export default function Learning() {
         borderTop="1px solid rgba(255,255,255,0.05)"
         display="flex"
         alignItems="center"
-        justifyContent="space-between"
+        justifyContent="center"
         flexWrap="wrap"
-        gap={4}
+        gap={6}
       >
-        <VStack align="start" spacing={0.5}>
+        <VStack align="center" spacing={0.5}>
           <Text fontFamily={H} fontSize="14px" fontWeight="800" color="white">
             There's more.
           </Text>
@@ -466,9 +477,11 @@ export default function Learning() {
           textTransform="uppercase"
           px={5} py={3}
           borderRadius="10px"
-          bg="rgba(255,255,255,0.04)"
-          border="1px solid rgba(255,255,255,0.1)"
-          color="white"
+          bg="bg.subdued"
+          borderWidth="1px"
+          borderStyle="solid"
+          borderColor="border.subdued"
+          color="text.subdued"
           _hover={{
             bg: 'rgba(124,58,237,0.14)',
             borderColor: 'rgba(124,58,237,0.4)',

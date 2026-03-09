@@ -698,11 +698,11 @@ export default function AboutIntro() {
       </Flex>
 
       {/* Bottom fade */}
-      <Box
+      {/* <Box
         position="absolute" bottom={0} left={0} right={0} h="120px"
         bgGradient="linear(to-t, rgba(10,10,10,1), transparent)"
         pointerEvents="none"
-      />
-    </Box>
+      />*/}
+    </Box> 
   );
 }

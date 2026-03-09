@@ -208,7 +208,7 @@ import Resume from '../components/Resume';
 import DotGrid from '../components/assets/DotGrid/DotGrid';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import Options from "../components/options"
+// import Options from "../components/options"
 // ─── Chakra + Framer Motion bridge ───────────────────────────────────────────
 const MotionBox = chakra(motion.div, {
   shouldForwardProp: (prop) =>
@@ -370,7 +370,7 @@ function AboutPage() {
   return (
     <>
       {/* ── Scroll progress bar ── */}
-           <motion.div
+      <motion.div
         style={{
           scaleX,
           position: 'fixed',
@@ -383,14 +383,6 @@ function AboutPage() {
           zIndex: 9999,
         }}
       />
-
-      {/* ────────────────────────────────────────────────────────────────────
-          DotGrid fix: position="absolute" so it spans the full scrollable
-          page height. z-index: 0 puts it behind all layers (which start at
-          z-index: 1). pointer-events: none lets mouse events pass through
-          to your interactive content, but the DotGrid canvas itself still
-          receives mousemove via its own window listener so it stays reactive.
-      ──────────────────────────────────────────────────────────────────── */}
       <Box
         position="absolute"
         top={0}
@@ -465,39 +457,13 @@ function AboutPage() {
           </Reveal>
         </Layer>
 
-        {/* <Layer index={1} label={LAYER_META[1].label} bg={LAYER_BG[1]} zIndex={LAYER_META.length} speed={0.3}> */}
-          {/* <Reveal> */}
-            {/* <Options /> */}
-            {/* </Reveal> */}
-        {/* </Layer> */}
-        <Layer index={1} label={LAYER_META[1].label} bg={LAYER_BG[1]} zIndex={LAYER_META.length} speed={0.3}>
-          <Reveal><AboutPart /></Reveal>
-        </Layer>
-
-        <Layer index={2} label={LAYER_META[2].label} bg={LAYER_BG[2]} zIndex={LAYER_META.length - 1} speed={0.5}>
-          <Reveal delay={0.05}><Hobbies /></Reveal>
-        </Layer>
-
-        <Layer index={3} label={LAYER_META[3].label} bg={LAYER_BG[3]} zIndex={LAYER_META.length - 2} speed={0.4}>
-          <Reveal delay={0.05}><TechSkills /></Reveal>
-        </Layer>
-
-        <Layer index={4} label={LAYER_META[4].label} bg={LAYER_BG[4]} zIndex={LAYER_META.length - 3} speed={0.35}>
-          <Reveal delay={0.05}><Learning /></Reveal>
-        </Layer>
-
-        <Layer index={5} label={LAYER_META[5].label} bg={LAYER_BG[5]} zIndex={LAYER_META.length - 4} speed={0.45}>
-          <Reveal delay={0.05}><Certificates /></Reveal>
-        </Layer>
-
-        <Layer index={6} label={LAYER_META[6].label} bg={LAYER_BG[6]} zIndex={LAYER_META.length - 5} speed={0.3}>
-          <Reveal delay={0.05}><ContributionMap /></Reveal>
-        </Layer>
-
-        <Layer index={7} label={LAYER_META[7].label} bg={LAYER_BG[7]} zIndex={LAYER_META.length - 6} speed={0}>
-          <Reveal delay={0.05}><Resume /></Reveal>
-        </Layer>
-
+          <AboutPart />
+            <Hobbies />
+            <TechSkills />
+            <Learning />
+          <Certificates />
+            <ContributionMap />
+            <Resume />
       </Box>
 
       <Box position="relative" zIndex={2}>

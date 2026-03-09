@@ -50,14 +50,14 @@ export default function Header(){
   );
   const borderColor = useColorModeValue("gray.200", "whiteAlpha.200");
   const linkColor = useColorModeValue("gray.700", "gray.300");
-  const activeLinkBg = useColorModeValue("fuchsia.200", "fuchsia.600");
-  const hoverBg = useColorModeValue("fuchsia.50", "fuchsia.900");
+  const activeLinkBg = useColorModeValue("#f5d0fe", "#c026d3");
+  const hoverBg = useColorModeValue("#fdf4ff", "#701a75");
   const iconHoverBg = useColorModeValue("gray.100", "whiteAlpha.200");
   const mobileDropdownBg = useColorModeValue("white", "gray.900");
   const shadowColor = colorMode === "dark"
     ? "0 8px 32px rgba(255,255,255,0.05)"
     : "0 8px 32px rgba(0,0,0,0.1)";
-  const activeLinkColor = useColorModeValue("fuchsia.800", "fuchsia.50");
+  const activeLinkColor = useColorModeValue("#86198f", "fdf4ff");
 
   const links = [
     { name: "Home", href: "/" },
@@ -212,10 +212,10 @@ export default function Header(){
             borderRadius="md"
             fontSize="sm"
             fontWeight="medium"
-            bg={useColorModeValue("fuchsia.500", "fuchsia.600")}
+            bg={useColorModeValue("#d946ef", "#c026d3")}
             color="white"
             _hover={{
-              bg: useColorModeValue("fuchsia.600", "fuchsia.500"),
+              bg: useColorModeValue("#c026d3", "#d946ef"),
               textDecoration: "none",
               transform: "scale(1.02)",
             }}
