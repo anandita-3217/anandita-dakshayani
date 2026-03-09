@@ -59,6 +59,75 @@ const theme = extendTheme({
         default: 'gray.500',
         _dark: 'whiteAlpha.400',
       },
+      // Row number (big faded number behind each project)
+        'text.ghost': {
+          default: 'gray.200',
+          _dark: 'rgba(255,255,255,0.06)',
+        },
+      // Default description text
+      'text.dim': {
+        default: 'gray.400',
+        _dark: 'rgba(255,255,255,0.28)',
+      },
+
+      // Hovered description text
+      'text.dimHover': {
+        default: 'gray.600',
+        _dark: 'rgba(255,255,255,0.6)',
+      },
+
+      // Default title text
+      'text.strong': {
+        default: 'gray.700',
+        _dark: 'rgba(255,255,255,0.8)',
+      },
+
+      // Tech stack badge text (default)
+      'text.badge': {
+        default: 'gray.400',
+        _dark: 'rgba(255,255,255,0.22)',
+      },
+
+      // Tech stack badge text (hovered)
+      'text.badgeHover': {
+        default: 'gray.600',
+        _dark: 'rgba(255,255,255,0.5)',
+      },
+      // Divider slash between Code / Demo links
+      'text.slash': {
+        default: 'gray.300',
+        _dark: 'rgba(255,255,255,0.1)',
+      },
+
+      // Default Code/Demo link text
+      'text.link': {
+        default: 'gray.400',
+        _dark: 'rgba(255,255,255,0.2)',
+      },
+
+      // Project count "6 projects" label
+      'text.counter': {
+        default: 'gray.400',
+        _dark: 'whiteAlpha.200',
+      },
+
+      // "Side quests" label
+      'text.eyebrow': {
+        default: 'gray.400',
+        _dark: 'whiteAlpha.400',
+      },
+
+      // Stats labels (PROJECTS, THINGS LEARNED etc.)
+      'text.statLabel': {
+        default: 'gray.400',
+        _dark: 'whiteAlpha.350',
+      },
+
+      // CTA subtitle
+      'text.ctaSubtitle': {
+        default: 'gray.500',
+        _dark: 'whiteAlpha.400',
+      },
 
       // -------------------------
       // BACKGROUNDS
@@ -84,6 +153,12 @@ const theme = extendTheme({
       default: 'gray.100',
       _dark: 'gray.900',
     },
+    // Tech stack badge background
+    'bg.badge': {
+      default: 'gray.100',
+      _dark: 'rgba(255,255,255,0.04)',
+    },
+
 
       // -------------------------
       // BORDERS
@@ -104,6 +179,18 @@ const theme = extendTheme({
         default: 'gray.200',
         _dark: 'rgba(255,255,255,0.08)',
       },
+      // Tech stack badge border
+      'border.badge': {
+        default: 'gray.200',
+        _dark: 'rgba(255,255,255,0.07)',
+      },
+      
+      // Row divider line (center of gradient)
+      'border.row': {
+        default: 'gray.200',
+        _dark: 'rgba(255,255,255,0.05)',
+      },
+      
 
       // -------------------------
       // BORDERS

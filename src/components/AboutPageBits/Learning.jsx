@@ -148,7 +148,7 @@ const ProjectRow = ({ project, index }) => {
             fontSize={{ base: '32px', md: '56px' }}
             fontWeight="900"
             lineHeight={1}
-            color={hovered ? project.accent : 'rgba(255,255,255,0.06)'}
+            color={hovered ? project.accent : 'text.ghost'}
             transition="color 0.4s"
             flexShrink={0}
             w={{ base: '60px', md: '90px' }}
@@ -165,7 +165,7 @@ const ProjectRow = ({ project, index }) => {
                 fontSize={{ base: '18px', md: '24px' }}
                 fontWeight="900"
                 letterSpacing="-0.02em"
-                color={hovered ? 'white' : 'rgba(255,255,255,0.8)'}
+                color={hovered ? 'text.strong' : 'rgba(255,255,255,0.8)'}
                 transition="color 0.3s"
                 lineHeight={1.1}
               >
@@ -211,7 +211,7 @@ const ProjectRow = ({ project, index }) => {
               fontFamily={B}
               fontSize="14px"
               lineHeight={1.75}
-              color={hovered ? 'rgba(255,255,255,0.6)' : 'rgba(255,255,255,0.28)'}
+              color={hovered ? 'text.dim' : 'text.dimHover'}
               transition="color 0.4s"
               noOfLines={hovered ? undefined : 2}
             >
@@ -261,9 +261,11 @@ const ProjectRow = ({ project, index }) => {
                   fontSize="9px"
                   px={2} py={0.5}
                   borderRadius="5px"
-                  bg="rgba(255,255,255,0.04)"
-                  color={hovered ? 'rgba(255,255,255,0.5)' : 'rgba(255,255,255,0.22)'}
-                  border="1px solid rgba(255,255,255,0.07)"
+                  bg="bg.badge"
+                  color={hovered ? 'text.badge' : 'text.badgeHover'}
+                  borderWidth="1px"
+                  borderColor="border.badge"
+                  borderStyle="solid"
                   transition="color 0.3s"
                 >
                   {t}
