@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const H = "'Orbitron', sans-serif";
-const B = "'Sora', sans-serif";
 const MONO = "'JetBrains Mono', 'Fira Code', monospace";
 
 const skills = [

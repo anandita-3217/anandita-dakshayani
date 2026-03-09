@@ -114,14 +114,14 @@ export default function Hobbies() {
   };
 
   return (
-    <Box bg="transparent" py={{ base: 4, md: 6 }} position="relative">
+    <Box bg="transparent" py={{ base: 4, md: 6 }} position="relative" maxW="1100px" mx="auto">
 
       {/* ── Header ───────────────────────────────────────────────────────── */}
       <Box mb={10}>
         <HStack spacing={3} mb={3}>
           <Box w="24px" h="1px" bgGradient="linear(to-r, #ec4899, #7c3aed)" />
           <Text fontSize="9px" letterSpacing="0.3em"
-            textTransform="uppercase" color="whiteAlpha.400">
+            textTransform="uppercase" color="text.eyebrow">
             Beyond the screen
           </Text>
         </HStack>
@@ -143,9 +143,9 @@ export default function Hobbies() {
       >
         {/* Edge fades */}
         <Box position="absolute" left={0} top={0} bottom={0} w="80px" zIndex={3}
-          bgGradient="linear(to-r, rgba(10,10,10,1), transparent)" pointerEvents="none" />
+          bgGradient="linear(to-r, var(--chakra-colors-bg-primary, #f7f7f8), transparent)" pointerEvents="none" />
         <Box position="absolute" right={0} top={0} bottom={0} w="80px" zIndex={3}
-          bgGradient="linear(to-l, rgba(10,10,10,1), transparent)" pointerEvents="none" />
+          bgGradient="linear(to-l, var(--chakra-colors-bg-primary, #f7f7f8), transparent)" pointerEvents="none" />
 
         {/* Track */}
         <Box
@@ -381,7 +381,7 @@ export default function Hobbies() {
             borderRadius="full"
             bg={activeIdx !== null && activeIdx % hobbies.length === i
               ? hobby.accent
-              : 'rgba(255,255,255,0.16)'}
+              : 'border.badge'}
             transition="all 0.35s cubic-bezier(0.23,1,0.32,1)"
           />
         ))}
