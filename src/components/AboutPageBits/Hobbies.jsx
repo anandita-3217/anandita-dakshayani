@@ -3,10 +3,7 @@ import { Box, Text, HStack, VStack, Badge, Flex } from '@chakra-ui/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import gsap from 'gsap';
 import {Camera,Music4,MountainSnow,Book,Coffee} from 'lucide-react';
-const MotionBox = motion.create(Box);
-
-const GRAD = 'linear(to-r, #1e40af, #7c3aed, #ec4899)';
-
+// TODO: Hobbies not working in mobile view
 const hobbies = [
   {
     title: 'Photography',
