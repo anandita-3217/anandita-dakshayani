@@ -459,11 +459,11 @@ function AboutPage() {
 
           <AboutPart />
             <Hobbies />
-            <TechSkills />
             <Learning />
-          <Certificates />
             <ContributionMap />
             <Resume />
+            <TechSkills />
+          <Certificates />
       </Box>
 
       <Box position="relative" zIndex={2}>

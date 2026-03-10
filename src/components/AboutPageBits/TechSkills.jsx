@@ -74,7 +74,7 @@ function Terminal() {
   }, []);
 
   return (
-    <div style={{ fontFamily: MONO }}>
+    <div style={{ fontFamily: MONO  }}>
       {/* Terminal window chrome */}
       <div style={{
         background: "rgba(0,0,0,0.6)", backdropFilter: "blur(20px)",
