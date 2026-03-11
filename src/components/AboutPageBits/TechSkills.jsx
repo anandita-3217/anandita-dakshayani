@@ -198,6 +198,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import {Text} from '@chakra-ui/react';
 
 const H = "'Orbitron', sans-serif";
 const MONO = "'JetBrains Mono', 'Fira Code', monospace";
@@ -382,12 +383,12 @@ export default function TechSkillsPreview() {
           <div style={{ width: 24, height: 1, background: "linear-gradient(to right, #ec4899, #7c3aed)" }} />
           <span style={{
             fontFamily: H, fontSize: 9, letterSpacing: "0.3em",
-            textTransform: "uppercase", color: "rgba(255,255,255,0.4)",
+            textTransform: "uppercase", color: "text.subdued",
           }}>
             Arsenal
           </span>
         </div>
-        <div style={{
+        <Text style={{
           fontFamily: H,
           fontSize: "clamp(26px, 4vw, 40px)",
           fontWeight: 900,
@@ -396,19 +397,21 @@ export default function TechSkillsPreview() {
           background: "linear-gradient(to right, #1e40af, #7c3aed, #ec4899)",
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent",
+          display: 'inline-block',
+          width: 'fit-content'
         }}>
           Tools &amp;
-        </div>
-        <div style={{
+        </Text>
+        <Text style={{
           fontFamily: H,
           fontSize: "clamp(26px, 4vw, 40px)",
           fontWeight: 900,
           letterSpacing: "-0.02em",
           lineHeight: 1.05,
-          color: "rgba(255,255,255,0.4)",
+          color: "text.subdued",
         }}>
           Technologies
-        </div>
+        </Text>
       </div>
 
       <AnimatePresence mode="wait">

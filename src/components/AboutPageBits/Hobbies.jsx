@@ -123,7 +123,7 @@ export default function Hobbies() {
           </Text>
         </HStack>
         <Text fontSize={{ base: '26px', md: '40px' }} fontWeight="900"
-          letterSpacing="-0.02em" lineHeight={1.05} bgGradient="linear(to-r, #7c3aed, #ec4899)" bgClip="text">
+          letterSpacing="-0.02em" lineHeight={1.05} bgGradient="linear(to-r, #7c3aed, #ec4899)" bgClip="text" display="inline-block" width="fit-content">
           What I Do
         </Text>
         <Text fontSize={{ base: '26px', md: '40px' }} fontWeight="900"

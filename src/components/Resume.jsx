@@ -424,9 +424,11 @@ export const Resume = () => {
             as="h1"
             fontSize={{ base: '4xl', md: '5xl', lg: '6xl' }}
             fontWeight="normal"
-            bgGradient="linear(to-r, #1e40af, #ec4899)"
+            bgGradient="linear(to-r, #1e40af, #7c3aed, #ec4899)"
             bgClip="text"
             fontFamily="heading"
+            display="inline-block"
+            width="fit-content"
             mb={4}
           >
             {personalInfo.name}
