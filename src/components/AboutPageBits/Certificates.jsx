@@ -364,14 +364,6 @@ export default function Certificates() {
               Credentials &amp; Achievements
             </Text>
           </MotionBox>
-
-          <MotionBox initial={{ opacity: 0, y: 14 }} animate={headerInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 }}
-            transition={{ duration: 0.5, delay: 0.65 }}>
-            <Text fontFamily={B} fontSize="14px" color="whiteAlpha.400" maxW="460px" mx="auto">
-              Academic journey and professional certifications — a record of continuous learning.
-            </Text>
-          </MotionBox>
-
           {/* Stats */}
           <MotionBox as={HStack} spacing={{ base: 8, md: 14 }} pt={2} flexWrap="wrap" justify="center"
             initial="hidden" animate={headerInView ? 'visible' : 'hidden'} variants={staggerContainer}>
