@@ -7,12 +7,6 @@ import { useInView } from 'react-intersection-observer';
 import gsap from 'gsap';
 
 const USERNAME = 'anandita-3217';
-const H    = 'Orbitron, sans-serif';
-const B    = 'Sora, sans-serif';
-const MONO = "'JetBrains Mono', monospace";
-const TEAL = '#14b8a6';
-const GRAD = 'linear-gradient(135deg, #1e40af, #7c3aed, #ec4899)';
-
 // ── Count-up ──────────────────────────────────────────────────────────────────
 function CountUp({ to, trigger }) {
   const [v, setV] = useState(0);
@@ -32,7 +26,7 @@ function CountUp({ to, trigger }) {
 // ── Stat card ─────────────────────────────────────────────────────────────────
 const StatCard = ({ value, suffix = '', label, sub, color, trigger, icon }) => {
   const [hov, setHov] = useState(false);
-  const cardBg     = useColorModeValue('rgba(255,255,255,0.8)',  'rgba(255,255,255,0.025)');
+  const cardBg     = useColorModeValue('rgba(247,247,248,0.92)', 'rgba(10,10,10,0.82)');
   const cardBgHov  = useColorModeValue('#ffffff',                `${color}0a`);
   const borderBase = useColorModeValue('rgba(0,0,0,0.08)',       'rgba(255,255,255,0.06)');
   const subColor   = useColorModeValue('gray.500',               'whiteAlpha.300');
@@ -55,11 +49,11 @@ const StatCard = ({ value, suffix = '', label, sub, color, trigger, icon }) => {
       <Box position="absolute" top={0} left="15%" right="15%" h="1px"
         bg={color} opacity={hov ? 0.55 : 0.15} transition="opacity 0.3s" />
       <HStack spacing={1.5} mb={2} align="center" justify="flex-end">
-        <Text fontFamily={H} fontSize="9px" letterSpacing="0.22em"
+        <Text fontFamily='Orbitron' fontSize="9px" letterSpacing="0.22em"
           textTransform="uppercase" color={labelColor}>{label}</Text>
         <Box color={labelColor}>{icon}</Box>
       </HStack>
-      <Text fontFamily={H} fontWeight="900" lineHeight={1} mb={1}
+      <Text fontFamily='Orbitron' fontWeight="900" lineHeight={1} mb={1}
         fontSize={{ base: '24px', md: '30px' }} textAlign="right"
         display="inline-block" w="100%"
         style={{ background: `linear-gradient(135deg, ${color}, ${color}88)`,
@@ -69,7 +63,7 @@ const StatCard = ({ value, suffix = '', label, sub, color, trigger, icon }) => {
           : <><CountUp to={value} trigger={trigger} />{suffix}</>
         }
       </Text>
-      {sub && <Text fontFamily={B} fontSize="11px" color={subColor}
+      {sub && <Text fontFamily='Sora' fontSize="11px" color={subColor}
         mt={1} textAlign="right">{sub}</Text>}
     </Box>
   );
@@ -219,10 +213,9 @@ export default function ContributionMap() {
 
   // Semantic colours from theme
   const outerBg      = useColorModeValue('rgba(247,247,248,0.92)', 'rgba(10,10,10,0.82)');
-  const cardBg       = useColorModeValue('rgba(255,255,255,0.85)', 'rgba(255,255,255,0.03)');
+  const cardBg       = useColorModeValue('rgba(247,247,248,0.92)', 'rgba(10,10,10,0.82)');
   const cardBorder   = useColorModeValue('rgba(0,0,0,0.08)',       'rgba(255,255,255,0.06)');
   const eyebrowColor = useColorModeValue('gray.500',               'whiteAlpha.400');
-  const ghostColor   = useColorModeValue('rgba(0,0,0,0.08)',       'rgba(255,255,255,0.10)');
   const labelColor   = useColorModeValue('gray.400',               'whiteAlpha.200');
   const cellStroke   = useColorModeValue('rgba(0,0,0,0.08)',       'rgba(255,255,255,0.07)');
   const svgTextFill  = useColorModeValue('rgba(0,0,0,0.35)',       'rgba(255,255,255,0.28)');
@@ -265,9 +258,8 @@ export default function ContributionMap() {
       ref={sectionRef}
       position="relative"
       py={{ base: 4, md: 6 }}
-      maxW="900px" mx="auto"
-      bg={outerBg}
-      backdropFilter="blur(10px)"
+      maxW="1100px" mx="auto"
+      bg="transparent"
     >
       {/* ── Header ─────────────────────────────────────────────────── */}
       <motion.div
@@ -278,23 +270,23 @@ export default function ContributionMap() {
         <HStack spacing={3} mb={3}>
           <Box w="24px" h="1px"
             style={{ background: 'linear-gradient(to right, #ec4899, #7c3aed)' }} />
-          <Text fontFamily={H} fontSize="9px" letterSpacing="0.3em"
+          <Text fontFamily='Orbitron' fontSize="9px" letterSpacing="0.3em"
             textTransform="uppercase" color={eyebrowColor}>
             Activity
           </Text>
         </HStack>
 
-        {/* fit-content so gradient always spans just the word */}
-        <Text as="div" fontFamily={H} fontWeight="900" letterSpacing="-0.02em"
-          lineHeight={1.05} fontSize={{ base: '26px', md: '40px' }}
-          display="inline-block" w="fit-content"
-          style={{ background: GRAD, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+        <Text fontFamily='Orbitron' fontWeight="900" fontSize={{ base: '26px', md: '40px' }}
+          letterSpacing="-0.02em"
+          lineHeight={1.05} bgGradient="linear(to-r, #7c3aed, #ec4899)"
+            bgClip="text" display="inline-block" width="fit-content"
+          >
           GitHub
         </Text>
 
-        <Text as="div" fontFamily={H} fontWeight="900" letterSpacing="-0.02em"
-          lineHeight={1.05} fontSize={{ base: '26px', md: '40px' }}
-          color={ghostColor} mb={10}>
+        <Text fontFamily='Orbitron' fontWeight="900" fontSize={{ base: '26px', md: '40px' }} 
+          letterSpacing="-0.02em" lineHeight={1.05} 
+          color="text.subdued" mb={10}>
           Contributions
         </Text>
       </motion.div>
@@ -307,7 +299,7 @@ export default function ContributionMap() {
       >
         <Flex gap={3} mb={8} flexWrap="wrap">
           <StatCard value={stats.contributions} label="Contributions" sub="this year"
-            color={TEAL}    trigger={inView} icon={<GitCommitHorizontal size={13} />} />
+            color='#14b8a6'    trigger={inView} icon={<GitCommitHorizontal size={13} />} />
           <StatCard value={stats.repos}         label="Repositories"  sub="public"
             color="#a855f7" trigger={inView} icon={<BookMarked size={13} />} />
           <StatCard value={stats.streak}        label="Streak"        sub="days"
@@ -361,7 +353,7 @@ export default function ContributionMap() {
               },
               'svg text': {
                 fill: `${svgTextFill} !important`,
-                fontFamily: MONO,
+                fontFamily: 'JetBrains Mono',
                 fontSize: '11px',
               },
               'svg': { maxWidth: '100%', height: 'auto' },
@@ -375,6 +367,7 @@ export default function ContributionMap() {
               blockMargin={5}
               fontSize={13}
               theme={calTheme}
+              fontFamily="JetBrains Mono"
               colorScheme="dark"
               labels={{
                 months: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
@@ -389,18 +382,18 @@ export default function ContributionMap() {
           <Flex mt={6} pt={4} justify="space-between" align="center"
             borderTop="1px solid" borderColor={legendBorder}
             position="relative" zIndex={1}>
-            <Text fontFamily={MONO} fontSize="10px" color={labelColor}>
+            <Text fontFamily='JetBrains Mono' fontSize="10px" color={labelColor}>
               {USERNAME}
             </Text>
             <HStack spacing={1.5} align="center">
-              <Text fontFamily={H} fontSize="7px" letterSpacing="0.12em"
+              <Text fontFamily='Orbitron' fontSize="7px" letterSpacing="0.12em"
                 textTransform="uppercase" color={labelColor} mr={1}>Less</Text>
               {[0.28, 0.50, 0.72, 0.95].map((o, i) => (
                 <Box key={i} w="10px" h="10px" borderRadius="3px"
                   style={{ background: '#7c3aed', opacity: o }}
                   border="1px solid" borderColor={legendSquareBorder} />
               ))}
-              <Text fontFamily={H} fontSize="7px" letterSpacing="0.12em"
+              <Text fontFamily='Orbitron' fontSize="7px" letterSpacing="0.12em"
                 textTransform="uppercase" color={labelColor} ml={1}>More</Text>
             </HStack>
           </Flex>

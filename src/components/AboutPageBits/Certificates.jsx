@@ -346,7 +346,7 @@ export default function Certificates() {
   );
 
   return (
-    <Box bg="transparent" py={{ base: 4, md: 6 }}>
+    <Box bg="transparent" py={{ base: 4, md: 6 }} maxW="1100px" position="relative" mx="auto">
       <VStack spacing={12} align="stretch">
 
         {/* Header */}

@@ -411,51 +411,7 @@ function AboutPage() {
       {/* ── Layered sections — sit above DotGrid via z-index: 1+ ── */}
       <Box position="relative" zIndex={1} pt="80px">
 
-        <Layer index={0} bg={LAYER_BG[0]} zIndex={LAYER_META.length + 1} speed={0}>
-          <Reveal>
-            <Box>
-              <Text
-                fontFamily="Orbitron, sans-serif"
-                fontSize={{ base: '10px', md: '11px' }}
-                letterSpacing="0.4em"
-                textTransform="uppercase"
-                bgGradient="linear(to-r, #ec4899, #a855f7, #6366f1)"
-                bgClip="text"
-                mb={5}
-              >
-                About Me
-              </Text>
-              <Text
-                fontFamily="Orbitron, sans-serif"
-                fontSize={{ base: '36px', md: '64px', lg: '80px' }}
-                fontWeight="900"
-                letterSpacing="-0.03em"
-                lineHeight={0.95}
-                color="text.primary"
-                mb={6}
-              >
-                Building things
-                <br />
-                <chakra.span
-                  bgGradient="linear(to-r, #1e40af, #7c3aed, #ec4899)"
-                  bgClip="text"
-                >
-                  that matter.
-                </chakra.span>
-              </Text>
-              <Text
-                fontFamily="Sora, sans-serif"
-                fontSize={{ base: '15px', md: '17px' }}
-                color="whiteAlpha.500"
-                maxW="480px"
-                lineHeight={1.8}
-              >
-                A developer whose curiosity stretches beyond the IDE — into
-                craft, texture, and the physical world.
-              </Text>
-            </Box>
-          </Reveal>
-        </Layer>
+      
 
           <AboutPart />
             <Hobbies />

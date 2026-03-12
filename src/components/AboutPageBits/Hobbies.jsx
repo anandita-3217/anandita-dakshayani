@@ -122,11 +122,11 @@ export default function Hobbies() {
             Beyond the screen
           </Text>
         </HStack>
-        <Text fontSize={{ base: '26px', md: '40px' }} fontWeight="900"
+        <Text fontSize={{ base: '26px', md: '40px' }} fontWeight="900" fontFamily='Orbitron' 
           letterSpacing="-0.02em" lineHeight={1.05} bgGradient="linear(to-r, #7c3aed, #ec4899)" bgClip="text" display="inline-block" width="fit-content">
-          What I Do
+          What I Do 
         </Text>
-        <Text fontSize={{ base: '26px', md: '40px' }} fontWeight="900"
+        <Text fontSize={{ base: '26px', md: '40px' }} fontWeight="900" fontFamily='Orbitron' 
           letterSpacing="-0.02em" lineHeight={1.05} color="text.subdued">
           When I'm Not Coding
         </Text>
