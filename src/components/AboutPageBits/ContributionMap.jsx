@@ -212,7 +212,6 @@ export default function ContributionMap() {
   const stats = useGitHubStats(USERNAME);
 
   // Semantic colours from theme
-  const outerBg      = useColorModeValue('rgba(247,247,248,0.92)', 'rgba(10,10,10,0.82)');
   const cardBg       = useColorModeValue('rgba(247,247,248,0.92)', 'rgba(10,10,10,0.82)');
   const cardBorder   = useColorModeValue('rgba(0,0,0,0.08)',       'rgba(255,255,255,0.06)');
   const eyebrowColor = useColorModeValue('gray.500',               'whiteAlpha.400');
