@@ -56,7 +56,7 @@ const theme = extendTheme({
         _dark: 'gray.500',
       },
       'text.subdued': {
-        default: 'gray.500',
+        default: 'black.500',
         _dark: 'whiteAlpha.400',
       },
       // Row number (big faded number behind each project)
