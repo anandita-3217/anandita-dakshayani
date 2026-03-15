@@ -427,8 +427,6 @@ export default function Certificates() {
             Credentials
           </Text>
         </HStack>
-
-        {/* Heading line 1 — gradient, fit-content */}
         <Text
           fontFamily="Orbitron" fontWeight="900" fontSize={{ base: '26px', md: '40px' }}
           letterSpacing="-0.02em" lineHeight={1.05}
@@ -437,8 +435,6 @@ export default function Certificates() {
         >
           Credentials
         </Text>
-
-        {/* Heading line 2 — subdued */}
         <Text
           fontFamily="Orbitron" fontWeight="900" fontSize={{ base: '26px', md: '40px' }}
           letterSpacing="-0.02em" lineHeight={1.05}

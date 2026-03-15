@@ -98,23 +98,17 @@
 // // TODO: https://www.achyutkatiyar.com/ use this as a base s 
 // // TODO: https://sarayoussry.com/
 // // TODO: https://aayushbharti.in/ -- layout
-// // TODO: Add a glimplse of github profile 
-// // TODO: Better layout design and make it multi page -TODO: Working on this 
 // // TODO: Make security better for contact form
 // // TODO: Have separate pages and have like buttons with tech skills or stuff for like when clicked tge projects with those tech skills in tags will be displayed
 // // TODO: Redo contact and test again and modify the code 
 // // TODO: Direct mailto: in contact.jsx is unsafe check that out
 // // TODO: migrate resume to a drive link all assets
-// // TODO: Learn to make routes and setup separate pages 
 // // TODO: Add guest book inspired by https://aayushbharti.in/ 
 // // TODO: Add bucketlist inspired by https://aayushbharti.in/ 
 // // TODO: For the main projects think of a better layout and add filters and sorts option
-// // TODO: https://aayushbharti.in/about layout for new about page https://reactbits.dev/components/dome-gallery or https://reactbits.dev/components/masonry or https://reactbits.dev/components/stack or https://reactbits.dev/components/circular-gallery for rightside asset
-// // TODO: Add  a an AI chatbot or whatev 
 // // TODO: Maybe add a picture of whatever hubble is seeing in the hobbies section?
 // // TODO: maybe https://www.framer.com/marketplace/components/eyes-follow-cursor/ https://www.framer.com/marketplace/components/interactive-gradient/
 // TODO: Add a cool loading screen
-//  TODO: On scroll away from the current component and component can become smaller and smaller and then the next component can pop up 
 //   )
 // }
 
