@@ -133,6 +133,7 @@ import ScrollToTop from './components/ScrollToTop';
 import NotFound from './components/NotFound'
 import useKeyboardShortcuts from './components/hooks/useKeyboardShortcuts';
 import ProjectsPage from './pages/ProjectsPage'; 
+import PageTransition from './components/PageTransition';
 // import Options from './components/options';
 
 function App() {
@@ -199,7 +200,7 @@ function App() {
               resistance={750}
               returnDuration={1.5}
             /> 
-            
+            <PageTransition/>
             <Header />
             <Hero />
             <About />
@@ -210,7 +211,7 @@ function App() {
             <Footer />
           </>
         } />
-
+        <PageTransition />   
         <Route path="/about" element={<AboutPage />} />
         <Route path="/work" element={<ProjectsPage />} />
         <Route path="*" element={<NotFound />} />
