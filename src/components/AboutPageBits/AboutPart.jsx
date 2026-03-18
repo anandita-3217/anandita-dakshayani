@@ -929,12 +929,6 @@ function ReelCarousel() {
     else if (info.offset.x > 50) prev();
   };
 
-  // Keyboard hint tokens
-  const hintBg     = useColorModeValue("rgba(0,0,0,0.05)",   "rgba(255,255,255,0.05)");
-  const hintBorder = useColorModeValue("rgba(0,0,0,0.1)",    "rgba(255,255,255,0.1)");
-  const hintText   = useColorModeValue("gray.400",            "whiteAlpha.300");
-  const hintLabel  = useColorModeValue("gray.300",            "whiteAlpha.200");
-
   return (
     <Box
       position="relative"

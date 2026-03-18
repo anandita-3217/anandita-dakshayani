@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import { useColorModeValue } from '@chakra-ui/react';
-
+import { Box } from "@chakra-ui/react";
 const H = "'Orbitron', sans-serif";
 const MONO = "'JetBrains Mono', 'Fira Code', monospace";
 
@@ -13,13 +13,13 @@ const skills = [
   { name: "Node.js",    num: "05", category: "Backend",  years: 3, level: 80, mass: "20 LTS" },
   { name: "Python",     num: "06", category: "Backend",  years: 3, level: 75, mass: "3.12" },
   { name: "PostgreSQL", num: "07", category: "Backend",  years: 2, level: 70, mass: "16.x" },
-  { name: "GraphQL",    num: "08", category: "Backend",  years: 2, level: 65, mass: "Oct'21" },
-  { name: "Docker",     num: "09", category: "DevOps",   years: 2, level: 68, mass: "24.x" },
+  // { name: "GraphQL",    num: "08", category: "Backend",  years: 2, level: 65, mass: "Oct'21" },
+  // { name: "Docker",     num: "09", category: "DevOps",   years: 2, level: 68, mass: "24.x" },
   { name: "Git",        num: "10", category: "DevOps",   years: 5, level: 92, mass: "2.x" },
   { name: "AWS",        num: "11", category: "DevOps",   years: 1, level: 58, mass: "Cloud" },
-  { name: "Figma",      num: "12", category: "Design",   years: 3, level: 80, mass: "UI/UX" },
+  // { name: "Figma",      num: "12", category: "Design",   years: 3, level: 80, mass: "UI/UX" },
   { name: "CSS",        num: "13", category: "Frontend", years: 5, level: 91, mass: "CSS4" },
-  { name: "Three.js",   num: "14", category: "Frontend", years: 1, level: 55, mass: "r159" },
+  // { name: "Three.js",   num: "14", category: "Frontend", years: 1, level: 55, mass: "r159" },
   { name: "MongoDB",    num: "15", category: "Backend",  years: 2, level: 72, mass: "7.x" },
 ];
 
@@ -185,17 +185,37 @@ function Terminal() {
 }
 
 export default function TechSkillsPreview() {
+  const sectionRef = useRef(null);
+  const inView     = useInView(sectionRef, { once: true, margin: "-80px" });
+  const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
   const eyebrowColor  = useColorModeValue("rgba(0,0,0,0.4)",  "rgba(255,255,255,0.4)");
   const subtitleColor = useColorModeValue("rgba(0, 0, 0, 0.89)",  "rgba(255,255,255,0.4)");
 
+    const handleMouseMove = (e) => {
+    const rect = sectionRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    setMousePos({
+      x: (e.clientX - rect.left) / rect.width,
+      y: (e.clientY - rect.top)  / rect.height,
+    });
+  };
+
   return (
-    <div style={{
-      background: "transparent",
-      padding: "16px 0",
-      fontFamily: H,
-      maxWidth: "1100px",
-      margin: "0 auto",
-    }}>
+       <Box
+         ref={sectionRef}
+         onMouseMove={handleMouseMove}
+         minH="1100px"
+         bg="transparent"
+         position="relative"
+         overflow="hidden"
+         display="flex"
+         alignItems="center"
+         px={{ base: 5, md: 12, lg: 20 }}
+         py={{ base: 20, md: 0 }}
+         fontFamily="'Sora', sans-serif"
+         transition="background-color 0.3s ease"
+       >
+         
 
       {/* ── Header ── */}
       <div style={{ marginBottom: 40 }}>
@@ -237,6 +257,6 @@ export default function TechSkillsPreview() {
       <AnimatePresence mode="wait">
         <Terminal />
       </AnimatePresence>
-    </div>
+    </Box>
   );
 }
