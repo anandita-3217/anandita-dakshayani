@@ -414,12 +414,12 @@ function AboutPage() {
       
 
           <AboutPart />
-            <Hobbies />
-            <Learning />
-            <ContributionMap />
-            <Resume />
-            <TechSkills />
-          <Certificates />
+  <TechSkills />
+  <Hobbies />
+  <Learning />
+  <Certificates />
+  <ContributionMap />
+  <Resume />
       </Box>
 
       <Box position="relative" zIndex={2}>

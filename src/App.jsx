@@ -211,7 +211,7 @@ function App() {
             <Footer />
           </>
         } />
-        <PageTransition />   
+        {/* <PageTransition />    */}
         <Route path="/about" element={<AboutPage />} />
         <Route path="/work" element={<ProjectsPage />} />
         <Route path="*" element={<NotFound />} />

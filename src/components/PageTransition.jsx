@@ -260,5 +260,4 @@ export function PageTransition({ label = '' }) {
   );
 }
 
-// ── Default export for convenience ────────────────────────────────────────────
 export default PageTransition;
