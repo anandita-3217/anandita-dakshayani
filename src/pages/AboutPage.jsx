@@ -198,6 +198,14 @@ import {
   isValidMotionProp,
 } from 'framer-motion';
 
+import DotGrid from '../components/assets/DotGrid/DotGrid';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import CommandPalette from '../components/CommandPalette';
+import ScrollToTop from '../components/ScrollToTop';
+import useKeyboardShortcuts from '../components/hooks/useKeyboardShortcuts';
+
+
 import AboutPart from '../components/AboutPageBits/AboutPart';
 import Hobbies from '../components/AboutPageBits/Hobbies';
 import Certificates from '../components/AboutPageBits/Certificates';
@@ -205,9 +213,6 @@ import TechSkills from '../components/AboutPageBits/TechSkills';
 import ContributionMap from '../components/AboutPageBits/ContributionMap';
 import Learning from '../components/AboutPageBits/Learning';
 import Resume from '../components/Resume';
-import DotGrid from '../components/assets/DotGrid/DotGrid';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
 // import Options from "../components/options"
 // ─── Chakra + Framer Motion bridge ───────────────────────────────────────────
 const MotionBox = chakra(motion.div, {
@@ -241,108 +246,7 @@ const SectionBadge = ({ index, label }) => (
     </Text>
   </Box>
 );
-
-// ─── Individual layer ─────────────────────────────────────────────────────────
-const Layer = ({ children, index, label, bg, zIndex, speed = 0 }) => {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
-  });
-  const y = useTransform(scrollYProgress, [0, 1], [speed * 60, speed * -60]);
-  const springY = useSpring(y, { stiffness: 80, damping: 25, restDelta: 0.001 });
-  const isHero = index === 0;
-
-  return (
-    <Box
-      ref={ref}
-      position="relative"
-      zIndex={zIndex}
-      mt={isHero ? 0 : `-${OVERLAP}px`}
-      bg={bg}
-      borderRadius={isHero ? 0 : '24px 24px 0 0'}
-      // Subtle blur keeps text readable over the dot grid beneath
-      backdropFilter={isHero ? 'none' : 'blur(2px)'}
-      _before={
-        !isHero
-          ? {
-              content: '""',
-              position: 'absolute',
-              top: 0,
-              left: '8%',
-              right: '8%',
-              height: '1px',
-              background:
-                'linear-gradient(90deg, transparent, rgba(255,255,255,0.07), transparent)',
-              borderRadius: '50%',
-            }
-          : undefined
-      }
-    >
-      <MotionBox style={{ y: springY }}>
-        <Box
-          maxW="1100px"
-          mx="auto"
-          px={{ base: 6, md: 12, lg: 16 }}
-          py={{ base: 20, md: 28 }}
-        >
-          {label && <SectionBadge index={index} label={label} />}
-          {children}
-        </Box>
-      </MotionBox>
-    </Box>
-  );
-};
-
-// ─── Reveal on scroll ─────────────────────────────────────────────────────────
-const Reveal = ({ children, delay = 0 }) => {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start 0.92', 'start 0.55'],
-  });
-  const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
-  const y = useTransform(scrollYProgress, [0, 1], [32, 0]);
-
-  return (
-    <Box ref={ref}>
-      <MotionBox style={{ opacity, y }} transition={{ delay }}>
-        {children}
-      </MotionBox>
-    </Box>
-  );
-};
-
-// ─── Semi-transparent layer backgrounds ──────────────────────────────────────
-// These let the DotGrid canvas show through while keeping content legible.
-// Tweak the alpha (0.0 – 1.0) to control how much grid bleeds through each layer.
-// Hero is fully transparent so the grid is completely exposed on load.
-const LAYER_BG = [
-  'transparent',              // 0 — Hero:        grid fully visible
-  'rgba(10, 10, 10, 0.82)',   // 1 — About
-  'rgba(15, 15, 15, 0.78)',   // 2 — Hobbies
-  'rgba(10, 10, 10, 0.82)',   // 3 — Tech Skills
-  'rgba(15, 15, 15, 0.78)',   // 4 — Learning
-  'rgba(10, 10, 10, 0.82)',   // 5 — Certificates
-  'rgba(15, 15, 15, 0.78)',   // 6 — Activity
-  'rgba(10, 10, 10, 0.88)',   // 7 — Resume:      slightly more solid to anchor
-];
-
-
-
-const LAYER_META = [
-  { label: null },
-  { label: 'About' },
-  { label: 'Hobbies' },
-  { label: 'Tech Skills' },
-  { label: 'Learning' },
-  { label: 'Certificates' },
-  { label: 'Activity' },
-  { label: 'Resume' },
-];
-
-// ─── PAGE ─────────────────────────────────────────────────────────────────────
-function AboutPage() {
+export default function AboutPage() {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -404,29 +308,16 @@ function AboutPage() {
           returnDuration={1.5}
         />
       </Box>
-
-      {/* ── Header ── */}
-      <Header />
-
-      {/* ── Layered sections — sit above DotGrid via z-index: 1+ ── */}
-      <Box position="relative" zIndex={1} pt="80px">
-
-      
-
+          <Header />
           <AboutPart />
-  <TechSkills />
-  <Hobbies />
-  <Learning />
-  <Certificates />
-  <ContributionMap />
-  <Resume />
-      </Box>
-
-      <Box position="relative" zIndex={2}>
-        <Footer />
-      </Box>
+          <TechSkills />
+          <Hobbies />
+          <Learning />
+          <Certificates />
+          <ContributionMap />
+          <Resume />
+          <Footer />
 </>
   );
 }
 
-export default AboutPage;

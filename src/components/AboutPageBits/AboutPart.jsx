@@ -708,7 +708,8 @@ const REELS = [
   },
   {
     id: "motion",
-    bg: "https://images.unsplash.com/photo-1579762715459-a28e1d7e32e3?w=400&h=600&fit=crop&auto=format",
+    // bg: "https://images.unsplash.com/photo-1579762715459-a28e1d7e32e3?w=400&h=600&fit=crop&auto=format",
+    bg: "https://unsplash.com/photos/person-using-macbook-pro-on-table-p8GmCEgSmmo",
     gradient: "linear-gradient(180deg, transparent 30%, rgba(10,10,10,0.95) 100%)",
     accent: "#7c3aed",
     label: "Motion",
@@ -797,52 +798,6 @@ function TagPill({ label, color, delay }) {
           {label}
         </Text>
       </HStack>
-    </MotionBox>
-  );
-}
-
-// ── Stat counter ───────────────────────────────────────────────────────────
-function StatItem({ value, label, color, delay }) {
-  const [count, setCount] = useState(0);
-  const ref    = useRef(null);
-  const inView = useInView(ref, { once: true });
-  const target = parseInt(value);
-
-  useEffect(() => {
-    if (!inView) return;
-    const timeout = setTimeout(() => {
-      let start = 0;
-      const step = Math.ceil(target / 30);
-      const interval = setInterval(() => {
-        start = Math.min(start + step, target);
-        setCount(start);
-        if (start >= target) clearInterval(interval);
-      }, 40);
-      return () => clearInterval(interval);
-    }, delay * 1000);
-    return () => clearTimeout(timeout);
-  }, [inView, target, delay]);
-
-  return (
-    <MotionBox
-      ref={ref}
-      initial={{ opacity: 0, y: 20 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ delay, duration: 0.5 }}
-      textAlign="center" cursor="default" role="group"
-    >
-      <Text fontFamily="'Orbitron', sans-serif"
-        fontSize={{ base: "22px", md: "28px" }} fontWeight={800}
-        color={color} lineHeight={1}
-        _groupHover={{ textShadow: `0 0 20px ${color}` }}
-        transition="text-shadow 0.3s"
-      >
-        {count}{value.replace(/[0-9]/g, "")}
-      </Text>
-      <Text fontSize="11px" color="text.statLabel" letterSpacing="0.12em"
-        textTransform="uppercase" fontFamily="'Sora', sans-serif" mt={1}>
-        {label}
-      </Text>
     </MotionBox>
   );
 }
@@ -1279,3 +1234,4 @@ export default function AboutIntro() {
     </Box>
   );
 }
+

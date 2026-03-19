@@ -122,18 +122,23 @@ import { motion, useScroll, useSpring } from 'framer-motion';
 import DotGrid from './components/assets/DotGrid/DotGrid';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import CommandPalette from './components/CommandPalette';
+import ScrollToTop from './components/ScrollToTop';
+import useKeyboardShortcuts from './components/hooks/useKeyboardShortcuts';
+
+import NotFound from './components/NotFound'
+
 import Hero from './components/Hero'; 
 import Projects from './components/Projects'; 
 import About from './components/About';
-import AboutPage from './pages/AboutPage';
 import Contact from './components/Contact';
 import Resume from './components/Resume';
-import CommandPalette from './components/CommandPalette';
-import ScrollToTop from './components/ScrollToTop';
-import NotFound from './components/NotFound'
-import useKeyboardShortcuts from './components/hooks/useKeyboardShortcuts';
+
+
+
 import ProjectsPage from './pages/ProjectsPage'; 
-import PageTransition from './components/PageTransition';
+import AboutPage from './pages/AboutPage';
+
 // import Options from './components/options';
 
 function App() {
@@ -200,7 +205,6 @@ function App() {
               resistance={750}
               returnDuration={1.5}
             /> 
-            <PageTransition/>
             <Header />
             <Hero />
             <About />
