@@ -16,9 +16,8 @@ import {
 } from "@chakra-ui/react";
 import {isValidMotionProp,motion,useInView} from "framer-motion";
 import {CodeXml , Paintbrush, Sparkles, Handshake  } from 'lucide-react';
-const MotionBox = chakra(motion.div, {
-  shouldForwardProp: (p) => isValidMotionProp(p) || shouldForwardProp(p),
-});
+
+const MotionBox = motion.create(Box)
 
 // ── Keyframes ──────────────────────────────────────────────────────────────
 const breathe = keyframes`

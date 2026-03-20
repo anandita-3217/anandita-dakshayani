@@ -22,7 +22,7 @@ import {
   MapPin,
 } from 'lucide-react';
 
-const MotionBox = motion(Box);
+const MotionBox = motion.create(Box);
 
 // ---------------------------------------------------------------------------
 // Data

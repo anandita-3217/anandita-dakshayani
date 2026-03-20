@@ -19,8 +19,8 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, ArrowUpRight, X } from 'lucide-react';
 
-const MotionBox = motion(Box);
-const MotionGrid = motion(Grid);
+const MotionBox = motion.create(Box);
+const MotionGrid = motion.create(Grid);
 
 // ---------------------------------------------------------------------------
 // Projects Data

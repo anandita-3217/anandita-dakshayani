@@ -117,18 +117,6 @@ const CopyableEmail = () => {
   );
 };
 
-// Animation variants
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.2
-    }
-  }
-};
-
 const headerVariants = {
   hidden: { opacity: 0, y: 40 },
   visible: {
@@ -186,7 +174,7 @@ const createCardVariants = (index, position = 'middle') => {
 
 // Enhanced Card Component
 const BentoCard = ({ children, rowSpan, colSpan, index, position = 'middle', color = '#14b8a6', accentColor = '#0d9488' }) => {
-  const cardRef = useRef(null);
+  // const cardRef = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
   
   // Individual scroll trigger for each card
@@ -283,7 +271,7 @@ const BentoCard = ({ children, rowSpan, colSpan, index, position = 'middle', col
 };
 
 // About Section Component
-function About() {
+export default function About() {
   const [headerRef, headerInView] = useInView({ 
     triggerOnce: false,
     threshold: 0.2
@@ -738,5 +726,3 @@ function About() {
     </Box>
   );
 }
-
-export default About;

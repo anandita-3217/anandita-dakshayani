@@ -67,11 +67,6 @@ const hobbies = [
   },
 ];
 
-const COLLAPSED_W = 80;   // px — width of a compressed card
-const EXPANDED_W  = 520;  // px — width of the active expanded card
-const CARD_H      = 480;  // px
-const GAP         = 12;   // px
-
 export default function Hobbies() {
   const trackRef      = useRef(null);
   const tweenRef      = useRef(null);
@@ -149,9 +144,9 @@ export default function Hobbies() {
           ref={trackRef}
           display="flex"
           alignItems="stretch"
-          gap={`${GAP}px`}
+          gap="12px"
           overflowX="auto"
-          h={`${CARD_H}px`}
+          h="480px"
           pb={2}
           sx={{
             scrollbarWidth: 'none',
@@ -172,15 +167,15 @@ export default function Hobbies() {
                 onHoverEnd={() => setActiveIdx(null)}
                 animate={{
                   width: isExpanded
-                    ? EXPANDED_W
+                    ? 520
                     : isCompressed
-                    ? COLLAPSED_W
+                    ? 80
                     : 220,
                   flexShrink: 0,
                 }}
                 transition={{ duration: 0.55, ease: [0.23, 1, 0.32, 1] }}
                 style={{
-                  height: `${CARD_H}px`,
+                  height: `px`,
                   flexShrink: 0,
                   borderRadius: '18px',
                   overflow: 'hidden',
