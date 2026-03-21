@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Box, Text, VStack, HStack, Button, Grid,
   Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton,
@@ -18,16 +18,11 @@ import { useInView } from 'react-intersection-observer';
 const iconMap = { GraduationCap, DiReact, BsGlobe, DiJavascript1, DiNodejsSmall, DatabaseZap, DiPython, DiCode, FaChartLine, FaChartBar };
 const getIcon = (type, color) => { const C = iconMap[type]; return C ? <C color={color} size={22} /> : null; };
 
-// ── Fonts & constants ─────────────────────────────────────────────────────────
-
-const MONO = "'JetBrains Mono', monospace";
-const TEAL = '#14b8a6';
-const GRAD = 'linear-gradient(135deg, #1e40af, #7c3aed, #ec4899)';
 
 const catMeta = {
   degree:        { label: 'DEGREE', accent: '#a855f7' },
   certification: { label: 'CERT',   accent: '#3b82f6' },
-  course:        { label: 'COURSE', accent: TEAL      },
+  course:        { label: 'COURSE', accent: '#14b8a6'      },
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -318,7 +313,7 @@ const CertificateDetailModal = ({ isOpen, onClose, cert }) => {
                   <Button as="a" href={cert.verificationUrl} target="_blank"
                     leftIcon={<CheckCircle size={11} />} variant="ghost" w="full"
                     fontFamily="monospace" fontSize="9px" letterSpacing="0.15em" textTransform="uppercase"
-                    color={monoCol} _hover={{ color: TEAL, bg: `$"14b8a6"08` }}>
+                    color={monoCol} _hover={{ color: '#14b8a6', bg: `$"14b8a6"08` }}>
                     Verify on {cert.institution}
                   </Button>
                 )}
@@ -353,7 +348,7 @@ export default function Certificates() {
   const tabSel       = useColorModeValue('gray.700',           'rgba(255,255,255,0.88)');
   const emptyColor   = useColorModeValue('gray.400',           'rgba(255,255,255,0.28)');
   const eyebrowColor = useColorModeValue('gray.500',           'whiteAlpha.400');
-  const inputFocus   = { borderColor: TEAL, boxShadow: `0 0 0 1px $"14b8a6"` };
+  const inputFocus   = { borderColor: '#14b8a6', boxShadow: `0 0 0 1px $"14b8a6"` };
 
   useEffect(() => {
     (async () => {
@@ -410,7 +405,7 @@ export default function Certificates() {
   );
 
   return (
-    <Box bg="transparent" py={{ base: 4, md: 6 }} maxW="1100px" mx="auto" position="relative">
+    <Box bg="transparent" py={{ base: 4, md: 6 }} position="relative" maxW="1100px" mx="auto">
 
       {/* ── Header — plain motion.div, no inView dependency ─────────── */}
       <motion.div
@@ -460,7 +455,7 @@ export default function Certificates() {
               value={searchQuery} onChange={e => setSearchQuery(e.target.value)}
               size="md" bg={inputBg} border="1px solid" borderColor={inputBorder}
               color={titleColor} fontFamily="monospace" fontSize="12px" borderRadius="8px"
-              _placeholder={{ color: subColor, fontFamily: MONO }}
+              _placeholder={{ color: subColor, fontFamily: "monospace" }}
               _hover={{ borderColor: 'rgba(255,255,255,0.13)' }}
               _focus={inputFocus} />
           </Box>
@@ -488,7 +483,7 @@ export default function Certificates() {
               sx={{
                 '&[aria-selected=true]::after': {
                   content: '""', position: 'absolute', bottom: '-12px', left: 0, right: 0,
-                  height: '2px', background: GRAD,
+                  height: '2px', background: 'linear-gradient(135deg, #1e40af, #7c3aed, #ec4899)',
                 }
               }}>
               {label}

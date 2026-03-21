@@ -464,7 +464,7 @@ function Terminal() {
 
 export default function TeckSkills() {
   const sectionRef = useRef(null);
-  const inView     = useInView(sectionRef, { once: true, margin: "-80px" });
+  // const inView     = useInView(sectionRef, { once: true, margin: "-80px" });
   const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
   const eyebrowColor  = useColorModeValue("rgba(0,0,0,0.4)",       "rgba(255,255,255,0.4)");
   const subtitleColor = useColorModeValue("rgba(0, 0, 0, 0.89)",   "rgba(255,255,255,0.4)");
