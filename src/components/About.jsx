@@ -637,6 +637,7 @@ export default function About() {
                         { icon: DiBootstrap, color: '#7952b3' },
                         { icon: DiLinux, color: '#fcc624' },
                         { icon: DiTerminal, color: '#4eaa25' },
+                        { icon: DiPostgresql, color: '#2556aa' },
                       ].map((tech, i) => (
                         <Box
                           key={i}
