@@ -6,16 +6,19 @@ import { keyframes } from "@emotion/react";
 import {
   Box,
   Flex,
+  Heading,
   Text,
   VStack,
   HStack,
   useColorModeValue,
   useColorMode,
 } from "@chakra-ui/react";
+import TextType from "../ui/TextType";
 import {isValidMotionProp,motion,useInView} from "framer-motion";
 import {CodeXml , Paintbrush, Sparkles, Handshake  } from 'lucide-react';
 
 const MotionBox = motion.create(Box)
+const MotionHeading = motion.create(Heading)
 
 // ── Keyframes ──────────────────────────────────────────────────────────────
 const breathe = keyframes`
@@ -88,37 +91,37 @@ const REELS = [
 
 
 // ── Typing hook ────────────────────────────────────────────────────────────
-function useTypewriter(words, speed = 80, pause = 1800) {
-  const [display, setDisplay]   = useState("");
-  const [wordIdx, setWordIdx]   = useState(0);
-  const [charIdx, setCharIdx]   = useState(0);
-  const [deleting, setDeleting] = useState(false);
-  const pauseRef = useRef(false);
+// function useTypewriter(words, speed = 80, pause = 1800) {
+//   const [display, setDisplay]   = useState("");
+//   const [wordIdx, setWordIdx]   = useState(0);
+//   const [charIdx, setCharIdx]   = useState(0);
+//   const [deleting, setDeleting] = useState(false);
+//   const pauseRef = useRef(false);
 
-  useEffect(() => {
-    if (pauseRef.current) return;
-    const current = words[wordIdx];
-    const timeout = setTimeout(() => {
-      if (!deleting) {
-        setDisplay(current.slice(0, charIdx + 1));
-        if (charIdx + 1 === current.length) {
-          pauseRef.current = true;
-          setTimeout(() => { pauseRef.current = false; setDeleting(true); }, pause);
-        } else setCharIdx((c) => c + 1);
-      } else {
-        setDisplay(current.slice(0, charIdx - 1));
-        if (charIdx - 1 === 0) {
-          setDeleting(false);
-          setWordIdx((w) => (w + 1) % words.length);
-          setCharIdx(0);
-        } else setCharIdx((c) => c - 1);
-      }
-    }, deleting ? speed / 2 : speed);
-    return () => clearTimeout(timeout);
-  }, [charIdx, deleting, wordIdx, words, speed, pause]);
+//   useEffect(() => {
+//     if (pauseRef.current) return;
+//     const current = words[wordIdx];
+//     const timeout = setTimeout(() => {
+//       if (!deleting) {
+//         setDisplay(current.slice(0, charIdx + 1));
+//         if (charIdx + 1 === current.length) {
+//           pauseRef.current = true;
+//           setTimeout(() => { pauseRef.current = false; setDeleting(true); }, pause);
+//         } else setCharIdx((c) => c + 1);
+//       } else {
+//         setDisplay(current.slice(0, charIdx - 1));
+//         if (charIdx - 1 === 0) {
+//           setDeleting(false);
+//           setWordIdx((w) => (w + 1) % words.length);
+//           setCharIdx(0);
+//         } else setCharIdx((c) => c - 1);
+//       }
+//     }, deleting ? speed / 2 : speed);
+//     return () => clearTimeout(timeout);
+//   }, [charIdx, deleting, wordIdx, words, speed, pause]);
 
-  return display;
-}
+//   return display;
+// }
 
 // ── Tag pill ───────────────────────────────────────────────────────────────
 function TagPill({ label, color, delay }) {
@@ -373,8 +376,8 @@ export default function AboutIntro() {
   const { colorMode } = useColorMode();
   const isDark = colorMode === "dark";
 
-  const roles = ["Full-Stack Developer", "UI/UX Enthusiast", "Open Source Lover", "Problem Solver"];
-  const typed = useTypewriter(roles, 75, 2000);
+  // const roles = ["Full-Stack Developer", "UI/UX Enthusiast", "Open Source Lover", "Problem Solver"];
+  // const typed = useTypewriter(roles, 75, 2000);
 
   const tags = [
     { label: "React & TypeScript", color: "#61dafb", delay: 0.9 },
@@ -477,7 +480,7 @@ export default function AboutIntro() {
               lineHeight={1.1}
               as="h1"
             />
-
+            
 
             <MotionBox
               initial={{ opacity: 0 }}
@@ -486,7 +489,7 @@ export default function AboutIntro() {
               mt={2}
             >
               <HStack spacing={0} align="center" h="36px">
-                <Text
+                {/* <Text
                   fontFamily="'Sora', sans-serif"
                   fontSize={{ base: "17px", md: "21px" }}
                   fontWeight={400}
@@ -497,7 +500,25 @@ export default function AboutIntro() {
                   letterSpacing="0.02em"
                 >
                   {typed}
-                </Text>
+                </Text> */}
+                <Text
+                fontFamily="'Sora', sans-serif"
+                fontSize={{ base: "17px", md: "21px" }}
+                initial="hidden"
+                bgGradient="linear(to-r, #1e40af, #7c3aed,#ec4899)"
+                bgClip="text"
+                backgroundSize="200% 200%"
+                animation={`${gradShift} 5s ease infinite`}
+                letterSpacing="0.02em"
+            >
+                <TextType 
+                text={["Full-Stack Developer", "UI/UX Enthusiast", "Open Source Lover", "Problem Solver"]}
+                typingSpeed={75}
+                pauseDuration={1500}
+                showCursor={false}
+              />
+
+            </Text>
                 <Box w="2px" h="22px" bg={cursorColor} ml={1}
                   animation={`${blink} 1s step-end infinite`}
                   borderRadius="full"
