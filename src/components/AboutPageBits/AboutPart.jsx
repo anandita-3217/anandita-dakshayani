@@ -9,8 +9,6 @@ import {
   Text,
   VStack,
   HStack,
-  chakra,
-  shouldForwardProp,
   useColorModeValue,
   useColorMode,
 } from "@chakra-ui/react";
@@ -479,6 +477,8 @@ export default function AboutIntro() {
               lineHeight={1.1}
               as="h1"
             />
+
+
             <MotionBox
               initial={{ opacity: 0 }}
               animate={inView ? { opacity: 1 } : {}}
