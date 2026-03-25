@@ -18,7 +18,6 @@ import {isValidMotionProp,motion,useInView} from "framer-motion";
 import {CodeXml , Paintbrush, Sparkles, Handshake  } from 'lucide-react';
 
 const MotionBox = motion.create(Box)
-const MotionHeading = motion.create(Heading)
 
 // ── Keyframes ──────────────────────────────────────────────────────────────
 const breathe = keyframes`
@@ -88,40 +87,6 @@ const REELS = [
     duration: 4200,
   },
 ];
-
-
-// ── Typing hook ────────────────────────────────────────────────────────────
-// function useTypewriter(words, speed = 80, pause = 1800) {
-//   const [display, setDisplay]   = useState("");
-//   const [wordIdx, setWordIdx]   = useState(0);
-//   const [charIdx, setCharIdx]   = useState(0);
-//   const [deleting, setDeleting] = useState(false);
-//   const pauseRef = useRef(false);
-
-//   useEffect(() => {
-//     if (pauseRef.current) return;
-//     const current = words[wordIdx];
-//     const timeout = setTimeout(() => {
-//       if (!deleting) {
-//         setDisplay(current.slice(0, charIdx + 1));
-//         if (charIdx + 1 === current.length) {
-//           pauseRef.current = true;
-//           setTimeout(() => { pauseRef.current = false; setDeleting(true); }, pause);
-//         } else setCharIdx((c) => c + 1);
-//       } else {
-//         setDisplay(current.slice(0, charIdx - 1));
-//         if (charIdx - 1 === 0) {
-//           setDeleting(false);
-//           setWordIdx((w) => (w + 1) % words.length);
-//           setCharIdx(0);
-//         } else setCharIdx((c) => c - 1);
-//       }
-//     }, deleting ? speed / 2 : speed);
-//     return () => clearTimeout(timeout);
-//   }, [charIdx, deleting, wordIdx, words, speed, pause]);
-
-//   return display;
-// }
 
 // ── Tag pill ───────────────────────────────────────────────────────────────
 function TagPill({ label, color, delay }) {
@@ -376,9 +341,6 @@ export default function AboutIntro() {
   const { colorMode } = useColorMode();
   const isDark = colorMode === "dark";
 
-  // const roles = ["Full-Stack Developer", "UI/UX Enthusiast", "Open Source Lover", "Problem Solver"];
-  // const typed = useTypewriter(roles, 75, 2000);
-
   const tags = [
     { label: "React & TypeScript", color: "#61dafb", delay: 0.9 },
     { label: "Node.js",            color: "#68a063", delay: 1.0 },
@@ -489,18 +451,6 @@ export default function AboutIntro() {
               mt={2}
             >
               <HStack spacing={0} align="center" h="36px">
-                {/* <Text
-                  fontFamily="'Sora', sans-serif"
-                  fontSize={{ base: "17px", md: "21px" }}
-                  fontWeight={400}
-                  bgGradient="linear(to-r, #1e40af, #7c3aed, #ec4899)"
-                  bgClip="text"
-                  backgroundSize="200% 200%"
-                  animation={`${gradShift} 5s ease infinite`}
-                  letterSpacing="0.02em"
-                >
-                  {typed}
-                </Text> */}
                 <Text
                 fontFamily="'Sora', sans-serif"
                 fontSize={{ base: "17px", md: "21px" }}
