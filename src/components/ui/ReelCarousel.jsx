@@ -230,3 +230,4 @@ export default function ReelCarousel() {
     </Box>
   );
 }
+// TODO: Instead of hardcoded REELS, make it accept REELS as a json object which can be fetched from a json file ensuring reusability
