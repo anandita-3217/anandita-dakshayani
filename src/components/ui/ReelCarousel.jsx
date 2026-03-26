@@ -1,51 +1,55 @@
-const REELS = [
-  {
-    id: "design",
-    bg: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=600&fit=crop&auto=format",
-    gradient: "linear-gradient(180deg, transparent 30%, rgba(10,10,10,0.95) 100%)",
-    accent: "#ec4899",
-    label: "UI Design",
-    caption: "Crafting interfaces that feel inevitable.",
-    tagIcon: Paintbrush,
-    tagLabel: "Design Systems",
+// const REELS = [
+//   {
+//     id: "design",
+//     bg: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=600&fit=crop&auto=format",
+//     gradient: "linear-gradient(180deg, transparent 30%, rgba(10,10,10,0.95) 100%)",
+//     accent: "#ec4899",
+//     label: "UI Design",
+//     caption: "Crafting interfaces that feel inevitable.",
+//     tagIcon: Paintbrush,
+//     tagLabel: "Design Systems",
 
-    duration: 4000,
-  },
-  {
-    id: "code",
-    bg: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=600&fit=crop&auto=format",
-    gradient: "linear-gradient(180deg, transparent 30%, rgba(10,10,10,0.95) 100%)",
-    accent: "#14b8a6",
-    label: "Engineering",
-    caption: "Clean code is a love letter to the next developer.",
-    tagIcon: CodeXml ,
-    tagLabel: "Full-Stack",
+//     duration: 4000,
+//   },
+//   {
+//     id: "code",
+//     bg: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=600&fit=crop&auto=format",
+//     gradient: "linear-gradient(180deg, transparent 30%, rgba(10,10,10,0.95) 100%)",
+//     accent: "#14b8a6",
+//     label: "Engineering",
+//     caption: "Clean code is a love letter to the next developer.",
+//     tagIcon: CodeXml ,
+//     tagLabel: "Full-Stack",
 
-    duration: 4500,
-  },
-  {
-    id: "motion",
-    bg: "https://images.unsplash.com/photo-1579762715459-a28e1d7e32e3?w=400&h=600&fit=crop&auto=format",
-    gradient: "linear-gradient(180deg, transparent 30%, rgba(10,10,10,0.95) 100%)",
-    accent: "#7c3aed",
-    label: "Motion",
-    caption: "Animation is the soul of interaction.",
-    tagIcon: Sparkles ,
-    tagLabel: "Micro-interactions",
-    duration: 3800,
-  },
-  {
-    id: "collab",
-    bg: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=600&fit=crop&auto=format",
-    gradient: "linear-gradient(180deg, transparent 30%, rgba(10,10,10,0.95) 100%)",
-    accent: "#3b82f6",
-    label: "Collaboration",
-    caption: "The best products are built together.",
-    tagIcon: Handshake ,
-    tagLabel: "Teamwork",
-    duration: 4200,
-  },
-];
+//     duration: 4500,
+//   },
+//   {
+//     id: "motion",
+//     bg: "https://images.unsplash.com/photo-1579762715459-a28e1d7e32e3?w=400&h=600&fit=crop&auto=format",
+//     gradient: "linear-gradient(180deg, transparent 30%, rgba(10,10,10,0.95) 100%)",
+//     accent: "#7c3aed",
+//     label: "Motion",
+//     caption: "Animation is the soul of interaction.",
+//     tagIcon: Sparkles ,
+//     tagLabel: "Micro-interactions",
+//     duration: 3800,
+//   },
+//   {
+//     id: "collab",
+//     bg: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=600&fit=crop&auto=format",
+//     gradient: "linear-gradient(180deg, transparent 30%, rgba(10,10,10,0.95) 100%)",
+//     accent: "#3b82f6",
+//     label: "Collaboration",
+//     caption: "The best products are built together.",
+//     tagIcon: Handshake ,
+//     tagLabel: "Teamwork",
+//     duration: 4200,
+//   },
+// ];
+import { PaintBucket, CodeXml, Sparkles, Handshake } from "lucide-react";
+
+const ICON_MAP = { Paintbrush, CodeXml, Sparkles, Handshake };
+
 
 export default function ReelCarousel() {
   const [active, setActive]     = useState(0);
@@ -54,7 +58,10 @@ export default function ReelCarousel() {
   const progressRef  = useRef(null);
   const startTimeRef = useRef(null);
   const pausedAtRef  = useRef(0);
-  const reel = REELS[active];
+  const REELS = reels.map(r => ({
+    ...r,
+    tagIcon: ICON_MAP[r.tagIcon] ?? null,
+  }));
 
   const goTo = useCallback((idx) => {
     cancelAnimationFrame(progressRef.current);
