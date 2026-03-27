@@ -126,6 +126,8 @@ import CommandPalette from './components/CommandPalette';
 import ScrollToTop from './components/ScrollToTop';
 import useKeyboardShortcuts from './components/hooks/useKeyboardShortcuts';
 
+import HeroMaskReveal from './components/AltHero'
+
 import NotFound from './components/NotFound'
 
 import Hero from './components/Hero'; 

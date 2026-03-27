@@ -1,5 +1,5 @@
 import Hero from "./assets/Hero.jpg";
-
+// 
 
 import React, { useState } from 'react';
 import { Box, Heading, Text, VStack } from '@chakra-ui/react';
@@ -89,4 +89,4 @@ const HeroMaskReveal = () => {
 };
 
 export default HeroMaskReveal;
-// Hero mask reveal should go to some other project doesnt sit with this one well
+// Hero mask reveal should go to some other project doesnt sit with this one well - and improve the trainsition for cursorr tracking not smooth
