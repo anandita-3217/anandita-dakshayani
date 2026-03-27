@@ -212,7 +212,7 @@ function App() {
               <Contact />
               <Resume />
             
-              <Options/>
+              {/* <Options/> */}
             <Footer />
           </>
         } />
