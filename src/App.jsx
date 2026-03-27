@@ -139,7 +139,7 @@ import Resume from './components/Resume';
 import ProjectsPage from './pages/ProjectsPage'; 
 import AboutPage from './pages/AboutPage';
 
-// import Options from './components/options';
+import Options from './components/options';
 
 function App() {
   const { scrollYProgress } = useScroll();
@@ -212,6 +212,7 @@ function App() {
               <Contact />
               <Resume />
             
+              <Options/>
             <Footer />
           </>
         } />
