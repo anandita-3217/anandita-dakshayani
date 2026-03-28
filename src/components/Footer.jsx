@@ -167,6 +167,7 @@ export default function Footer() {
                   </Text>
                 </HStack>
                 <HStack>
+                  <Kbd>ctrl</Kbd>
                   <Kbd>T</Kbd>
                   <Text fontSize="sm" color="text.secondary">
                     Toggle theme
