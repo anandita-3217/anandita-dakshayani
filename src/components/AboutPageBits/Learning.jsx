@@ -573,7 +573,8 @@ export default function Learning() {
       display="flex"
       justifyContent="center"
       px={{ base: 5, md: 12, lg: 20 }}
-      py={{ base: 20, md: 0 }}
+      pt={{ base: 20, md: 0 }}
+      pb={{ base: 20, md: 0 }}
       fontFamily="'Sora', sans-serif"
       transition="background-color 0.3s ease"
     >
