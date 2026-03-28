@@ -11,7 +11,7 @@ export function useKeyboardShortcuts({ onCommandPaletteOpen, onThemeToggle }) {
           onCommandPaletteOpen();
         }
       }
-      if(event.key === 't'){
+      if((event.metaKey || event.ctrlKey) && event.key === 'q'){
         event.preventDefault();
         if (onThemeToggle){
           onThemeToggle();

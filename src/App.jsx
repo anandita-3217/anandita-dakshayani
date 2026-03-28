@@ -141,7 +141,7 @@ import Resume from './components/Resume';
 import ProjectsPage from './pages/ProjectsPage'; 
 import AboutPage from './pages/AboutPage';
 
-import Options from './components/options';
+import BookNook from './components/BookNook';
 
 function App() {
   const { scrollYProgress } = useScroll();
@@ -211,6 +211,7 @@ function App() {
             <Hero />
             <About />
             <Projects /> 
+            <BookNook/>
               <Contact />
               <Resume />
             
