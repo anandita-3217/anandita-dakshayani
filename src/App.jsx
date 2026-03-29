@@ -225,25 +225,13 @@ function App() {
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
-    // TODO: Use this https://motion.dev/tutorials/react-scroll-zoom-hero
-//     const ref = useRef(null)
-// const { scrollYProgress } = useScroll({
-//   target: ref,
-//   offset: ["start end", "center center"]
-// })
-
-// const clipPath = useTransform(
-//   scrollYProgress,
-//   [0, 1],
-//   ["inset(0% 50% 0% 50%)", "inset(0% 0% 0% 0%)"]
-// )
-
+    
 // return (
 //   <motion.div ref={ref} style={{ clipPath }}>
 //     <img src="/photo.jpg" alt="Revealed image" />
 //   </motion.div>
 // ) 
-//  TODO: card style https://www.framer.com/marketplace/components/cms-showcase-card/
+
 // minor projects:  in projects page
 // const containerRef = useRef(null)
 // const { scrollYProgress } = useScroll({
