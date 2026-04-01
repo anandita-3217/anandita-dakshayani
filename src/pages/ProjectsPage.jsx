@@ -122,6 +122,8 @@ export default function ProjectsPage() {
               {/* TODO: https://aayushbharti.in/projects/snippix  make a page like this for the first 4 projects */}
       {/* About Section - Slow upward parallax */}
       {/* <ExperienceTimeline/> Put in maybe aboutPage */}
+{/* TODO: ADD AN INTRODUTORY SECTION AND FOR THE TOP MOST COMPONENT ADD AN EXTRA PADDING AT THE TOP */}
+
       <ContactTerminal/>{/*  Cool will put here*/}
       <SkillsConstellation/> {/* Not Working */}
       <StatsTicker/>{/* Add to the top of the screen */}
