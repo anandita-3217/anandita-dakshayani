@@ -8,6 +8,11 @@ import Learning from '../components/AboutPageBits/Learning';
 import ProjectOptions from '../components/ProjectPageBits/ProjectOptions';
 import ProjectsIndex from '../components/ProjectPageBits/ProjectsIndex';
 import DotGrid from '../components/assets/DotGrid/DotGrid';
+import ExperienceTimeline from '../components/ui/ExperienceTimeline';
+import ContactTerminal from '../components/ui/ContactTerminal';
+import StatsTicker from '../components/ui/StatsTicker';
+import SkillsConstellation from '../components/ui/StatsTicker';
+
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 const ParallaxSection = ({ children, speed = 0.5, direction = 1 }) => {
@@ -116,6 +121,10 @@ export default function ProjectsPage() {
       <Box position="relative" zIndex={1}>
               {/* TODO: https://aayushbharti.in/projects/snippix  make a page like this for the first 4 projects */}
       {/* About Section - Slow upward parallax */}
+      {/* <ExperienceTimeline/> Put in maybe aboutPage */}
+      <ContactTerminal/>{/*  Cool will put here*/}
+      <SkillsConstellation/> {/* Not Working */}
+      <StatsTicker/>{/* Add to the top of the screen */}
       <FadeInSection delay={0.2}>
         <ParallaxSection speed={0.4} direction={1}>
           <ProjectOptions />
