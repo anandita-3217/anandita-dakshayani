@@ -4,7 +4,8 @@ import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { useColorModeValue } from '@chakra-ui/react';
 
 import Learning from '../components/AboutPageBits/Learning';
-import Projects from '../components/Projects';
+// import Projects from '../components/Projects';
+import ProjectOptions from '../components/ProjectPageBits/ProjectOptions';
 import ProjectsIndex from '../components/ProjectPageBits/ProjectsIndex';
 import DotGrid from '../components/assets/DotGrid/DotGrid';
 import Header from '../components/Header';
@@ -115,6 +116,11 @@ export default function ProjectsPage() {
       <Box position="relative" zIndex={1}>
               {/* TODO: https://aayushbharti.in/projects/snippix  make a page like this for the first 4 projects */}
       {/* About Section - Slow upward parallax */}
+      <FadeInSection delay={0.2}>
+        <ParallaxSection speed={0.4} direction={1}>
+          <ProjectOptions />
+        </ParallaxSection>
+      </FadeInSection>
       <FadeInSection>
         <ParallaxSection speed={0.3} direction={1}>
           <ProjectsIndex/>
@@ -125,11 +131,6 @@ export default function ProjectsPage() {
             <Learning />
           </ParallaxSection>
       </FadeInSection>
-      {/* <FadeInSection delay={0.2}>
-        <ParallaxSection speed={0.4} direction={1}>
-          <Projects />
-        </ParallaxSection>
-      </FadeInSection> */}
       </Box>
       <Footer/>
     </Box>
