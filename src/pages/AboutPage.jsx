@@ -212,7 +212,8 @@ import Certificates from '../components/AboutPageBits/Certificates';
 import TechSkills from '../components/AboutPageBits/TechSkills';
 import ContributionMap from '../components/AboutPageBits/ContributionMap';
 import Learning from '../components/AboutPageBits/Learning';
-import Resume from '../components/Resume';
+// import Resume from '../components/Resume';
+import ExperienceTimeline from '../components/AboutPageBits/ExperienceTimeline';
 // import Options from "../components/options"
 // ─── Chakra + Framer Motion bridge ───────────────────────────────────────────
 const MotionBox = chakra(motion.div, {
@@ -315,7 +316,7 @@ export default function AboutPage() {
           <Learning />
           <Certificates />
           <ContributionMap />
-          <Resume />
+          <ExperienceTimeline />
           <Footer />
 </>
   );
