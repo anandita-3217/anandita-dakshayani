@@ -121,7 +121,7 @@ export default function ProjectsPage() {
       <Box position="relative" zIndex={1}>
               {/* TODO: https://aayushbharti.in/projects/snippix  make a page like this for the first 4 projects */}
       {/* About Section - Slow upward parallax */}
-      {/* <ExperienceTimeline/> Put in maybe aboutPage */}
+<ExperienceTimeline/> 
 {/* TODO: ADD AN INTRODUTORY SECTION AND FOR THE TOP MOST COMPONENT ADD AN EXTRA PADDING AT THE TOP */}
 
       <ContactTerminal/>{/*  Cool will put here*/}
