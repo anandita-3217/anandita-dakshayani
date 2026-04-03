@@ -16,13 +16,9 @@ import {
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { gsap } from "gsap";
 
-// ─── Google Fonts ────────────────────────────────────────────────────────────
-// Add to your index.html <head>:
-// <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;800;900&family=Sora:wght@300;400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 // ─── Motion primitives ───────────────────────────────────────────────────────
-const MotionBox = motion(Box);
-const MotionFlex = motion(Flex);
+const MotionBox = motion.create(Box);
 
 // ─── Project Data ────────────────────────────────────────────────────────────
 const PROJECTS = [
