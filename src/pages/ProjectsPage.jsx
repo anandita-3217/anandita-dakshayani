@@ -135,12 +135,12 @@ export default function ProjectsPage() {
       </FadeInSection>
       <FadeInSection>
         <ParallaxSection speed={0.3} direction={1}>
-          <ProjectsIndex/>
+          {/* <ProjectsIndex/> */}
         </ParallaxSection>
       </FadeInSection>
       <FadeInSection delay={0.1}>
           <ParallaxSection speed={0.6} direction={-1}>
-            <Learning />
+            {/* <Learning /> */}
           </ParallaxSection>
       </FadeInSection>
       </Box>
