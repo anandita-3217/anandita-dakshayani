@@ -45,6 +45,8 @@ import ProjectsPage from './pages/ProjectsPage';
 import AboutPage from './pages/AboutPage';
 
 
+import TechStack from './components/ui/TechStack';
+
 
 function App() {
   const { scrollYProgress } = useScroll();
@@ -113,6 +115,7 @@ function App() {
             <Header />
             <Hero />
             <About />
+            {/* <TechStack/> maybe??? */}
             <Projects /> 
               <Contact />
               <Resume />

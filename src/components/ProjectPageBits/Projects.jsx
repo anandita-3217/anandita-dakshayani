@@ -332,7 +332,7 @@ function SuggestionDropdown({ suggestions, query, onSelect }) {
 
 function ProjectCard({ project, index, isHighlighted }) {
   const ref = useRef(null);
-  const glowRef = useRef(null);
+  // const glowRef = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
   const cardBg = useColorModeValue("rgba(247,247,248,0.92)", "rgba(10,10,10,0.82)");
   const borderColor = useColorModeValue("rgba(0,0,0,0.08)", "rgba(255,255,255,0.06)");
@@ -341,32 +341,7 @@ function ProjectCard({ project, index, isHighlighted }) {
   const statLabelColor = useColorModeValue("#9ca3af", "rgba(255,255,255,0.3)");
   const cornerColor = "rgba(124,58,237,0.25)";
 
-  // GSAP magnetic hover for card
-  useEffect(() => {
-    const card = ref.current;
-    if (!card) return;
-    const onMove = (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-      gsap.to(card, {
-        rotateX: -y * 0.015,
-        rotateY: x * 0.015,
-        duration: 0.6,
-        ease: "power2.out",
-        transformPerspective: 800,
-      });
-    };
-    const onLeave = () => {
-      gsap.to(card, { rotateX: 0, rotateY: 0, duration: 0.8, ease: "elastic.out(1, 0.4)" });
-    };
-    card.addEventListener("mousemove", onMove);
-    card.addEventListener("mouseleave", onLeave);
-    return () => {
-      card.removeEventListener("mousemove", onMove);
-      card.removeEventListener("mouseleave", onLeave);
-    };
-  }, []);
+  
 
   const status = STATUS_META[project.status] || STATUS_META.Live;
 
@@ -665,7 +640,7 @@ function FilterTabGroup({ label, options, active, onChange, accent }) {
 }
 
 // ─── Main Component ───────────────────────────────────────────────────────────
-export default function ProjectOptions() {
+export default function Projects() {
   const [query, setQuery] = useState("");
   const [techFilters, setTechFilters] = useState([]);
   const [useCaseFilters, setUseCaseFilters] = useState([]);

@@ -2,11 +2,9 @@ import React, { useRef } from 'react';
 import { Box } from '@chakra-ui/react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { useColorModeValue } from '@chakra-ui/react';
-// TODO: Change the theme colors
 
-// import Projects from '../components/Projects';
 import ProjectsHero from '../components/ProjectPageBits/ProjectsHero'
-import ProjectOptions from '../components/ProjectPageBits/ProjectOptions';
+import Projects from '../components/ProjectPageBits/Projects';
 import ProjectsIndex from '../components/ProjectPageBits/ProjectsIndex';
 import DotGrid from '../components/assets/DotGrid/DotGrid';
 
@@ -119,17 +117,14 @@ export default function ProjectsPage() {
 
       {/* Fixed Header */}
       <Header />
-      <Box position="relative" zIndex={1}>
+      <Box position="relative" zIndex={1} pt={{ base: "100px", md: "120px" }} px={"70px"}>
               {/* TODO: https://aayushbharti.in/projects/snippix  make a page like this for the first 4 projects */}
-      {/* About Section - Slow upward parallax */}
-{/* <ExperienceTimeline/>  */}
-{/* TODO: ADD AN INTRODUTORY SECTION AND FOR THE TOP MOST COMPONENT ADD AN EXTRA PADDING AT THE TOP */}
         <ProjectsHero scrollTargetId="projects"/>
         <StatsTicker/>{/* Add to the top of the screen */}
 
       <FadeInSection delay={0.2}>
         <ParallaxSection speed={0.4} direction={1}>
-          <ProjectOptions id="projects" />
+          <Projects id="projects" />
         </ParallaxSection>
       </FadeInSection>
 {/* Has All the info so cant get rid of it immediately */}

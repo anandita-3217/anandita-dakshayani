@@ -201,9 +201,7 @@ import {
 import DotGrid from '../components/assets/DotGrid/DotGrid';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import CommandPalette from '../components/CommandPalette';
-import ScrollToTop from '../components/ScrollToTop';
-import useKeyboardShortcuts from '../components/hooks/useKeyboardShortcuts';
+
 
 
 import AboutPart from '../components/AboutPageBits/AboutPart';
@@ -212,41 +210,63 @@ import Certificates from '../components/AboutPageBits/Certificates';
 import TechSkills from '../components/AboutPageBits/TechSkills';
 import ContributionMap from '../components/AboutPageBits/ContributionMap';
 import Learning from '../components/AboutPageBits/Learning';
-// import Resume from '../components/Resume';
-import ExperienceTimeline from '../components/AboutPageBits/ExperienceTimeline';
-// import Options from "../components/options"
-// ─── Chakra + Framer Motion bridge ───────────────────────────────────────────
-const MotionBox = chakra(motion.div, {
-  shouldForwardProp: (prop) =>
-    isValidMotionProp(prop) || shouldForwardProp(prop),
-});
 
-const OVERLAP = 80;
+// import Options from "../components/options"
+const ParallaxSection = ({ children, speed = 0.5, direction = 1 }) => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+
+  // Transform scroll progress to Y position
+  const y = useTransform(
+    scrollYProgress, 
+    [0, 1], 
+    [100 * direction * speed, -100 * direction * speed]
+  );
+  
+  // Add spring physics for smooth motion
+  const springY = useSpring(y, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
+  return (
+    <Box ref={ref} position="relative">
+      <motion.div style={{ y: springY }}>
+        {children}
+      </motion.div>
+    </Box>
+  );
+};
+
 
 // ─── Section index badge ──────────────────────────────────────────────────────
-const SectionBadge = ({ index, label }) => (
-  <Box display="flex" alignItems="center" gap={3} mb={8}>
-    <Text
-      fontFamily="Orbitron, sans-serif"
-      fontSize="9px"
-      letterSpacing="0.3em"
-      textTransform="uppercase"
-      color="whiteAlpha.300"
-    >
-      {String(index).padStart(2, '0')}
-    </Text>
-    <Box h="1px" w="32px" bg="whiteAlpha.100" />
-    <Text
-      fontFamily="Orbitron, sans-serif"
-      fontSize="9px"
-      letterSpacing="0.3em"
-      textTransform="uppercase"
-      color="whiteAlpha.300"
-    >
-      {label}
-    </Text>
-  </Box>
-);
+const FadeInSection = ({ children, delay = 0 }) => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start 0.9", "start 0.5"]
+  });
+
+  const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  const scale = useTransform(scrollYProgress, [0, 1], [0.95, 1]);
+
+  return (
+    <Box ref={ref}>
+      <motion.div 
+        style={{ opacity, scale }}
+        transition={{ delay }}
+      >
+        {children}
+      </motion.div>
+    </Box>
+  );
+};
+
+
 export default function AboutPage() {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -311,12 +331,31 @@ export default function AboutPage() {
       </Box>
           <Header />
           <AboutPart />
-          <TechSkills />
-          <Hobbies />
-          <Learning />
+        <FadeInSection delay={0.2}>
+          <ParallaxSection speed={0.4} direction={1}>
+            <TechSkills />
+          </ParallaxSection>
+        </FadeInSection>
+          <FadeInSection delay={0.2}>
+          <ParallaxSection speed={0.4} direction={1}>
+            <Hobbies />
+          </ParallaxSection>
+          </FadeInSection>
+          <FadeInSection delay={0.2}>
+          <ParallaxSection speed={0.4} direction={1}>
+            <Learning />
+          </ParallaxSection>
+          </FadeInSection>
+          <FadeInSection delay={0.2}>
+          <ParallaxSection speed={0.4} direction={1}>
           <Certificates />
+          </ParallaxSection>
+          </FadeInSection>
+          <FadeInSection delay={0.2}>
+          <ParallaxSection speed={0.4} direction={1}>
           <ContributionMap />
-          <ExperienceTimeline />
+          </ParallaxSection>
+          </FadeInSection>
           <Footer />
 </>
   );
