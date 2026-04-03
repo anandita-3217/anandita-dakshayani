@@ -3,7 +3,7 @@ import { Box } from '@chakra-ui/react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { useColorModeValue } from '@chakra-ui/react';
 // TODO: Change the theme colors
-import Learning from '../components/AboutPageBits/Learning';
+
 // import Projects from '../components/Projects';
 import ProjectsHero from '../components/ProjectPageBits/ProjectsHero'
 import ProjectOptions from '../components/ProjectPageBits/ProjectOptions';
@@ -125,24 +125,21 @@ export default function ProjectsPage() {
 {/* <ExperienceTimeline/>  */}
 {/* TODO: ADD AN INTRODUTORY SECTION AND FOR THE TOP MOST COMPONENT ADD AN EXTRA PADDING AT THE TOP */}
         <ProjectsHero scrollTargetId="projects"/>
-      <ContactTerminal/>{/*  Cool will put here*/}
-      <SkillsConstellation/> {/* Not Working */}
-      <StatsTicker/>{/* Add to the top of the screen */}
+        <StatsTicker/>{/* Add to the top of the screen */}
+
       <FadeInSection delay={0.2}>
         <ParallaxSection speed={0.4} direction={1}>
           <ProjectOptions id="projects" />
         </ParallaxSection>
       </FadeInSection>
-      <FadeInSection>
-        <ParallaxSection speed={0.3} direction={1}>
+{/* Has All the info so cant get rid of it immediately */}
           {/* <ProjectsIndex/> */}
-        </ParallaxSection>
-      </FadeInSection>
-      <FadeInSection delay={0.1}>
-          <ParallaxSection speed={0.6} direction={-1}>
-            {/* <Learning /> */}
+
+        <FadeInSection delay={0.2}>
+        <ParallaxSection speed={0.4} direction={1}>
+            <ContactTerminal/>{/*  Cool will put here*/}
           </ParallaxSection>
-      </FadeInSection>
+        </FadeInSection>
       </Box>
       <Footer/>
     </Box>

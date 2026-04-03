@@ -215,12 +215,13 @@ function FilterPill({ label, active, onClick, accent = "#7c3aed" }) {
       border="1px solid"
       borderColor={active ? accent : "rgba(255,255,255,0.08)"}
       bg={active ? `${accent}18` : "rgba(255,255,255,0.03)"}
-      color={active ? accent : "rgba(255,255,255,0.35)"}
+      color={accent}
       fontFamily="'JetBrains Mono', monospace"
       fontSize="9px"
       letterSpacing="0.18em"
       textTransform="uppercase"
       cursor="pointer"
+
       whiteSpace="nowrap"
       whileTap={{ scale: 0.96 }}
       transition={{ duration: 0.15 }}
@@ -625,6 +626,7 @@ function ProjectCard({ project, index, isHighlighted }) {
 // ─── Tab Group ────────────────────────────────────────────────────────────────
 function FilterTabGroup({ label, options, active, onChange, accent }) {
   const dividerColor = useColorModeValue("rgba(0,0,0,0.06)", "rgba(255,255,255,0.06)");
+  // const labelColor = useColorModeValue("#9ca3af", "rgba(255,255,255,0.28)");
   const labelColor = useColorModeValue("#9ca3af", "rgba(255,255,255,0.28)");
 
   return (
@@ -847,6 +849,7 @@ export default function ProjectOptions() {
               options={ALL_TECH}
               active={techFilters}
               onChange={setTechFilters}
+              color={inputColor}
               accent="#14b8a6"
             />
             <FilterTabGroup
