@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useState,useRef } from 'react';
 import { Box } from '@chakra-ui/react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { useColorModeValue } from '@chakra-ui/react';
@@ -10,7 +10,7 @@ import DotGrid from '../components/assets/DotGrid/DotGrid';
 
 import ContactTerminal from '../components/ui/ContactTerminal';
 import StatsTicker from '../components/ui/StatsTicker';
-import SkillsConstellation from '../components/ui/StatsTicker';
+import ProjectsConstellation from '../components/ProjectPageBits/ProjectsConstellation';
 
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -84,6 +84,7 @@ export default function ProjectsPage() {
     'linear-gradient(90deg, #ec4899, #a855f7, #6366f1)',
     'linear-gradient(90deg, #ec4899, #a855f7, #6366f1)'
   );
+  const [techFilter, setTechFilter] = useState(null);
 
   return (
     <Box position="relative" overflow="hidden">
@@ -124,7 +125,8 @@ export default function ProjectsPage() {
 
       <FadeInSection delay={0.2}>
         <ParallaxSection speed={0.4} direction={1}>
-          <Projects id="projects" />
+          <Projects id="projects" activeTechFilter={techFilter} />
+          <ProjectsConstellation onTechFilter={(tech) => setTechFilter(tech)} />
         </ParallaxSection>
       </FadeInSection>
 {/* Has All the info so cant get rid of it immediately */}
