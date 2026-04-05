@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Box, Flex, Text, useColorModeValue } from "@chakra-ui/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { gsap } from "gsap";
-import { PROJECT_STATS } from "./data/projects"; // Wheere to put this in ?
+import { PROJECT_STATS } from "./data/projects"; 
 
 const MotionBox = motion.create(Box);
 const MotionFlex = motion.create(Flex);
@@ -12,7 +12,7 @@ const CONFIG = {
   name: "Alex Morgan",
   handle: "@alexmorgan",
   totalProjects: 6,
-  totalTech: 18,
+  totalTech: PROJECT_STATS.total,
   currentlyBuilding: "NeuralDraft — AI writing tooling for devs",
   openToWork: true,
   // Rotating focus areas shown in the "focus" slot
