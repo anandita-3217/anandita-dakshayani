@@ -1,3 +1,5 @@
+// TODO: For some reason the contact section opens up every time - look into that 
+
 import React, { useState,useRef } from 'react';
 import { Box } from '@chakra-ui/react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
@@ -121,12 +123,12 @@ export default function ProjectsPage() {
       <Box position="relative" zIndex={1} pt={{ base: "100px", md: "120px" }} px={"70px"}>
               {/* TODO: https://aayushbharti.in/projects/snippix  make a page like this for the first 4 projects */}
         <ProjectsHero scrollTargetId="projects"/>
-        <StatsTicker/>{/* Add to the top of the screen */}
+        <StatsTicker/>
 
       <FadeInSection delay={0.2}>
         <ParallaxSection speed={0.4} direction={1}>
-          <Projects id="projects" activeTechFilter={techFilter} />
-          <ProjectsConstellation onTechFilter={(tech) => setTechFilter(tech)} />
+          <Projects id="projects"/>
+          {/* <ProjectsConstellation onTechFilter={(tech) => setTechFilter(tech)} /> */}
         </ParallaxSection>
       </FadeInSection>
 {/* Has All the info so cant get rid of it immediately */}

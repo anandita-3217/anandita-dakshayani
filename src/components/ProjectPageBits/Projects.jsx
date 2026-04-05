@@ -16,131 +16,133 @@ import {
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { gsap } from "gsap";
 
+import { PROJECTS, ALL_TECH, ALL_USECASES, ALL_TYPES } from "./data/projects";
+
 
 // ─── Motion primitives ───────────────────────────────────────────────────────
 const MotionBox = motion.create(Box);
 
 // ─── Project Data ────────────────────────────────────────────────────────────
-const PROJECTS = [
-  {
-    id: 1,
-    title: "NeuralDraft",
-    tagline: "AI-powered writing assistant for engineers",
-    description:
-      "A real-time document editor with GPT-4 integration, contextual completions, and collaborative cursors. Designed for dev teams shipping fast.",
-    techStack: ["React", "TypeScript", "OpenAI", "Socket.io", "Redis", "Postgres"],
-    useCase: ["Productivity", "AI", "Collaboration"],
-    type: "Web App",
-    category: "AI",
-    accent: "#14b8a6",
-    status: "Live",
-    year: "2024",
-    url: "#",
-    metrics: [
-      { label: "Active Users", value: "2.4K" },
-      { label: "Tokens/Day", value: "18M" },
-    ],
-  },
-  {
-    id: 2,
-    title: "OrbitCI",
-    tagline: "Visual pipeline builder for CI/CD workflows",
-    description:
-      "Drag-and-drop CI/CD pipeline orchestrator with YAML export, multi-cloud runners, and real-time log streaming. Zero config by default.",
-    techStack: ["Vue 3", "Go", "Docker", "Kubernetes", "GitHub Actions"],
-    useCase: ["DevOps", "Automation", "Infrastructure"],
-    type: "Dev Tool",
-    category: "DevOps",
-    accent: "#f4845f",
-    status: "Beta",
-    year: "2024",
-    url: "#",
-    metrics: [
-      { label: "Pipelines", value: "340+" },
-      { label: "Deploy Time", value: "-62%" },
-    ],
-  },
-  {
-    id: 3,
-    title: "Spectral UI",
-    tagline: "Design system generator from Figma tokens",
-    description:
-      "Converts Figma design tokens into production-ready Chakra, MUI, or Tailwind themes. Supports dark mode, typography scales, and component overrides.",
-    techStack: ["Next.js", "Figma API", "Tailwind", "Node.js", "PostCSS"],
-    useCase: ["Design", "Frontend", "Automation"],
-    type: "Library",
-    category: "Design",
-    accent: "#e8c547",
-    status: "OSS",
-    year: "2023",
-    url: "#",
-    metrics: [
-      { label: "GitHub Stars", value: "1.1K" },
-      { label: "Themes Built", value: "870+" },
-    ],
-  },
-  {
-    id: 4,
-    title: "Echelon",
-    tagline: "Real-time sports analytics dashboard",
-    description:
-      "High-frequency sports data platform with WebSocket feeds, predictive models, and exportable PDF reports. Built for analysts, not fans.",
-    techStack: ["React", "D3.js", "FastAPI", "TimescaleDB", "WebSockets"],
-    useCase: ["Analytics", "Data Viz", "Sports"],
-    type: "Dashboard",
-    category: "Data",
-    accent: "#7c3aed",
-    status: "Live",
-    year: "2023",
-    url: "#",
-    metrics: [
-      { label: "Events/Sec", value: "12K" },
-      { label: "Accuracy", value: "94.3%" },
-    ],
-  },
-  {
-    id: 5,
-    title: "Phoneme",
-    tagline: "Browser-native audio transcription SDK",
-    description:
-      "Lightweight WASM-powered transcription library using Whisper distilled models. Works fully offline. Sub-200ms latency on modern hardware.",
-    techStack: ["TypeScript", "WebAssembly", "Rust", "Whisper", "Web Workers"],
-    useCase: ["Accessibility", "Audio", "SDK"],
-    type: "Library",
-    category: "AI",
-    accent: "#14b8a6",
-    status: "OSS",
-    year: "2024",
-    url: "#",
-    metrics: [
-      { label: "NPM Downloads", value: "48K" },
-      { label: "Bundle Size", value: "3.2MB" },
-    ],
-  },
-  {
-    id: 6,
-    title: "Terrarium",
-    tagline: "Sandboxed code execution for LLM apps",
-    description:
-      "Secure, isolated execution environment for running AI-generated code. Supports Python, JS, and Bash with resource quotas and audit logs.",
-    techStack: ["Rust", "gVisor", "Python", "gRPC", "Firecracker"],
-    useCase: ["Security", "Infrastructure", "AI"],
-    type: "Backend",
-    category: "DevOps",
-    accent: "#f4845f",
-    status: "Beta",
-    year: "2024",
-    url: "#",
-    metrics: [
-      { label: "Exec Latency", value: "38ms" },
-      { label: "Sandbox Limit", value: "∞" },
-    ],
-  },
-];
+// const PROJECTS = [
+//   {
+//     id: 1,
+//     title: "NeuralDraft",
+//     tagline: "AI-powered writing assistant for engineers",
+//     description:
+//       "A real-time document editor with GPT-4 integration, contextual completions, and collaborative cursors. Designed for dev teams shipping fast.",
+//     techStack: ["React", "TypeScript", "OpenAI", "Socket.io", "Redis", "Postgres"],
+//     useCase: ["Productivity", "AI", "Collaboration"],
+//     type: "Web App",
+//     category: "AI",
+//     accent: "#14b8a6",
+//     status: "Live",
+//     year: "2024",
+//     url: "#",
+//     metrics: [
+//       { label: "Active Users", value: "2.4K" },
+//       { label: "Tokens/Day", value: "18M" },
+//     ],
+//   },
+//   {
+//     id: 2,
+//     title: "OrbitCI",
+//     tagline: "Visual pipeline builder for CI/CD workflows",
+//     description:
+//       "Drag-and-drop CI/CD pipeline orchestrator with YAML export, multi-cloud runners, and real-time log streaming. Zero config by default.",
+//     techStack: ["Vue 3", "Go", "Docker", "Kubernetes", "GitHub Actions"],
+//     useCase: ["DevOps", "Automation", "Infrastructure"],
+//     type: "Dev Tool",
+//     category: "DevOps",
+//     accent: "#f4845f",
+//     status: "Beta",
+//     year: "2024",
+//     url: "#",
+//     metrics: [
+//       { label: "Pipelines", value: "340+" },
+//       { label: "Deploy Time", value: "-62%" },
+//     ],
+//   },
+//   {
+//     id: 3,
+//     title: "Spectral UI",
+//     tagline: "Design system generator from Figma tokens",
+//     description:
+//       "Converts Figma design tokens into production-ready Chakra, MUI, or Tailwind themes. Supports dark mode, typography scales, and component overrides.",
+//     techStack: ["Next.js", "Figma API", "Tailwind", "Node.js", "PostCSS"],
+//     useCase: ["Design", "Frontend", "Automation"],
+//     type: "Library",
+//     category: "Design",
+//     accent: "#e8c547",
+//     status: "OSS",
+//     year: "2023",
+//     url: "#",
+//     metrics: [
+//       { label: "GitHub Stars", value: "1.1K" },
+//       { label: "Themes Built", value: "870+" },
+//     ],
+//   },
+//   {
+//     id: 4,
+//     title: "Echelon",
+//     tagline: "Real-time sports analytics dashboard",
+//     description:
+//       "High-frequency sports data platform with WebSocket feeds, predictive models, and exportable PDF reports. Built for analysts, not fans.",
+//     techStack: ["React", "D3.js", "FastAPI", "TimescaleDB", "WebSockets"],
+//     useCase: ["Analytics", "Data Viz", "Sports"],
+//     type: "Dashboard",
+//     category: "Data",
+//     accent: "#7c3aed",
+//     status: "Live",
+//     year: "2023",
+//     url: "#",
+//     metrics: [
+//       { label: "Events/Sec", value: "12K" },
+//       { label: "Accuracy", value: "94.3%" },
+//     ],
+//   },
+//   {
+//     id: 5,
+//     title: "Phoneme",
+//     tagline: "Browser-native audio transcription SDK",
+//     description:
+//       "Lightweight WASM-powered transcription library using Whisper distilled models. Works fully offline. Sub-200ms latency on modern hardware.",
+//     techStack: ["TypeScript", "WebAssembly", "Rust", "Whisper", "Web Workers"],
+//     useCase: ["Accessibility", "Audio", "SDK"],
+//     type: "Library",
+//     category: "AI",
+//     accent: "#14b8a6",
+//     status: "OSS",
+//     year: "2024",
+//     url: "#",
+//     metrics: [
+//       { label: "NPM Downloads", value: "48K" },
+//       { label: "Bundle Size", value: "3.2MB" },
+//     ],
+//   },
+//   {
+//     id: 6,
+//     title: "Terrarium",
+//     tagline: "Sandboxed code execution for LLM apps",
+//     description:
+//       "Secure, isolated execution environment for running AI-generated code. Supports Python, JS, and Bash with resource quotas and audit logs.",
+//     techStack: ["Rust", "gVisor", "Python", "gRPC", "Firecracker"],
+//     useCase: ["Security", "Infrastructure", "AI"],
+//     type: "Backend",
+//     category: "DevOps",
+//     accent: "#f4845f",
+//     status: "Beta",
+//     year: "2024",
+//     url: "#",
+//     metrics: [
+//       { label: "Exec Latency", value: "38ms" },
+//       { label: "Sandbox Limit", value: "∞" },
+//     ],
+//   },
+// ];
 
-const ALL_TECH = [...new Set(PROJECTS.flatMap((p) => p.techStack))].sort();
-const ALL_USECASES = [...new Set(PROJECTS.flatMap((p) => p.useCase))].sort();
-const ALL_TYPES = [...new Set(PROJECTS.map((p) => p.type))].sort();
+// const ALL_TECH = [...new Set(PROJECTS.flatMap((p) => p.techStack))].sort();
+// const ALL_USECASES = [...new Set(PROJECTS.flatMap((p) => p.useCase))].sort();
+// const ALL_TYPES = [...new Set(PROJECTS.map((p) => p.type))].sort();
 
 const STATUS_META = {
   Live: { bg: "rgba(20,184,166,0.12)", border: "rgba(20,184,166,0.35)", color: "#14b8a6" },
