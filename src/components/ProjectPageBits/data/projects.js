@@ -139,7 +139,7 @@ export const PROJECTS = [
     status: "OSS",
     year: "2024",
     url: "#",
-    github: "https://github.com",
+    github: "https://github.com/anandita-3217/experimental-garden",
     metrics: [
       { label: "API Routes", value: "3" },
       { label: "Storage Layers", value: "2" },
@@ -162,7 +162,7 @@ export const PROJECTS = [
     status: "Live",
     year: "2024",
     url: "#",
-    github: "https://github.com",
+    github: "https://github.com/anandita-3217/CS50xFinalProject",
     metrics: [
       { label: "Built In", value: "3 days" },
       { label: "Transactions ↓", value: "Greedy algo" },
@@ -185,7 +185,7 @@ export const PROJECTS = [
     status: "Live",
     year: "2024",
     url: "#",
-    github: "https://github.com",
+    github: "https://github.com/anandita-3217/Noracle",
     metrics: [
       { label: "Data Collected", value: "Zero" },
       { label: "Answer", value: "Always no" },
@@ -208,7 +208,7 @@ export const PROJECTS = [
     status: "OSS",
     year: "2024",
     url: "#",
-    github: "https://github.com",
+    github: "https://github.com/anandita/DeepFakeDetectionProject",
     metrics: [
       { label: "Accuracy", value: "99.7%" },
       { label: "Approaches", value: "2 (SVM + DenseNet)" },
