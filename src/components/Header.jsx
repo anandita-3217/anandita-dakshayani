@@ -5,11 +5,12 @@ import {
   HStack,
   IconButton,
   Image,
+  Kbd,
   VStack,
   useDisclosure,
   useColorMode,
   useColorModeValue,
-  Text,
+  Tooltip ,
 } from "@chakra-ui/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link as RouterLink, useLocation } from "react-router-dom";
@@ -27,6 +28,8 @@ import { FaStar, FaCodeBranch } from "react-icons/fa";
 // Chakra + Motion wrapper
 const MotionBox = motion.create(Box);
 const MotionFlex = motion.create(Flex);
+
+// const themeToolTip = <Kbd>ctrl</Kbd>+<Kbd>shift</Kbd> + <Kbd>k</Kbd> 
 
 export default function Header(){
   const { colorMode, toggleColorMode } = useColorMode();
@@ -63,7 +66,7 @@ export default function Header(){
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
     { name: "Work", href: "/work" },
-    { name: "Contact", href: "/#contact" },
+    { name: "More ↓", href: "#" }, // TODO: on hover show GuestBook and BucketList
     { name: "Resume",  href: "/#resume" },
   ];
 
@@ -235,6 +238,7 @@ export default function Header(){
           gap={2}
         >
           {/* Command Palette Button */}
+          <Tooltip label='ctrl+k' placement="bottom" hasArrow openDelay={300}>
           <MotionBox
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -254,12 +258,20 @@ export default function Header(){
             />
           </MotionBox>
 
+          </Tooltip>
+        
+
           {/* Theme Toggle */}
+            <Tooltip label='ctrl+shift+k' placement="bottom"
+  hasArrow
+  openDelay={300}
+>
           <MotionBox
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.3, type: "spring" }}
           >
+
             <IconButton
               aria-label="Toggle theme"
               icon={colorMode === "light" ? <Moon size={20} /> : <Sun size={20} />}
@@ -272,6 +284,7 @@ export default function Header(){
               }}
             />
           </MotionBox>
+            </Tooltip>
 
           {/* Mobile Menu Toggle */}
           <IconButton

@@ -11,7 +11,9 @@ export function useKeyboardShortcuts({ onCommandPaletteOpen, onThemeToggle }) {
           onCommandPaletteOpen();
         }
       }
-      if((event.metaKey || event.ctrlKey) && event.key === 'q'){
+      // TODO: Figure out what combination
+      if((event.metaKey || event.ctrlKey) && event.shiftKey && event.key.toLowerCase() === 'k'
+){
         event.preventDefault();
         if (onThemeToggle){
           onThemeToggle();
