@@ -143,7 +143,7 @@ const MotionBox = motion.create(Box);
 // const ALL_TECH = [...new Set(PROJECTS.flatMap((p) => p.techStack))].sort();
 // const ALL_USECASES = [...new Set(PROJECTS.flatMap((p) => p.useCase))].sort();
 // const ALL_TYPES = [...new Set(PROJECTS.map((p) => p.type))].sort();
-
+// TODO: ADD: gITHUB BUTTON AND LINK TO PROJECTS.JS
 const STATUS_META = {
   Live: { bg: "rgba(20,184,166,0.12)", border: "rgba(20,184,166,0.35)", color: "#14b8a6" },
   Beta: { bg: "rgba(232,197,71,0.12)", border: "rgba(232,197,71,0.35)", color: "#e8c547" },

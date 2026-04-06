@@ -296,10 +296,10 @@ export default function ProjectsHero() {
 
       <Box
         ref={wrapperRef}
-        bg={cardBg}
+        bg="transparent"
         px={{ base: 5, md: 12, lg: 20 }}
         py={{ base: 25, md: 16 }}
-        backdropFilter="blur(18px)"
+        backdropFilter="blur(3px)"
         border="1px solid"
         borderColor={borderColor}
         borderRadius="20px"
