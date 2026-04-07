@@ -137,7 +137,7 @@ export const PROJECTS = [
     category: "Full-stack",
     accent: "#14b8a6",
     status: "OSS",
-    year: "2024",
+    year: "2026",
     url: "#",
     github: "https://github.com/anandita-3217/experimental-garden",
     metrics: [
@@ -160,7 +160,7 @@ export const PROJECTS = [
     category: "Full-stack",
     accent: "#7c3aed",
     status: "Live",
-    year: "2024",
+    year: "2025",
     url: "#",
     github: "https://github.com/anandita-3217/CS50xFinalProject",
     metrics: [
@@ -183,7 +183,7 @@ export const PROJECTS = [
     category: "Frontend",
     accent: "#ec4899",
     status: "Live",
-    year: "2024",
+    year: "2025",
     url: "#",
     github: "https://github.com/anandita-3217/Noracle",
     metrics: [
@@ -206,7 +206,7 @@ export const PROJECTS = [
     category: "AI",
     accent: "#e8c547",
     status: "OSS",
-    year: "2024",
+    year: "2023",
     url: "#",
     github: "https://github.com/anandita/DeepFakeDetectionProject",
     metrics: [

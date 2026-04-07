@@ -21,6 +21,9 @@ import { PROJECTS, ALL_TECH, ALL_USECASES, ALL_TYPES } from "./data/projects";
 const MotionBox = motion.create(Box);
 
 // TODO: On opening the page it auto scrolls to the bottom why?
+// TODO: 4 cards per row in the Projects 
+// TODO: Filter region - needs to be collapsable
+// TODO: To the filter region add a sort funtionality - sort on recency - by latest, by oldest
 const STATUS_META = {
   Live: { bg: "rgba(20,184,166,0.12)", border: "rgba(20,184,166,0.35)", color: "#14b8a6" },
   Beta: { bg: "rgba(232,197,71,0.12)", border: "rgba(232,197,71,0.35)", color: "#e8c547" },
