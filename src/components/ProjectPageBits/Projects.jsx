@@ -1,5 +1,3 @@
-// Projects.jsx — Dark-first cinematic portfolio component
-// Stack: React 18 + Chakra UI v2 + Framer Motion + GSAP
 // Search For now is ok but optimize it
 import { useState, useRef, useEffect, useCallback } from "react";
 import {
@@ -119,9 +117,7 @@ function SuggestionDropdown({ suggestions, query, onSelect }) {
   const bg = useColorModeValue("rgba(247,247,248,0.97)", "rgba(10,10,10,0.97)");
   const borderColor = useColorModeValue("rgba(0,0,0,0.10)", "rgba(255,255,255,0.08)");
   const hoverBg = useColorModeValue("rgba(124,58,237,0.06)", "rgba(124,58,237,0.12)");
-  const textColor = useColorModeValue("#1a1a1a", "rgba(255,255,255,0.85)");
-  const dimColor = useColorModeValue("#6b7280", "rgba(255,255,255,0.35)");
-
+  
   if (!suggestions.length || !query) return null;
 
   return (
@@ -168,7 +164,7 @@ function SuggestionDropdown({ suggestions, query, onSelect }) {
                   fontFamily="'Orbitron', sans-serif"
                   fontSize="11px"
                   fontWeight={700}
-                  color={textColor}
+                  color="text.primary"
                   letterSpacing="0.02em"
                 >
                   {s.title}
@@ -176,7 +172,7 @@ function SuggestionDropdown({ suggestions, query, onSelect }) {
                 <Text
                   fontFamily="'Sora', sans-serif"
                   fontSize="11px"
-                  color={dimColor}
+                  color="text.dim"
                   mt={0.5}
                 >
                   {s.tagline}
@@ -209,11 +205,9 @@ function SuggestionDropdown({ suggestions, query, onSelect }) {
 
 function ProjectCard({ project, index, isHighlighted }) {
   const ref = useRef(null);
-  // const glowRef = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
   const cardBg = useColorModeValue("rgba(247,247,248,0.92)", "rgba(10,10,10,0.82)");
   const borderColor = useColorModeValue("rgba(0,0,0,0.08)", "rgba(255,255,255,0.06)");
-  const textColor = useColorModeValue("#1a1a1a", "rgba(255,255,255,0.88)");
   const descColor = useColorModeValue("#4b5563", "rgba(255,255,255,0.5)");
   const statLabelColor = useColorModeValue("#9ca3af", "rgba(255,255,255,0.3)");
   const cornerColor = "rgba(124,58,237,0.25)";
@@ -322,7 +316,7 @@ function ProjectCard({ project, index, isHighlighted }) {
               fontWeight={800}
               fontSize={{ base: "15px", md: "17px" }}
               letterSpacing="-0.01em"
-              color={textColor}
+              color="text.primary"
               _groupHover={{ color: project.accent }}
               style={{ transition: "color 0.2s ease" }}
             >
@@ -477,8 +471,6 @@ function ProjectCard({ project, index, isHighlighted }) {
 
 // ─── Tab Group ────────────────────────────────────────────────────────────────
 function FilterTabGroup({ label, options, active, onChange, accent }) {
-  const dividerColor = useColorModeValue("rgba(0,0,0,0.06)", "rgba(255,255,255,0.06)");
-  // const labelColor = useColorModeValue("#9ca3af", "rgba(255,255,255,0.28)");
   const labelColor = useColorModeValue("#9ca3af", "rgba(255,255,255,0.28)");
 
   return (

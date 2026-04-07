@@ -90,7 +90,6 @@ function FocusCycler() {
 // ── Live building ticker ──────────────────────────────────────────────────────
 function BuildingTicker() {
   const accent = "#14b8a6";
-  const dimColor = useColorModeValue("#6b7280", "rgba(255,255,255,0.35)");
 
   return (
     <Flex align="center" gap={2.5} overflow="hidden">
@@ -117,7 +116,7 @@ function BuildingTicker() {
         fontSize="8px"
         letterSpacing="0.16em"
         textTransform="uppercase"
-        color={dimColor}
+        color="text.dim"
         flexShrink={0}
       >
         Building
@@ -150,7 +149,6 @@ function StatPill({ value, label, accent, delay }) {
   const numRef = useRef(null);
   const cardBg = useColorModeValue("rgba(247,247,248,0.92)", "rgba(10,10,10,0.82)");
   const borderColor = useColorModeValue("rgba(0,0,0,0.08)", "rgba(255,255,255,0.06)");
-  const dimColor = useColorModeValue("#9ca3af", "rgba(255,255,255,0.28)");
 
   // GSAP count-up
   useEffect(() => {
@@ -208,7 +206,7 @@ function StatPill({ value, label, accent, delay }) {
         fontSize="9px"
         letterSpacing="0.12em"
         textTransform="uppercase"
-        color={dimColor}
+        color="text.dim"
       >
         {label}
       </Text>
@@ -255,11 +253,6 @@ function AvailBadge() {
 // ─────────────────────────────────────────────────────────────────────────────
 export default function ProjectsHero() {
   const wrapperRef = useRef(null);
-
-  const cardBg      = useColorModeValue("rgba(247,247,248,0.88)", "rgba(8,8,10,0.84)");
-  const borderColor = useColorModeValue("rgba(0,0,0,0.08)", "rgba(255,255,255,0.06)");
-  const dimColor    = useColorModeValue("#9ca3af", "rgba(255,255,255,0.28)");
-  const textColor   = useColorModeValue("#111", "rgba(255,255,255,0.88)");
   const line2Color  = useColorModeValue("#d1d5db", "rgba(255,255,255,0.12)");
   const dividerColor = useColorModeValue("rgba(0,0,0,0.07)", "rgba(255,255,255,0.06)");
 
@@ -327,7 +320,7 @@ export default function ProjectsHero() {
                   fontSize="8px"
                   letterSpacing="0.3em"
                   textTransform="uppercase"
-                  color={dimColor}
+                  color="text.dim"
                 >
                   Selected Work
                 </Text>
@@ -375,7 +368,7 @@ export default function ProjectsHero() {
                   fontFamily="'JetBrains Mono', monospace"
                   fontSize="10px"
                   letterSpacing="0.18em"
-                  color={dimColor}
+                  color="text.dim"
                   mt={1.5}
                 >
                   {CONFIG.handle}
@@ -384,7 +377,8 @@ export default function ProjectsHero() {
                   fontFamily="'JetBrains Mono', monospace"
                   fontSize="10px"
                   letterSpacing="0.18em"
-                  color={dimColor}
+                  // color={text.dim}
+                  color="text.dim"
                   mt={1.5}
                 >
                   A peek into my technical intrests
@@ -463,14 +457,14 @@ export default function ProjectsHero() {
                   fontSize="8px"
                   letterSpacing="0.18em"
                   textTransform="uppercase"
-                  color={dimColor}
+                  color="text.dim"
                 >
                   {CONFIG.totalProjects} projects below
                 </Text>
                 <MotionBox
                   animate={{ y: [0, 4, 0] }}
                   transition={{ repeat: Infinity, duration: 1.6, ease: "easeInOut" }}
-                  color={dimColor}
+                  color="text.dim"
                   fontSize="11px"
                 >
                   ↓
