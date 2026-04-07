@@ -1669,4 +1669,5 @@ export default function BookNook() {
 // TODO: MAke the editability thing for all the other stuff too
 // TODO: Add a tooltip on themetoggle and commandpalette to show shortcuts
 // TODO: Make the Hobbies sections editable, on click opens this on the same page, just below
-
+// TODO: Add to the more tab of the header along with, bucket list, Hobbies, guestbook and links
+// TODO: Links inspo https://aayushbharti.in/links
