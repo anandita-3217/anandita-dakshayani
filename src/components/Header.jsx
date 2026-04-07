@@ -70,6 +70,9 @@ export default function Header(){
     { name: "Resume",  href: "/#resume" },
   ];
 
+  // TODO: Divde commandpallete into Pages, Connect,Legal and Resources - inspo : https://aayushbharti.in/
+
+
   // Handle scroll behavior
   useEffect(() => {
     const handleScroll = () => {
