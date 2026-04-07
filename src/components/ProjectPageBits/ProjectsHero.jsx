@@ -299,48 +299,11 @@ export default function ProjectsHero() {
         bg="transparent"
         px={{ base: 5, md: 12, lg: 20 }}
         py={{ base: 25, md: 16 }}
-        backdropFilter="blur(3px)"
-        border="1px solid"
-        borderColor={borderColor}
-        borderRadius="20px"
         position="relative"
         overflow="hidden"
         mb={8}
       >
-        {/* Top gradient hairline */}
-        <Box
-          position="absolute"
-          top={0} left={0} right={0} h="1px"
-          bgGradient="linear(to-r, transparent, #7c3aed, #ec4899, transparent)"
-        />
 
-        {/* GSAP shimmer sweep */}
-        <Box
-          className="shimmer-line"
-          position="absolute"
-          top={0} bottom={0}
-          w="60px"
-          bgGradient="linear(to-r, transparent, rgba(255,255,255,0.04), transparent)"
-          pointerEvents="none"
-          zIndex={1}
-        />
-
-        {/* Corner brackets */}
-        {[
-          { top: "12px", left: "12px",  borderTop: "1px solid", borderLeft: "1px solid" },
-          { top: "12px", right: "12px", borderTop: "1px solid", borderRight: "1px solid" },
-          { bottom: "12px", left: "12px",  borderBottom: "1px solid", borderLeft: "1px solid" },
-          { bottom: "12px", right: "12px", borderBottom: "1px solid", borderRight: "1px solid" },
-        ].map((s, i) => (
-          <Box
-            key={i}
-            position="absolute"
-            w="16px" h="16px"
-            borderColor="rgba(124,58,237,0.2)"
-            pointerEvents="none"
-            style={s}
-          />
-        ))}
 
         {/* ── Main content ── */}
         <MotionFlex
@@ -416,6 +379,16 @@ export default function ProjectsHero() {
                   mt={1.5}
                 >
                   {CONFIG.handle}
+                </Text>
+                <Text
+                  fontFamily="'JetBrains Mono', monospace"
+                  fontSize="10px"
+                  letterSpacing="0.18em"
+                  color={dimColor}
+                  mt={1.5}
+                >
+                  A peek into my technical intrests
+                  {/* For the ProjectsIntro i want to add a tagline - a peek into my technical intrests. - under the config handle how do i style it? */}
                 </Text>
               </Box>
 
