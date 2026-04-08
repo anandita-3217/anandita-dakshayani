@@ -21,9 +21,9 @@ import { PROJECTS, ALL_TECH, ALL_USECASES, ALL_TYPES } from "./data/projects";
 const MotionBox = motion.create(Box);
 
 // TODO: On opening the page it auto scrolls to the bottom why?
-// TODO: 4 cards per row in the Projects 
+// TODO: 
 // TODO: Filter region - needs to be collapsable
-// TODO: To the filter region add a sort funtionality - sort on recency - by latest, by oldest
+// TODO: sort funtionality - change styling 
 const STATUS_META = {
   Live: { bg: "rgba(20,184,166,0.12)", border: "rgba(20,184,166,0.35)", color: "#14b8a6" },
   Beta: { bg: "rgba(232,197,71,0.12)", border: "rgba(232,197,71,0.35)", color: "#e8c547" },
@@ -520,6 +520,12 @@ export default function Projects() {
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [highlightedId, setHighlightedId] = useState(null);
+  // Add sort state near your other useState hooks
+const [sortOrder, setSortOrder] = useState("latest"); // "latest" | "oldest"
+
+  
+
+
   const searchRef = useRef(null);
   const counterRef = useRef(null);
   const prevCount = useRef(0);
@@ -530,6 +536,10 @@ export default function Projects() {
   const placeholderColor = useColorModeValue("#9ca3af", "rgba(255,255,255,0.25)");
   const filterBg = useColorModeValue("rgba(247,247,248,0.90)", "rgba(10,10,10,0.76)");
   const filterBorder = useColorModeValue("rgba(0,0,0,0.08)", "rgba(255,255,255,0.06)");
+  const dividerColor = useColorModeValue("rgba(0,0,0,0.06)", "rgba(255,255,255,0.06)");
+  const labelColor = useColorModeValue("#9ca3af", "rgba(255,255,255,0.28)");
+
+
 
   // Search logic
   const getSuggestions = useCallback((q) => {
@@ -560,7 +570,11 @@ export default function Projects() {
     const matchesType = typeFilters.length === 0 || typeFilters.includes(p.type);
 
     return matchesQuery && matchesTech && matchesUse && matchesType;
-  });
+  }).sort((a, b) => {
+    if (sortOrder === "latest") return parseInt(b.year) - parseInt(a.year);
+    if (sortOrder === "oldest") return parseInt(a.year) - parseInt(b.year);
+    return 0;
+  });;
 
   // GSAP counter animation on result count change
   useEffect(() => {
@@ -699,6 +713,7 @@ export default function Projects() {
               color={inputColor}
               accent="#14b8a6"
             />
+
             <FilterTabGroup
               label="Use Case"
               options={ALL_USECASES}
@@ -713,6 +728,31 @@ export default function Projects() {
               onChange={setTypeFilters}
               accent="#ec4899"
             />
+            {/* Sort — add this block after Type */}
+<Box>
+  <Text
+    fontFamily="'JetBrains Mono', monospace"
+    fontSize="8px"
+    letterSpacing="0.2em"
+    textTransform="uppercase"
+    color={labelColor}
+    mb={2}
+  >
+    Sort
+  </Text>
+  <Flex gap={1.5}>
+    {["latest", "oldest"].map((order) => (
+      <FilterPill
+        key={order}
+        label={order}
+        active={sortOrder === order}
+        onClick={() => setSortOrder(order)}
+        accent="#14b8a6"
+      />
+    ))}
+  </Flex>
+</Box>
+
           </Flex>
 
           {/* Clear all */}

@@ -136,7 +136,7 @@ export const PROJECTS = [
     type: "Web App",
     category: "Full-stack",
     accent: "#14b8a6",
-    status: "OSS",
+    status: "LIVE",
     year: "2026",
     url: "#",
     github: "https://github.com/anandita-3217/experimental-garden",

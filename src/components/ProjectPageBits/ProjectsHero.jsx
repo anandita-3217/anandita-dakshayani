@@ -11,6 +11,7 @@ const MotionFlex = motion.create(Flex);
 const CONFIG = {
   name: "Alex Morgan",
   handle: "@alexmorgan",
+  tagline: "A peek into my technical interests.",
   totalProjects: 6,
   totalTech: PROJECT_STATS.total,
   currentlyBuilding: "NeuralDraft — AI writing tooling for devs",
@@ -374,15 +375,14 @@ export default function ProjectsHero() {
                   {CONFIG.handle}
                 </Text>
                 <Text
-                  fontFamily="'JetBrains Mono', monospace"
-                  fontSize="10px"
-                  letterSpacing="0.18em"
-                  // color={text.dim}
+                  fontFamily="'Sora', sans-serif"
+                  fontSize={{ base: "12px", md: "13px" }}
+                  letterSpacing="0.02em"
+                  fontStyle="italic"
                   color="text.dim"
-                  mt={1.5}
+                  mt={1}
                 >
-                  A peek into my technical intrests
-                  {/* For the ProjectsIntro i want to add a tagline - a peek into my technical intrests. - under the config handle how do i style it? */}
+                  {CONFIG.tagline}
                 </Text>
               </Box>
 
