@@ -141,7 +141,7 @@ export default function ProjectsPage() {
       <Header />
       <Box position="relative" zIndex={1} pt={{ base: "100px", md: "120px" }} px={"70px"}>
               {/* TODO: https://aayushbharti.in/projects/snippix  make a page like this for the first 4 projects */}
-        <ProjectsHero scrollTargetId="projects"/>
+        <ProjectsHero/>
         <StatsTicker/>
 
       <FadeInSection delay={0.2}>

@@ -9,19 +9,19 @@ const MotionFlex = motion.create(Flex);
 
 // ── Config — edit these ───────────────────────────────────────────────────────
 const CONFIG = {
-  name: "Alex Morgan",
-  handle: "@alexmorgan",
+  name: "Anandita Dakshayani",
+  handle: "@anandita",
   tagline: "A peek into my technical interests.",
   totalProjects: 6,
   totalTech: PROJECT_STATS.total,
-  currentlyBuilding: "NeuralDraft — AI writing tooling for devs",
+  currentlyBuilding: "FlowerNet",
   openToWork: true,
   // Rotating focus areas shown in the "focus" slot
   focusAreas: [
     "Full-stack Web Apps",
     "API Design & Integration",
     "Developer Tooling",
-    "Open Source Libraries",
+    // "Open Source Libraries",
     "AI-powered Products",
   ],
 };
@@ -257,17 +257,7 @@ export default function ProjectsHero() {
   const line2Color  = useColorModeValue("#d1d5db", "rgba(255,255,255,0.12)");
   const dividerColor = useColorModeValue("rgba(0,0,0,0.07)", "rgba(255,255,255,0.06)");
 
-  // GSAP: subtle scanline shimmer across the card on mount
-  useEffect(() => {
-    if (!wrapperRef.current) return;
-    const shimmer = wrapperRef.current.querySelector(".shimmer-line");
-    if (!shimmer) return;
-    gsap.fromTo(
-      shimmer,
-      { x: "-100%", opacity: 0.6 },
-      { x: "200%", opacity: 0, duration: 1.1, delay: 0.5, ease: "power1.inOut" }
-    );
-  }, []);
+
 
   const containerVariants = {
     hidden: {},
@@ -343,7 +333,7 @@ export default function ProjectsHero() {
                 <Flex align="baseline" gap={3} flexWrap="wrap">
                   <Text
                     fontFamily="'Orbitron', sans-serif"
-                    fontWeight={900}
+                    fontWeight={600}
                     fontSize={{ base: "28px", md: "clamp(32px, 4vw, 48px)" }}
                     letterSpacing="-0.03em"
                     lineHeight={0.95}
@@ -355,7 +345,7 @@ export default function ProjectsHero() {
                   </Text>
                   <Text
                     fontFamily="'Orbitron', sans-serif"
-                    fontWeight={900}
+                    fontWeight={600}
                     fontSize={{ base: "28px", md: "clamp(32px, 4vw, 48px)" }}
                     letterSpacing="-0.03em"
                     lineHeight={0.95}
@@ -484,29 +474,3 @@ export default function ProjectsHero() {
   );
 }
 
-// ── Usage — drop this directly above your search bar inside Projects.jsx ──────
-//
-// import ProjectsIntro from "./ProjectsIntro";
-//
-// export default function Projects() {
-//   return (
-//     <Box px={{ base: 5, md: 12, lg: 20 }} py={{ base: 20, md: 16 }}>
-//       <Flex direction="column" maxW="1200px" mx="auto" gap={8}>
-//         <ProjectsIntro />          ← sits here, above filters
-//         {/* search bar */}
-//         {/* filter toggles */}
-//         {/* project grid */}
-//       </Flex>
-//     </Box>
-//   );
-// }
-//
-// ── Config ────────────────────────────────────────────────────────────────────
-// Edit CONFIG{} at the top:
-//   name              — your full name (first word gets gradient, second gets muted)
-//   handle            — your GitHub/Twitter handle
-//   totalProjects     — animates via GSAP count-up
-//   totalTech         — same
-//   currentlyBuilding — one-liner, shown in the live ticker
-//   openToWork        — true/false toggles pill color teal ↔ coral
-//   focusAreas[]      — cycles every 2.6s in the focus chip

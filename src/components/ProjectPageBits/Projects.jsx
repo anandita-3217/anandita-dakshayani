@@ -21,7 +21,6 @@ import { PROJECTS, ALL_TECH, ALL_USECASES, ALL_TYPES } from "./data/projects";
 const MotionBox = motion.create(Box);
 
 // TODO: On opening the page it auto scrolls to the bottom why?
-// TODO: 
 // TODO: Filter region - needs to be collapsable
 // TODO: sort funtionality - change styling 
 const STATUS_META = {
