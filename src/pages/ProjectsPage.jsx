@@ -7,7 +7,7 @@ import { useColorModeValue } from '@chakra-ui/react';
 
 import ProjectsHero from '../components/ProjectPageBits/ProjectsHero'
 import Projects from '../components/ProjectPageBits/Projects';
-import ProjectsIndex from '../components/ProjectPageBits/ProjectsIndex';
+
 import DotGrid from '../components/assets/DotGrid/DotGrid';
 
 import ContactTerminal from '../components/ui/ContactTerminal';
@@ -45,7 +45,7 @@ const ParallaxSection = ({ children, speed = 0.5, direction = 1 }) => {
     </Box>
   );
 };
-
+// TODO: When i need to add a data to a front end project like this how do i choose the data between a js file and a json file
 // Fade in as section enters viewport
 // const FadeInSection = ({ children, delay = 0 }) => {
 //   const ref = useRef(null);
@@ -146,7 +146,8 @@ export default function ProjectsPage() {
 
       <FadeInSection delay={0.2}>
         <ParallaxSection speed={0.4} direction={1}>
-          <Projects id="projects"/>
+          {/* <ProjectsFilterBar/> */}
+          <Projects />
           {/* <ProjectsConstellation onTechFilter={(tech) => setTechFilter(tech)} /> */}
         </ParallaxSection>
       </FadeInSection>
