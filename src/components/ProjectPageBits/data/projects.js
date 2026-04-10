@@ -124,6 +124,9 @@
 // Accent colors: teal #14b8a6 · purple #7c3aed · pink #ec4899
 //                amber #e8c547 · coral #f4845f
 
+
+// TODO: REDUCE THE DESCRIPTION
+
 export const PROJECTS = [
   {
     id: 1,

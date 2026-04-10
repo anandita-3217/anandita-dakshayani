@@ -141,19 +141,14 @@ export default function ProjectsPage() {
       <Header />
       <Box position="relative" zIndex={1} pt={{ base: "100px", md: "120px" }} px={"70px"}>
               {/* TODO: https://aayushbharti.in/projects/snippix  make a page like this for the first 4 projects */}
-        <ProjectsHero/>
         <StatsTicker/>
+        <ProjectsHero/>
 
       <FadeInSection delay={0.2}>
         <ParallaxSection speed={0.4} direction={1}>
-          {/* <ProjectsFilterBar/> */}
           <Projects />
-          {/* <ProjectsConstellation onTechFilter={(tech) => setTechFilter(tech)} /> */}
-        </ParallaxSection>
+                  </ParallaxSection>
       </FadeInSection>
-{/* Has All the info so cant get rid of it immediately */}
-          {/* <ProjectsIndex/> */}
-
         <FadeInSection delay={0.2}>
         <ParallaxSection speed={0.4} direction={1}>
             <ContactTerminal/>{/*  Cool will put here*/}
