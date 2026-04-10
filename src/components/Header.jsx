@@ -1,3 +1,6 @@
+// TODO: Add icons to mobile view and make ther "Header" component stick to the bottom like in instagram
+// TODO: For tablet view make it a side bar  and stick it to the left
+
 import React, { useState, useEffect } from "react";
 import {
   Box,
@@ -22,14 +25,13 @@ import {
   Sun,
   Moon,
   Command,
+  ChevronDown
 } from "lucide-react";
 import { FaStar, FaCodeBranch } from "react-icons/fa";
 
 // Chakra + Motion wrapper
 const MotionBox = motion.create(Box);
 const MotionFlex = motion.create(Flex);
-
-// const themeToolTip = <Kbd>ctrl</Kbd>+<Kbd>shift</Kbd> + <Kbd>k</Kbd> 
 
 export default function Header(){
   const { colorMode, toggleColorMode } = useColorMode();
@@ -54,20 +56,20 @@ export default function Header(){
   const borderColor = useColorModeValue("gray.200", "whiteAlpha.200");
   const linkColor = useColorModeValue("gray.700", "gray.300");
   const activeLinkBg = useColorModeValue("#f5d0fe", "#c026d3");
-  const hoverBg = useColorModeValue("#fdf4ff", "#701a75");
+  const TooltipBg = useColorModeValue("#bf26d392","#f5d0fe" );
+  const hoverLink = useColorModeValue("#c026d3", "#86198f");
   const iconHoverBg = useColorModeValue("gray.100", "whiteAlpha.200");
   const mobileDropdownBg = useColorModeValue("white", "gray.900");
   const shadowColor = colorMode === "dark"
     ? "0 8px 32px rgba(255,255,255,0.05)"
     : "0 8px 32px rgba(0,0,0,0.1)";
-  const activeLinkColor = useColorModeValue("#86198f", "fdf4ff");
+  const activeLinkColor = useColorModeValue("#86198f", "#fdf4ff");
 
   const links = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
     { name: "Work", href: "/work" },
-    { name: "More ↓", href: "#" }, // TODO: on hover show GuestBook and BucketList
-    { name: "Resume",  href: "/#resume" },
+    { name: "More ", href: "#" }, // TODO: on hover show GuestBook and BucketList
   ];
 
   // TODO: Divde commandpallete into Pages, Connect,Legal and Resources - inspo : https://aayushbharti.in/
@@ -181,6 +183,8 @@ export default function Header(){
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
+
+
               <Box
                 as={RouterLink}
                 to={href}
@@ -192,16 +196,19 @@ export default function Header(){
                 borderRadius="md"
                 fontSize="sm"
                 fontWeight="medium"
-                bg={isLinkActive(href) ? activeLinkBg : "transparent"}
-                color={isLinkActive(href) ? activeLinkColor : linkColor}
+                bg={"transparent"}
+                color={isLinkActive(href) ? hoverLink : linkColor}
                 _hover={{
-                  bg: hoverBg,
-                  color: activeLinkColor,
+                  color: hoverLink,
                   textDecoration: "none",
                 }}
                 transition="all 0.2s ease"
               >
                 {name}
+
+{name === "More" && 
+  (<ChevronDown size={14} style={{ marginLeft: "-2px" }} />)
+}    
               </Box>
             </MotionBox>
           ))}
@@ -241,7 +248,21 @@ export default function Header(){
           gap={2}
         >
           {/* Command Palette Button */}
-          <Tooltip label='ctrl+k' placement="bottom" hasArrow openDelay={300}>
+          {/* TODO: Change bg colors of kbd */}
+            <Tooltip bg = {TooltipBg}
+  label={
+    <Flex align="center" gap={1}>
+      <Kbd fontSize="10px" borderRadius="5px" color={hoverLink} >ctrl</Kbd>
+      <Box as="span" fontSize="10px" color={hoverLink}>+</Box>
+      <Kbd fontSize="10px" borderRadius="5px" color={hoverLink} >K</Kbd>
+    </Flex>
+  }
+  placement="bottom"
+  openDelay={300}
+  borderRadius="8px"
+  px={2}
+  py={1.5}
+>
           <MotionBox
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -265,10 +286,23 @@ export default function Header(){
         
 
           {/* Theme Toggle */}
-            <Tooltip label='ctrl+shift+k' placement="bottom"
-  hasArrow
+            <Tooltip bg = {TooltipBg}
+  label={
+    <Flex align="center" gap={1}>
+      <Kbd fontSize="10px" borderRadius="5px" color={hoverLink}>ctrl</Kbd>
+      <Box as="span" fontSize="10px" color={hoverLink}>+</Box>
+      <Kbd fontSize="10px" borderRadius="5px" color={hoverLink}>shift</Kbd>
+      <Box as="span" fontSize="10px" color={hoverLink}>+</Box>
+      <Kbd fontSize="10px" borderRadius="5px" color={hoverLink}>K</Kbd>
+    </Flex>
+  }
+  placement="bottom"
   openDelay={300}
+  borderRadius="8px"
+  px={2}
+  py={1.5}
 >
+
           <MotionBox
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -288,6 +322,7 @@ export default function Header(){
             />
           </MotionBox>
             </Tooltip>
+            
 
           {/* Mobile Menu Toggle */}
           <IconButton
@@ -342,11 +377,10 @@ export default function Header(){
                       py={3}
                       fontSize="lg"
                       fontWeight="medium"
-                      bg={isLinkActive(href) ? activeLinkBg : "transparent"}
-                      color={isLinkActive(href) ? activeLinkColor : linkColor}
+                      bg={"transparent"}
+                      color={isLinkActive(href) ? hoverLink : linkColor}
                       _hover={{
-                        bg: hoverBg,
-                        color: activeLinkColor,
+                        color: hoverLink,
                         textDecoration: "none",
                       }}
                       transition="all 0.2s ease"

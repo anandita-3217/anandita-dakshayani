@@ -7,7 +7,7 @@ import { Box, Flex, Text, Input, useColorModeValue } from "@chakra-ui/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { gsap } from "gsap";
 
-const MotionBox = motion(Box);
+const MotionBox = motion.create(Box);
 
 // ── Terminal state machine ────────────────────────────────────────────────────
 const PROMPTS = [

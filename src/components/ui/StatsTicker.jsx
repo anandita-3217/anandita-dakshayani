@@ -7,7 +7,7 @@ import { Box, Flex, Text, useColorModeValue } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { gsap } from "gsap";
 
-const MotionBox = motion(Box);
+const MotionBox = motion.create(Box);
 
 // ── Ticker items ─────────────────────────────────────────────────────────────
 const ITEMS = [

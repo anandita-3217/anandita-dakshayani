@@ -127,6 +127,7 @@
 
 // TODO: REDUCE THE DESCRIPTION
 
+
 export const PROJECTS = [
   {
     id: 1,

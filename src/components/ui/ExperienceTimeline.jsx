@@ -9,7 +9,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
-const MotionBox = motion(Box);
+const MotionBox = motion.create(Box);
 
 // ── Data ─────────────────────────────────────────────────────────────────────
 const EXPERIENCES = [
