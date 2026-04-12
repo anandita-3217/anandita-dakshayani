@@ -14,9 +14,10 @@ import {
 import { motion, useScroll, useTransform, useSpring, useInView } from 'framer-motion';
 import { ArrowUpRight, Github } from 'lucide-react';
 
+// TODO: Make this more mobile friendly by adding vertical padding on mobile screens 
 
 const MotionBox = motion.create(Box);
-const MotionDiv = motion.div;
+
 
 // ---------------------------------------------------------------------------
 // Projects data

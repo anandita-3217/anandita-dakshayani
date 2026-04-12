@@ -1,6 +1,6 @@
 
 // TODO: Change the about part from lorem ipsum
-
+// TODO: get rid of the text floating in 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { keyframes } from "@emotion/react";
 import {
