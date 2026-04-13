@@ -17,6 +17,8 @@
 
 // export default App;
 
+
+// TODO: disable dev tools in prod
 import { useColorMode, useDisclosure, useColorModeValue } from '@chakra-ui/react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { motion, useScroll, useSpring } from 'framer-motion';

@@ -1,12 +1,10 @@
 
 // TODO: Change the about part from lorem ipsum
-// TODO: get rid of the text floating in 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { keyframes } from "@emotion/react";
 import {
   Box,
   Flex,
-  Heading,
   Text,
   VStack,
   HStack,
@@ -83,28 +81,6 @@ function TagPill({ label, color, delay }) {
     </MotionBox>
   );
 }
-
-// ── Word reveal ────────────────────────────────────────────────────────────
-function RevealText({ text, delay = 0, fontSize, fontWeight, color, fontFamily, lineHeight, as }) {
-  const ref    = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
-  return (
-    <Box ref={ref} as={as || "p"} display="flex" flexWrap="wrap" gap="0.3em" lineHeight={lineHeight || 1.5}>
-      {text.split(" ").map((word, i) => (
-        <motion.span key={i}
-          initial={{ opacity: 0, y: 18, filter: "blur(4px)" }}
-          animate={inView ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
-          transition={{ delay: delay + i * 0.045, duration: 0.45, ease: "easeOut" }}
-          style={{ fontSize, fontWeight, color, fontFamily, display: "inline-block" }}
-        >
-          {word}
-        </motion.span>
-      ))}
-    </Box>
-  );
-}
-
-
 // 2. The Icon Map
 const REEL_ICON_MAP = { Paintbrush, CodeXml, Sparkles, Handshake };
 // ── MAIN COMPONENT ─────────────────────────────────────────────────────────
@@ -206,16 +182,7 @@ export default function AboutIntro() {
 
           {/* Name + typewriter */}
           <Box mb={4}>
-            <RevealText
-              text="Hey, I'm Anandita"
-              delay={0.15}
-              fontSize="clamp(38px, 6vw, 64px)"
-              fontWeight="800"
-              color={isDark ? "white" : "#1a1a1a"}
-              fontFamily="'Orbitron', sans-serif"
-              lineHeight={1.1}
-              as="h1"
-            />
+            <Text as="h1" lineHeight={1.1} fontFamily="'Orbitron', sans-serif" fontWeight={800} fontSize="clamp(38px,6vw,64px)" color="text.primary">Hey I'm Anandita</Text>
             
 
             <MotionBox
@@ -262,19 +229,14 @@ export default function AboutIntro() {
 
           {/* Body copy — uses text.secondary / text.dim semantic tokens */}
           <Box mb={8} maxW="500px">
-            <RevealText
-              text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. I craft digital experiences that feel alive — blending clean engineering with considered design to build things people actually enjoy using."
-              delay={0.5} fontSize="15.5px" fontWeight="400"
-              color="text.dim"
-              fontFamily="'Sora', sans-serif" lineHeight={1.9}
-            />
-            <Box mt={4}>
-              <RevealText
-                text="I believe the best products live at the intersection of empathy and precision. When I'm not shipping features, you'll find me exploring design systems, contributing to open source, or staring at a sunset pretending to be productive."
-                delay={0.75} fontSize="15.5px" fontWeight="400"
-                color="text.dim"
-                fontFamily="'Sora', sans-serif" lineHeight={1.9}
-              />
+            <Text fontSize="15.5px" fontWeight="400"  color="text.scondary" fontFamily="'Sora', sans-serif" lineHeight={1.9}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. I craft digital experiences that feel alive — blending clean engineering with considered design to build things people actually enjoy using.
+            </Text>
+            
+          <Box mt={4}>
+            <Text fontSize="15.5px" fontWeight="400"  color="text.scondary" fontFamily="'Sora', sans-serif" lineHeight={1.9}>
+              I believe the best products live at the intersection of empathy and precision. When I'm not shipping features, you'll find me exploring design systems, contributing to open source, or staring at a sunset pretending to be productive.
+            </Text>
             </Box>
           </Box>
 
