@@ -155,8 +155,8 @@ const MockBrowserWindow = ({ color, image }) => {
     <Box
       w="100%"
       maxW={{ base: "100%", sm: "900px"  }} 
-      minW={{ base: "280px", sm: "500px" }}
-      h={{ base: "580px", sm: "380px"}}
+      minW={{ base: "280px", sm: "776px" }}
+      h={{ base: "300px", sm: "580px"}}
       borderRadius="2xl"
       overflow="hidden"
       position="relative"
@@ -220,15 +220,17 @@ const MockBrowserWindow = ({ color, image }) => {
               <Box
                 flex={1}
                 display="grid"
-                gridTemplateColumns="repeat(3, 1fr)"
+                gridTemplateColumns={{ base: "repeat(2, 1fr)", sm: "repeat(3, 1fr)" }}
                 gap={3}
                 mt={4}
+                minH={{ base: "140px", sm: "280px" }}
               >
                 {[...Array(6)].map((_, i) => (
                   <Box
                     key={i}
                     borderRadius="xl"
                     bg={`${color}${30 + i * 6}`}
+                    minH={{ base: "50px", sm: "80px" }}
                   />
                 ))}
               </Box>
@@ -278,8 +280,10 @@ const ProjectCard = ({ project, index }) => {
       ref={cardRef}
       style={{ opacity, scale }}
       position="relative"
-      py={{ base: 20, md: 28 }}   
+      py={{ base: 20, md: 28 }} 
+        
     >
+
       <Box
         display="grid"
         gridTemplateColumns={{ base: '1fr', lg: 'repeat(2, 1fr)' }}
@@ -296,7 +300,9 @@ const ProjectCard = ({ project, index }) => {
             style={{ y: backgroundY }}
             display="flex"
             justifyContent="center"
+            alignItems="center"        
             pointerEvents="none"
+            overflow="hidden"
           >
             <MotionBox
               initial={{ opacity: 0, scale: 0.95 }}
