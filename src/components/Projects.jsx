@@ -151,9 +151,12 @@ const hexToRgb = (hex) => {
 // ---------------------------------------------------------------------------
 const MockBrowserWindow = ({ color, image }) => {
   return (
+
     <Box
-      w="900px"
-      h="580px"
+      w="100%"
+      maxW={{ base: "100%", sm: "900px"  }} 
+      minW={{ base: "280px", sm: "500px" }}
+      h={{ base: "580px", sm: "380px"}}
       borderRadius="2xl"
       overflow="hidden"
       position="relative"
@@ -234,6 +237,8 @@ const MockBrowserWindow = ({ color, image }) => {
         </VStack>
       )}
     </Box>
+
+
   );
 };
 
@@ -286,7 +291,7 @@ const ProjectCard = ({ project, index }) => {
         {/* ── Background mock screenshot ── */}
           <MotionBox
             position="absolute"
-            inset={{ base: '-100px', lg: '-160px' }}
+            inset={{ base: '-20px', lg: '-160px' }}
             zIndex={0}
             style={{ y: backgroundY }}
             display="flex"
