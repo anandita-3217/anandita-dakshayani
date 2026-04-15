@@ -281,6 +281,7 @@ const ProjectCard = ({ project, index }) => {
       style={{ opacity, scale }}
       position="relative"
       py={{ base: 20, md: 28 }} 
+      w = "100%"
         
     >
 
@@ -327,7 +328,8 @@ const ProjectCard = ({ project, index }) => {
             initial={{ opacity: 0, x: isEven ? -80 : 80 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
-            p={8}
+            // p={8}
+            p={{ base: 4, sm: 6, md: 8 }}
             borderRadius="2xl"
             backdropFilter="blur(40px)"
             bg="surface.card"
