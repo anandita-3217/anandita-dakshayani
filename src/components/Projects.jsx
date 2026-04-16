@@ -157,7 +157,7 @@ const MockBrowserWindow = ({ color, image }) => {
       maxW={{ base: "100%", sm: "900px"  }} 
       minW={{ base: "280px", sm: "776px" }}
       h={{ base: "300px", sm: "580px"}}
-      borderRadius="2xl"
+      borderRadius="3xl"
       overflow="hidden"
       position="relative"
       bg={`${color}35`}              // ← strong base
@@ -281,14 +281,14 @@ const ProjectCard = ({ project, index }) => {
       style={{ opacity, scale }}
       position="relative"
       py={{ base: 20, md: 28 }} 
-      w = "100%"
         
     >
 
       <Box
         display="grid"
         gridTemplateColumns={{ base: '1fr', lg: 'repeat(2, 1fr)' }}
-        gap={{ base: 14, lg: 20 }}
+        // gap={{ base: 14, lg: 20 }}
+        gap={{ base: 6, sm: 10, lg: 20 }}  
         alignItems="center"
       >
         {/* ── Mock Screenshot (background – slower parallax) ── */}
@@ -329,15 +329,20 @@ const ProjectCard = ({ project, index }) => {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
             // p={8}
-            p={{ base: 4, sm: 6, md: 8 }}
+             p={{ base: 4, sm: 6, md: 8 }} 
             borderRadius="2xl"
             backdropFilter="blur(40px)"
             bg="surface.card"
             border="1px solid"
             borderColor={`${project.color}30`}
             boxShadow={`0 8px 32px ${project.color}15`}
+            maxW={{ base: "100%", sm: "480px", md: "100%" }}  // ← constrain on mobile
+  mx={{ base: "auto", md: 0 }}                       
           >
-            <VStack align="flex-start" spacing={5}>
+            <VStack align="flex-start" 
+            spacing={{ base: 3, md: 5 }}
+            // spacing={5}
+            >
               {/* Number + badge */}
               <HStack spacing={4} align="center">
                 <Text
