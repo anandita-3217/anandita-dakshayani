@@ -346,7 +346,7 @@ const ProjectCard = ({ project, index }) => {
               {/* Number + badge */}
               <HStack spacing={4} align="center">
                 <Text
-                  fontSize={{ base: '6xl', md: '7xl' }}
+                  fontSize={{ base: '4xl', sm:'3xl', md: '5xl' }}
                   fontWeight="900"
                   lineHeight="none"
                   color={project.color}
@@ -383,7 +383,7 @@ const ProjectCard = ({ project, index }) => {
                 >
                   <Heading
                     as="h3"
-                    fontSize={{ base: '3xl', md: '4xl' }}
+                    fontSize={{ sm:'xl',base: '2xl', md: '4xl' }}
                     fontWeight="800"
                     lineHeight="tight"
                     fontFamily="heading"
