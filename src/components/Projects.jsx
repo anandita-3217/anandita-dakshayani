@@ -346,7 +346,7 @@ const ProjectCard = ({ project, index }) => {
               {/* Number + badge */}
               <HStack spacing={4} align="center">
                 <Text
-                  fontSize={{ base: '4xl', sm:'3xl', md: '5xl' }}
+                  fontSize={{ md: '4xl', base:'3xl', lg: '5xl' }}
                   fontWeight="900"
                   lineHeight="none"
                   color={project.color}
@@ -356,7 +356,7 @@ const ProjectCard = ({ project, index }) => {
                 </Text>
                 <Badge
                   variant="outline"
-                  fontSize="xs"
+                  fontSize={{base: '2xs',md:'xs',lg:'xs'}}
                   textTransform="uppercase"
                   letterSpacing="widest"
                   px={3}
@@ -383,7 +383,7 @@ const ProjectCard = ({ project, index }) => {
                 >
                   <Heading
                     as="h3"
-                    fontSize={{ sm:'xl',base: '2xl', md: '4xl' }}
+                    fontSize={{ base: 'lg', md: '3xl', lg: '5xl' }}
                     fontWeight="800"
                     lineHeight="tight"
                     fontFamily="heading"
@@ -396,8 +396,8 @@ const ProjectCard = ({ project, index }) => {
                   {/* Arrow – hidden by default, appears on group hover */}
                   <Box
                     as={ArrowUpRight}
-                    w={7}
-                    h={7}
+                    w={{base: 5, md: 6, lg: 7}}
+                    h={{base: 5, md: 6, lg: 7}}
                     color={project.color}
                     opacity={0}
                     transform="translateX(-6px)"
@@ -418,8 +418,8 @@ const ProjectCard = ({ project, index }) => {
     >
       <Box
         as={Github}
-        w={5}
-        h={5}
+        w={{base:5, md: 6, lg: 7}}
+        h={{base:5, md: 6, lg: 7}}
         color="text.secondary"
         opacity={0.6}
         transition="all 0.2s ease"
@@ -434,7 +434,7 @@ const ProjectCard = ({ project, index }) => {
 
               {/* Period */}
               <Text
-                fontSize="xs"
+                fontSize={{base: "2xs", md: 'xs', lg: 'lg'}}
                 color={textSecondary}
                 textTransform="uppercase"
                 letterSpacing="0.15em"
@@ -444,7 +444,8 @@ const ProjectCard = ({ project, index }) => {
               </Text>
 
               {/* Description */}
-              <Text fontSize="md" color={textSecondary} lineHeight="1.7" fontFamily="body">
+              <Text fontSize={{base: 'sm', md: 'md', lg: 'md'}} 
+              color={textSecondary} lineHeight="1.7" fontFamily="body">
                 {project.description}
               </Text>
 
@@ -459,6 +460,7 @@ const ProjectCard = ({ project, index }) => {
                   },
                 }}
               >
+                {/* See if i can use something similar to noOflines like i can in Text */}
                 <HStack spacing={2} flexWrap="wrap">
                   {project.tags.slice(0, 6).map((tag) => (
                     <MotionBox

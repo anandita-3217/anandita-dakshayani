@@ -19,6 +19,8 @@
 
 
 // TODO: disable dev tools in prod
+// TODO: Add favicon
+// TODO: make paths keyboard focusable
 import { useColorMode, useDisclosure, useColorModeValue } from '@chakra-ui/react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { motion, useScroll, useSpring } from 'framer-motion';
