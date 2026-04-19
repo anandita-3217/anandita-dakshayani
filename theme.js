@@ -5,6 +5,15 @@ const theme = extendTheme({
     initialColorMode: 'dark',
     useSystemColorMode: false,
     },
+
+  breakpoints: {
+    sm: "480px",
+    md: "768px",
+    lg: "1024px",   // ← add this if not already there
+    xl: "1280px",
+  },
+
+
   fonts: {
     heading: `'Orbitron', sans-serif`,
     body: `'Sora', sans-serif`,
